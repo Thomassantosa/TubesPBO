@@ -1,7 +1,4 @@
-.vscode/
 bin/
-lib/
 
-*.json
 *.class
 *.md
