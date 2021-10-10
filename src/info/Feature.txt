@@ -1,38 +1,6 @@
-Inheritance 1
-    - User (Parent)         -> userID, name, username, email, password
-        - Guest             ->
-        - Admin             ->
-        - Member            -> memberID
-            - MemberPremium -> 
-
-Inheritance 2
-    - Vehicles (Parent)     ->
-        - Kereta            ->
-        - Pesawat           ->
-        - Mobil             ->
-        - Motor             ->
-
-Inheritance 3
-    - Lodging (Parent)      -> Nama, kota, ...
-    - Hotel                 ->
-    - Villa                 ->
-    - Homestay              ->
-
-Interface
-    - Search -> SearchBookingCode, SearchName, ...
-    - 
-    - 
-
-Enumerasi
-    - GUEST
-    - ADMIN
-    - MEMBER
-    - MEMBER_PREMIUM
-
-Contants
-    - ERROR_WRONG_INPUT
-    - INPUT_SUCCESS
-    - BOOKING_SUCCESS
-    - BOOKING_FAILED
-    - LOGIN_SUCCESS
-    - ...(All message)
+Transportasi
+    - Bus
+    - Kereta
+    - Pesawat
+Hotel
+Wisata
