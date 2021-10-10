@@ -2485,7 +2485,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="N_XQfPaiQudfmDW4urfR" name="Use Case Diagram">
-        <mxGraphModel dx="234" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
+        <mxGraphModel dx="1178" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
             <root>
                 <mxCell id="9eihDgbZHIuVFMT067f_-0"/>
                 <mxCell id="9eihDgbZHIuVFMT067f_-1" parent="9eihDgbZHIuVFMT067f_-0"/>
@@ -2673,7 +2673,7 @@
                         <mxPoint x="682.5" y="1107.5" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-32" value="" style="endArrow=none;html=1;exitX=0.693;exitY=0.008;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-33" target="vl1_EtVQsWp62S9TtOtU-8">
+                <mxCell id="vl1_EtVQsWp62S9TtOtU-32" value="" style="endArrow=none;html=1;exitX=0.693;exitY=0.008;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-33" target="vl1_EtVQsWp62S9TtOtU-8">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="650" y="1150" as="sourcePoint"/>
                         <mxPoint x="697.69" y="1169.95" as="targetPoint"/>
@@ -2682,15 +2682,6 @@
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-33" value="Mengajukan list baru" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="9eihDgbZHIuVFMT067f_-1">
                     <mxGeometry x="565" y="1180" width="105" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-34" value="" style="endArrow=none;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-35" target="vl1_EtVQsWp62S9TtOtU-8">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="710" y="1180" as="sourcePoint"/>
-                        <mxPoint x="773.62" y="1179.9995950561065" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-35" value="Mengubah keterangan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="9eihDgbZHIuVFMT067f_-1">
-                    <mxGeometry x="670" y="1180" width="105" height="50" as="geometry"/>
-                </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-36" value="" style="endArrow=none;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.342;exitY=0.002;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-37" target="vl1_EtVQsWp62S9TtOtU-8">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="790" y="1160" as="sourcePoint"/>
@@ -2698,7 +2689,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-37" value="Mengajukan list yang mau dihapus" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="9eihDgbZHIuVFMT067f_-1">
-                    <mxGeometry x="780" y="1180" width="110" height="50" as="geometry"/>
+                    <mxGeometry x="710" y="1190" width="110" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-38" value="Approve&lt;br&gt;pembatalan&lt;br&gt;pembayaran" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="9eihDgbZHIuVFMT067f_-1">
                     <mxGeometry x="800" y="670" width="90" height="65" as="geometry"/>
@@ -2754,14 +2745,14 @@
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-50" value="Menentukan keuntungan yang didapatkan Mitra" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="9eihDgbZHIuVFMT067f_-1">
                     <mxGeometry x="1025" y="850" width="120" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-51" value="" style="endArrow=none;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.08;exitY=0.18;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-52" target="vl1_EtVQsWp62S9TtOtU-8">
+                <mxCell id="vl1_EtVQsWp62S9TtOtU-51" value="" style="endArrow=none;html=1;exitX=0.08;exitY=0.18;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-52" target="vl1_EtVQsWp62S9TtOtU-8">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="828" y="1150" as="sourcePoint"/>
                         <mxPoint x="820" y="1119" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-52" value="Melihat list yang mitra masukan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="9eihDgbZHIuVFMT067f_-1">
-                    <mxGeometry x="890" y="1160" width="110" height="50" as="geometry"/>
+                    <mxGeometry x="850" y="1170" width="110" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-54" value="" style="endArrow=none;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.24;exitY=0.086;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-55" target="vl1_EtVQsWp62S9TtOtU-7">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
