@@ -2619,7 +2619,7 @@
                         <mxPoint x="614.83" y="760.56" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-23" value="Memakai&amp;nbsp;&lt;br&gt;Promo" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
+                <mxCell id="vl1_EtVQsWp62S9TtOtU-23" value="Memakai&amp;nbsp;&lt;br&gt;voucher" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
                     <mxGeometry x="290" y="670" width="90" height="65" as="geometry"/>
                 </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-24" value="" style="endArrow=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-25" target="vl1_EtVQsWp62S9TtOtU-0" edge="1">
@@ -2688,7 +2688,7 @@
                         <mxPoint x="975" y="800" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-41" value="Membuat promo" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
+                <mxCell id="vl1_EtVQsWp62S9TtOtU-41" value="Membuat voucher" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
                     <mxGeometry x="890" y="650" width="90" height="65" as="geometry"/>
                 </mxCell>
                 <mxCell id="vl1_EtVQsWp62S9TtOtU-42" value="" style="endArrow=none;html=1;entryX=0.75;entryY=0.1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="9eihDgbZHIuVFMT067f_-1" source="vl1_EtVQsWp62S9TtOtU-43" target="vl1_EtVQsWp62S9TtOtU-7" edge="1">
@@ -2742,8 +2742,8 @@
                         <mxPoint x="950" y="887.5" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="vl1_EtVQsWp62S9TtOtU-55" value="Meniadakan promo" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
-                    <mxGeometry x="1005" y="920" width="115" height="67.5" as="geometry"/>
+                <mxCell id="vl1_EtVQsWp62S9TtOtU-55" value="Meniadakan voucher" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
+                    <mxGeometry x="1000" y="920" width="120" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="439j8QLZiNLEg2do4BEV-0" value="" style="endArrow=none;html=1;entryX=0.75;entryY=0.1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="9eihDgbZHIuVFMT067f_-1" source="439j8QLZiNLEg2do4BEV-1" target="vl1_EtVQsWp62S9TtOtU-0" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -2751,7 +2751,7 @@
                         <mxPoint x="612.5" y="785.03" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="439j8QLZiNLEg2do4BEV-1" value="Melihat promo&lt;br&gt;yang tersedia" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
+                <mxCell id="439j8QLZiNLEg2do4BEV-1" value="Melihat voucher&lt;br&gt;yang tersedia" style="ellipse;whiteSpace=wrap;html=1;" parent="9eihDgbZHIuVFMT067f_-1" vertex="1">
                     <mxGeometry x="510" y="570" width="90" height="65" as="geometry"/>
                 </mxCell>
             </root>
