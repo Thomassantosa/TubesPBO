@@ -8,5 +8,6 @@ public class Main extends User {
         System.out.println("halo");
         System.out.println("Parel");
         System.out.println("acc");
+        System.out.println("COBA AH");
     }
 }
