@@ -6,8 +6,8 @@ public abstract class User {
     private String username;
     private String email;
     private String password;
-    private UserStatusEnum status;
     private String Address;
+    private UserStatusEnum status;
 
     public User() {
     }
@@ -21,8 +21,6 @@ public abstract class User {
         this.status = status;
         this.Address = Address;
     }
-
-
 
     public int getUserID() {
         return this.userID;
