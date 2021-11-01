@@ -1,5 +1,5 @@
 package model;
 
-public enum Triptype {
+public enum TripType {
     Flight, Train, Bus;
 }
