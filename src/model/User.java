@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class User {
     private int userID;
-<<<<<<< HEAD
     private String fulName;
     private String username;
     private String email;
@@ -23,26 +22,6 @@ public abstract class User {
         this.addresString = addresString;
         this.typeUser = typeUser;
         this.orderList = orderList;
-=======
-    private String name;
-    private String username;
-    private String email;
-    private String password;
-    private String Address;
-    private UserStatusEnum status;
-
-    public User() {
-    }
-
-    public User(int userID, String name, String username, String email, String password, UserStatusEnum status, String Address) {
-        this.userID = userID;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.status = status;
-        this.Address = Address;
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     }
 
     public int getUserID() {
@@ -53,21 +32,12 @@ public abstract class User {
         this.userID = userID;
     }
 
-<<<<<<< HEAD
     public String getFulName() {
         return this.fulName;
     }
 
     public void setFulName(String fulName) {
         this.fulName = fulName;
-=======
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     }
 
     public String getUsername() {
@@ -94,7 +64,6 @@ public abstract class User {
         this.password = password;
     }
 
-<<<<<<< HEAD
     public String getAddresString() {
         return this.addresString;
     }
@@ -132,22 +101,5 @@ public abstract class User {
             ", orderList='" + getOrderList() + "'" +
             "}";
     }
-    
-=======
-    public UserStatusEnum getStatus() {
-        return this.status;
-    }
 
-    public void setStatus(UserStatusEnum status) {
-        this.status = status;
-    }
-
-    public String getAddress() {
-        return this.Address;
-    }
-
-    public void setAddress(String Address) {
-        this.Address = Address;
-    }
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
 }

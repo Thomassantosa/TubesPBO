@@ -1,16 +1,6 @@
 package model;
 
 public class Seat {
-<<<<<<< HEAD
-    private int seatID;
-    private SeatType seatType;
-    private int baggageCapacity;
-    private int price;
-
-    public Seat(int seatID, SeatType seatType, int baggageCapacity, int price) {
-        this.seatID = seatID;
-        this.seatType = seatType;
-=======
     private int seatId;
     private SeatType seatType;
     private int seatCapacity;
@@ -24,26 +14,16 @@ public class Seat {
         this.seatId = seatId;
         this.seatType = seatType;
         this.seatCapacity = seatCapacity;
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
         this.baggageCapacity = baggageCapacity;
         this.price = price;
     }
 
-<<<<<<< HEAD
-    public int getSeatID() {
-        return this.seatID;
-    }
-
-    public void setSeatID(int seatID) {
-        this.seatID = seatID;
-=======
     public int getSeatId() {
         return this.seatId;
     }
 
     public void setSeatId(int seatId) {
         this.seatId = seatId;
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     }
 
     public SeatType getSeatType() {
@@ -54,8 +34,6 @@ public class Seat {
         this.seatType = seatType;
     }
 
-<<<<<<< HEAD
-=======
     public int getSeatCapacity() {
         return this.seatCapacity;
     }
@@ -64,7 +42,6 @@ public class Seat {
         this.seatCapacity = seatCapacity;
     }
 
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     public int getBaggageCapacity() {
         return this.baggageCapacity;
     }
@@ -81,18 +58,15 @@ public class Seat {
         this.price = price;
     }
 
-<<<<<<< HEAD
     @Override
     public String toString() {
         return "{" +
-            " seatID='" + getSeatID() + "'" +
+            " seatId='" + getSeatId() + "'" +
             ", seatType='" + getSeatType() + "'" +
+            ", seatCapacity='" + getSeatCapacity() + "'" +
             ", baggageCapacity='" + getBaggageCapacity() + "'" +
             ", price='" + getPrice() + "'" +
             "}";
     }
 
 }
-=======
-}
->>>>>>> 2f46109763e3002969092934e4099c581bf472ce
