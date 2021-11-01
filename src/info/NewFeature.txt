@@ -3,3 +3,5 @@ NEW FEATURE
     - Pembayaran
     - Primary Key
     - Buat ngebedain bookingan (nomor booking)
+
+    - Tambah table provinces, countries
