@@ -9,8 +9,8 @@ public class Flight extends Trip {
     private String airline;
     private Seat seat;
 
-    public Flight(String flighNumber, String airplaneModel, String departureAirport, String destinationAirport, String airline, Seat seat, int tripID, String trip, TripType TripType, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
-        super(tripID, trip, TripType, origin, destination, departureTime, arrivalTime, date, tripTime);
+    public Flight(String flighNumber, String airplaneModel, String departureAirport, String destinationAirport, String airline, Seat seat, int tripID, String trip, TripTypes TripTypes, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
+        super(tripID, trip, TripTypes, origin, destination, departureTime, arrivalTime, date, tripTime);
         this.flighNumber = flighNumber;
         this.airplaneModel = airplaneModel;
         this.departureAirport = departureAirport;

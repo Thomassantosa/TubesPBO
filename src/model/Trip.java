@@ -3,7 +3,7 @@ package model;
 public abstract class Trip {
     private int tripID;
     private String trip;
-    private TripType TripType;
+    private TripTypes TripTypes;
     private String origin;
     private String destination;
     private int departureTime;
@@ -11,10 +11,10 @@ public abstract class Trip {
     private String date;
     private int tripTime;
 
-    public Trip(int tripID, String trip, TripType TripType, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
+    public Trip(int tripID, String trip, TripTypes TripType, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
         this.tripID = tripID;
         this.trip = trip;
-        this.TripType = TripType;
+        this.TripTypes = TripType;
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
@@ -36,12 +36,12 @@ public abstract class Trip {
         this.trip = trip;
     }
 
-    public TripType getTripType() {
-        return this.TripType;
+    public TripTypes getTripType() {
+        return this.TripTypes;
     }
 
-    public void setTripType(TripType TripType) {
-        this.TripType = TripType;
+    public void setTripType(TripTypes TripType) {
+        this.TripTypes = TripType;
     }
 
     public String getOrigin() {
