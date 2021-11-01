@@ -1,6 +1,7 @@
 package model;
 
 public class Flight extends Trip {
+<<<<<<< HEAD
     private String flighNumber;
     private String airplaneModel;
     private String departureAirport;
@@ -28,12 +29,47 @@ public class Flight extends Trip {
 
     public String getAirplaneModel() {
         return airplaneModel;
+=======
+    private String flightNumber;
+    private String airplaneModel;
+    private String derpatureAirport;
+    private String destinationAirport;
+    private String airline;
+
+    // masih bingung cara declare
+    //private   Seat choosenSeat = new Seat();
+
+
+    public Flight() {
+    }
+
+    public Flight(String flightNumber, String airplaneModel, String derpatureAirport, String destinationAirport,
+            String airline) {
+        this.flightNumber = flightNumber;
+        this.airplaneModel = airplaneModel;
+        this.derpatureAirport = derpatureAirport;
+        this.destinationAirport = destinationAirport;
+        this.airline = airline;
+    }
+
+    public String getFlightNumber() {
+        return this.flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public String getAirplaneModel() {
+        return this.airplaneModel;
+>>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     }
 
     public void setAirplaneModel(String airplaneModel) {
         this.airplaneModel = airplaneModel;
     }
 
+<<<<<<< HEAD
     public String getDepartureAirport() {
         return departureAirport;
     }
@@ -44,6 +80,18 @@ public class Flight extends Trip {
 
     public String getDestinationAirport() {
         return destinationAirport;
+=======
+    public String getDerpatureAirport() {
+        return this.derpatureAirport;
+    }
+
+    public void setDerpatureAirport(String derpatureAirport) {
+        this.derpatureAirport = derpatureAirport;
+    }
+
+    public String getDestinationAirport() {
+        return this.destinationAirport;
+>>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     }
 
     public void setDestinationAirport(String destinationAirport) {
@@ -51,13 +99,18 @@ public class Flight extends Trip {
     }
 
     public String getAirline() {
+<<<<<<< HEAD
         return airline;
+=======
+        return this.airline;
+>>>>>>> 2f46109763e3002969092934e4099c581bf472ce
     }
 
     public void setAirline(String airline) {
         this.airline = airline;
     }
 
+<<<<<<< HEAD
     public Seat getSeat() {
         return seat;
     }
@@ -71,4 +124,6 @@ public class Flight extends Trip {
         return "Flight{" + "flighNumber=" + flighNumber + ", airplaneModel=" + airplaneModel + ", departureAirport=" + departureAirport + ", destinationAirport=" + destinationAirport + ", airline=" + airline + ", seat=" + seat + '}';
     }
     
+=======
+>>>>>>> 2f46109763e3002969092934e4099c581bf472ce
 }
