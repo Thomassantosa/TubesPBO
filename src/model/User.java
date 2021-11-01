@@ -12,6 +12,9 @@ public abstract class User {
     private userType typeUser;
     private ArrayList <Order> orderList = new ArrayList<>();
 
+    public User (){
+        
+    }
 
     public User(int userID, String fulName, String username, String email, String password, String addresString, userType typeUser, ArrayList<Order> orderList) {
         this.userID = userID;
