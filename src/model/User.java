@@ -1,25 +1,30 @@
 package model;
 
+import java.util.ArrayList;
+
 public abstract class User {
     private int userID;
-    private String name;
+    private String fulName;
     private String username;
     private String email;
     private String password;
-    private String Address;
-    private UserStatusEnum status;
+    private String addresString;
+    private userType typeUser;
+    private ArrayList <Order> orderList = new ArrayList<>();
 
-    public User() {
+    public User (){
+        
     }
 
-    public User(int userID, String name, String username, String email, String password, UserStatusEnum status, String Address) {
+    public User(int userID, String fulName, String username, String email, String password, String addresString, userType typeUser, ArrayList<Order> orderList) {
         this.userID = userID;
-        this.name = name;
+        this.fulName = fulName;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.status = status;
-        this.Address = Address;
+        this.addresString = addresString;
+        this.typeUser = typeUser;
+        this.orderList = orderList;
     }
 
     public int getUserID() {
@@ -30,12 +35,12 @@ public abstract class User {
         this.userID = userID;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFulName() {
+        return this.fulName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFulName(String fulName) {
+        this.fulName = fulName;
     }
 
     public String getUsername() {
@@ -62,19 +67,42 @@ public abstract class User {
         this.password = password;
     }
 
-    public UserStatusEnum getStatus() {
-        return this.status;
+    public String getAddresString() {
+        return this.addresString;
     }
 
-    public void setStatus(UserStatusEnum status) {
-        this.status = status;
+    public void setAddresString(String addresString) {
+        this.addresString = addresString;
     }
 
-    public String getAddress() {
-        return this.Address;
+    public userType getTypeUser() {
+        return this.typeUser;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setTypeUser(userType typeUser) {
+        this.typeUser = typeUser;
     }
+
+    public ArrayList<Order> getOrderList() {
+        return this.orderList;
+    }
+
+    public void setOrderList(ArrayList<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " userID='" + getUserID() + "'" +
+            ", fulName='" + getFulName() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", addresString='" + getAddresString() + "'" +
+            ", typeUser='" + getTypeUser() + "'" +
+            ", orderList='" + getOrderList() + "'" +
+            "}";
+    }
+
 }

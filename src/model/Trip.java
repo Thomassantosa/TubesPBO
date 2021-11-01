@@ -1,44 +1,47 @@
 package model;
 
-public class Trip {
-    private int tripId;
-    private Triptype tripType;
+public abstract class Trip {
+    private int tripID;
+    private String trip;
+    private TripType TripType;
     private String origin;
     private String destination;
-    private int derpatureTime;
+    private int departureTime;
     private int arrivalTime;
-    private int date;
+    private String date;
     private int tripTime;
 
-    public Trip() {
-    }
-
-    public Trip(int tripId, Triptype tripType, String origin, String destination, int derpatureTime, int arrivalTime,
-            int date, int tripTime) {
-        this.tripId = tripId;
-        this.tripType = tripType;
+    public Trip(int tripID, String trip, TripType TripType, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
+        this.tripID = tripID;
+        this.trip = trip;
+        this.TripType = TripType;
         this.origin = origin;
         this.destination = destination;
-        this.derpatureTime = derpatureTime;
-        this.arrivalTime = arrivalTime;
-        this.date = date;
-        this.tripTime = tripTime;
+        this.departureTime = departureTime;
     }
 
-    public int getTripId() {
-        return this.tripId;
+    public int getTripID() {
+        return this.tripID;
     }
 
-    public void setTripId(int tripId) {
-        this.tripId = tripId;
+    public void setTripID(int tripID) {
+        this.tripID = tripID;
     }
 
-    public Triptype getTripType() {
-        return this.tripType;
+    public String getTrip() {
+        return this.trip;
     }
 
-    public void setTripType(Triptype tripType) {
-        this.tripType = tripType;
+    public void setTrip(String trip) {
+        this.trip = trip;
+    }
+
+    public TripType getTripType() {
+        return this.TripType;
+    }
+
+    public void setTripType(TripType TripType) {
+        this.TripType = TripType;
     }
 
     public String getOrigin() {
@@ -57,12 +60,12 @@ public class Trip {
         this.destination = destination;
     }
 
-    public int getDerpatureTime() {
-        return this.derpatureTime;
+    public int getDepartureTime() {
+        return this.departureTime;
     }
 
-    public void setDerpatureTime(int derpatureTime) {
-        this.derpatureTime = derpatureTime;
+    public void setDepartureTime(int departureTime) {
+        this.departureTime = departureTime;
     }
 
     public int getArrivalTime() {
@@ -73,11 +76,11 @@ public class Trip {
         this.arrivalTime = arrivalTime;
     }
 
-    public int getDate() {
+    public String getDate() {
         return this.date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -88,4 +91,20 @@ public class Trip {
     public void setTripTime(int tripTime) {
         this.tripTime = tripTime;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " tripID='" + getTripID() + "'" +
+            ", trip='" + getTrip() + "'" +
+            ", TripType='" + getTripType() + "'" +
+            ", origin='" + getOrigin() + "'" +
+            ", destination='" + getDestination() + "'" +
+            ", departureTime='" + getDepartureTime() + "'" +
+            ", arrivalTime='" + getArrivalTime() + "'" +
+            ", date='" + getDate() + "'" +
+            ", tripTime='" + getTripTime() + "'" +
+            "}";
+    }
+
 }

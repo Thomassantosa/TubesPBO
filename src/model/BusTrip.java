@@ -1,19 +1,15 @@
 package model;
 
-public class BusTrip extends Trip {
+public class BusTrip {
     private int busTripNumber;
     private String busModel;
-    private String derpatureStation;
+    private String departureStation;
     private String destinationStation;
-    //  Seat choosenSeat = new Seat();
 
-    public BusTrip() {
-    }
-
-    public BusTrip(int busTripNumber, String busModel, String derpatureStation, String destinationStation) {
+    public BusTrip(int busTripNumber, String busModel, String departureStation, String destinationStation) {
         this.busTripNumber = busTripNumber;
         this.busModel = busModel;
-        this.derpatureStation = derpatureStation;
+        this.departureStation = departureStation;
         this.destinationStation = destinationStation;
     }
 
@@ -33,12 +29,12 @@ public class BusTrip extends Trip {
         this.busModel = busModel;
     }
 
-    public String getDerpatureStation() {
-        return this.derpatureStation;
+    public String getDepartureStation() {
+        return this.departureStation;
     }
 
-    public void setDerpatureStation(String derpatureStation) {
-        this.derpatureStation = derpatureStation;
+    public void setDepartureStation(String departureStation) {
+        this.departureStation = departureStation;
     }
 
     public String getDestinationStation() {
@@ -48,4 +44,15 @@ public class BusTrip extends Trip {
     public void setDestinationStation(String destinationStation) {
         this.destinationStation = destinationStation;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " busTripNumber='" + getBusTripNumber() + "'" +
+            ", busModel='" + getBusModel() + "'" +
+            ", departureStation='" + getDepartureStation() + "'" +
+            ", destinationStation='" + getDestinationStation() + "'" +
+            "}";
+    }
+
 }

@@ -58,4 +58,15 @@ public class Seat {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " seatId='" + getSeatId() + "'" +
+            ", seatType='" + getSeatType() + "'" +
+            ", seatCapacity='" + getSeatCapacity() + "'" +
+            ", baggageCapacity='" + getBaggageCapacity() + "'" +
+            ", price='" + getPrice() + "'" +
+            "}";
+    }
+
 }

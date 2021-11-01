@@ -1,29 +1,27 @@
 package model;
 
-public class TrainTrip  extends Trip{
+
+public class TrainTrip {
     private int trainTripNumber;
     private String trainModel;
-    private String derpatureStation;
+    private String departureStation;
     private String destinationStation;
-    
-    //private Seat choosenSeat = new Seat();
+    private Seat seat;
 
-
-    public TrainTrip() {
-    }
-
-    public TrainTrip(int trainTripNumber, String trainModel, String derpatureStation, String destinationStation) {
+    public TrainTrip(int trainTripNumber, String trainModel, String departureStation, String destinationStation, Seat seat) {
         this.trainTripNumber = trainTripNumber;
         this.trainModel = trainModel;
-        this.derpatureStation = derpatureStation;
+        this.departureStation = departureStation;
         this.destinationStation = destinationStation;
+        this.seat = seat;
     }
 
-    public int gettrainTripNumber() {
+
+    public int getTrainTripNumber() {
         return this.trainTripNumber;
     }
 
-    public void settrainTripNumber(int trainTripNumber) {
+    public void setTrainTripNumber(int trainTripNumber) {
         this.trainTripNumber = trainTripNumber;
     }
 
@@ -35,12 +33,12 @@ public class TrainTrip  extends Trip{
         this.trainModel = trainModel;
     }
 
-    public String getDerpatureStation() {
-        return this.derpatureStation;
+    public String getDepartureStation() {
+        return this.departureStation;
     }
 
-    public void setDerpatureStation(String derpatureStation) {
-        this.derpatureStation = derpatureStation;
+    public void setDepartureStation(String departureStation) {
+        this.departureStation = departureStation;
     }
 
     public String getDestinationStation() {
@@ -51,6 +49,23 @@ public class TrainTrip  extends Trip{
         this.destinationStation = destinationStation;
     }
 
+    public Seat getSeat() {
+        return this.seat;
+    }
 
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " trainTripNumber='" + getTrainTripNumber() + "'" +
+            ", trainModel='" + getTrainModel() + "'" +
+            ", departureStation='" + getDepartureStation() + "'" +
+            ", destinationStation='" + getDestinationStation() + "'" +
+            ", seat='" + getSeat() + "'" +
+            "}";
+    }
+    
 }

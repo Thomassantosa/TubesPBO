@@ -1,34 +1,30 @@
 package model;
 
 public class Flight extends Trip {
-    private String flightNumber;
+
+    private String flighNumber;
     private String airplaneModel;
-    private String derpatureAirport;
+    private String departureAirport;
     private String destinationAirport;
     private String airline;
+    private Seat seat;
 
-    // masih bingung cara declare
-    //private   Seat choosenSeat = new Seat();
-
-
-    public Flight() {
-    }
-
-    public Flight(String flightNumber, String airplaneModel, String derpatureAirport, String destinationAirport,
-            String airline) {
-        this.flightNumber = flightNumber;
+    public Flight(String flighNumber, String airplaneModel, String departureAirport, String destinationAirport, String airline, Seat seat, int tripID, String trip, TripType TripType, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
+        super(tripID, trip, TripType, origin, destination, departureTime, arrivalTime, date, tripTime);
+        this.flighNumber = flighNumber;
         this.airplaneModel = airplaneModel;
-        this.derpatureAirport = derpatureAirport;
+        this.departureAirport = departureAirport;
         this.destinationAirport = destinationAirport;
         this.airline = airline;
+        this.seat = seat;
     }
 
-    public String getFlightNumber() {
-        return this.flightNumber;
+    public String getFlighNumber() {
+        return this.flighNumber;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
+    public void setFlighNumber(String flighNumber) {
+        this.flighNumber = flighNumber;
     }
 
     public String getAirplaneModel() {
@@ -39,12 +35,12 @@ public class Flight extends Trip {
         this.airplaneModel = airplaneModel;
     }
 
-    public String getDerpatureAirport() {
-        return this.derpatureAirport;
+    public String getDepartureAirport() {
+        return this.departureAirport;
     }
 
-    public void setDerpatureAirport(String derpatureAirport) {
-        this.derpatureAirport = derpatureAirport;
+    public void setDepartureAirport(String departureAirport) {
+        this.departureAirport = departureAirport;
     }
 
     public String getDestinationAirport() {
@@ -63,4 +59,25 @@ public class Flight extends Trip {
         this.airline = airline;
     }
 
+    public Seat getSeat() {
+        return this.seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " flighNumber='" + getFlighNumber() + "'" +
+            ", airplaneModel='" + getAirplaneModel() + "'" +
+            ", departureAirport='" + getDepartureAirport() + "'" +
+            ", destinationAirport='" + getDestinationAirport() + "'" +
+            ", airline='" + getAirline() + "'" +
+            ", seat='" + getSeat() + "'" +
+            "}";
+    }
+
 }
+
