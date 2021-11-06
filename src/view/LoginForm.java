@@ -37,7 +37,7 @@ public class LoginForm {
 
         JTextField jtUsername = new JTextField();
         jtUsername.setBounds(115, 130, 220, 30);
-        
+
 
         //password input
         JLabel lPassword = new JLabel("PASSWORD ");
@@ -46,7 +46,7 @@ public class LoginForm {
 
         JPasswordField jPassword = new JPasswordField();
         jPassword.setBounds(115, 220,220, 30);
-
+        
         // JButton btnLogin = new JButton("Log In");
         // btnLogin.setBounds(50, 170, 90, 50);
         // JButton btnRegister = new JButton("Register");
