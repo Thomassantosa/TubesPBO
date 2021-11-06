@@ -11,10 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import controller.Controller;
+import javax.swing.JOptionPane;
+
 public class LoginForm {
 
     public LoginForm() {
-        //object check
+        // object check
         Controller controller = new Controller();
 
         JFrame fLogin = new JFrame("LogIn");
@@ -33,47 +35,46 @@ public class LoginForm {
         lLogin.setFont(new Font("Sans-Serif", Font.BOLD, 34));
         lLogin.setBounds(145, 15, 300, 30);
 
-        //username input
+        // username input
         JLabel lUsername = new JLabel("USERNAME ");
-        lUsername.setFont( new Font("Tahoma", Font.BOLD, 15));
+        lUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
         lUsername.setBounds(180, 50, 100, 100);
 
         JTextField jtUsername = new JTextField();
         jtUsername.setBounds(115, 130, 220, 30);
 
-
-        //password input
+        // password input
         JLabel lPassword = new JLabel("PASSWORD ");
-        lPassword.setFont( new Font("Tahoma", Font.BOLD, 15));
+        lPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
         lPassword.setBounds(180, 140, 100, 100);
 
         JPasswordField jPassword = new JPasswordField();
-        jPassword.setBounds(115, 220,220, 30);
-        
-        //button
+        jPassword.setBounds(115, 220, 220, 30);
+
+        // button
         JButton btnLogin = new JButton("Log In");
-        btnLogin.setBounds(175 ,280, 90, 30);
-      
-        //action
+        btnLogin.setBounds(175, 280, 90, 30);
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    boolean check = controller.Check();
-                    if(check){
-                        new MainMenu();
-                    }
+                boolean check = controller.CheckLogin(jtUsername.getText(), jPassword.getText());
+                if (check) {
+                    fLogin.dispose();
+                    new MainMenu();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please insert all the field correctly !", "Warning",  JOptionPane.WARNING_MESSAGE);
                 }
+            }
         });
-      
 
         JButton btnRegister = new JButton("Register");
         btnRegister.setBounds(175, 350, 90, 30);
-        //action 
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                      new RegisterForm();
-                }
+                fLogin.dispose();
+                new RegisterForm();
+            }
         });
 
         // add to panel
@@ -84,12 +85,10 @@ public class LoginForm {
         panelLogin.add(jPassword);
         panelLogin.add(btnLogin);
         panelLogin.add(btnRegister);
-       
 
         // add to Frame
         fLogin.add(panelLogin);
-        
+
     }
-    
 
 }

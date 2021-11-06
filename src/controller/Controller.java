@@ -1,21 +1,23 @@
 package controller;
 
-import view.LoginForm;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-public class Controller {
 
-    public boolean Check() {
-        if (!jtUsername.getText().equals(" ")) {
-            if (!jPassword.getText().equals(" ")) {
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Insert The Password Field");
+public class Controller {
+    public boolean CheckLogin(String jtUsername, String jPassword) {
+        boolean result = false;
+        if (!jtUsername.equals("")) {
+            if (!jPassword.equals("")) {
+                result = true;
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Insert The Username Field");
         }
+        return result;
     }
 
+    public void insertData(){
+        JOptionPane.showMessageDialog(null, "You Have been Registered!");
+    }
+
+    public boolean CheckRegistration(){
+        return true;
+    }
 }
