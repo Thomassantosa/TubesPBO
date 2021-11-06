@@ -5,3 +5,4 @@ NEW FEATURE
     - Buat ngebedain bookingan (nomor booking)
 
     - Tambah table provinces, countries
+    - Singleton (object user dibuat dengan singleton saat login)
