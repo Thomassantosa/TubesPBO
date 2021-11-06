@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import controller.Controller;
-import javax.swing.JOptionPane;
+
 
 public class RegisterForm {
 
