@@ -10,10 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-
+import controller.Controller;
 public class LoginForm {
 
     public LoginForm() {
+        //object check
+        Controller controller = new Controller();
+
         JFrame fLogin = new JFrame("LogIn");
         fLogin.setSize(450, 550);
         fLogin.setLayout(null);
@@ -47,12 +50,31 @@ public class LoginForm {
         JPasswordField jPassword = new JPasswordField();
         jPassword.setBounds(115, 220,220, 30);
         
-        // JButton btnLogin = new JButton("Log In");
-        // btnLogin.setBounds(50, 170, 90, 50);
-        // JButton btnRegister = new JButton("Register");
-        // btnRegister.setBounds(150, 170, 90, 50);
-        // JButton btnQuit = new JButton("Quit");
-        // btnQuit.setBounds(250, 170, 90, 50);
+        //button
+        JButton btnLogin = new JButton("Log In");
+        btnLogin.setBounds(175 ,280, 90, 30);
+      
+        //action
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    boolean check = controller.Check();
+                    if(check){
+                        new MainMenu();
+                    }
+                }
+        });
+      
+
+        JButton btnRegister = new JButton("Register");
+        btnRegister.setBounds(175, 350, 90, 30);
+        //action 
+        btnRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                      new RegisterForm();
+                }
+        });
 
         // add to panel
         panelLogin.add(lLogin);
@@ -60,12 +82,14 @@ public class LoginForm {
         panelLogin.add(lPassword);
         panelLogin.add(jtUsername);
         panelLogin.add(jPassword);
-        // panelLogin.add(btnLogin);
-        // panelLogin.add(btnRegister);
-        // panelLogin.add(btnQuit);
+        panelLogin.add(btnLogin);
+        panelLogin.add(btnRegister);
+       
 
         // add to Frame
         fLogin.add(panelLogin);
+        
     }
+    
 
 }
