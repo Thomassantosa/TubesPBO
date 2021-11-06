@@ -26,27 +26,33 @@ public class LoginForm {
         panelLogin.setLayout(null);
         panelLogin.setVisible(true);
 
-        JLabel lLogin = new JLabel("LOGIN");
-        lLogin.setFont(new Font("Sans-Serif", Font.BOLD, 24));
-        lLogin.setBounds(187, 15, 300, 30);
+        JLabel lLogin = new JLabel("Welcome!");
+        lLogin.setFont(new Font("Sans-Serif", Font.BOLD, 34));
+        lLogin.setBounds(145, 15, 300, 30);
 
-        JLabel lUsername = new JLabel("Username  : ");
-        lUsername.setBounds(50, 50, 100, 100);
-
-        JLabel lPassword = new JLabel("Passsword : ");
-        lPassword.setBounds(50, 100, 100, 100);
+        //username input
+        JLabel lUsername = new JLabel("USERNAME ");
+        lUsername.setFont( new Font("Tahoma", Font.BOLD, 15));
+        lUsername.setBounds(180, 50, 100, 100);
 
         JTextField jtUsername = new JTextField();
-        jtUsername.setBounds(125, 90, 100, 20);
-        JPasswordField jPassword = new JPasswordField();
-        jPassword.setBounds(125, 110, 100, 20);
+        jtUsername.setBounds(115, 130, 220, 30);
+        
 
-        JButton btnLogin = new JButton("Log In");
-        btnLogin.setBounds(50, 170, 90, 50);
-        JButton btnRegister = new JButton("Register");
-        btnRegister.setBounds(150, 170, 90, 50);
-        JButton btnQuit = new JButton("Quit");
-        btnQuit.setBounds(250, 170, 90, 50);
+        //password input
+        JLabel lPassword = new JLabel("PASSWORD ");
+        lPassword.setFont( new Font("Tahoma", Font.BOLD, 15));
+        lPassword.setBounds(180, 140, 100, 100);
+
+        JPasswordField jPassword = new JPasswordField();
+        jPassword.setBounds(115, 220,220, 30);
+
+        // JButton btnLogin = new JButton("Log In");
+        // btnLogin.setBounds(50, 170, 90, 50);
+        // JButton btnRegister = new JButton("Register");
+        // btnRegister.setBounds(150, 170, 90, 50);
+        // JButton btnQuit = new JButton("Quit");
+        // btnQuit.setBounds(250, 170, 90, 50);
 
         // add to panel
         panelLogin.add(lLogin);
@@ -54,9 +60,9 @@ public class LoginForm {
         panelLogin.add(lPassword);
         panelLogin.add(jtUsername);
         panelLogin.add(jPassword);
-        panelLogin.add(btnLogin);
-        panelLogin.add(btnRegister);
-        panelLogin.add(btnQuit);
+        // panelLogin.add(btnLogin);
+        // panelLogin.add(btnRegister);
+        // panelLogin.add(btnQuit);
 
         // add to Frame
         fLogin.add(panelLogin);
