@@ -27,7 +27,6 @@ public class TestMenu implements MouseInputListener {
     JTextArea textArea1;
     JScrollPane scrollPane1;
 
-
     public TestMenu() {
 
         // Get screen size
@@ -56,7 +55,7 @@ public class TestMenu implements MouseInputListener {
         // Set components
         // Set splashscreen component
         ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
-        Image scaleImage = icon.getImage().getScaledInstance(220, 250,Image.SCALE_SMOOTH);
+        Image scaleImage = icon.getImage().getScaledInstance(220, 250,Image.SCALE_REPLICATE);
         lSplashLogo = new JLabel(new ImageIcon(scaleImage));
         lSplashLogo.setBounds(width/2-110, height/2-170, 220, 250);
         
@@ -86,7 +85,6 @@ public class TestMenu implements MouseInputListener {
         }
         splashPanel.setVisible(false);
         panel.setVisible(true);
-        
     }
 
     @Override
