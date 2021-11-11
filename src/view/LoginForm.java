@@ -22,14 +22,14 @@ public class LoginForm {
         JFrame fLogin = new JFrame("LogIn");
         fLogin.setSize(450, 550);
         fLogin.setLayout(null);
-        fLogin.setVisible(true);
+      
         fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panelLogin = new JPanel();
         panelLogin.setBackground(new Color(129, 173, 181));
         panelLogin.setSize(450, 550);
         panelLogin.setLayout(null);
-        panelLogin.setVisible(true);
+      
 
         JLabel lLogin = new JLabel("Welcome!");
         lLogin.setFont(new Font("Sans-Serif", Font.BOLD, 34));
@@ -87,8 +87,9 @@ public class LoginForm {
         panelLogin.add(btnRegister);
 
         // add to Frame
+        panelLogin.setVisible(true);
         fLogin.add(panelLogin);
-
+        fLogin.setVisible(true);
     }
 
 }
