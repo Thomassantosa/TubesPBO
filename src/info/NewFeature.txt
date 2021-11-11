@@ -6,3 +6,4 @@ NEW FEATURE
 
     - Tambah table provinces, countries
     - Singleton (object user dibuat dengan singleton saat login)
+    - Log In : Full Name, No HP, Password, re-type password, email, address, jenis kelamin, tanggal lahir
