@@ -1,23 +1,36 @@
 package model;
 
+import java.sql.Date;
+
 public abstract class Trip {
     private int tripID;
-    private String trip;
     private TripTypes TripTypes;
-    private String origin;
-    private String destination;
     private int departureTime;
     private int arrivalTime;
-    private String date;
+    private Date departureDate;
+    private Date arrivalDate;
     private int tripTime;
 
-    public Trip(int tripID, String trip, TripTypes TripType, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
-        this.tripID = tripID;
-        this.trip = trip;
-        this.TripTypes = TripType;
-        this.origin = origin;
-        this.destination = destination;
+    public Trip() {
+    }
+
+    public Trip(TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
+        this.TripTypes = TripTypes;
         this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.tripTime = tripTime;
+    }
+
+    public Trip(int tripID, TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
+        this.tripID = tripID;
+        this.TripTypes = TripTypes;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.tripTime = tripTime;
     }
 
     public int getTripID() {
@@ -28,36 +41,12 @@ public abstract class Trip {
         this.tripID = tripID;
     }
 
-    public String getTrip() {
-        return this.trip;
-    }
-
-    public void setTrip(String trip) {
-        this.trip = trip;
-    }
-
-    public TripTypes getTripType() {
+    public TripTypes getTripTypes() {
         return this.TripTypes;
     }
 
-    public void setTripType(TripTypes TripType) {
-        this.TripTypes = TripType;
-    }
-
-    public String getOrigin() {
-        return this.origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getDestination() {
-        return this.destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public void setTripTypes(TripTypes TripTypes) {
+        this.TripTypes = TripTypes;
     }
 
     public int getDepartureTime() {
@@ -76,12 +65,20 @@ public abstract class Trip {
         this.arrivalTime = arrivalTime;
     }
 
-    public String getDate() {
-        return this.date;
+    public Date getDepartureDate() {
+        return this.departureDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Date getArrivalDate() {
+        return this.arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
 
     public int getTripTime() {
@@ -96,15 +93,12 @@ public abstract class Trip {
     public String toString() {
         return "{" +
             " tripID='" + getTripID() + "'" +
-            ", trip='" + getTrip() + "'" +
-            ", TripType='" + getTripType() + "'" +
-            ", origin='" + getOrigin() + "'" +
-            ", destination='" + getDestination() + "'" +
+            ", TripTypes='" + getTripTypes() + "'" +
             ", departureTime='" + getDepartureTime() + "'" +
             ", arrivalTime='" + getArrivalTime() + "'" +
-            ", date='" + getDate() + "'" +
+            ", departureDate='" + getDepartureDate() + "'" +
+            ", arrivalDate='" + getArrivalDate() + "'" +
             ", tripTime='" + getTripTime() + "'" +
             "}";
     }
-
 }

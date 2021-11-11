@@ -1,5 +1,5 @@
 package model;
 
 public enum SeatType {
-    ECONOMY , BUSSINESS , FIRSTCLASS;
+    ECONOMY, BUSSINESS, FIRSTCLASS;
 }
