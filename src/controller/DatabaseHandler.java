@@ -7,20 +7,20 @@ import javax.swing.JOptionPane;
 
 public class DatabaseHandler {
     
-    public Connection con;
-    private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost/travelokay";
-    private String username = "root";
-    private String password = "";
+    public Connection conn;
+    private final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private final String URL = "jdbc:mysql://localhost/travelokay";
+    private final String USERNAME = "root";
+    private final String PASSWORD = "";
 
     private Connection logOn() {
         try {
 
             // Load JDBC Driver
-            Class.forName(driver);
+            Class.forName(DRIVER);
 
             // Make Object Connection
-            con = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (Exception ex) {
 
             // Handle any errors
@@ -28,14 +28,14 @@ public class DatabaseHandler {
             System.out.println("SQLState: " + ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Error Ocurred when login" + ex);
         }
-        return con;
+        return conn;
     }
 
     private void logOff() {
         try {
 
             // Close connection
-            con.close();
+            conn.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error Ocurred when login" + ex);
         }
@@ -43,7 +43,7 @@ public class DatabaseHandler {
 
     public void connect() {
         try {
-            con = logOn();
+            conn = logOn();
         } catch (Exception ex) {
             System.out.println("Error occured when connecting to database");
         }

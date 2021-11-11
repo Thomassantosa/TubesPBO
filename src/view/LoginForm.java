@@ -10,14 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import controller.Controller;
+import controller.QueryController;
 import javax.swing.JOptionPane;
 
 public class LoginForm {
 
     public LoginForm() {
         // object check
-        Controller controller = new Controller();
+        QueryController controller = new QueryController();
 
         JFrame fLogin = new JFrame("LogIn");
         fLogin.setSize(450, 550);
