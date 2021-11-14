@@ -11,8 +11,16 @@ public class BusTrip extends Trip{
     public BusTrip() {
     }
 
-    public BusTrip(TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
+    public BusTrip(TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
         super(TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
+        this.busTripNumber = busTripNumber;
+        this.bus = bus;
+        this.departureStation = departureStation;
+        this.destinationStation = destinationStation;
+    }
+
+    public BusTrip(int tripID, TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
+        super(tripID, TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.busTripNumber = busTripNumber;
         this.bus = bus;
         this.departureStation = departureStation;

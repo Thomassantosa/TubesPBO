@@ -1,35 +1,52 @@
 package model;
 
 public class Seat {
-    private SeatType seatType;
-    private int seatCapacity;
+    private int seatID;
+    private ConstType seatType;
+    private int seatAvaliable;
     private int baggageCapacity;
     private int price;
 
     public Seat() {
     }
 
-    public Seat(SeatType seatType, int seatCapacity, int baggageCapacity, int price) {
+    public Seat(ConstType seatType, int seatAvaliable, int baggageCapacity, int price) {
         this.seatType = seatType;
-        this.seatCapacity = seatCapacity;
+        this.seatAvaliable = seatAvaliable;
         this.baggageCapacity = baggageCapacity;
         this.price = price;
     }
 
-    public SeatType getSeatType() {
+    public Seat(int seatID, ConstType seatType, int seatAvaliable, int baggageCapacity, int price) {
+        this.seatID = seatID;
+        this.seatType = seatType;
+        this.seatAvaliable = seatAvaliable;
+        this.baggageCapacity = baggageCapacity;
+        this.price = price;
+    }
+
+    public int getSeatID() {
+        return this.seatID;
+    }
+
+    public void setSeatID(int seatID) {
+        this.seatID = seatID;
+    }
+
+    public ConstType getSeatType() {
         return this.seatType;
     }
 
-    public void setSeatType(SeatType seatType) {
+    public void setSeatType(ConstType seatType) {
         this.seatType = seatType;
     }
 
-    public int getSeatCapacity() {
-        return this.seatCapacity;
+    public int getSeatAvaliable() {
+        return this.seatAvaliable;
     }
 
-    public void setSeatCapacity(int seatCapacity) {
-        this.seatCapacity = seatCapacity;
+    public void setSeatAvaliable(int seatAvaliable) {
+        this.seatAvaliable = seatAvaliable;
     }
 
     public int getBaggageCapacity() {
@@ -51,8 +68,9 @@ public class Seat {
     @Override
     public String toString() {
         return "{" +
-            " seatType='" + getSeatType() + "'" +
-            ", seatCapacity='" + getSeatCapacity() + "'" +
+            " seatID='" + getSeatID() + "'" +
+            ", seatType='" + getSeatType() + "'" +
+            ", seatAvaliable='" + getSeatAvaliable() + "'" +
             ", baggageCapacity='" + getBaggageCapacity() + "'" +
             ", price='" + getPrice() + "'" +
             "}";

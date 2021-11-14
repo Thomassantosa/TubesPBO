@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Mitra extends User{
     private String companyName;
     private int fullName;
-    public Mitra(String companyName, int fullName, int userID, String fulName, String username, String email, String password, String addresString, userType typeUser, ArrayList<Order> orderList) {
+
+    public Mitra(String companyName, int fullName, int userID, String fulName, String username, String email, String password, String addresString, ConstType typeUser, ArrayList<Order> orderList) {
         super(userID, fulName, username, email, password, addresString, typeUser, orderList);
         this.companyName = companyName;
         this.fullName = fullName;

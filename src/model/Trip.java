@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public abstract class Trip {
     private int tripID;
-    private TripTypes TripTypes;
+    private TripTypesEnum TripTypes;
     private int departureTime;
     private int arrivalTime;
     private Date departureDate;
@@ -14,7 +14,7 @@ public abstract class Trip {
     public Trip() {
     }
 
-    public Trip(TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
+    public Trip(TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
         this.TripTypes = TripTypes;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
@@ -23,7 +23,7 @@ public abstract class Trip {
         this.tripTime = tripTime;
     }
 
-    public Trip(int tripID, TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
+    public Trip(int tripID, TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
         this.tripID = tripID;
         this.TripTypes = TripTypes;
         this.departureTime = departureTime;
@@ -41,11 +41,11 @@ public abstract class Trip {
         this.tripID = tripID;
     }
 
-    public TripTypes getTripTypes() {
+    public TripTypesEnum getTripTypes() {
         return this.TripTypes;
     }
 
-    public void setTripTypes(TripTypes TripTypes) {
+    public void setTripTypes(TripTypesEnum TripTypes) {
         this.TripTypes = TripTypes;
     }
 
