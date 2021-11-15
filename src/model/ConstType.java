@@ -6,7 +6,7 @@ public class ConstType {
     public final static String ADMIN = "Admin";
     public final static String USER = "User";
     public final static String MEMBER = "Member";
-    public final static String MITRA = "Mitra";
+    public final static String PARTNER = "Partner";
     
     // Seat type
     public final static String ECONOMY = "Economy";
