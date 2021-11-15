@@ -3,17 +3,33 @@ package view;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import org.jdatepicker.impl.*;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.*;
+import javax.swing.*;
+import java.sql.Date;
+import java.util.Properties;
+
+import javax.swing.event.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
 import java.awt.Image;
 
 public class MainMenu implements MouseInputListener{
     JFrame fMainMenu;
     JPanel panelMenu, panelMainMenu, panelProfile, panelPesawat, panelKeretaApi, panelBus, panelHotel, panelWisata;
-    JButton btnProfile, btnPesawat, btnKeretaApi, btnBus, btnHotel, btnWisata, btnLogOut;
-
+    JButton btnProfile, btnPesawat, btnKeretaApi, btnBus, btnHotel, btnWisata, btnLogOut, btnSearch;
+    JLabel lTitlePesawat, lDeparture, lDestination, lDate, lSeatClass;
+    JComboBox cbDeparture, cbDestination, cbSeatClass;
+    JDatePanelImpl jdPick;
+    String country[]={"Surabaya","Bandung","Singapore","Bali","Raja Ampat"};
+    String seatClass[] = {"Economy","Business", "First Class"};
     public MainMenu() {
         fMainMenu = new JFrame("MAIN MENU");
         fMainMenu.setSize(1500, 700);
@@ -129,9 +145,7 @@ public class MainMenu implements MouseInputListener{
         panelMainMenu.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MainMenu();
-    }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -158,6 +172,64 @@ public class MainMenu implements MouseInputListener{
             panelBus.setVisible(false);
             panelHotel.setVisible(false);
             panelWisata.setVisible(false);
+
+            lTitlePesawat = new JLabel("PESAWAT");
+            lTitlePesawat.setForeground(Color.white);
+            lTitlePesawat.setFont(new Font("Tahoma", Font.BOLD,20));
+            lTitlePesawat.setBounds(600, 1, 100, 50);
+
+            lDeparture = new JLabel("Departure");
+            lDeparture.setForeground(Color.white);
+            lDeparture.setFont(new Font("Tahoma", Font.BOLD,15));
+            lDeparture.setBounds(40, 50, 100, 20);
+
+            cbDeparture = new JComboBox<>(country);
+            cbDeparture.setBounds(40, 70, 200, 20);
+
+            lDestination = new JLabel("Destination");
+            lDestination.setForeground(Color.white);
+            lDestination.setFont(new Font("Tahoma", Font.BOLD,15));
+            lDestination.setBounds(400, 50, 100, 20);
+
+            cbDestination = new JComboBox<>(country);
+            cbDestination.setBounds(400, 70, 200, 20);
+
+            lDate = new JLabel("Choose Date");
+            lDate.setForeground(Color.white);
+            lDate.setFont(new Font("Tahoma", Font.BOLD,15));
+            lDate.setBounds(40, 120, 100, 20);
+
+            Properties p = new Properties();
+            SqlDateModel model = new SqlDateModel();
+            p.put("text.day", "Day");
+            p.put("text.month", "Month");
+            p.put("text.year", "Year");
+            JDatePanelImpl date = new JDatePanelImpl(model, p);
+            date.setBounds(40, 140, 200, 200);
+            
+            lSeatClass = new JLabel("Seat Class");
+            lSeatClass.setForeground(Color.white);
+            lSeatClass.setFont(new Font("Tahoma", Font.BOLD,15));
+            lSeatClass.setBounds(400, 120, 100, 20);
+
+            cbSeatClass = new JComboBox<>(seatClass);
+            cbSeatClass.setBounds(400,150,200,20);
+
+            btnSearch = new JButton("Search");
+            btnSearch.setBounds(40,500,230,50);
+            btnSearch.setBackground(Color.orange);
+
+
+            panelPesawat.add(btnSearch);
+            panelPesawat.add(cbSeatClass);
+            panelPesawat.add(lSeatClass);
+            panelPesawat.add(lDate);
+            panelPesawat.add(date);
+            panelPesawat.add(cbDestination);
+            panelPesawat.add(lDestination);
+            panelPesawat.add(cbDeparture);
+            panelPesawat.add(lDeparture);
+            panelPesawat.add(lTitlePesawat);
             break;
         case "Kereta Api":
             panelMainMenu.setVisible(false);
@@ -230,5 +302,8 @@ public class MainMenu implements MouseInputListener{
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+    public static void main(String[] args) {
+        new MainMenu();
     }
 }
