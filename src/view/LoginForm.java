@@ -28,7 +28,7 @@ public class LoginForm {
         Controller controller = new Controller();
 
         JPanel splashPanel = new JPanel();
-        splashPanel.setBackground(new Color(23, 42, 62));
+        splashPanel.setBackground(new Color(40, 25, 54));
         splashPanel.setSize((int) width - 100, (int) height - 100);
         splashPanel.setLayout(null);
 
@@ -48,12 +48,12 @@ public class LoginForm {
         JPanel bigPanel = new JPanel();
         bigPanel.setSize((int) width - 100, (int) height - 100);
         bigPanel.setLayout(null);
-        bigPanel.setBackground(new Color(23, 42, 62));
+        bigPanel.setBackground(new Color(40, 25, 54));
 
         fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panelLogin = new JPanel();
-        panelLogin.setBackground(new Color(32, 59, 87));
+        panelLogin.setBackground(new Color(60, 46, 72));
         panelLogin.setBounds((int) width / 5 + 100, (int) height / 6, 900, 550);
         panelLogin.setLayout(null);
 
@@ -76,6 +76,8 @@ public class LoginForm {
 
         JTextField jtUsername = new JTextField();
         jtUsername.setBounds(lLogin.getWidth(), lUsername.getY() + 100, 310, 30);
+        jtUsername.setBackground(new Color(100,88,110));
+        jtUsername.setForeground(Color.white);
 
         // password input
         JLabel lPassword = new JLabel("PASSWORD ");
@@ -85,11 +87,14 @@ public class LoginForm {
 
         JPasswordField jPassword = new JPasswordField();
         jPassword.setBounds(lLogin.getWidth(), lPassword.getY() + 100, 310, 30);
+        jPassword.setBackground(new Color(100,88,110));
+        jPassword.setForeground(Color.white);
 
         // button
         JButton btnLogin = new JButton("Log In");
         btnLogin.setBounds(lLogin.getWidth(), jPassword.getY() + 100, 310, 50);
-        btnLogin.setBackground(new Color(57, 189, 118));
+        btnLogin.setBackground(new Color(136, 94, 254));
+        btnLogin.setForeground(Color.WHITE);
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,7 +116,7 @@ public class LoginForm {
 
         JButton btnRegister = new JButton("Register");
         btnRegister.setBounds(info.getX() + 130, info.getY(), 90, 30);
-        btnRegister.setBackground(new Color(32, 59, 87));
+        btnRegister.setBackground(new Color(60, 46, 72));
         btnRegister.setForeground(new Color(57, 189, 118));
 
         btnRegister.addActionListener(new ActionListener() {
@@ -148,7 +153,7 @@ public class LoginForm {
 
         //splash screen (loading screen)
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
