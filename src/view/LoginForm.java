@@ -12,83 +12,122 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import controller.Controller;
 import javax.swing.JOptionPane;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class LoginForm {
 
-    public LoginForm() {
-        // object check
-        Controller controller = new Controller();
+    // public LoginForm() {
+    //     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    //     double width = screenSize.getWidth();
+    //     double height = screenSize.getHeight();
+       
+    //     // object
+    //     Controller controller = new Controller();
 
-        JFrame fLogin = new JFrame("LogIn");
-        fLogin.setSize(450, 550);
-        fLogin.setLayout(null);
-        fLogin.setVisible(true);
-        fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //     JFrame fLogin = new JFrame("Login Form");
+    //     fLogin.setSize((int)width-100, (int)height-100);
+    //     fLogin.setLayout(null);
+        
+    //     JPanel bigPanel = new JPanel();
+    //     bigPanel.setSize((int)width-100, (int)height-100);
+    //     bigPanel.setLayout(null);
+    //     bigPanel.setBackground(new Color(23,42,62));
 
-        JPanel panelLogin = new JPanel();
-        panelLogin.setBackground(new Color(129, 173, 181));
-        panelLogin.setSize(450, 550);
-        panelLogin.setLayout(null);
-        panelLogin.setVisible(true);
+    //     fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JLabel lLogin = new JLabel("Welcome!");
-        lLogin.setFont(new Font("Sans-Serif", Font.BOLD, 34));
-        lLogin.setBounds(145, 15, 300, 30);
+    //     JPanel panelLogin = new JPanel();
+    //     panelLogin.setBackground(new Color(32,59,87));
+    //     panelLogin.setBounds((int)width/5+100,(int)height/6,900, 550);
+    //     panelLogin.setLayout(null);
+       
 
-        // username input
-        JLabel lUsername = new JLabel("USERNAME ");
-        lUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
-        lUsername.setBounds(180, 50, 100, 100);
+    //     JLabel lLogin = new JLabel("Welcome!");
+    //     lLogin.setFont(new Font("Tahoma", Font.BOLD, 34));
+    //     lLogin.setBounds(panelLogin.getWidth()/3+80, 15, 300, 30);
+    //     lLogin.setForeground(Color.white);
 
-        JTextField jtUsername = new JTextField();
-        jtUsername.setBounds(115, 130, 220, 30);
+    //     JLabel moto = new JLabel("Start Your Journey Today");
+    //     moto.setFont(new Font ("Sans-serif",Font.ITALIC,16));
+    //     moto.setForeground(Color.white);
+    //     moto.setBounds(lLogin.getX()-5,lLogin.getY()+50,310 ,30);
+    //     moto.setLayout(null);
 
-        // password input
-        JLabel lPassword = new JLabel("PASSWORD ");
-        lPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
-        lPassword.setBounds(180, 140, 100, 100);
+    
 
-        JPasswordField jPassword = new JPasswordField();
-        jPassword.setBounds(115, 220, 220, 30);
+    //     // username input
+    //     JLabel lUsername = new JLabel("USERNAME ");
+    //     lUsername.setFont(new Font("Tahoma", Font.BOLD, 19));
+    //     lUsername.setBounds(panelLogin.getWidth()/3+100, 70, 120, 150);
+    //     lUsername.setForeground(Color.WHITE);
 
-        // button
-        JButton btnLogin = new JButton("Log In");
-        btnLogin.setBounds(175, 280, 90, 30);
-        btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean check = controller.CheckLogin(jtUsername.getText(), jPassword.getText());
-                if (check) {
-                    fLogin.dispose();
-                    new MainMenu();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please insert all the field correctly !", "Warning",  JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
+    //     JTextField jtUsername = new JTextField();
+    //     jtUsername.setBounds(lLogin.getWidth(), lUsername.getY()+100, 310, 30);
 
-        JButton btnRegister = new JButton("Register");
-        btnRegister.setBounds(175, 350, 90, 30);
-        btnRegister.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fLogin.dispose();
-                new RegisterForm();
-            }
-        });
+    //     // password input
+    //     JLabel lPassword = new JLabel("PASSWORD ");
+    //     lPassword.setFont(new Font("Tahoma", Font.BOLD, 19));
+    //     lPassword.setBounds(panelLogin.getWidth()/3+100, jtUsername.getY(), 120, 150);
+    //     lPassword.setForeground(Color.WHITE);
 
-        // add to panel
-        panelLogin.add(lLogin);
-        panelLogin.add(lUsername);
-        panelLogin.add(lPassword);
-        panelLogin.add(jtUsername);
-        panelLogin.add(jPassword);
-        panelLogin.add(btnLogin);
-        panelLogin.add(btnRegister);
+    //     JPasswordField jPassword = new JPasswordField();
+    //     jPassword.setBounds(lLogin.getWidth(), lPassword.getY()+100, 310, 30);
 
-        // add to Frame
-        fLogin.add(panelLogin);
+    //     // button
+    //     JButton btnLogin = new JButton("Log In");
+    //     btnLogin.setBounds(lLogin.getWidth(), jPassword.getY()+100, 310, 50);
+    //     btnLogin.setBackground(new Color(57,189,118));
+    //     btnLogin.addActionListener(new ActionListener() {
+    //         @Override
+    //         public void actionPerformed(ActionEvent e) {
+    //             boolean check = controller.CheckLogin(jtUsername.getText(), jPassword.getText());
+    //             if (check) {
+    //                 fLogin.dispose();
+    //                 new MainMenu();
+    //             } else {
+    //                 JOptionPane.showMessageDialog(null, "Please insert all the field correctly !", "Warning",
+    //                         JOptionPane.WARNING_MESSAGE);
+    //             }
+    //         }
+    //     });
 
-    }
+    //     JLabel info = new JLabel("Don't have Account ?");
+    //     info.setFont(new Font("Tahoma",Font.PLAIN,12));
+    //     info.setForeground(Color.white);
+    //     info.setBounds(15,btnLogin.getY()+120,150,30);
+
+    //     JButton btnRegister = new JButton("Register");
+    //     btnRegister.setBounds(info.getX()+130, info.getY(), 90, 30);
+    //     btnRegister.setBackground(new Color(32,59,87));
+    //     btnRegister.setForeground(new Color(57,189,118));
+        
+    //     btnRegister.addActionListener(new ActionListener() {
+    //         @Override
+    //         public void actionPerformed(ActionEvent e) {
+    //             fLogin.dispose();
+    //             new RegisterStatus();
+    //         }
+    //     });
+
+    //     // add to panel
+    //     panelLogin.add(lLogin);
+    //     panelLogin.add(moto);
+    //     panelLogin.add(lUsername);
+    //     panelLogin.add(lPassword);
+    //     panelLogin.add(info);
+    //     panelLogin.add(jtUsername);
+    //     panelLogin.add(jPassword);
+    //     panelLogin.add(btnLogin);    
+    //     panelLogin.add(btnRegister);
+
+    //     bigPanel.add(panelLogin);
+    //     // add to Frame
+    //     fLogin.add(bigPanel);
+
+    //     bigPanel.setVisible(true);
+    //     panelLogin.setVisible(true);
+    //     fLogin.setVisible(true);
+
+    // }
 
 }

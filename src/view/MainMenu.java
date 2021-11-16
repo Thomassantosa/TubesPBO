@@ -11,264 +11,223 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.sql.Date;
 import java.util.Properties;
-
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
+import javax.tools.Tool;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import java.awt.Image;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
-public class MainMenu implements MouseInputListener{
+public class MainMenu implements MouseInputListener {
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    double width = screenSize.getWidth();
+    double height = screenSize.getHeight();
+
     JFrame fMainMenu;
-    JPanel panelMenu, panelMainMenu, panelProfile, panelPesawat, panelKeretaApi, panelBus, panelHotel, panelWisata;
-    JButton btnProfile, btnPesawat, btnKeretaApi, btnBus, btnHotel, btnWisata, btnLogOut, btnSearch;
+    JPanel panelMenu, panelHome, panelProfile, panelFlight, panelTrain, panelBus, panelHotel, panelXtourience;
+    JButton btnHome, btnProfile, btnFlight, btnTrain, btnBus, btnHotel, btnXtourience, btnLogOut, btnSearch;
     JLabel lTitlePesawat, lDeparture, lDestination, lDate, lSeatClass;
     JComboBox cbDeparture, cbDestination, cbSeatClass;
     JDatePanelImpl jdPick;
-    String country[]={"Surabaya","Bandung","Singapore","Bali","Raja Ampat"};
-    String seatClass[] = {"Economy","Business", "First Class"};
+    String country[] = { "Surabaya", "Bandung", "Singapore", "Bali", "Raja Ampat" };
+    String seatClass[] = { "Economy", "Business", "First Class" };
+
     public MainMenu() {
-        fMainMenu = new JFrame("MAIN MENU");
-        fMainMenu.setSize(1500, 700);
+
+        // frame Main Menu
+        fMainMenu = new JFrame("Travelokay");
+        fMainMenu.setSize((int) width - 100, (int) height - 100);
         fMainMenu.setLayout(null);
 
         fMainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Panel Menu
         panelMenu = new JPanel();
-        panelMenu.setBackground(new Color(23,42,62));
-        panelMenu.setBounds(0, 0, 250, 700);
+        panelMenu.setBackground(new Color(100, 88, 110));
+        panelMenu.setBounds(0, 0, (int) width / 10, (int) height - 100);
         panelMenu.setLayout(null);
 
-        panelProfile = new JPanel();
-        panelProfile.setBackground(Color.WHITE);
-        panelProfile.setBounds(250, 0, 1500, 700);
-        panelProfile.setLayout(null);
+        // Panel Home
+        panelHome = new JPanel();
+        panelHome.setBackground(new Color(40, 25, 54));
+        panelHome.setBounds((int) width / 10, 0, (int) width - 100, (int) height - 100);
+        panelHome.setLayout(null);
 
-        panelPesawat = new JPanel();
-        panelPesawat.setBackground(Color.black);
-        panelPesawat.setBounds(250, 0, 1500, 700);
-        panelPesawat.setLayout(null);
+        // Button Home
+        btnHome = new JButton("Home");
+        btnHome.setBounds(0, 0, 195, 50);
+        btnHome.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnHome.setBackground(new Color(100, 88, 110));
+        btnHome.setForeground(Color.white);
+        btnHome.addMouseListener(this);
+        btnHome.setHorizontalAlignment(SwingConstants.LEFT);
 
-        panelKeretaApi = new JPanel();
-        panelKeretaApi.setBackground(Color.magenta);
-        panelKeretaApi.setBounds(250, 0, 1500, 700);
-        panelKeretaApi.setLayout(null);
+        // Button Flight
+        btnFlight = new JButton("Flight");
+        btnFlight.setBounds(0, btnHome.getVerticalAlignment() + 50, 195, 50);
+        btnFlight.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnFlight.setBackground(new Color(100, 88, 110));
+        btnFlight.setForeground(Color.white);
+        btnFlight.addMouseListener(this);
+        btnFlight.setHorizontalAlignment(SwingConstants.LEFT);
 
-        panelBus = new JPanel();
-        panelBus.setBackground(Color.red);
-        panelBus.setBounds(250, 0, 1500, 700);
-        panelBus.setLayout(null);
+        // Button Train
+        btnTrain = new JButton("Train");
+        btnTrain.setBounds(0, btnHome.getVerticalAlignment() + 100, 195, 50);
+        btnTrain.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnTrain.setBackground(new Color(100, 88, 110));
+        btnTrain.setForeground(Color.white);
+        btnTrain.addMouseListener(this);
+        btnTrain.setHorizontalAlignment(SwingConstants.LEFT);
 
-        panelHotel = new JPanel();
-        panelHotel.setBackground(Color.ORANGE);
-        panelHotel.setBounds(250, 0, 1500, 700);
-        panelHotel.setLayout(null);
-
-        panelWisata = new JPanel();
-        panelWisata.setBackground(Color.pink);
-        panelWisata.setBounds(250, 0, 1500, 700);
-        panelWisata.setLayout(null);
-
-        panelMainMenu = new JPanel();
-        panelMainMenu.setBackground(new Color(32,59,87));
-        panelMainMenu.setBounds(250, 0, 1500, 700);
-        panelMainMenu.setLayout(null);
-
-        ImageIcon logo = new ImageIcon("src\\source\\Logo_Splashscreen.png");
-        Image scaleImage = logo.getImage().getScaledInstance(150, 150,Image.SCALE_SMOOTH);
-        
-        btnProfile = new JButton();
-        btnProfile.setText("NAMA");
-        btnProfile.setHorizontalTextPosition(JButton.CENTER);
-        btnProfile.setVerticalTextPosition(JButton.BOTTOM);
-        btnProfile.setIcon(new ImageIcon(scaleImage));
-        btnProfile.setBounds(10, 10, 230, 230);
-        btnProfile.setBackground(new Color(23,42,62));
-        btnProfile.setForeground(Color.white);
-        btnProfile.addMouseListener(this);
-
-        btnPesawat = new JButton("Pesawat");
-        btnPesawat.setBounds(10, 245, 230, 50);
-        btnPesawat.setBackground(new Color(23,42,62));
-        btnPesawat.setForeground(Color.white);
-        btnPesawat.addMouseListener(this);
-
-        btnKeretaApi = new JButton("Kereta Api");
-        btnKeretaApi.setBounds(10, 300, 230, 50);
-        btnKeretaApi.setBackground(new Color(23,42,62));
-        btnKeretaApi.setForeground(Color.white);
-        btnKeretaApi.addMouseListener(this);
-
+        // Button Bus
         btnBus = new JButton("Bus");
-        btnBus.setBounds(10, 355, 230, 50);
-        btnBus.setBackground(new Color(23,42,62));
+        btnBus.setBounds(0, btnHome.getVerticalAlignment() + 150, 195, 50);
+        btnBus.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnBus.setBackground(new Color(100, 88, 110));
         btnBus.setForeground(Color.white);
         btnBus.addMouseListener(this);
+        btnBus.setHorizontalAlignment(SwingConstants.LEFT);
 
+        // Button Hotel
         btnHotel = new JButton("Hotel");
-        btnHotel.setBounds(10, 410, 230, 50);
-        btnHotel.setBackground(new Color(23,42,62));
+        btnHotel.setBounds(0, btnHome.getVerticalAlignment() + 200, 195, 50);
+        btnHotel.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnHotel.setBackground(new Color(100, 88, 110));
         btnHotel.setForeground(Color.white);
         btnHotel.addMouseListener(this);
+        btnHotel.setHorizontalAlignment(SwingConstants.LEFT);
 
-        btnWisata = new JButton("Wisata");
-        btnWisata.setBounds(10, 465, 230, 50);
-        btnWisata.setBackground(new Color(23,42,62));
-        btnWisata.setForeground(Color.white);
-        btnWisata.addMouseListener(this);
+        // Button Xtourience
+        btnXtourience = new JButton("Xtourience");
+        btnXtourience.setBounds(0, btnHome.getVerticalAlignment() + 250, 195, 50);
+        btnXtourience.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnXtourience.setBackground(new Color(100, 88, 110));
+        btnXtourience.setForeground(Color.white);
+        btnXtourience.addMouseListener(this);
+        btnXtourience.setHorizontalAlignment(SwingConstants.LEFT);
 
-        btnLogOut = new JButton("Log Out");
-        btnLogOut.setBounds(10, 600, 230, 50);
-        btnLogOut.setForeground(Color.white);
-        btnLogOut.setBackground(Color.red);
+        // Panel Pesawat
+        panelFlight = new JPanel();
+        panelFlight.setBackground(Color.BLUE);
+        panelFlight.setBounds((int) width / 10, 0, (int) width - 100, (int) height - 100);
+        panelFlight.setLayout(null);
 
-        panelMenu.add(btnLogOut);
-        panelMenu.add(btnWisata);
+        // Panel Train
+        panelTrain = new JPanel();
+        panelTrain.setBackground(Color.yellow);
+        panelTrain.setBounds((int) width / 10, 0, (int) width - 100, (int) height - 100);
+        panelTrain.setLayout(null);
+
+        // Panel Bus
+        panelBus = new JPanel();
+        panelBus.setBackground(Color.red);
+        panelBus.setBounds((int) width / 10, 0, (int) width - 100, (int) height - 100);
+        panelBus.setLayout(null);
+
+        // Panel Hotel
+        panelHotel = new JPanel();
+        panelHotel.setBackground(Color.white);
+        panelHotel.setBounds((int) width / 10, 0, (int) width - 100, (int) height - 100);
+        panelHotel.setLayout(null);
+
+        // Panel Xtourience
+        panelXtourience = new JPanel();
+        panelXtourience.setBackground(Color.black);
+        panelXtourience.setBounds((int) width / 10, 0, (int) width - 100, (int) height - 100);
+        panelXtourience.setLayout(null);
+
+        panelMenu.add(btnXtourience);
         panelMenu.add(btnHotel);
         panelMenu.add(btnBus);
-        panelMenu.add(btnKeretaApi);
-        panelMenu.add(btnPesawat);
-        panelMenu.add(btnProfile);
-        fMainMenu.add(panelMainMenu);
+        panelMenu.add(btnTrain);
+        panelMenu.add(btnFlight);
+        panelMenu.add(btnHome);
+        panelMenu.add(btnHotel);
         fMainMenu.add(panelMenu);
+        fMainMenu.add(panelHome);
+        fMainMenu.add(panelFlight);
+        fMainMenu.add(panelTrain);
         fMainMenu.add(panelBus);
         fMainMenu.add(panelHotel);
-        fMainMenu.add(panelKeretaApi);
-        fMainMenu.add(panelPesawat);
-        fMainMenu.add(panelProfile);
-        fMainMenu.add(panelWisata);
+        fMainMenu.add(panelXtourience);
 
+        // panelHome.setVisible(true);
+        // panelBus.setVisible(false);
+        // panelTrain.setVisible(false);
+        // panelFlight.setVisible(false);
+        // panelHotel.setVisible(false);
+        // panelXtourience.setVisible(false);
         fMainMenu.setVisible(true);
-        panelMainMenu.setVisible(true);
     }
-
-    
 
     @Override
     public void mouseClicked(MouseEvent e) {
         Component component = e.getComponent();
-        component.setBackground(new Color (32,59,87));
+        component.setBackground(new Color(100, 88, 110));
         JButton button = (JButton) e.getSource();
         String name = button.getText();
         switch (name) {
-        case "Profile":
-            panelMainMenu.setVisible(false);
-            panelProfile.setVisible(true);
-            panelPesawat.setVisible(false);
-            panelKeretaApi.setVisible(false);
-            panelBus.setVisible(false);
-            panelHotel.setVisible(false);
-            panelWisata.setVisible(false);
-
-            break;
-        case "Pesawat":
-            panelMainMenu.setVisible(false);
+        case "Home":
+            panelHome.setVisible(true);
             panelProfile.setVisible(false);
-            panelPesawat.setVisible(true);
-            panelKeretaApi.setVisible(false);
+            panelFlight.setVisible(false);
+            panelTrain.setVisible(false);
             panelBus.setVisible(false);
             panelHotel.setVisible(false);
-            panelWisata.setVisible(false);
-
-            lTitlePesawat = new JLabel("PESAWAT");
-            lTitlePesawat.setForeground(Color.white);
-            lTitlePesawat.setFont(new Font("Tahoma", Font.BOLD,20));
-            lTitlePesawat.setBounds(600, 1, 100, 50);
-
-            lDeparture = new JLabel("Departure");
-            lDeparture.setForeground(Color.white);
-            lDeparture.setFont(new Font("Tahoma", Font.BOLD,15));
-            lDeparture.setBounds(40, 50, 100, 20);
-
-            cbDeparture = new JComboBox<>(country);
-            cbDeparture.setBounds(40, 70, 200, 20);
-
-            lDestination = new JLabel("Destination");
-            lDestination.setForeground(Color.white);
-            lDestination.setFont(new Font("Tahoma", Font.BOLD,15));
-            lDestination.setBounds(400, 50, 100, 20);
-
-            cbDestination = new JComboBox<>(country);
-            cbDestination.setBounds(400, 70, 200, 20);
-
-            lDate = new JLabel("Choose Date");
-            lDate.setForeground(Color.white);
-            lDate.setFont(new Font("Tahoma", Font.BOLD,15));
-            lDate.setBounds(40, 120, 100, 20);
-
-            Properties p = new Properties();
-            SqlDateModel model = new SqlDateModel();
-            p.put("text.day", "Day");
-            p.put("text.month", "Month");
-            p.put("text.year", "Year");
-            JDatePanelImpl date = new JDatePanelImpl(model, p);
-            date.setBounds(40, 140, 200, 200);
-            
-            lSeatClass = new JLabel("Seat Class");
-            lSeatClass.setForeground(Color.white);
-            lSeatClass.setFont(new Font("Tahoma", Font.BOLD,15));
-            lSeatClass.setBounds(400, 120, 100, 20);
-
-            cbSeatClass = new JComboBox<>(seatClass);
-            cbSeatClass.setBounds(400,150,200,20);
-
-            btnSearch = new JButton("Search");
-            btnSearch.setBounds(40,500,230,50);
-            btnSearch.setBackground(Color.orange);
-
-
-            panelPesawat.add(btnSearch);
-            panelPesawat.add(cbSeatClass);
-            panelPesawat.add(lSeatClass);
-            panelPesawat.add(lDate);
-            panelPesawat.add(date);
-            panelPesawat.add(cbDestination);
-            panelPesawat.add(lDestination);
-            panelPesawat.add(cbDeparture);
-            panelPesawat.add(lDeparture);
-            panelPesawat.add(lTitlePesawat);
+            panelXtourience.setVisible(false);
             break;
-        case "Kereta Api":
-            panelMainMenu.setVisible(false);
+        case "Flight":
+            panelHome.setVisible(false);
             panelProfile.setVisible(false);
-            panelPesawat.setVisible(false);
-            panelKeretaApi.setVisible(true);
+            panelFlight.setVisible(true);
+            panelTrain.setVisible(false);
             panelBus.setVisible(false);
             panelHotel.setVisible(false);
-            panelWisata.setVisible(false);
+            panelXtourience.setVisible(false);
+            break;
+        case "Train":
+            panelHome.setVisible(false);
+            panelProfile.setVisible(false);
+            panelFlight.setVisible(false);
+            panelTrain.setVisible(true);
+            panelBus.setVisible(false);
+            panelHotel.setVisible(false);
+            panelXtourience.setVisible(false);
             break;
         case "Bus":
-            panelMainMenu.setVisible(false);
+            panelHome.setVisible(false);
             panelProfile.setVisible(false);
-            panelPesawat.setVisible(false);
-            panelKeretaApi.setVisible(false);
+            panelFlight.setVisible(false);
+            panelTrain.setVisible(false);
             panelBus.setVisible(true);
             panelHotel.setVisible(false);
-            panelWisata.setVisible(false);
+            panelXtourience.setVisible(false);
             break;
         case "Hotel":
-            panelMainMenu.setVisible(false);
+            panelHome.setVisible(false);
             panelProfile.setVisible(false);
-            panelPesawat.setVisible(false);
-            panelKeretaApi.setVisible(false);
+            panelFlight.setVisible(false);
+            panelTrain.setVisible(false);
             panelBus.setVisible(false);
             panelHotel.setVisible(true);
-            panelWisata.setVisible(false);
+            panelXtourience.setVisible(false);
             break;
-        case "Wisata":
-            panelMainMenu.setVisible(false);
+        case "Xtourience":
+            panelHome.setVisible(false);
             panelProfile.setVisible(false);
-            panelPesawat.setVisible(false);
-            panelKeretaApi.setVisible(false);
+            panelFlight.setVisible(false);
+            panelTrain.setVisible(false);
             panelBus.setVisible(false);
             panelHotel.setVisible(false);
-            panelWisata.setVisible(true);
+            panelXtourience.setVisible(true);
             break;
         default:
-            System.out.println("TEST BUTTON ELSE");
             break;
         }
     }
@@ -285,14 +244,10 @@ public class MainMenu implements MouseInputListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        Component component = e.getComponent();
-        component.setBackground(new Color(57,189,118));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        Component component = e.getComponent();
-        component.setBackground(new Color(23,42,62));
     }
 
     @Override
@@ -303,6 +258,7 @@ public class MainMenu implements MouseInputListener{
     public void mouseMoved(MouseEvent e) {
 
     }
+
     public static void main(String[] args) {
         new MainMenu();
     }
