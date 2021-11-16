@@ -233,7 +233,7 @@ public class MainMenu implements MouseInputListener{
             break;
         case "Kereta Api":
             panelMainMenu.setVisible(false);
-            panelProfile.setVisible(false);
+            // panelProfile.setVisible(false);
             panelPesawat.setVisible(false);
             panelKeretaApi.setVisible(true);
             panelBus.setVisible(false);
@@ -242,7 +242,7 @@ public class MainMenu implements MouseInputListener{
             break;
         case "Bus":
             panelMainMenu.setVisible(false);
-            panelProfile.setVisible(false);
+            // panelProfile.setVisible(false);
             panelPesawat.setVisible(false);
             panelKeretaApi.setVisible(false);
             panelBus.setVisible(true);
@@ -251,7 +251,7 @@ public class MainMenu implements MouseInputListener{
             break;
         case "Hotel":
             panelMainMenu.setVisible(false);
-            panelProfile.setVisible(false);
+            // panelProfile.setVisible(false);
             panelPesawat.setVisible(false);
             panelKeretaApi.setVisible(false);
             panelBus.setVisible(false);
@@ -260,7 +260,7 @@ public class MainMenu implements MouseInputListener{
             break;
         case "Wisata":
             panelMainMenu.setVisible(false);
-            panelProfile.setVisible(false);
+            // panelProfile.setVisible(false);
             panelPesawat.setVisible(false);
             panelKeretaApi.setVisible(false);
             panelBus.setVisible(false);
@@ -268,7 +268,6 @@ public class MainMenu implements MouseInputListener{
             panelWisata.setVisible(true);
             break;
         default:
-            System.out.println("TEST BUTTON ELSE");
             break;
         }
     }

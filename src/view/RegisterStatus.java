@@ -22,46 +22,62 @@ public class RegisterStatus implements MouseInputListener {
     double width;
     double height;
     JFrame frame;
-    JPanel bigPanel , registerPanel;
-    JLabel logo,moto,lRegister;
-    JButton btnTraveller , btnPartner;
+    JPanel bigPanel, registerPanel;
+    JLabel logo, moto, lRegister;
+    JButton btnTraveller, btnPartner;
 
     public RegisterStatus() {
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width=screenSize.getWidth();
-        height = screenSize.getHeight();
         
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        width = screenSize.getWidth();
+        height = screenSize.getHeight();
+
         frame = new JFrame("Register As");
-        frame.setSize((int)width-100, (int)height-100);
+        frame.setSize((int) width - 100, (int) height - 100);
         frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         bigPanel = new JPanel();
-        bigPanel.setSize((int)width-100, (int)height-100);
+        bigPanel.setSize((int) width - 100, (int) height - 100);
         bigPanel.setLayout(null);
         bigPanel.setBackground(new Color(40, 25, 54));
 
         registerPanel = new JPanel();
         registerPanel.setBackground(new Color(60, 46, 72));
         registerPanel.setBounds((int) width / 5 + 100, (int) height / 6, 900, 550);
-        
-        lRegister = new JLabel("Welcome!");
+        registerPanel.setLayout(null);
+
+        lRegister = new JLabel("Register");
         lRegister.setFont(new Font("Tahoma", Font.BOLD, 34));
-        lRegister.setBounds(registerPanel.getWidth() / 3 + 80, 15, 300, 30);
+        lRegister.setBounds(registerPanel.getWidth() / 3 + 80, 15, 300, 45);
         lRegister.setForeground(Color.white);
+        lRegister.setLayout(null);
 
         moto = new JLabel("Start Your Journey Today");
         moto.setFont(new Font("Sans-serif", Font.ITALIC, 16));
         moto.setForeground(Color.white);
-        moto.setBounds(lRegister.getX() - 5, lRegister.getY() + 50, 310, 30);
+        moto.setBounds(lRegister.getX() - 15, lRegister.getY() + 50, 310, 30);
         moto.setLayout(null);
 
         btnTraveller = new JButton("Traveller");
+        btnTraveller.setBounds((int) width / 5 - 300, moto.getY() + 70, 350, 350);
+        btnTraveller.setFont(new Font("Tahoma", Font.BOLD, 40));
+        btnTraveller.setBackground(new Color (60, 46, 72));
+        btnTraveller.setForeground(Color.white);
         btnTraveller.addMouseListener(this);
-        
+
         btnPartner = new JButton("Partner");
+        btnPartner.setBounds((int) width / 5 + 100, moto.getY() + 70, 350, 350);
+        btnPartner.setFont(new Font("Tahoma", Font.BOLD, 40));
+        btnPartner.setBackground(new Color (60, 46, 72));
+        btnPartner.setForeground(Color.white);
         btnPartner.addMouseListener(this);
 
-        registerPanel.add(lRegister,moto);
+        registerPanel.add(lRegister);
+        registerPanel.add(moto);
+        registerPanel.add(btnTraveller);
+        registerPanel.add(btnPartner);
+        
         bigPanel.add(registerPanel);
         frame.add(bigPanel);
 
@@ -69,23 +85,28 @@ public class RegisterStatus implements MouseInputListener {
         bigPanel.setVisible(true);
         frame.setVisible(true);
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton button = (JButton) e.getSource();
         String name = button.getText();
 
-        switch(name) {
-            case "Test":
-                System.out.println("TEST BUTTON 1");
-                break;
-            case "":
-                break;
-            case "bla":
-                break;
-            default: 
-                System.out.println("TEST BUTTON ELSE");
-                break;
+        switch (name) {
+        case "Traveller":
+            //masukin queery untuk traveller disini 
+            frame.dispose();
+            new RegisterForm();
+            break;
+
+        case "Partner":
+           //masukin queery untuk partner disini 
+            frame.dispose();
+            new RegisterForm();
+            break;
+
+        default:
+
+            break;
         }
     }
 
@@ -102,13 +123,13 @@ public class RegisterStatus implements MouseInputListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         Component component = e.getComponent();
-        component.setBackground(new Color(211, 228, 205));
+        component.setBackground(new Color(4, 170, 168));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         Component component = e.getComponent();
-        component.setBackground(new Color(173, 194, 169));
+        component.setBackground(new Color(60, 46, 72));
     }
 
     @Override
@@ -120,5 +141,5 @@ public class RegisterStatus implements MouseInputListener {
     public void mouseMoved(MouseEvent e) {
         // Not implemented
     }
-    
+
 }

@@ -17,6 +17,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
+
 public class LoginForm {
 
     public LoginForm() {
@@ -44,13 +45,14 @@ public class LoginForm {
         JFrame fLogin = new JFrame("Login Form");
         fLogin.setSize((int) width - 100, (int) height - 100);
         fLogin.setLayout(null);
-
+        fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         JPanel bigPanel = new JPanel();
         bigPanel.setSize((int) width - 100, (int) height - 100);
         bigPanel.setLayout(null);
         bigPanel.setBackground(new Color(40, 25, 54));
 
-        fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         JPanel panelLogin = new JPanel();
         panelLogin.setBackground(new Color(60, 46, 72));
@@ -117,7 +119,7 @@ public class LoginForm {
         JButton btnRegister = new JButton("Register");
         btnRegister.setBounds(info.getX() + 130, info.getY(), 90, 30);
         btnRegister.setBackground(new Color(60, 46, 72));
-        btnRegister.setForeground(new Color(57, 189, 118));
+        btnRegister.setForeground(new Color(4, 170, 168));
 
         btnRegister.addActionListener(new ActionListener() {
             @Override
