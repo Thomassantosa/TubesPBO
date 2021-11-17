@@ -72,9 +72,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button1.setFont(new Font("Arial", Font.PLAIN, 16));
         button1.setBorderPainted(false);
         button1.setHorizontalAlignment(SwingConstants.LEFT);
-        ImageIcon homeIcon = new ImageIcon("src\\source\\Asset 20.png");
-        // homeIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-        button1.setIconTextGap(10);
+        ImageIcon homeIcon = new ImageIcon("src\\source\\Home Icon.png");
         button1.setIcon(homeIcon);
         
         button2 = new JButton("Flight");
@@ -85,7 +83,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button2.setBorderPainted(false);
         button2.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon flightIcon = new ImageIcon("src\\source\\Flight Icon.png");
-        flightIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button2.setIcon(flightIcon);
         
         button3 = new JButton("Train");
@@ -96,7 +93,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button3.setBorderPainted(false);
         button3.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon trainIcon = new ImageIcon("src\\source\\Train Icon.png");
-        trainIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button3.setIcon(trainIcon);
         
         button4 = new JButton("Bus");
@@ -107,7 +103,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button4.setBorderPainted(false);
         button4.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon busIcon = new ImageIcon("src\\source\\Bus Icon.png");
-        busIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button4.setIcon(busIcon);
         
         button5 = new JButton("Hotel");
@@ -118,7 +113,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button5.setBorderPainted(false);
         button5.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon hotelIcon = new ImageIcon("src\\source\\Hotel Icon.png");
-        hotelIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button5.setIcon(hotelIcon);
         
         button6 = new JButton("XTourience");
@@ -129,7 +123,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button6.setBorderPainted(false);
         button6.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon xTourienceIcon = new ImageIcon("src\\source\\XTourience Icon.png");
-        xTourienceIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button6.setIcon(xTourienceIcon);
         
         button7 = new JButton("User");
@@ -140,7 +133,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button7.setBorderPainted(false);
         button7.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon accountIcon = new ImageIcon("src\\source\\Account Icon.png");
-        accountIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button7.setIcon(accountIcon);
         
         button8 = new JButton("Partner");
@@ -151,7 +143,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button8.setBorderPainted(false);
         button8.setHorizontalAlignment(SwingConstants.LEFT);
         accountIcon = new ImageIcon("src\\source\\Account Icon.png");
-        accountIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button8.setIcon(accountIcon);
         
         button9 = new JButton("Account");
@@ -162,7 +153,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button9.setBorderPainted(false);
         button9.setHorizontalAlignment(SwingConstants.LEFT);
         accountIcon = new ImageIcon("src\\source\\Account Icon.png");
-        accountIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button9.setIcon(accountIcon);
         
         button10 = new JButton("Log-Out");
@@ -173,7 +163,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button10.setBorderPainted(false);
         button10.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon logoutIcon = new ImageIcon("src\\source\\LogOut Icon.png");
-        logoutIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button10.setIcon(logoutIcon);
         
         button1.addMouseListener(this);
@@ -241,14 +230,12 @@ public class MainFrame extends JFrame implements MouseInputListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        // // Not implemented
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        // // Not implemented
     }
 
     @Override
@@ -310,7 +297,6 @@ public class MainFrame extends JFrame implements MouseInputListener{
             default: 
                 break;
         }
-        hoverIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button.setIcon(hoverIcon);
     }
 
@@ -373,19 +359,16 @@ public class MainFrame extends JFrame implements MouseInputListener{
             default: 
                 break;
         }
-        icon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         button.setIcon(icon);
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        // Not implemented
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        // Not implemented
     }
 }
