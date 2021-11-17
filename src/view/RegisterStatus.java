@@ -101,7 +101,7 @@ public class RegisterStatus implements MouseInputListener {
         case "Partner":
            //masukin queery untuk partner disini 
             frame.dispose();
-            new RegisterForm();
+            new RegisterFormPartner();
             break;
 
         default:
