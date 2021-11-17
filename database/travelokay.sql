@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2021 at 03:15 PM
+-- Generation Time: Nov 17, 2021 at 03:43 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -53,8 +53,10 @@ CREATE TABLE `airplanes` (
 
 CREATE TABLE `airports` (
   `airport_id` int(10) NOT NULL,
-  `airport_name` int(50) NOT NULL,
-  `airport_address` varchar(255) NOT NULL
+  `airport_code` varchar(5) NOT NULL,
+  `airport_name` varchar(255) NOT NULL,
+  `airport_city` varchar(50) NOT NULL,
+  `airport_country` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,7 +69,7 @@ CREATE TABLE `buscompanies` (
   `buscompany_id` int(10) NOT NULL,
   `buscompany_name` varchar(20) NOT NULL,
   `buscompany_contact` varchar(15) NOT NULL,
-  `buscompany_address` varchar(255) NOT NULL
+  `buscompany_address` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90,8 +92,9 @@ CREATE TABLE `buses` (
 
 CREATE TABLE `busstations` (
   `busstation_id` int(10) NOT NULL,
-  `busstation_name` varchar(20) NOT NULL,
-  `busstation_address` varchar(255) NOT NULL
+  `busstation_code` varchar(5) NOT NULL,
+  `busstation_name` varchar(255) NOT NULL,
+  `busstation_city` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -105,12 +108,11 @@ CREATE TABLE `bustrips` (
   `bus_id` int(10) NOT NULL,
   `departure_busstation` int(10) NOT NULL,
   `destination_busstation` int(10) NOT NULL,
-  `bus_number` varchar(20) NOT NULL,
-  `bus_origin` varchar(20) NOT NULL,
-  `bus_destination` varchar(20) NOT NULL,
+  `busTrip_number` varchar(20) NOT NULL,
   `departure_time` datetime NOT NULL,
   `arrival_time` datetime NOT NULL,
-  `travel_date` date NOT NULL,
+  `daparture_date` date NOT NULL,
+  `arrival_date` date NOT NULL,
   `travel_time` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -127,11 +129,10 @@ CREATE TABLE `flights` (
   `destination_airport` int(10) NOT NULL,
   `flight_type` varchar(15) NOT NULL,
   `flight_number` varchar(20) NOT NULL,
-  `flight_origin` varchar(20) NOT NULL,
-  `flight_destination` varchar(20) NOT NULL,
   `departure_time` datetime NOT NULL,
   `arrival_time` datetime NOT NULL,
-  `travel_date` date NOT NULL,
+  `departure_date` date NOT NULL,
+  `arrival_date` date NOT NULL,
   `travel_time` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -144,9 +145,13 @@ CREATE TABLE `flights` (
 CREATE TABLE `hotels` (
   `hotel_id` int(10) NOT NULL,
   `hotel_name` varchar(20) NOT NULL,
-  `hotel_rating` int(1) NOT NULL,
-  `hotel_desc` text NOT NULL,
-  `hotel_address` varchar(255) NOT NULL
+  `hotel_star` int(1) NOT NULL,
+  `hotel_rating` decimal(2,1) NOT NULL DEFAULT 0.0,
+  `hotel_review` int(10) NOT NULL DEFAULT 0,
+  `hotel_facility` text NOT NULL,
+  `hotel_address` text NOT NULL,
+  `hotel_city` varchar(50) NOT NULL,
+  `hotel_country` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -157,6 +162,7 @@ CREATE TABLE `hotels` (
 
 CREATE TABLE `imagelist` (
   `image_id` int(10) NOT NULL,
+  `hotel_id` int(10) NOT NULL,
   `room_id` int(10) NOT NULL,
   `tour_id` int(10) NOT NULL,
   `image_path` varchar(255) NOT NULL
@@ -190,22 +196,14 @@ CREATE TABLE `orders` (
 CREATE TABLE `rooms` (
   `room_id` int(10) NOT NULL,
   `hotel_id` int(10) NOT NULL,
-  `roomtype_id` int(10) NOT NULL,
+  `room_name` varchar(100) NOT NULL,
+  `room_type` varchar(20) NOT NULL,
   `room_price` int(10) NOT NULL,
   `room_facility` text NOT NULL,
-  `room_amount` int(2) NOT NULL,
-  `room_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roomtypes`
---
-
-CREATE TABLE `roomtypes` (
-  `roomtype_id` int(11) NOT NULL,
-  `roomtype_name` varchar(20) NOT NULL
+  `room_capacity` int(2) NOT NULL,
+  `room_status` tinyint(1) NOT NULL,
+  `checkin` date NOT NULL,
+  `checkout` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -234,7 +232,7 @@ CREATE TABLE `seats` (
   `train_id` int(10) NOT NULL,
   `bus_id` int(10) NOT NULL,
   `seat_type` varchar(10) NOT NULL,
-  `seat_capacity` int(3) NOT NULL,
+  `seat_avaliable` int(3) NOT NULL,
   `baggage_capacity` int(3) NOT NULL,
   `seat_price` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -247,8 +245,9 @@ CREATE TABLE `seats` (
 
 CREATE TABLE `stations` (
   `station_id` int(10) NOT NULL,
-  `station_name` varchar(20) NOT NULL,
-  `station_address` varchar(255) NOT NULL
+  `station_code` varchar(50) NOT NULL,
+  `station_name` varchar(255) NOT NULL,
+  `station_city` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -259,9 +258,17 @@ CREATE TABLE `stations` (
 
 CREATE TABLE `tours` (
   `tour_id` int(10) NOT NULL,
-  `tour_name` varchar(30) NOT NULL,
+  `tour_name` varchar(100) NOT NULL,
+  `tour_type` varchar(50) NOT NULL,
+  `tour_rating` decimal(2,1) NOT NULL DEFAULT 0.0,
+  `tour_review` int(10) NOT NULL,
+  `tour_highlight` text NOT NULL,
   `tour_desc` text NOT NULL,
-  `tour_address` varchar(255) NOT NULL,
+  `tour_facility` text NOT NULL,
+  `tour_address` text NOT NULL,
+  `tour_city` varchar(50) NOT NULL,
+  `tour_province` varchar(50) NOT NULL,
+  `tour_country` varchar(50) NOT NULL,
   `tour_price` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -287,12 +294,11 @@ CREATE TABLE `traintrips` (
   `train_id` int(10) NOT NULL,
   `departure_station` int(10) NOT NULL,
   `destination_station` int(10) NOT NULL,
-  `train_number` varchar(20) NOT NULL,
-  `train_origin` varchar(20) NOT NULL,
-  `train_destination` varchar(20) NOT NULL,
+  `trainTrip_number` varchar(20) NOT NULL,
   `departure_time` datetime NOT NULL,
   `arrival_time` datetime NOT NULL,
-  `travel_date` date NOT NULL,
+  `departure_date` date NOT NULL,
+  `arrival_date` date NOT NULL,
   `travel_time` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -309,6 +315,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `address` text NOT NULL,
+  `birthdate` date NOT NULL,
   `user_type` varchar(10) NOT NULL,
   `company_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -385,7 +392,8 @@ ALTER TABLE `hotels`
 ALTER TABLE `imagelist`
   ADD PRIMARY KEY (`image_id`),
   ADD KEY `room_id` (`room_id`),
-  ADD KEY `tour_id` (`tour_id`);
+  ADD KEY `tour_id` (`tour_id`),
+  ADD KEY `hotel_id` (`hotel_id`);
 
 --
 -- Indexes for table `orders`
@@ -404,14 +412,7 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`room_id`),
-  ADD KEY `roomtype_id` (`roomtype_id`),
   ADD KEY `hotel_id` (`hotel_id`);
-
---
--- Indexes for table `roomtypes`
---
-ALTER TABLE `roomtypes`
-  ADD PRIMARY KEY (`roomtype_id`);
 
 --
 -- Indexes for table `schedules`
@@ -539,12 +540,6 @@ ALTER TABLE `rooms`
   MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `roomtypes`
---
-ALTER TABLE `roomtypes`
-  MODIFY `roomtype_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
@@ -623,7 +618,8 @@ ALTER TABLE `flights`
 --
 ALTER TABLE `imagelist`
   ADD CONSTRAINT `imagelist_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`),
-  ADD CONSTRAINT `imagelist_ibfk_2` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`tour_id`);
+  ADD CONSTRAINT `imagelist_ibfk_2` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`tour_id`),
+  ADD CONSTRAINT `imagelist_ibfk_3` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`hotel_id`);
 
 --
 -- Constraints for table `orders`
@@ -640,7 +636,6 @@ ALTER TABLE `orders`
 -- Constraints for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`roomtype_id`) REFERENCES `roomtypes` (`roomtype_id`),
   ADD CONSTRAINT `rooms_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`hotel_id`);
 
 --
