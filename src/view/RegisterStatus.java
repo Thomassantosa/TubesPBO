@@ -50,14 +50,14 @@ public class RegisterStatus implements MouseInputListener {
 
         lRegister = new JLabel("Register As");
         lRegister.setFont(new Font("Tahoma", Font.BOLD, 34));
-        lRegister.setBounds(registerPanel.getWidth() / 3 + 80, 15, 300, 45);
+        lRegister.setBounds(registerPanel.getWidth() / 3 + 50, 15, 300, 45);
         lRegister.setForeground(Color.white);
         lRegister.setLayout(null);
 
         moto = new JLabel("Start Your Journey Today");
         moto.setFont(new Font("Sans-serif", Font.ITALIC, 16));
         moto.setForeground(Color.white);
-        moto.setBounds(lRegister.getX() - 15, lRegister.getY() + 50, 310, 30);
+        moto.setBounds(lRegister.getX() , lRegister.getY() + 50, 310, 30);
         moto.setLayout(null);
 
         btnTraveller = new JButton("Traveller");
