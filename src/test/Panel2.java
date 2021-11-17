@@ -15,7 +15,8 @@ public class Panel2 extends JPanel{
 
     public Panel2() {
         this.setBackground(Color.RED);
-        this.setBounds(400, 0, width, height);
+        this.setBounds(220, 0, width-220, height);
         this.setLayout(null);
+        this.setVisible(true);
     }
 }
