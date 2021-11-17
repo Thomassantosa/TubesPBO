@@ -19,39 +19,48 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class RegisterForm implements MouseInputListener {
     JFrame frameRegister;
     JPanel bigPanel , panelLogo;
-
+    JLabel logo;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
-
+    
     public RegisterForm() {
         Controller controller = new Controller();
 
+        //image 
+        ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
+        Image scaleImage = icon.getImage().getScaledInstance(220, 250, Image.SCALE_REPLICATE);
+        
         // frame
         frameRegister = new JFrame("Register");
-        frameRegister.setSize((int) width - 100, (int) height - 100);
+        frameRegister.setSize((int) width , (int) height);
         frameRegister.setLayout(null);
         frameRegister.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameRegister.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // panel
         bigPanel = new JPanel();
-        bigPanel.setSize((int) width - 100, (int) height - 100);
+        bigPanel.setSize((int) width, (int) height);
         bigPanel.setLayout(null);
         bigPanel.setBackground(new Color(40, 25, 54));
 
         panelLogo = new JPanel();
-        panelLogo.setSize(500,(int)height-100);
+        panelLogo.setSize(500,(int)height);
         panelLogo.setLayout(null);
         panelLogo.setBackground(new Color(60, 46, 72));
-      
+        
         // lable
-      
+        logo = new JLabel(new ImageIcon(scaleImage));
+        logo.setBounds(0,(int)height/6, 500 , 500);
         // add to panel
+
+        panelLogo.add(logo);
         bigPanel.add(panelLogo);
        
         // add to Frame

@@ -33,12 +33,13 @@ public class RegisterStatus implements MouseInputListener {
         height = screenSize.getHeight();
 
         frame = new JFrame("Register As");
-        frame.setSize((int) width - 100, (int) height - 100);
+        frame.setSize((int) width , (int) height );
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
         bigPanel = new JPanel();
-        bigPanel.setSize((int) width - 100, (int) height - 100);
+        bigPanel.setSize((int) width, (int) height);
         bigPanel.setLayout(null);
         bigPanel.setBackground(new Color(40, 25, 54));
 

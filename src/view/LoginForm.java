@@ -30,7 +30,7 @@ public class LoginForm {
 
         JPanel splashPanel = new JPanel();
         splashPanel.setBackground(new Color(40, 25, 54));
-        splashPanel.setSize((int) width - 100, (int) height - 100);
+        splashPanel.setSize((int) width , (int) height );
         splashPanel.setLayout(null);
 
         // Set components
@@ -43,12 +43,13 @@ public class LoginForm {
 
         //frame login
         JFrame fLogin = new JFrame("Login Form");
-        fLogin.setSize((int) width - 100, (int) height - 100);
+        fLogin.setSize((int) width , (int) height );
         fLogin.setLayout(null);
         fLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fLogin.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         JPanel bigPanel = new JPanel();
-        bigPanel.setSize((int) width - 100, (int) height - 100);
+        bigPanel.setSize((int) width, (int) height);
         bigPanel.setLayout(null);
         bigPanel.setBackground(new Color(40, 25, 54));
 
