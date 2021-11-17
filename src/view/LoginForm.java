@@ -140,7 +140,7 @@ public class LoginForm {
         panelLogin.add(info);
         panelLogin.add(jtUsername);
         panelLogin.add(jPassword);
-        panelLogin.add(btnLogin);
+        panelLogin.add(btnLogin);    
         panelLogin.add(btnRegister);
 
         bigPanel.add(panelLogin);
