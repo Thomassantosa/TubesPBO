@@ -12,3 +12,4 @@ NEW FEATURE
     - Dark mode toggle
     - Register as user or mitra
     - Color variable as interface
+    - Log In : Full Name, No HP, Password, re-type password, email, address, jenis kelamin, tanggal lahir
