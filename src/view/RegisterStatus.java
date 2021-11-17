@@ -37,7 +37,7 @@ public class RegisterStatus implements MouseInputListener {
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         bigPanel = new JPanel();
         bigPanel.setSize((int) width, (int) height);
         bigPanel.setLayout(null);
@@ -48,7 +48,7 @@ public class RegisterStatus implements MouseInputListener {
         registerPanel.setBounds((int) width / 5 + 100, (int) height / 6, 900, 550);
         registerPanel.setLayout(null);
 
-        lRegister = new JLabel("Register");
+        lRegister = new JLabel("Register As");
         lRegister.setFont(new Font("Tahoma", Font.BOLD, 34));
         lRegister.setBounds(registerPanel.getWidth() / 3 + 80, 15, 300, 45);
         lRegister.setForeground(Color.white);

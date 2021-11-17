@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,9 +18,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import javax.swing.JCheckBox;
+import java.awt.event.ItemListener;
 
-
-public class LoginForm {
+public class LoginForm implements ItemListener {
+    JCheckBox showPassword;
 
     public LoginForm() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -94,10 +98,11 @@ public class LoginForm {
         jPassword.setForeground(Color.white);
 
         // button
-        JButton btnLogin = new JButton("Log In");
+        JButton btnLogin = new JButton("Login");
         btnLogin.setBounds(lLogin.getWidth(), jPassword.getY() + 100, 310, 50);
         btnLogin.setBackground(new Color(136, 94, 254));
         btnLogin.setForeground(Color.WHITE);
+        btnLogin.setFont(new Font("Tahoma" , Font.PLAIN ,24 ));
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,6 +117,21 @@ public class LoginForm {
             }
         });
 
+         // button for showing password
+         showPassword = new JCheckBox("Show Password ");
+         showPassword.setForeground(Color.white);
+         showPassword.setBackground(new Color(60, 46, 72));
+         showPassword.setBounds(jPassword.getX(), jPassword.getY() + 50, 150, 20);
+         char passwordDefault= jPassword.getEchoChar();
+         showPassword.addItemListener(new ItemListener() {
+             public void itemStateChanged(ItemEvent e) {
+                 if (e.getStateChange() == ItemEvent.SELECTED) {
+                     jPassword.setEchoChar((char) 0);
+                 } else {
+                     jPassword.setEchoChar(passwordDefault);
+                 }
+             }
+         });
         JLabel info = new JLabel("Don't have Account ?");
         info.setFont(new Font("Tahoma", Font.PLAIN, 12));
         info.setForeground(Color.white);
@@ -143,7 +163,7 @@ public class LoginForm {
         panelLogin.add(jPassword);
         panelLogin.add(btnLogin);    
         panelLogin.add(btnRegister);
-
+        panelLogin.add(showPassword);
         bigPanel.add(panelLogin);
         // add to Frame
         fLogin.add(splashPanel);
@@ -164,6 +184,12 @@ public class LoginForm {
         panelLogin.setVisible(true);
         bigPanel.setVisible(true);
 
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        //already implemented in top 
+        
     }
 
 }
