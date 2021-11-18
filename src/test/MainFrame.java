@@ -218,7 +218,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
 
         switch(name) {
             case "Home":
-                cardLayout.show(cardPanel, "panelB");
+                cardLayout.show(cardPanel, "panelA");
                 break;
             case "Flight":
                 cardLayout.show(cardPanel, "panelC");
