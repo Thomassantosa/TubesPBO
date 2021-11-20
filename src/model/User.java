@@ -9,21 +9,21 @@ public abstract class User {
     private String email;
     private String password;
     private String addresString;
-    private userType typeUser;
+    private ConstType userType;
     private ArrayList <Order> orderList = new ArrayList<>();
 
     public User (){
         
     }
 
-    public User(int userID, String fulName, String username, String email, String password, String addresString, userType typeUser, ArrayList<Order> orderList) {
+    public User(int userID, String fulName, String username, String email, String password, String addresString, ConstType userType, ArrayList<Order> orderList) {
         this.userID = userID;
         this.fulName = fulName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.addresString = addresString;
-        this.typeUser = typeUser;
+        this.userType = userType;
         this.orderList = orderList;
     }
 
@@ -75,12 +75,12 @@ public abstract class User {
         this.addresString = addresString;
     }
 
-    public userType getTypeUser() {
-        return this.typeUser;
+    public ConstType getTypeUser() {
+        return this.userType;
     }
 
-    public void setTypeUser(userType typeUser) {
-        this.typeUser = typeUser;
+    public void setTypeUser(ConstType userType) {
+        this.userType = userType;
     }
 
     public ArrayList<Order> getOrderList() {
@@ -100,7 +100,7 @@ public abstract class User {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", addresString='" + getAddresString() + "'" +
-            ", typeUser='" + getTypeUser() + "'" +
+            ", userType='" + getTypeUser() + "'" +
             ", orderList='" + getOrderList() + "'" +
             "}";
     }

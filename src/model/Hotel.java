@@ -1,20 +1,35 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Hotel {
     private int hotelID;
     private String name;
-    private int rating;
-    private String desc;
+    private int star;
+    private double rating;
+    private int review;
+    private String facility;
     private String address;
-    private Room room;
+    private String city;
+    private String country;
+    ArrayList <Room> roomList = new ArrayList<>();
+    ArrayList <Image> imageList = new ArrayList<>();
 
-    public Hotel(int hotelID, String name, int rating, String desc, String address, Room room) {
+    public Hotel() {
+    }
+
+    public Hotel(int hotelID, String name, int star, double rating, int review, String facility, String address, String city, String country, ArrayList<Room> roomList, ArrayList<Image> imageList) {
         this.hotelID = hotelID;
         this.name = name;
+        this.star = star;
         this.rating = rating;
-        this.desc = desc;
+        this.review = review;
+        this.facility = facility;
         this.address = address;
-        this.room = room;
+        this.city = city;
+        this.country = country;
+        this.roomList = roomList;
+        this.imageList = imageList;
     }
 
     public int getHotelID() {
@@ -33,20 +48,36 @@ public class Hotel {
         this.name = name;
     }
 
-    public int getRating() {
+    public int getStar() {
+        return this.star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
+
+    public double getRating() {
         return this.rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
-    public String getDesc() {
-        return this.desc;
+    public int getReview() {
+        return this.review;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setReview(int review) {
+        this.review = review;
+    }
+
+    public String getFacility() {
+        return this.facility;
+    }
+
+    public void setFacility(String facility) {
+        this.facility = facility;
     }
 
     public String getAddress() {
@@ -57,12 +88,36 @@ public class Hotel {
         this.address = address;
     }
 
-    public Room getRoom() {
-        return this.room;
+    public String getCity() {
+        return this.city;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public ArrayList<Room> getRoomList() {
+        return this.roomList;
+    }
+
+    public void setRoomList(ArrayList<Room> roomList) {
+        this.roomList = roomList;
+    }
+
+    public ArrayList<Image> getImageList() {
+        return this.imageList;
+    }
+
+    public void setImageList(ArrayList<Image> imageList) {
+        this.imageList = imageList;
     }
 
     @Override
@@ -70,11 +125,15 @@ public class Hotel {
         return "{" +
             " hotelID='" + getHotelID() + "'" +
             ", name='" + getName() + "'" +
+            ", star='" + getStar() + "'" +
             ", rating='" + getRating() + "'" +
-            ", desc='" + getDesc() + "'" +
+            ", review='" + getReview() + "'" +
+            ", facility='" + getFacility() + "'" +
             ", address='" + getAddress() + "'" +
-            ", room='" + getRoom() + "'" +
+            ", city='" + getCity() + "'" +
+            ", country='" + getCountry() + "'" +
+            ", roomList='" + getRoomList() + "'" +
+            ", imageList='" + getImageList() + "'" +
             "}";
     }
-
 }

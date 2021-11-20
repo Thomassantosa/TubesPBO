@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import controller.QueryController;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.ItemListener;
@@ -39,7 +40,7 @@ public class RegisterForm implements MouseInputListener, ItemListener {
     JButton regisButton;
 
     public RegisterForm() {
-        Controller controller = new Controller();
+        QueryController controller = new QueryController();
 
         // image
         ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
