@@ -164,18 +164,31 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
             String password = String.valueOf(pfPassword.getPassword());
 
             // Checking value
-            if (email.equals("") && password.equals("")) {
+            if (email.equals("") || password.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please fill all field !");
             } else {
 
                 // Get data from database
                 QueryController queryController = new QueryController();
-                User user = queryController.selectUser(email, password);
+                User user = queryController.selectUserByEmail(email, password);
                 if (user == null) {
                     JOptionPane.showMessageDialog(null, "User not found");
                 } else {
-                    new ProfileMenu(user);
-                    frame.dispose();
+                    String userType = user.getUserType();
+                    switch (userType) {
+                        case "Admin":
+                            JOptionPane.showMessageDialog(null, "ADMIN FOUND");
+                            MainFrame.cardLayout.show(MainFrame.cardPanel1, "registerUser");
+                            break;
+                        case "User":
+                            JOptionPane.showMessageDialog(null, "USER FOUND");
+                            break;
+                        case "Partner":
+                            JOptionPane.showMessageDialog(null, "PARTNER FOUND");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         } else {

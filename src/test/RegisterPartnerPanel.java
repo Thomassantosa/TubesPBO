@@ -188,7 +188,7 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
         lCompany = new JLabel("Company Name");
         lCompany.setForeground(ConstColor.WHITE);
         lCompany.setFont(new Font("Arial", Font.PLAIN, 20));
-        lCompany.setBounds(lEmail.getX(), taAddress.getY() + 120, 120, 50);
+        lCompany.setBounds(lEmail.getX(), taAddress.getY() + 120, 150, 50);
 
         // Set JTextfield (tfCompany)
         tfCompany = new JTextField();

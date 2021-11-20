@@ -1,30 +1,41 @@
 package model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
-public abstract class User {
+public class User {
     private int userID;
-    private String fulName;
+    private String fullname;
     private String username;
     private String email;
     private String password;
-    private String addresString;
-    private ConstType userType;
+    private String address;
+    private Date birthdate;
+    private String userType;
     private ArrayList <Order> orderList = new ArrayList<>();
 
-    public User (){
-        
+    public User() {
     }
 
-    public User(int userID, String fulName, String username, String email, String password, String addresString, ConstType userType, ArrayList<Order> orderList) {
+    public User(int userID, String fullname, String username, String email, String password, String address, Date birthdate, String userType) {
         this.userID = userID;
-        this.fulName = fulName;
+        this.fullname = fullname;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.addresString = addresString;
+        this.address = address;
+        this.birthdate = birthdate;
         this.userType = userType;
-        this.orderList = orderList;
+    }
+
+    public User(String fullname, String username, String email, String password, String address, Date birthdate, String userType) {
+        this.fullname = fullname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.birthdate = birthdate;
+        this.userType = userType;
     }
 
     public int getUserID() {
@@ -35,12 +46,12 @@ public abstract class User {
         this.userID = userID;
     }
 
-    public String getFulName() {
-        return this.fulName;
+    public String getFullname() {
+        return this.fullname;
     }
 
-    public void setFulName(String fulName) {
-        this.fulName = fulName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUsername() {
@@ -67,19 +78,27 @@ public abstract class User {
         this.password = password;
     }
 
-    public String getAddresString() {
-        return this.addresString;
+    public String getAddress() {
+        return this.address;
     }
 
-    public void setAddresString(String addresString) {
-        this.addresString = addresString;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public ConstType getTypeUser() {
+    public Date getBirthdate() {
+        return this.birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getUserType() {
         return this.userType;
     }
 
-    public void setTypeUser(ConstType userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
@@ -95,14 +114,14 @@ public abstract class User {
     public String toString() {
         return "{" +
             " userID='" + getUserID() + "'" +
-            ", fulName='" + getFulName() + "'" +
+            ", fullname='" + getFullname() + "'" +
             ", username='" + getUsername() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
-            ", addresString='" + getAddresString() + "'" +
-            ", userType='" + getTypeUser() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", birthdate='" + getBirthdate() + "'" +
+            ", userType='" + getUserType() + "'" +
             ", orderList='" + getOrderList() + "'" +
             "}";
     }
-
 }
