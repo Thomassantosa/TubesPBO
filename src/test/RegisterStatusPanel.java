@@ -95,8 +95,7 @@ public class RegisterStatusPanel extends JPanel implements MouseInputListener {
                 MainFrame.cardLayout.show(MainFrame.cardPanel1, "registerUser");
                 break;
             case "Partner":
-                JOptionPane.showMessageDialog(null, "ON PROGRESS");
-                // MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                MainFrame.cardLayout.show(MainFrame.cardPanel1, "registerPartner");
                 break;
             default: 
                 break;

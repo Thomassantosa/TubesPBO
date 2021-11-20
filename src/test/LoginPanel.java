@@ -154,10 +154,26 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().getClass().toString().equals("class javax.swing.JButton")) {
-            JButton button = (JButton) e.getSource();
-            // JOptionPane.showMessageDialog(null, button.getText());
-            JOptionPane.showMessageDialog(null, "LOGIN ON PROGRESS");
-            // cardLayout.show(cardPanel1, "panelA");
+            
+            // Get value
+            String email = tfUsername.getText();
+            String password = String.valueOf(pfPassword.getPassword());
+
+            // Checking value
+            if (email.equals("") && password.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please fill all field !");
+            } else {
+
+                // Get data from database
+                QueryController queryController = new QueryController();
+                User user = queryController.selectUser(email, password);
+                if (user == null) {
+                    JOptionPane.showMessageDialog(null, "User not found");
+                } else {
+                    new ProfileMenu(user);
+                    frame.dispose();
+                }
+            }
         } else {
             MainFrame.cardLayout.show(MainFrame.cardPanel1, "registerStatus");
         }

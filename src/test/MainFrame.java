@@ -34,6 +34,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
     LoginPanel loginPanel;
     RegisterStatusPanel registerStatusPanel;
     RegisterUserPanel registerUserPanel;
+    RegisterPartnerPanel registerPartnerPanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -69,6 +70,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         loginPanel = new LoginPanel();
         registerStatusPanel = new RegisterStatusPanel();
         registerUserPanel = new RegisterUserPanel();
+        registerPartnerPanel = new RegisterPartnerPanel();
         panel0 = new Panel0();
         panel1 = new Panel1();
         panel2 = new Panel2();
@@ -204,6 +206,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         cardPanel1.add(loginPanel, "loginPanel");
         cardPanel1.add(registerStatusPanel, "registerStatus");
         cardPanel1.add(registerUserPanel, "registerUser");
+        cardPanel1.add(registerPartnerPanel, "registerPartner");
         cardPanel1.add(panel0, "panelA");
         cardPanel1.add(panel1, "panelB");
         cardPanel1.add(panel2, "panelC");

@@ -25,10 +25,10 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
     
     // Declaring variable
     JPanel logoPanel, formPanel;
-    JLabel logo, lTitle, lUsername, lPassword, lVerify, lEmail, lFullname, lAddress, lCompany;
+    JLabel logo, lTitle, lUsername, lPassword, lVerify, lEmail, lFullname, lAddress;
     JPasswordField pfPassword, pfVerify;
     char passwordDefault, verifyDefault;
-    JTextField tfUsername, tfEmail, tfFullname, tfCompany;
+    JTextField tfUsername, tfEmail, tfFullname;
     JTextArea taAddress;
     JCheckBox showPassword, showVerify;
     JButton btnRegister;
@@ -47,13 +47,11 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
 
         // Set JPanel (container)
         logoPanel = new JPanel();
-        // logoPanel.setBounds(0, 0, 400, height);
         logoPanel.setBounds(0, 0, width/4, height);
         logoPanel.setLayout(null);
         logoPanel.setBackground(ConstColor.PURPLE1);
 
         formPanel = new JPanel();
-        // formPanel.setBounds(400, 0, width - 400, height);
         formPanel.setBounds(logoPanel.getWidth(), 0, width - logoPanel.getWidth(), height);
         formPanel.setLayout(null);
         formPanel.setBackground(ConstColor.PURPLE2);
@@ -62,7 +60,6 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
         ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
         Image scaleImage = icon.getImage().getScaledInstance(220, 250, Image.SCALE_SMOOTH);
         logo = new JLabel(new ImageIcon(scaleImage));
-        // logo.setBounds(80, height/2 - 200, 220, 250);
         logo.setBounds(logoPanel.getWidth()/2-110, height/2 - 200, 220, 250);
         
         // Set JLabel (lTitle)
