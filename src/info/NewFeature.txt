@@ -6,3 +6,10 @@ NEW FEATURE
 
     - Tambah table provinces, countries
     - Singleton (object user dibuat dengan singleton saat login)
+
+    - Swapping between panel ?
+    - Caralayout (?)
+    - Dark mode toggle
+    - Register as user or mitra
+    - Color variable as interface
+    - Log In : Full Name, No HP, Password, re-type password, email, address, jenis kelamin, tanggal lahir

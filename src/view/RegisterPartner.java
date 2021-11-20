@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -20,16 +19,16 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import controller.QueryController;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.ItemListener;
+import javax.swing.JComboBox;
 
-public class RegisterForm implements MouseInputListener, ItemListener {
+public class RegisterPartner implements MouseInputListener, ItemListener {
 
     JFrame frameRegister;
     JPanel bigPanel, panelLogo;
-    JLabel logo, title, lUsername, lPassword, lRetype, lEmail, lFullname, lAddress, lCompany;
+    JLabel logo, title, lUsername, lPassword, lRetype, lEmail, lFullname, lAddress, lCompany, lCategory;
     JPasswordField password, retype;
     JTextField username, email, fullname, company;
     JTextArea address;
@@ -38,9 +37,11 @@ public class RegisterForm implements MouseInputListener, ItemListener {
     double height = screenSize.getHeight();
     JCheckBox showPassword, showRetype;
     JButton regisButton;
+    JComboBox<String> cbCategory;
+    // ArrayList<CategoryUser> categories = Controller.selectCategoryUser();
 
-    public RegisterForm() {
-        QueryController controller = new QueryController();
+    public RegisterPartner() {
+        Controller controller = new Controller();
 
         // image
         ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
@@ -68,7 +69,7 @@ public class RegisterForm implements MouseInputListener, ItemListener {
         logo = new JLabel(new ImageIcon(scaleImage));
         logo.setBounds(0, (int) height / 6, 500, 650);
 
-        title = new JLabel("Join The Journey");
+        title = new JLabel("Join The Journey (Partner)");
         title.setBounds(panelLogo.getWidth() + 150, 15, 300, 100);
         title.setForeground(Color.WHITE);
         title.setFont(new Font("Tahoma", Font.BOLD, 35));
@@ -132,6 +133,20 @@ public class RegisterForm implements MouseInputListener, ItemListener {
         showRetype.setForeground(Color.white);
         showRetype.setBackground(new Color(60, 46, 72));
         showRetype.setBounds(title.getX(), retype.getY() + 60, 120, 20);
+
+        //Label
+        lCategory = new JLabel("Category");
+        lCategory.setForeground(Color.white);
+        lCategory.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        lCategory.setBounds(title.getX(), showRetype.getY() + 50, 250, 50);
+
+        // //set ComboBox
+        // String[] categoryList = new String[categories.size()];
+        // for (int i = 0; i < categories.size(); i++) {
+        //     categoryList[i] = categories.get(i).getName();
+        // }
+        // cbCategory = new JComboBox<>(categoryList); 
+        // cbCategory.setBounds(600, 110, 200, 40);
 
         // to get default char
         char retypeDefault = retype.getEchoChar();
@@ -215,6 +230,8 @@ public class RegisterForm implements MouseInputListener, ItemListener {
         bigPanel.add(lRetype);
         bigPanel.add(retype);
         bigPanel.add(showRetype);
+
+        bigPanel.add(lCategory);
 
         bigPanel.add(lEmail);
         bigPanel.add(email);
