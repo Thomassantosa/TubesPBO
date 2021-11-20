@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 import javax.swing.JLabel;
 import controller.Controller;
+import test.RoundedBorder;
+
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -68,6 +70,7 @@ public class RegisterStatus implements MouseInputListener {
         btnTraveller.addMouseListener(this);
 
         btnPartner = new JButton("Partner");
+        btnPartner.setBorder(new RoundedBorder(10));
         btnPartner.setBounds((int) width / 5 + 100, moto.getY() + 70, 350, 350);
         btnPartner.setFont(new Font("Tahoma", Font.BOLD, 40));
         btnPartner.setBackground(new Color (60, 46, 72));

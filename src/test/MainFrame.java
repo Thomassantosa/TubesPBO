@@ -20,14 +20,20 @@ import javax.swing.event.MouseInputListener;
 public class MainFrame extends JFrame implements MouseInputListener{
     
     // Declaring variable
-    JPanel buttonContainer, cardPanel;
+    static JPanel buttonContainer;
+    static JPanel cardPanel1;
+    static CardLayout cardLayout;
     JLabel lSplashLogo;
     JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10;
+    
+    // Declaring variable (JPanel from another class)
     Panel0 panel0;
     Panel1 panel1;
     Panel2 panel2;
-    CardLayout cardLayout;
     SplashPanel splashPanel;
+    LoginPanel loginPanel;
+    RegisterStatusPanel registerStatusPanel;
+    RegisterUserPanel registerUserPanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -53,12 +59,16 @@ public class MainFrame extends JFrame implements MouseInputListener{
         buttonContainer.setLayout(null);
         
         // Set JPanel
-        cardPanel = new JPanel();
+        cardPanel1 = new JPanel();
         cardLayout = new CardLayout();
-        cardPanel.setLayout(cardLayout);
-        cardPanel.setBounds(220, 0, width-220, height);
+        cardPanel1.setLayout(cardLayout);
+        // cardPanel1.setBounds(220, 0, width - 220, height);
+        cardPanel1.setBounds(0, 0, width, height);
 
         splashPanel = new SplashPanel();
+        loginPanel = new LoginPanel();
+        registerStatusPanel = new RegisterStatusPanel();
+        registerUserPanel = new RegisterUserPanel();
         panel0 = new Panel0();
         panel1 = new Panel1();
         panel2 = new Panel2();
@@ -78,7 +88,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button2 = new JButton("Flight");
         button2.setBackground(ConstColor.PURPLE2);
         button2.setForeground(ConstColor.GREY);
-        button2.setBounds(0, button1.getY()+40, 220, 40);
+        button2.setBounds(0, button1.getY() + 40, 220, 40);
         button2.setFont(new Font("Arial", Font.PLAIN, 16));
         button2.setBorderPainted(false);
         button2.setHorizontalAlignment(SwingConstants.LEFT);
@@ -88,7 +98,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button3 = new JButton("Train");
         button3.setBackground(ConstColor.PURPLE2);
         button3.setForeground(ConstColor.GREY);
-        button3.setBounds(0, button2.getY()+40, 220, 40);
+        button3.setBounds(0, button2.getY() + 40, 220, 40);
         button3.setFont(new Font("Arial", Font.PLAIN, 16));
         button3.setBorderPainted(false);
         button3.setHorizontalAlignment(SwingConstants.LEFT);
@@ -98,7 +108,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button4 = new JButton("Bus");
         button4.setBackground(ConstColor.PURPLE2);
         button4.setForeground(ConstColor.GREY);
-        button4.setBounds(0, button3.getY()+40, 220, 40);
+        button4.setBounds(0, button3.getY() + 40, 220, 40);
         button4.setFont(new Font("Arial", Font.PLAIN, 16));
         button4.setBorderPainted(false);
         button4.setHorizontalAlignment(SwingConstants.LEFT);
@@ -108,7 +118,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button5 = new JButton("Hotel");
         button5.setBackground(ConstColor.PURPLE2);
         button5.setForeground(ConstColor.GREY);
-        button5.setBounds(0, button4.getY()+40, 220, 40);
+        button5.setBounds(0, button4.getY() + 40, 220, 40);
         button5.setFont(new Font("Arial", Font.PLAIN, 16));
         button5.setBorderPainted(false);
         button5.setHorizontalAlignment(SwingConstants.LEFT);
@@ -118,7 +128,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button6 = new JButton("XTourience");
         button6.setBackground(ConstColor.PURPLE2);
         button6.setForeground(ConstColor.GREY);
-        button6.setBounds(0, button5.getY()+40, 220, 40);
+        button6.setBounds(0, button5.getY() + 40, 220, 40);
         button6.setFont(new Font("Arial", Font.PLAIN, 16));
         button6.setBorderPainted(false);
         button6.setHorizontalAlignment(SwingConstants.LEFT);
@@ -128,7 +138,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button7 = new JButton("User");
         button7.setBackground(ConstColor.PURPLE2);
         button7.setForeground(ConstColor.GREY);
-        button7.setBounds(0, button6.getY()+40, 220, 40);
+        button7.setBounds(0, button6.getY() + 40, 220, 40);
         button7.setFont(new Font("Arial", Font.PLAIN, 16));
         button7.setBorderPainted(false);
         button7.setHorizontalAlignment(SwingConstants.LEFT);
@@ -138,7 +148,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button8 = new JButton("Partner");
         button8.setBackground(ConstColor.PURPLE2);
         button8.setForeground(ConstColor.GREY);
-        button8.setBounds(0, button7.getY()+40, 220, 40);
+        button8.setBounds(0, button7.getY() + 40, 220, 40);
         button8.setFont(new Font("Arial", Font.PLAIN, 16));
         button8.setBorderPainted(false);
         button8.setHorizontalAlignment(SwingConstants.LEFT);
@@ -148,17 +158,17 @@ public class MainFrame extends JFrame implements MouseInputListener{
         button9 = new JButton("Account");
         button9.setBackground(ConstColor.PURPLE2);
         button9.setForeground(ConstColor.GREY);
-        button9.setBounds(0, height-140, 220, 40);
+        button9.setBounds(0, height - 140, 220, 40);
         button9.setFont(new Font("Arial", Font.PLAIN, 16));
         button9.setBorderPainted(false);
         button9.setHorizontalAlignment(SwingConstants.LEFT);
         accountIcon = new ImageIcon("src\\source\\Account Icon.png");
         button9.setIcon(accountIcon);
         
-        button10 = new JButton("Log-Out");
+        button10 = new JButton("Log - Out");
         button10.setBackground(ConstColor.PURPLE2);
         button10.setForeground(ConstColor.RED2);
-        button10.setBounds(0, height-100, 220, 40);
+        button10.setBounds(0, height - 100, 220, 40);
         button10.setFont(new Font("Arial", Font.PLAIN, 16));
         button10.setBorderPainted(false);
         button10.setHorizontalAlignment(SwingConstants.LEFT);
@@ -191,15 +201,19 @@ public class MainFrame extends JFrame implements MouseInputListener{
         buttonContainer.add(button10);
         this.add(buttonContainer);
 
-        cardPanel.add(panel0, "panelA");
-        cardPanel.add(panel1, "panelB");
-        cardPanel.add(panel2, "panelC");
-        this.add(cardPanel);
+        cardPanel1.add(loginPanel, "loginPanel");
+        cardPanel1.add(registerStatusPanel, "registerStatus");
+        cardPanel1.add(registerUserPanel, "registerUser");
+        cardPanel1.add(panel0, "panelA");
+        cardPanel1.add(panel1, "panelB");
+        cardPanel1.add(panel2, "panelC");
+        this.add(cardPanel1);
 
         // Set Vicibility
         this.setVisible(true);
-        buttonContainer.setVisible(false);
         splashPanel.setVisible(true);
+        buttonContainer.setVisible(false);
+        cardPanel1.setVisible(false);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -207,8 +221,9 @@ public class MainFrame extends JFrame implements MouseInputListener{
         }
         splashPanel.setVisible(false);
 
-        buttonContainer.setVisible(true);
-        cardPanel.setVisible(true);
+        // buttonContainer.setVisible(true);
+        cardPanel1.setVisible(true);
+        // buttonContainer.setVisible(false);
     }
 
     @Override
@@ -218,10 +233,10 @@ public class MainFrame extends JFrame implements MouseInputListener{
 
         switch(name) {
             case "Home":
-                cardLayout.show(cardPanel, "panelA");
+                cardLayout.show(cardPanel1, "panelA");
                 break;
             case "Flight":
-                cardLayout.show(cardPanel, "panelC");
+                cardLayout.show(cardPanel1, "panelC");
                 break;
             default: 
                 break;
@@ -230,12 +245,12 @@ public class MainFrame extends JFrame implements MouseInputListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // // Not implemented
+        // Not implemented
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // // Not implemented
+        // Not implemented
     }
 
     @Override
@@ -290,7 +305,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
                 button.setBackground(ConstColor.PURPLE4);
                 button.setForeground(ConstColor.WHITE);
                 break;
-            case "Log-Out":
+            case "Log - Out":
                 hoverIcon = new ImageIcon("src\\source\\LogOut Icon.png");
                 button.setBackground(ConstColor.RED1);
                 break;
@@ -352,7 +367,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
                 button.setBackground(ConstColor.PURPLE2);
                 button.setForeground(ConstColor.GREY);
                 break;
-            case "Log-Out":
+            case "Log - Out":
                 icon = new ImageIcon("src\\source\\LogOut Icon.png");
                 button.setBackground(ConstColor.PURPLE2);
                 break;

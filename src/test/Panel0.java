@@ -36,7 +36,6 @@ public class Panel0 extends JPanel implements MouseInputListener{
         this.setBackground(ConstColor.PURPLE1);
         this.setBounds(220, 0, width-220, height);
         this.setLayout(null);
-        this.setVisible(true);
 
         // Set components
         // Set JLabel (title)
