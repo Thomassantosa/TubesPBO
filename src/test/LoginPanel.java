@@ -10,6 +10,10 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.event.MouseInputListener;
+
+import controller.QueryController;
+import model.User;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
