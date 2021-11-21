@@ -171,8 +171,23 @@ public class QueryController {
     }
     public ArrayList<Flight> showFlights(){
         conn.connect();
-        String query = "SELECT`a.departure_airport`,`a.destination_airport`,`a.departure_time`,`a.arrival_time`,`a.departure_date`,`a.arrival_date`, `b.airport_code`, `b.airport_name` FROM `flights a ` join `airports b` on a.flights_id = b.";
-        return null;
+        String query = "SELECT a.flight_number, a.departure_time, a.arrival_time, a.departure_date, a.arrival_date, a.travel_time,b.airport_code AS departure_airport_code, b.airport_name AS departure_airport_name,c.airport_code AS destination_airport_code, c.airport_name AS destination_airport_name,d.airline_name, d.airplane_model FROM flights a join airports b on a.departure_airport = b.airport_id join airports c on a.destination_airport = c.airport_id join airport_airlines d on a.airplane_id = d.airplane_id";
+        
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Flight> flights = new ArrayList<>();
+
+            while (result.next()) {
+                Flight city = new Flight();
+            }
+
+            return flights;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     // public boolean insertFlight() {
 
