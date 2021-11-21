@@ -127,7 +127,7 @@ public class QueryController {
         }
     }
 
-    public ArrayList<Airport> showCity() {
+    public ArrayList<Airport> showCityFlight() {
         conn.connect();
         String query = "Select `airport_city` FROM `airports`";
         try {
@@ -136,9 +136,9 @@ public class QueryController {
             ArrayList<Airport> airport = new ArrayList<>();
 
             while (result.next()) {
-                Airport destination = new Airport();
-                destination.setCity(result.getString("airport_city"));
-                airport.add(destination);
+                Airport city = new Airport();
+                city.setCity(result.getString("airport_city"));
+                airport.add(city);
             }
 
             return airport;
@@ -147,6 +147,32 @@ public class QueryController {
             e.printStackTrace();
             return null;
         }
+    }
+    public ArrayList<Station> showCityTrain() {
+        conn.connect();
+        String query = "SELECT DISTINCT `station_city` FROM `stations`";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Station> bus = new ArrayList<>();
+
+            while (result.next()) {
+                Station city = new Station();
+                city.setCity(result.getString("station_city"));
+                bus.add(city);
+            }
+
+            return bus;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public ArrayList<Flight> showFlights(){
+        conn.connect();
+        String query = "SELECT`a.departure_airport`,`a.destination_airport`,`a.departure_time`,`a.arrival_time`,`a.departure_date`,`a.arrival_date`, `b.airport_code`, `b.airport_name` FROM `flights a ` join `airports b` on a.flights_id = b.";
+        return null;
     }
     // public boolean insertFlight() {
 

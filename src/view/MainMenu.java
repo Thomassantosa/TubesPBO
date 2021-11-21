@@ -26,7 +26,7 @@ public class MainMenu implements MouseInputListener {
     JFrame fMainMenu;
     JPanel panelMenu, panelHome, panelProfile, panelFlight, panelTrain, panelBus, panelHotel, panelXtourience;
     JButton btnSave, btnHome, btnProfile, btnFlight, btnTrain, btnBus, btnHotel, btnXtourience, btnLogOut, btnSearch,
-            btnSearchXtour;
+            btnSearchXtour, btnSearchFlight;
     JLabel lFullName, lProfile, lTitleHome, lCity, lTitleHotel, lTitleFlight, lDeparture, lDestination, lDate,
             lSeatClass, lNoPassengers, lTitleTrain, lTitleBus, lNight, lUsername, lEmail, lPassword, lAddress,
             lBirthdate, lTitleXtour, lMoto;
@@ -40,7 +40,8 @@ public class MainMenu implements MouseInputListener {
     JScrollPane scrollPane;
     DefaultTableModel model;
     QueryController queryController = new QueryController();
-    ArrayList<Airport> city = queryController.showCity();
+    ArrayList<Airport> cityFLight = queryController.showCityFlight();
+    ArrayList<Station> cityTrain = queryController.showCityTrain();
 
     public MainMenu() {
 
@@ -316,11 +317,12 @@ public class MainMenu implements MouseInputListener {
             lDeparture.setForeground(Color.white);
             lDeparture.setFont(new Font("Tahoma", Font.BOLD, 20));
             lDeparture.setBounds((int) width - 1800, (int) height / 15, 500, 20);
-            String[] showCity = new String[city.size()];
-            for (int i = 0; i < city.size(); i++) {
-                showCity[i] = city.get(i).getCity();
+
+            String[] showCityFlight = new String[cityFLight.size()];
+            for (int i = 0; i < cityFLight.size(); i++) {
+                showCityFlight[i] = cityFLight.get(i).getCity();
             }
-            cbDeparture = new JComboBox<>(showCity);
+            cbDeparture = new JComboBox<>(showCityFlight);
             cbDeparture.setBounds((int) width - 1800, (int) height / 10, 200, 20);
 
             // Label Destination
@@ -330,8 +332,7 @@ public class MainMenu implements MouseInputListener {
             lDestination.setBounds((int) width - 1300, (int) height / 15, 500, 20);
 
             // Combobox Destination
-
-            cbDestination = new JComboBox<>(showCity);
+            cbDestination = new JComboBox<>(showCityFlight);
             cbDestination.setBounds((int) width - 1300, (int) height / 10, 200, 20);
 
             // Label Date
@@ -370,13 +371,15 @@ public class MainMenu implements MouseInputListener {
             cbPassengers.setBounds((int) width - 1300, (int) height / 4 + 50, 200, 20);
 
             // Button Search
-            btnSearch = new JButton("Search");
-            btnSearch.setBounds((int) width - 1800, (int) height / 2, 230, 50);
-            btnSearch.setBackground(Color.orange);
+            btnSearchFlight = new JButton("Search Flight");
+            btnSearchFlight.setBounds((int) width - 1800, (int) height / 2, 230, 50);
+            btnSearchFlight.setBackground(Color.orange);
+            btnSearchFlight.addMouseListener(this);
+
 
             panelFlight.add(cbPassengers);
             panelFlight.add(lNoPassengers);
-            panelFlight.add(btnSearch);
+            panelFlight.add(btnSearchFlight);
             panelFlight.add(cbSeatClass);
             panelFlight.add(lSeatClass);
             panelFlight.add(date);
@@ -409,7 +412,11 @@ public class MainMenu implements MouseInputListener {
             lDeparture.setBounds((int) width - 1800, (int) height / 15, 500, 20);
 
             // ComboBox Departure
-            cbDeparture = new JComboBox<>(country);
+            String[] showCityTrain = new String[cityTrain.size()];
+            for (int i = 0; i < cityTrain.size(); i++) {
+                showCityTrain[i] = cityTrain.get(i).getCity();
+            }
+            cbDeparture = new JComboBox<>(showCityTrain);
             cbDeparture.setBounds((int) width - 1800, (int) height / 10, 200, 20);
 
             // Label Destination
@@ -419,7 +426,7 @@ public class MainMenu implements MouseInputListener {
             lDestination.setBounds((int) width - 1300, (int) height / 15, 500, 20);
 
             // Combobox Destination
-            cbDestination = new JComboBox<>(country);
+            cbDestination = new JComboBox<>(showCityTrain);
             cbDestination.setBounds((int) width - 1300, (int) height / 10, 200, 20);
 
             // Label Date
@@ -485,7 +492,7 @@ public class MainMenu implements MouseInputListener {
             lDeparture.setBounds((int) width - 1800, (int) height / 15, 500, 20);
 
             // ComboBox Departure
-            cbDeparture = new JComboBox<>(country);
+            // cbDeparture = new JComboBox<>(country);
             cbDeparture.setBounds((int) width - 1800, (int) height / 10, 200, 20);
 
             // Label Destination
@@ -495,7 +502,7 @@ public class MainMenu implements MouseInputListener {
             lDestination.setBounds((int) width - 1300, (int) height / 15, 500, 20);
 
             // Combobox Destination
-            cbDestination = new JComboBox<>(country);
+            // cbDestination = new JComboBox<>(country);
             cbDestination.setBounds((int) width - 1300, (int) height / 10, 200, 20);
 
             // Label Date
@@ -728,7 +735,10 @@ public class MainMenu implements MouseInputListener {
             panelProfile.setVisible(false);
             new LoginForm();
             break;
-
+        case "Search Flight":
+            new ShowFlight();
+            fMainMenu.dispose();
+            break;
         default:
             break;
         }
