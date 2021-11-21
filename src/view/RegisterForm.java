@@ -22,7 +22,7 @@ public class RegisterForm {
         JFrame fRegister = new JFrame("Registration");
         fRegister.setSize(550, 650);
         fRegister.setLayout(null);
-        fRegister.setVisible(true);
+  
         fRegister.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // panel
@@ -30,7 +30,7 @@ public class RegisterForm {
         panelRegister.setBackground(new Color(129, 173, 181));
         panelRegister.setSize(550, 650);
         panelRegister.setLayout(null);
-        panelRegister.setVisible(true);
+       
 
         // lable
         JLabel lRegister = new JLabel("Hello!");
@@ -118,8 +118,10 @@ public class RegisterForm {
         panelRegister.add(jPassword);
         panelRegister.add(jRetype);
 
+        panelRegister.setVisible(true);
         // add to Frame
         fRegister.add(panelRegister);
+        fRegister.setVisible(true);
 
     }
 }

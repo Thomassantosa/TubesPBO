@@ -21,7 +21,7 @@ public class TestMenu implements MouseInputListener {
     
     // Declaring variable
     JFrame frame;
-    JPanel splashPanel, panel;
+    JPanel splashPanel, loginPanel, loginContainer;
     JLabel lSplashLogo, label1;
     JButton button1;
     JTextArea textArea1;
@@ -40,22 +40,30 @@ public class TestMenu implements MouseInputListener {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\source\\Logo_Splashscreen.png");    
+        frame.setIconImage(icon);
         
-        // Set panel
-        panel = new JPanel();
-        panel.setBackground(new Color(254, 245, 237));
-        panel.setSize(width, height);
-        panel.setLayout(null);
-        
+        // Set JPanel
         splashPanel = new JPanel();
         splashPanel.setBackground(new Color(23, 42, 62));
         splashPanel.setSize(width, height);
         splashPanel.setLayout(null);
         
+        loginPanel = new JPanel();
+        loginPanel.setBackground(new Color(23, 42, 62));
+        loginPanel.setSize(width, height);
+        loginPanel.setLayout(null);
+
+        loginContainer = new JPanel();
+        loginContainer.setBackground(new Color(32,59,87));
+        loginContainer.setSize(450, 500);
+        loginContainer.setLayout(null);
+        // loginContainer.setBorder(new RoundedBorder(50));
+
         // Set components
         // Set splashscreen component
-        ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
-        Image scaleImage = icon.getImage().getScaledInstance(220, 250,Image.SCALE_REPLICATE);
+        ImageIcon logo = new ImageIcon("src\\source\\Logo_Splashscreen.png");
+        Image scaleImage = logo.getImage().getScaledInstance(220, 250,Image.SCALE_SMOOTH);
         lSplashLogo = new JLabel(new ImageIcon(scaleImage));
         lSplashLogo.setBounds(width/2-110, height/2-170, 220, 250);
         
@@ -70,21 +78,21 @@ public class TestMenu implements MouseInputListener {
 
         // Adding component
         splashPanel.add(lSplashLogo);
-        panel.add(button1);
+        loginPanel.add(loginContainer);
         frame.add(splashPanel);
-        frame.add(panel);
+        frame.add(loginPanel);
 
         // Set vicibility
         frame.setVisible(true);
         splashPanel.setVisible(true);
-        panel.setVisible(false);
+        loginPanel.setVisible(false);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         splashPanel.setVisible(false);
-        panel.setVisible(true);
+        loginPanel.setVisible(true);
     }
 
     @Override
