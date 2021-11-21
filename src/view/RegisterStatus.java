@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 import javax.swing.JLabel;
-import controller.Controller;
+import controller.QueryController;
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
 import java.awt.Toolkit;

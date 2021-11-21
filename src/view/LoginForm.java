@@ -28,13 +28,9 @@ public class LoginForm implements ItemListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
-<<<<<<< HEAD
-       
-=======
 
         // object
-        Controller controller = new Controller();
->>>>>>> master
+        QueryController controller = new QueryController();
 
         JPanel splashPanel = new JPanel();
         splashPanel.setBackground(new Color(40, 25, 54));

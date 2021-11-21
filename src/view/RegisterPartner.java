@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import controller.Controller;
+import controller.QueryController;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
@@ -41,7 +41,7 @@ public class RegisterPartner implements MouseInputListener, ItemListener {
     // ArrayList<CategoryUser> categories = Controller.selectCategoryUser();
 
     public RegisterPartner() {
-        Controller controller = new Controller();
+        QueryController controller = new QueryController();
 
         // image
         ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
