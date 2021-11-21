@@ -10,13 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import controller.Controller;
+import controller.QueryController;
 
 
 public class RegisterForm {
 
     public RegisterForm() {
-        Controller controller = new Controller();
+        QueryController controller = new QueryController();
 
         // frame
         JFrame fRegister = new JFrame("Registration");
