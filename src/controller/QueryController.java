@@ -1,21 +1,18 @@
 package controller;
 
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-import model.Airlines;
-import model.Vehicle;
-import model.Airport;
-import model.BusCompany;
-import model.BusTrip;
-import model.Station;
+import model.*;
 
 public class QueryController {
 
     DatabaseHandler conn = new DatabaseHandler();
-    
+
     public boolean insertAirline(Airlines airline) {
         conn.connect();
         String query = "INSERT INTO `airlines`(`airline_name`, `airline_cantact`) VALUES ('?','?')";
@@ -44,7 +41,7 @@ public class QueryController {
             return (false);
         }
     }
-    
+
     public boolean insertAirport(Airport airport) {
         conn.connect();
         String query = "INSERT INTO `airports`(`airport_code`, `airport_name`, `airport_city`, `airport_country`) VALUES ('?','?','?','?')";
@@ -61,7 +58,7 @@ public class QueryController {
             return (false);
         }
     }
-        
+
     public boolean insertBusCompany(BusCompany busCompany) {
         conn.connect();
         String query = "INSERT INTO `buscompanies`(`buscompany_name`, `buscompany_contact`, `buscompany_address`) VALUES ('?','?','?')";
@@ -77,7 +74,7 @@ public class QueryController {
             return (false);
         }
     }
-    
+
     public boolean insertBusStation(Station station) {
         conn.connect();
         String query = "INSERT INTO `busstations`(`busstation_code`, `busstation_name`, `busstation_city`) VALUES ('?','?','?')";
@@ -93,7 +90,7 @@ public class QueryController {
             return (false);
         }
     }
-    
+
     public boolean insertBusTrip(BusTrip busTrip) {
         conn.connect();
         String query = "INSERT INTO `busstations`(`bus_id`, `departure_busstation`, `destination_busstation`, `busTrip_number`, `departure_time`, `arrival_time`, `daparture_date`, `arrival_date`, `travel_time`) VALUES ('?','?','?','?','?','?','?','?','?')";
@@ -115,7 +112,7 @@ public class QueryController {
             return (false);
         }
     }
-    
+
     public boolean insertBus(Vehicle vehicle) {
         conn.connect();
         String query = "INSERT INTO `buses`(`bus_model`) VALUES ('?')";
@@ -129,59 +126,80 @@ public class QueryController {
             return (false);
         }
     }
-    
-    public boolean insertFlight() {
 
+    public ArrayList<Airport> showCity() {
+        conn.connect();
+        String query = "Select `airport_city` FROM `airports`";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Airport> airport = new ArrayList<>();
+
+            while (result.next()) {
+                Airport destination = new Airport();
+                destination.setCity(result.getString("airport_city"));
+                airport.add(destination);
+            }
+
+            return airport;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-    
-    public boolean insertHotel() {
+    // public boolean insertFlight() {
 
-    }
-    
-    public boolean insertImageList() {
+    // }
 
-    }
-    
-    public boolean insertOrder() {
+    // public boolean insertHotel() {
 
-    }
-    
-    public boolean insertRoom() {
+    // }
 
-    }
-    
-    public boolean insertRoomType() {
+    // public boolean insertImageList() {
 
-    }
-    
-    public boolean insertSchedule() {
+    // }
 
-    }
-    
-    public boolean insertSeat() {
+    // public boolean insertOrder() {
 
-    }
-    
-    public boolean insertStation() {
+    // }
 
-    }
+    // public boolean insertRoom() {
 
-    public boolean insertTrain() {
+    // }
 
-    }
-    
-    public boolean insertTour() {
+    // public boolean insertRoomType() {
 
-    }
-    
-    public boolean insertTrainTrip() {
+    // }
 
-    }
-    
-    public boolean insertUser() {
+    // public boolean insertSchedule() {
 
-    }
-    
+    // }
+
+    // public boolean insertSeat() {
+
+    // }
+
+    // public boolean insertStation() {
+
+    // }
+
+    // public boolean insertTrain() {
+
+    // }
+
+    // public boolean insertTour() {
+
+    // }
+
+    // public boolean insertTrainTrip() {
+
+    // }
+
+    // public boolean insertUser() {
+
+    // }
+
     public boolean CheckLogin(String jtUsername, String jPassword) {
         boolean result = false;
         if (!jtUsername.equals("")) {
@@ -192,11 +210,11 @@ public class QueryController {
         return result;
     }
 
-    public void insertData(){
+    public void insertData() {
         JOptionPane.showMessageDialog(null, "You Have been Registered!");
     }
 
-    public boolean CheckRegistration(){
+    public boolean CheckRegistration() {
         return true;
     }
 }
