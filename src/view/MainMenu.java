@@ -10,6 +10,9 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.Toolkit;
 import java.awt.Image;
@@ -20,11 +23,11 @@ public class MainMenu implements MouseInputListener {
     double height = screenSize.getHeight();
     JFrame fMainMenu;
     JPanel panelMenu, panelHome, panelProfile, panelFlight, panelTrain, panelBus, panelHotel, panelXtourience;
-    JButton btnSave, btnHome, btnProfile, btnFlight, btnTrain, btnBus, btnHotel, btnXtourience, btnLogOut, btnSearch;
+    JButton btnSave, btnHome, btnProfile, btnFlight, btnTrain, btnBus, btnHotel, btnXtourience, btnLogOut, btnSearch , btnSearchXtour;
     JLabel lFullName, lProfile, lTitleHome, lCity, lTitleHotel, lTitleFlight, lDeparture, lDestination, lDate,
             lSeatClass, lNoPassengers, lTitleTrain, lTitleBus, lNight, lUsername, lEmail, lPassword, lAddress,
-            lBirthdate;
-    JComboBox cbDeparture, cbDestination, cbSeatClass, cbPassengers, cbCity;
+            lBirthdate, lTitleXtour, lMoto;
+    JComboBox cbDeparture, cbDestination, cbSeatClass, cbPassengers, cbCity, cbCityXtour;
     JDatePanelImpl jdPick;
     JTextField tfFullName, tfUsername, tfAddress;
     String country[] = { "Surabaya", "Bandung", "Singapore", "Bali", "Raja Ampat" };
@@ -32,6 +35,9 @@ public class MainMenu implements MouseInputListener {
     String number[] = { "1", "2", "3", "4", "5", "6", "7" };
     String City[] = { "Solo", "Bandung", "Jakarta", "Bali", "Yogyakarta" };
     JDatePanelImpl date;
+    
+    JScrollPane scrollPane;
+    DefaultTableModel model;
 
     public MainMenu() {
 
@@ -100,7 +106,7 @@ public class MainMenu implements MouseInputListener {
         btnHotel.setHorizontalAlignment(SwingConstants.LEFT);
 
         // Button Xtourience
-        btnXtourience = new JButton("Xtourience");
+        btnXtourience = new JButton("XTourience");
         btnXtourience.setBounds(0, btnHome.getVerticalAlignment() + 250, 195, 50);
         btnXtourience.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnXtourience.setBackground(new Color(100, 88, 110));
@@ -152,7 +158,7 @@ public class MainMenu implements MouseInputListener {
 
         // Panel Xtourience
         panelXtourience = new JPanel();
-        panelXtourience.setBackground(Color.black);
+        panelXtourience.setBackground(new Color(40, 25, 54));
         panelXtourience.setBounds((int) width / 10, 0, (int) width, (int) height);
         panelXtourience.setLayout(null);
 
@@ -163,7 +169,7 @@ public class MainMenu implements MouseInputListener {
         panelProfile.setLayout(null);
 
         // add to panel
-        panelMenu.add(btnXtourience);
+        // panelMenu.add(btnXtourience);
         panelMenu.add(btnHotel);
         panelMenu.add(btnBus);
         panelMenu.add(btnTrain);
@@ -195,11 +201,16 @@ public class MainMenu implements MouseInputListener {
 
         lTitleHome = new JLabel("Let's Explore The World");
         lTitleHome.setForeground(Color.white);
-        lTitleHome.setFont(new Font("Tahoma", Font.BOLD, 30));
-        lTitleHome.setBounds((int) width - 1500, (int) height / 60, 500, 50);
+        lTitleHome.setFont(new Font("Tahoma", Font.BOLD, 40));
+        lTitleHome.setBounds((int) width / 2 - 350 , (int) height / 60, 500, 50);
+
+        lUsername = new JLabel("Hello User");
+        lUsername.setBounds(panelHome.getX(), lTitleHome.getY()+lTitleHome.getHeight()+100, 500, 50);
+        lUsername.setForeground(Color.white);
+        lUsername.setFont(new Font("Tahoma", Font.BOLD, 35));
 
         btnFlight = new JButton("Flight");
-        btnFlight.setBounds((int) width - 1800, (int) height / 6, 70, 70);
+        btnFlight.setBounds(lUsername.getX(),lUsername.getY()+lUsername.getHeight()+150, 300, 300);
         ImageIcon logoFlight = new ImageIcon("src\\source\\Flight Icon.png");
         Image imgFlight = logoFlight.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         btnFlight.setBackground(new Color(41, 77, 126));
@@ -210,7 +221,7 @@ public class MainMenu implements MouseInputListener {
         btnFlight.setVerticalTextPosition(JButton.BOTTOM);
 
         btnTrain = new JButton("Train");
-        btnTrain.setBounds((int) width - 1700, (int) height / 6, 70, 70);
+        btnTrain.setBounds(btnFlight.getX() + btnFlight.getWidth() +50,btnFlight.getY(), 300, 300);
         ImageIcon logoTrain = new ImageIcon("src\\source\\Train Icon.png");
         Image imgTrain = logoTrain.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         btnTrain.setBackground(new Color(42, 81, 114));
@@ -221,7 +232,7 @@ public class MainMenu implements MouseInputListener {
         btnTrain.setVerticalTextPosition(JButton.BOTTOM);
 
         btnBus = new JButton("Bus");
-        btnBus.setBounds((int) width - 1600, (int) height / 6, 70, 70);
+        btnBus.setBounds(btnTrain.getX() + btnTrain.getWidth() +50,btnFlight.getY(), 300, 300);
         ImageIcon logoBus = new ImageIcon("src\\source\\Bus Icon.png");
         Image imgBus = logoBus.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         btnBus.setBackground(new Color(42, 87, 108));
@@ -232,7 +243,7 @@ public class MainMenu implements MouseInputListener {
         btnBus.setVerticalTextPosition(JButton.BOTTOM);
 
         btnHotel = new JButton("Hotel");
-        btnHotel.setBounds((int) width - 1500, (int) height / 6, 70, 70);
+        btnHotel.setBounds(btnBus.getX() + btnBus.getWidth() +50,btnFlight.getY(), 300, 300);
         ImageIcon logoHotel = new ImageIcon("src\\source\\Hotel Icon.png");
         Image imgHotel = logoHotel.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         btnHotel.setBackground(new Color(43, 93, 94));
@@ -254,15 +265,10 @@ public class MainMenu implements MouseInputListener {
         btnXtourience.setHorizontalTextPosition(JButton.CENTER);
         btnXtourience.setVerticalTextPosition(JButton.BOTTOM);
 
+     
 
-        lUsername = new JLabel("Hello User");
-        lUsername.setBounds((int) width - 1800, (int) height / 15, 500, 50);
-        lUsername.setForeground(Color.white);
-        lUsername.setFont(new Font("Tahoma", Font.BOLD, 20));
-
-        
         panelHome.add(lUsername);
-        panelHome.add(btnXtourience);
+        // panelHome.add(btnXtourience);
         panelHome.add(btnHotel);
         panelHome.add(btnBus);
         panelHome.add(btnTrain);
@@ -302,7 +308,7 @@ public class MainMenu implements MouseInputListener {
             lTitleFlight = new JLabel("FLIGHT");
             lTitleFlight.setForeground(Color.white);
             lTitleFlight.setFont(new Font("Tahoma", Font.BOLD, 26));
-            lTitleFlight.setBounds((int) width - 1500, (int) height / 60, 500, 50);
+            lTitleFlight.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
 
             // Label Departure
             lDeparture = new JLabel("Departure");
@@ -389,7 +395,7 @@ public class MainMenu implements MouseInputListener {
             lTitleTrain = new JLabel("TRAIN");
             lTitleTrain.setForeground(Color.white);
             lTitleTrain.setFont(new Font("Tahoma", Font.BOLD, 26));
-            lTitleTrain.setBounds((int) width - 1500, (int) height / 60, 500, 50);
+            lTitleTrain.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
 
             // Label Departure
             lDeparture = new JLabel("Departure");
@@ -465,7 +471,7 @@ public class MainMenu implements MouseInputListener {
             lTitleBus = new JLabel("BUS");
             lTitleBus.setForeground(Color.white);
             lTitleBus.setFont(new Font("Tahoma", Font.BOLD, 26));
-            lTitleBus.setBounds((int) width - 1500, (int) height / 60, 500, 50);
+            lTitleBus.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
 
             // Label Departure
             lDeparture = new JLabel("Departure");
@@ -541,7 +547,7 @@ public class MainMenu implements MouseInputListener {
             lTitleHotel = new JLabel("HOTEL");
             lTitleHotel.setForeground(Color.white);
             lTitleHotel.setFont(new Font("Tahoma", Font.BOLD, 26));
-            lTitleHotel.setBounds((int) width - 1500, (int) height / 60, 500, 50);
+            lTitleHotel.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
 
             // Label City
             lCity = new JLabel("City");
@@ -591,16 +597,52 @@ public class MainMenu implements MouseInputListener {
             panelHotel.add(cbCity);
             panelHotel.add(btnSearch);
             break;
-        case "Xtourience":
-            panelHome.setVisible(false);
-            panelFlight.setVisible(false);
-            panelTrain.setVisible(false);
-            panelBus.setVisible(false);
-            panelHotel.setVisible(false);
-            panelXtourience.setVisible(true);
-            panelProfile.setVisible(false);
 
-            break;
+        // case "XTourience":
+        //     panelHome.setVisible(false);
+        //     panelFlight.setVisible(false);
+        //     panelTrain.setVisible(false);
+        //     panelBus.setVisible(false);
+        //     panelHotel.setVisible(false);
+        //     panelXtourience.setVisible(true);
+        //     panelProfile.setVisible(false);
+
+        //     // lable title
+        //     lTitleXtour = new JLabel("XTourience");
+        //     lTitleXtour.setForeground(Color.white);
+        //     lTitleXtour.setFont(new Font("Tahoma", Font.BOLD, 40));
+        //     lTitleXtour.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
+
+        //     // label Moto
+        //     lMoto = new JLabel("Berkeliling Dunia bersama Travelokay");
+        //     lMoto.setForeground(Color.white);
+        //     lMoto.setFont(new Font("Tahoma", Font.ITALIC, 16));
+        //     lMoto.setBounds(lTitleXtour.getX() - 20, lTitleXtour.getY() + lTitleXtour.getHeight() + 20, 500, 25);
+
+        //     // label city
+        //     lCity = new JLabel("Choose your destination");
+        //     lCity.setForeground(Color.white);
+        //     lCity.setFont(new Font("Tahoma", Font.BOLD, 20));
+        //     lCity.setBounds(panelMenu.getWidth() - 120, lMoto.getY() + lMoto.getHeight() + 80, 500, 20);
+
+        //     // cb City
+        //     cbCityXtour = new JComboBox<>(City);
+        //     cbCityXtour.setBounds(lCity.getX(), lCity.getY() + lCity.getHeight() + 30, 200, 35);
+
+        //     btnSearchXtour = new JButton("Search City");
+        //     btnSearchXtour.setFont(new Font("Tahoma", Font.BOLD, 20));
+        //     btnSearchXtour.setBounds(panelMenu.getWidth() - 120, panelMenu.getHeight() - 200, 230, 50);
+        //     btnSearchXtour.setForeground(Color.white);
+        //     btnSearchXtour.setBackground(new Color(100, 88, 110));
+        //     btnSearchXtour.addMouseListener(this);
+
+        //     panelXtourience.add(lTitleXtour);
+        //     panelXtourience.add(lMoto);
+        //     panelXtourience.add(lCity);
+        //     panelXtourience.add(cbCityXtour);
+        //     panelXtourience.add(btnSearchXtour);
+        //     break;
+
         case "Profile":
             panelHome.setVisible(false);
             panelFlight.setVisible(false);
@@ -666,8 +708,8 @@ public class MainMenu implements MouseInputListener {
             panelProfile.add(lFullName);
             panelProfile.add(lProfile);
             break;
-        case "Log Out":
 
+        case "Log Out":
             panelHome.setVisible(false);
             panelFlight.setVisible(false);
             panelTrain.setVisible(false);
@@ -675,8 +717,9 @@ public class MainMenu implements MouseInputListener {
             panelHotel.setVisible(false);
             panelXtourience.setVisible(false);
             panelProfile.setVisible(false);
-            JOptionPane.showMessageDialog(null, "LOGOUT");
+            new LoginForm();
             break;
+       
         default:
             break;
         }
@@ -685,7 +728,9 @@ public class MainMenu implements MouseInputListener {
     @Override
     public void mousePressed(MouseEvent e) {
         Component component = e.getComponent();
+
         component.setBackground(new Color(136, 94, 254));
+
     }
 
     @Override
