@@ -2,17 +2,15 @@ package test;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Toolkit;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,6 +22,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controller.QueryController;
+import model.ConstType;
+import model.Partner;
+
 public class RegisterPartnerPanel extends JPanel implements ActionListener, ItemListener {
     
     // Declaring variable
@@ -34,7 +36,7 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
     JTextField tfUsername, tfEmail, tfFullname, tfCompany;
     JTextArea taAddress;
     JCheckBox showPassword, showVerify;
-    JComboBox cbType;
+    JComboBox<String> cbType;
     JButton btnRegister;
 
     // Get screen size
@@ -133,11 +135,6 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
         lType.setFont(new Font("Arial", Font.PLAIN, 20));
         lType.setBounds(lTitle.getX(), pfVerify.getY() + 70, 120, 50);
 
-        // Set JComboBox
-        // String[] categoryList = new String[categories.size()];
-        // for (int i = 0; i < categories.size(); i++) {
-        //     categoryList[i] = categories.get(i).getName();
-        // }
         String[] typeList = {"Flight", "Train", "Bus", "Hotel", "XTorience"};
         cbType = new JComboBox<>(typeList); 
         cbType.setForeground(ConstColor.WHITE);
@@ -263,7 +260,65 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // JOptionPane.showMessageDialog(null, "ON PROGRESS");
-        MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+
+        // Get value
+        String username = tfUsername.getText();
+        String password = String.valueOf(pfPassword.getPassword());
+        String verify = String.valueOf(pfVerify.getPassword());
+        String email = tfEmail.getText();
+        String fullname = tfFullname.getText();
+        String address = taAddress.getText();
+        String companyName = tfCompany.getText();
+        String userType = ConstType.PARTNER;
+        String partnerType = cbType.getSelectedItem().toString();
+
+        if (username.equals("") || password.equals("") || verify.equals("") || email.equals("") || fullname.equals("") || address.equals("") || companyName.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill all field !");
+        } else if (!password.equals(verify)){
+            JOptionPane.showMessageDialog(null, "Verify password failed !");
+        } else {
+            
+            // Check if email / username already taken
+            QueryController queryController = new QueryController();
+
+            int emailTaken = queryController.isEmailTaken(email);
+            switch (emailTaken) {
+                case 0:
+
+                    int usernameTaken = queryController.isUsernameTaken(username);
+                    switch (usernameTaken) {
+                        case 0:
+                            
+                            // Make new user and insert to database
+                            Partner newPartner = new Partner(fullname, username, email, password, address, userType, partnerType, companyName);
+                            boolean success = queryController.insertPartner(newPartner);
+
+                            if (success) {
+                                JOptionPane.showMessageDialog(null, "Register success");
+                                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Register failed");
+                            }
+                            break;
+                        case 1:
+                        JOptionPane.showMessageDialog(null, "Username already taken");
+                            break;
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Database connection failed");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Email already taken");
+                    break;
+                case -1:
+                    JOptionPane.showMessageDialog(null, "Database connection failed");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

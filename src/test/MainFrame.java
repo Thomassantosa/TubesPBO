@@ -1,13 +1,11 @@
 package test;
 
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.CardLayout;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +25,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
     JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10;
     
     // Declaring variable (JPanel from another class)
-    Panel0 panel0;
+    HomeAdminPanel homeAdminPanel;
     Panel1 panel1;
     Panel2 panel2;
     SplashPanel splashPanel;
@@ -71,7 +69,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         registerStatusPanel = new RegisterStatusPanel();
         registerUserPanel = new RegisterUserPanel();
         registerPartnerPanel = new RegisterPartnerPanel();
-        panel0 = new Panel0();
+        homeAdminPanel = new HomeAdminPanel();
         panel1 = new Panel1();
         panel2 = new Panel2();
 
@@ -207,7 +205,7 @@ public class MainFrame extends JFrame implements MouseInputListener{
         cardPanel1.add(registerStatusPanel, "registerStatus");
         cardPanel1.add(registerUserPanel, "registerUser");
         cardPanel1.add(registerPartnerPanel, "registerPartner");
-        cardPanel1.add(panel0, "panelA");
+        cardPanel1.add(homeAdminPanel, "panelA");
         cardPanel1.add(panel1, "panelB");
         cardPanel1.add(panel2, "panelC");
         this.add(cardPanel1);

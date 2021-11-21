@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
-public class Panel0 extends JPanel implements MouseInputListener{
+public class HomeAdminPanel extends JPanel implements MouseInputListener{
     
     // Declaring variable
     JLabel lTitle, lTitle2, lDate, lIncome, lIncomeValue, lTransaction, lTransactionValue;
@@ -30,7 +30,7 @@ public class Panel0 extends JPanel implements MouseInputListener{
     int width = (int)size.getWidth();
     int height = (int)size.getHeight();
 
-    public Panel0() {
+    public HomeAdminPanel() {
 
         // Set JPanel (this)
         this.setBackground(ConstColor.PURPLE1);

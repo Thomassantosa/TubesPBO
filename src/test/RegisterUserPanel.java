@@ -2,14 +2,14 @@ package test;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import controller.QueryController;
+import model.User;
 
 public class RegisterUserPanel extends JPanel implements ActionListener, ItemListener {
     
@@ -167,7 +170,7 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
         btnRegister = new JButton("Register");
         btnRegister.setForeground(ConstColor.WHITE);
         btnRegister.setBackground(ConstColor.PURPLE4);
-        btnRegister.setBounds(lUsername.getX(), taAddress.getY() + 200, 250, 40);
+        btnRegister.setBounds(lUsername.getX(), taAddress.getY() + 250, 250, 40);
         btnRegister.setFont(new Font("Arial", Font.PLAIN, 20));
         btnRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnRegister.addActionListener(this);
@@ -225,7 +228,63 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // JOptionPane.showMessageDialog(null, "ON PROGRESS");
-        MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+
+        // Get value
+        String username = tfUsername.getText();
+        String password = String.valueOf(pfPassword.getPassword());
+        String verify = String.valueOf(pfVerify.getPassword());
+        String email = tfEmail.getText();
+        String fullname = tfFullname.getText();
+        String address = taAddress.getText();
+
+        if (username.equals("") || password.equals("") || verify.equals("") || email.equals("") || fullname.equals("") || address.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill all field !");
+        } else if (!password.equals(verify)){
+            JOptionPane.showMessageDialog(null, "Verify password failed !");
+        } else {
+            
+            // Check if email / username already taken
+            QueryController queryController = new QueryController();
+
+            int emailTaken = queryController.isEmailTaken(email);
+            switch (emailTaken) {
+                case 0:
+
+                    int usernameTaken = queryController.isUsernameTaken(username);
+                    switch (usernameTaken) {
+                        case 0:
+                            
+                            // Make new user and insert to database
+                            User newUser = new User(fullname, username, email, password, address);
+
+                            boolean success = queryController.insertUser(newUser);
+
+                            if (success) {
+                                JOptionPane.showMessageDialog(null, "Register success");
+                                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Register failed");
+                            }
+                            break;
+                        case 1:
+                        JOptionPane.showMessageDialog(null, "Username already taken");
+                            break;
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Database connection failed");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Email already taken");
+                    break;
+                case -1:
+                    JOptionPane.showMessageDialog(null, "Database connection failed");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

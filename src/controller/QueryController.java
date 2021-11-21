@@ -14,7 +14,7 @@ public class QueryController {
     
     public User selectUserByEmail(String email, String password) {
         conn.connect();
-        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `birthdate`, `user_type`, `company_name` FROM `users` WHERE email='" + email + "' AND password='" + password + "'";
+        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `company_name` FROM `users` WHERE email='" + email + "' AND password='" + password + "'";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result1 = stmt.executeQuery(query);
@@ -42,7 +42,6 @@ public class QueryController {
                         user.setEmail(result2.getString("email"));
                         user.setPassword(result2.getString("password"));
                         user.setAddress(result2.getString("address"));
-                        user.setBirthdate(result2.getDate("birthdate"));
                         user.setUserType(result2.getString("user_type"));
                     }
 
@@ -59,7 +58,6 @@ public class QueryController {
                         partner.setEmail(result3.getString("email"));
                         partner.setPassword(result3.getString("password"));
                         partner.setAddress(result3.getString("address"));
-                        partner.setBirthdate(result3.getDate("birthdate"));
                         partner.setUserType(result3.getString("user_type"));
                         partner.setCompanyName(result3.getString("company_name"));
                     }
@@ -78,7 +76,7 @@ public class QueryController {
     
     public User selectUserByUsername(String username, String password) {
         conn.connect();
-        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `birthdate`, `user_type`, `company_name` FROM `users` WHERE username='" + username + "' AND password='" + password + "'";
+        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `company_name` FROM `users` WHERE username='" + username + "' AND password='" + password + "'";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result1 = stmt.executeQuery(query);
@@ -105,7 +103,6 @@ public class QueryController {
                         user.setEmail(result2.getString("email"));
                         user.setPassword(result2.getString("password"));
                         user.setAddress(result2.getString("address"));
-                        user.setBirthdate(result2.getDate("birthdate"));
                         user.setUserType(result2.getString("user_type"));
                     }
 
@@ -121,7 +118,6 @@ public class QueryController {
                         partner.setEmail(result3.getString("email"));
                         partner.setPassword(result3.getString("password"));
                         partner.setAddress(result3.getString("address"));
-                        partner.setBirthdate(result3.getDate("birthdate"));
                         partner.setUserType(result3.getString("user_type"));
                         partner.setCompanyName(result3.getString("company_name"));
                     }
@@ -135,6 +131,92 @@ public class QueryController {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public boolean insertUser(User user) {
+        conn.connect();
+        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`) VALUES  (?,?,?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setString(1, user.getFullname());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getAddress());
+            stmt.setString(6, user.getUserType());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public boolean insertPartner(Partner user) {
+        conn.connect();
+        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`, `partner_type`, `company_name`) VALUES  (?,?,?,?,?,?,?,?)";
+        try {   
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setString(1, user.getFullname());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getAddress());
+            stmt.setString(6, user.getUserType());
+            stmt.setString(7, user.getPartnerType());
+            stmt.setString(8, user.getCompanyName());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public int isEmailTaken(String email) {
+        conn.connect();
+        String query = "SELECT `user_id` FROM `users` WHERE email='" + email + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userId = 0;
+            
+            while (result.next()) {
+                userId = result.getInt("user_id");
+            }
+
+            if (userId == 0) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int isUsernameTaken(String username) {
+        conn.connect();
+        String query = "SELECT `user_id` FROM `users` WHERE username='" + username + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userId = 0;
+            
+            while (result.next()) {
+                userId = result.getInt("user_id");
+            }
+
+            if (userId == 0) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 }

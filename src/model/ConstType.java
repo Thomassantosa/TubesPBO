@@ -5,9 +5,13 @@ public class ConstType {
     // User type
     public final static String ADMIN = "Admin";
     public final static String USER = "User";
-    public final static String MEMBER = "Member";
     public final static String PARTNER = "Partner";
     
+    // Partner type
+    public final static String FLIGHTPARTNER = "Flight";
+    public final static String TRAINPARTNER = "Train";
+    public final static String BUSPARTNER = "Bus";
+
     // Seat type
     public final static String ECONOMY = "Economy";
     public final static String BUSSINESS = "Bussiness";

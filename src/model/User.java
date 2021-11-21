@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 public class User {
@@ -10,32 +9,38 @@ public class User {
     private String email;
     private String password;
     private String address;
-    private Date birthdate;
     private String userType;
     private ArrayList <Order> orderList = new ArrayList<>();
 
     public User() {
     }
 
-    public User(int userID, String fullname, String username, String email, String password, String address, Date birthdate, String userType) {
+    public User(int userID, String fullname, String username, String email, String password, String address, String userType) {
         this.userID = userID;
         this.fullname = fullname;
         this.username = username;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.birthdate = birthdate;
         this.userType = userType;
     }
 
-    public User(String fullname, String username, String email, String password, String address, Date birthdate, String userType) {
+    public User(String fullname, String username, String email, String password, String address, String userType) {
         this.fullname = fullname;
         this.username = username;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.birthdate = birthdate;
         this.userType = userType;
+    }
+
+    public User(String fullname, String username, String email, String password, String address) {
+        this.fullname = fullname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.userType = ConstType.USER;
     }
 
     public int getUserID() {
@@ -86,14 +91,6 @@ public class User {
         this.address = address;
     }
 
-    public Date getBirthdate() {
-        return this.birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
     public String getUserType() {
         return this.userType;
     }
@@ -119,7 +116,6 @@ public class User {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", address='" + getAddress() + "'" +
-            ", birthdate='" + getBirthdate() + "'" +
             ", userType='" + getUserType() + "'" +
             ", orderList='" + getOrderList() + "'" +
             "}";
