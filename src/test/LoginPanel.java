@@ -16,7 +16,6 @@ import model.User;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -178,7 +177,9 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                     switch (userType) {
                         case "Admin":
                             JOptionPane.showMessageDialog(null, "ADMIN FOUND");
-                            MainFrame.cardLayout.show(MainFrame.cardPanel1, "registerUser");
+                            MainFrame.cardPanel1.setVisible(false);
+                            MainFrame.buttonContainerAdmin.setVisible(true);
+                            MainFrame.cardPanelAdmin.setVisible(true);
                             break;
                         case "User":
                             JOptionPane.showMessageDialog(null, "USER FOUND");

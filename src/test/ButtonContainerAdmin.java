@@ -1,85 +1,33 @@
 package test;
 
-import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.event.MouseInputListener;
 
-public class MainFrame extends JFrame implements MouseInputListener{
-    
+public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
+
     // Declaring variable
-    static JPanel buttonContainer;
-    static JPanel cardPanel1, cardPanelAdmin;
-    static CardLayout cardLayout;
-    JLabel lSplashLogo;
     JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10;
     
-    // Declaring variable (JPanel from another class)
-    HomeAdminPanel homeAdminPanel;
-    Panel1 panel1;
-    Panel2 panel2;
-    SplashPanel splashPanel;
-    LoginPanel loginPanel;
-    RegisterStatusPanel registerStatusPanel;
-    RegisterUserPanel registerUserPanel;
-    RegisterPartnerPanel registerPartnerPanel;
-    static ButtonContainerAdmin buttonContainerAdmin;
-
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)size.getWidth();
     int height = (int)size.getHeight();
-    
-    public MainFrame() {
 
-        // Set JFrame
-        this.setTitle("Travelokay");
-        this.setSize(width, height);
+    public ButtonContainerAdmin() {
+
+        // Set JPanel (this)
+        this.setBackground(ConstColor.PURPLE2);
+        this.setSize(220, height);
         this.setLayout(null);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);  
-        Image icon = Toolkit.getDefaultToolkit().getImage("src\\source\\Logo.png");  
-        this.setIconImage(icon);
-
-        // Set Fixed JPanel
-        buttonContainer = new JPanel();
-        buttonContainer.setBackground(ConstColor.PURPLE2);
-        buttonContainer.setSize(220, height);
-        buttonContainer.setLayout(null);
-        
-        // Set JPanel
-        cardPanel1 = new JPanel();
-        cardLayout = new CardLayout();
-        cardPanel1.setLayout(cardLayout);
-        // cardPanel1.setBounds(220, 0, width - 220, height);
-        cardPanel1.setBounds(0, 0, width, height);
-
-        cardPanelAdmin = new JPanel();
-        // cardLayout = new CardLayout();
-        cardPanelAdmin.setLayout(cardLayout);
-        cardPanelAdmin.setBounds(220, 0, width - 220, height);
-
-        splashPanel = new SplashPanel();
-        loginPanel = new LoginPanel();
-        registerStatusPanel = new RegisterStatusPanel();
-        registerUserPanel = new RegisterUserPanel();
-        registerPartnerPanel = new RegisterPartnerPanel();
-
-        buttonContainerAdmin = new ButtonContainerAdmin();
-        homeAdminPanel = new HomeAdminPanel();
-        panel1 = new Panel1();
-        panel2 = new Panel2();
 
         // Set components
         // Set JButton
@@ -183,62 +131,20 @@ public class MainFrame extends JFrame implements MouseInputListener{
         ImageIcon logoutIcon = new ImageIcon("src\\source\\LogOut Icon.png");
         button10.setIcon(logoutIcon);
         
-        button1.addMouseListener(this);
-        button2.addMouseListener(this);
-        button3.addMouseListener(this);
-        button4.addMouseListener(this);
-        button5.addMouseListener(this);
-        button6.addMouseListener(this);
-        button7.addMouseListener(this);
-        button8.addMouseListener(this);
-        button9.addMouseListener(this);
-        button10.addMouseListener(this);
+        // Adding components
+        this.add(button1);
+        this.add(button2);
+        this.add(button3);
+        this.add(button4);
+        this.add(button5);
+        this.add(button6);
+        this.add(button7);
+        this.add(button8);
+        this.add(button9);
+        this.add(button10);
 
-        // Adding component
-        this.add(splashPanel);
-
-        buttonContainer.add(button1);
-        buttonContainer.add(button2);
-        buttonContainer.add(button3);
-        buttonContainer.add(button4);
-        buttonContainer.add(button5);
-        buttonContainer.add(button6);
-        buttonContainer.add(button7);
-        buttonContainer.add(button8);
-        buttonContainer.add(button9);
-        buttonContainer.add(button10);
-        this.add(buttonContainer);
-
-        cardPanel1.add(loginPanel, "loginPanel");
-        cardPanel1.add(registerStatusPanel, "registerStatus");
-        cardPanel1.add(registerUserPanel, "registerUser");
-        cardPanel1.add(registerPartnerPanel, "registerPartner");
-        this.add(cardPanel1);
-
-        cardPanelAdmin.add(homeAdminPanel, "homeAdminPanel");
-        cardPanelAdmin.add(panel1, "panelB");
-        cardPanelAdmin.add(panel2, "panelC");
-        this.add(cardPanelAdmin);
-
-        this.add(buttonContainerAdmin);
-
-        // Set Vicibility
+        // Set vicibility
         this.setVisible(true);
-        splashPanel.setVisible(true);
-        buttonContainer.setVisible(false);
-        cardPanel1.setVisible(false);
-        cardPanelAdmin.setVisible(false);
-        buttonContainerAdmin.setVisible(false);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        splashPanel.setVisible(false);
-
-        // buttonContainer.setVisible(true);
-        cardPanel1.setVisible(true);
-        // buttonContainer.setVisible(false);
     }
 
     @Override
@@ -248,10 +154,10 @@ public class MainFrame extends JFrame implements MouseInputListener{
 
         switch(name) {
             case "Home":
-                cardLayout.show(cardPanel1, "panelA");
+                JOptionPane.showMessageDialog(null, "TEST CLICKED");
                 break;
             case "Flight":
-                cardLayout.show(cardPanel1, "panelC");
+            
                 break;
             default: 
                 break;
@@ -401,4 +307,5 @@ public class MainFrame extends JFrame implements MouseInputListener{
     public void mouseMoved(MouseEvent e) {
         // Not implemented
     }
+    
 }
