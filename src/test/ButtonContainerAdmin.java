@@ -87,21 +87,22 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button5.setIcon(hotelIcon);
         button5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
-        button6 = new JButton("XTourience");
-        button6.setBackground(ConstColor.PURPLE2);
-        button6.setForeground(ConstColor.GREY);
-        button6.setBounds(0, button5.getY() + 40, 220, 40);
-        button6.setFont(new Font("Arial", Font.PLAIN, 16));
-        button6.setBorderPainted(false);
-        button6.setHorizontalAlignment(SwingConstants.LEFT);
-        ImageIcon xTourienceIcon = new ImageIcon("src\\source\\XTourience Icon.png");
-        button6.setIcon(xTourienceIcon);
-        button6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        // button6 = new JButton("XTourience");
+        // button6.setBackground(ConstColor.PURPLE2);
+        // button6.setForeground(ConstColor.GREY);
+        // button6.setBounds(0, button5.getY() + 40, 220, 40);
+        // button6.setFont(new Font("Arial", Font.PLAIN, 16));
+        // button6.setBorderPainted(false);
+        // button6.setHorizontalAlignment(SwingConstants.LEFT);
+        // ImageIcon xTourienceIcon = new ImageIcon("src\\source\\XTourience Icon.png");
+        // button6.setIcon(xTourienceIcon);
+        // button6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button7 = new JButton("User");
         button7.setBackground(ConstColor.PURPLE2);
         button7.setForeground(ConstColor.GREY);
-        button7.setBounds(0, button6.getY() + 40, 220, 40);
+        // button7.setBounds(0, button6.getY() + 40, 220, 40);
+        button7.setBounds(0, button5.getY() + 40, 220, 40);
         button7.setFont(new Font("Arial", Font.PLAIN, 16));
         button7.setBorderPainted(false);
         button7.setHorizontalAlignment(SwingConstants.LEFT);
@@ -147,7 +148,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button3.addMouseListener(this);
         button4.addMouseListener(this);
         button5.addMouseListener(this);
-        button6.addMouseListener(this);
+        // button6.addMouseListener(this);
         button7.addMouseListener(this);
         button8.addMouseListener(this);
         button9.addMouseListener(this);
@@ -159,7 +160,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         this.add(button3);
         this.add(button4);
         this.add(button5);
-        this.add(button6);
+        // this.add(button6);
         this.add(button7);
         this.add(button8);
         this.add(button9);
@@ -190,9 +191,9 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
             case "Hotel":
                 MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminHotelPanel");
                 break;
-            case "XTourience":
-                MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "panelC");
-                break;
+            // case "XTourience":
+            //     MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "panelC");
+            //     break;
             case "User":
                 MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminUserPanel");
                 break;
@@ -257,11 +258,11 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
                 button.setBackground(ConstColor.PURPLE4);
                 button.setForeground(ConstColor.WHITE);
                 break;
-            case "XTourience":
-                hoverIcon = new ImageIcon("src\\source\\XTourience Icon_Hover.png");
-                button.setBackground(ConstColor.PURPLE4);
-                button.setForeground(ConstColor.WHITE);
-                break;
+            // case "XTourience":
+            //     hoverIcon = new ImageIcon("src\\source\\XTourience Icon_Hover.png");
+            //     button.setBackground(ConstColor.PURPLE4);
+            //     button.setForeground(ConstColor.WHITE);
+            //     break;
             case "User":
                 hoverIcon = new ImageIcon("src\\source\\Account Icon_Hover.png");
                 button.setBackground(ConstColor.PURPLE4);
@@ -319,11 +320,11 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
                 button.setBackground(ConstColor.PURPLE2);
                 button.setForeground(ConstColor.GREY);
                 break;
-            case "XTourience":
-                icon = new ImageIcon("src\\source\\XTourience Icon.png");
-                button.setBackground(ConstColor.PURPLE2);
-                button.setForeground(ConstColor.GREY);
-                break;
+            // case "XTourience":
+            //     icon = new ImageIcon("src\\source\\XTourience Icon.png");
+            //     button.setBackground(ConstColor.PURPLE2);
+            //     button.setForeground(ConstColor.GREY);
+            //     break;
             case "User":
                 icon = new ImageIcon("src\\source\\Account Icon.png");
                 button.setBackground(ConstColor.PURPLE2);

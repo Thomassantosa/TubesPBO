@@ -10,6 +10,7 @@ public class User {
     private String password;
     private String address;
     private String userType;
+    private String dateCreated;
     private ArrayList <Order> orderList = new ArrayList<>();
 
     public User() {
@@ -105,6 +106,14 @@ public class User {
 
     public void setOrderList(ArrayList<Order> orderList) {
         this.orderList = orderList;
+    }
+
+    public String getDateCreated() {
+        return this.dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     @Override

@@ -189,6 +189,8 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                         default:
                             break;
                     }
+                    tfUsername.setText("");
+                    pfPassword.setText("");
                 }
             }
         } else {

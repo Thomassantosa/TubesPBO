@@ -690,4 +690,78 @@ public class QueryController {
             return null;
         }
     }
+
+    public ArrayList<User> selectAllTraveller() {
+        conn.connect();
+        String query = "SELECT user_id, " +
+        "fullname, " +
+        "username, " +
+        "email, " +
+        "address, " +
+        "date_created " +
+        "FROM users " +
+        "WHERE user_type = 'User' " +
+        "ORDER BY user_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            ArrayList<User> users = new ArrayList<>();
+            while (result.next()) {
+                User currentUser = new User();
+
+                currentUser.setUserID(result.getInt("user_id"));
+                currentUser.setFullname(result.getString("fullname"));
+                currentUser.setUsername(result.getString("username"));
+                currentUser.setEmail(result.getString("email"));
+                currentUser.setAddress(result.getString("address"));
+                currentUser.setDateCreated(result.getString("date_created"));
+                users.add(currentUser);
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Partner> selectAllPartner() {
+        conn.connect();
+        String query = "SELECT user_id, " +
+        "fullname, " +
+        "username, " +
+        "email, " +
+        "address, " +
+        "partner_type, " +
+        "company_name, " +
+        "date_created " +
+        "FROM users " +
+        "WHERE user_type = 'Partner' " +
+        "ORDER BY user_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            ArrayList<Partner> partners = new ArrayList<>();
+            while (result.next()) {
+                Partner currentPartner = new Partner();
+
+                currentPartner.setUserID(result.getInt("user_id"));
+                currentPartner.setFullname(result.getString("fullname"));
+                currentPartner.setUsername(result.getString("username"));
+                currentPartner.setEmail(result.getString("email"));
+                currentPartner.setAddress(result.getString("address"));
+                currentPartner.setPartnerType(result.getString("partner_type"));
+                currentPartner.setCompanyName(result.getString("company_name"));
+                currentPartner.setDateCreated(result.getString("date_created"));
+                partners.add(currentPartner);
+            }
+            return partners;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
