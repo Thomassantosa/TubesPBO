@@ -29,14 +29,14 @@ public class MainFrame extends JFrame {
     RegisterPartnerPanel registerPartnerPanel;
 
     static ButtonContainerAdmin buttonContainerAdmin;
-    AdminHomePanel adminHomePanel;
-    AdminFlightPanel adminFlightPanel;
-    AdminTrainPanel adminTrainPanel;
-    AdminBusPanel adminBusPanel;
-    AdminHotelPanel adminHotelPanel;
-    AdminUserPanel adminUserPanel;
-    AdminPartnerPanel adminPartnerPanel;
-    AdminProfilePanel adminProfilePanel;
+    static AdminHomePanel adminHomePanel;
+    static AdminFlightPanel adminFlightPanel;
+    static AdminTrainPanel adminTrainPanel;
+    static AdminBusPanel adminBusPanel;
+    static AdminHotelPanel adminHotelPanel;
+    static AdminUserPanel adminUserPanel;
+    static AdminPartnerPanel adminPartnerPanel;
+    static AdminProfilePanel adminProfilePanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,6 +55,7 @@ public class MainFrame extends JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage("src\\source\\Logo.png");  
         this.setIconImage(icon);
 
+        // Set components
         // Set Fixed JPanel
         buttonContainer = new JPanel();
         buttonContainer.setBackground(ConstColor.PURPLE2);
@@ -86,9 +87,7 @@ public class MainFrame extends JFrame {
         adminHotelPanel = new AdminHotelPanel();
         adminUserPanel = new AdminUserPanel();
         adminPartnerPanel = new AdminPartnerPanel();
-        adminProfilePanel = new AdminProfilePanel();
-
-        // Set components
+        // adminProfilePanel = new AdminProfilePanel();
 
         // Adding component
         this.add(splashPanel);
@@ -106,7 +105,7 @@ public class MainFrame extends JFrame {
         cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
         cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
         cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
-        cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
+        // cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
         this.add(cardPanelAdmin);
 
         this.add(buttonContainerAdmin);
@@ -128,5 +127,28 @@ public class MainFrame extends JFrame {
         // buttonContainer.setVisible(true);
         cardPanel1.setVisible(true);
         // buttonContainer.setVisible(false);
+    }
+
+    public static void setCardPanelAdmin() {
+        // cardPanelAdmin = new JPanel();
+
+        // buttonContainerAdmin = new ButtonContainerAdmin();
+        // adminHomePanel = new AdminHomePanel();
+        // adminFlightPanel = new AdminFlightPanel();
+        // adminTrainPanel = new AdminTrainPanel();
+        // adminBusPanel = new AdminBusPanel();
+        // adminHotelPanel = new AdminHotelPanel();
+        // adminUserPanel = new AdminUserPanel();
+        // adminPartnerPanel = new AdminPartnerPanel();
+        adminProfilePanel = new AdminProfilePanel();
+
+        // cardPanelAdmin.add(adminHomePanel, "adminHomePanel");
+        // cardPanelAdmin.add(adminFlightPanel, "adminFlightPanel");
+        // cardPanelAdmin.add(adminTrainPanel, "adminTrainPanel");
+        // cardPanelAdmin.add(adminBusPanel, "adminBusPanel");
+        // cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
+        // cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
+        // cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
+        cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
     }
 }

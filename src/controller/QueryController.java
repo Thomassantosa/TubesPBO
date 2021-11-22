@@ -764,4 +764,29 @@ public class QueryController {
             return null;
         }
     }
+
+    public boolean updateUser(int idUser, User user) {
+        conn.connect();
+        String query = "UPDATE `users` " +
+        "SET `fullname`= ?, " +
+        "`username`= ?, " +
+        "`email`= ?, " +
+        "`password`= ?, " +
+        "`address`= ?  " +
+        "WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setString(1, user.getFullname());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getAddress());
+            stmt.setInt(6, idUser);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 }

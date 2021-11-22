@@ -3,7 +3,6 @@ package test;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -22,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controller.QueryController;
+import controller.SingletonManager;
 import model.User;
 
 public class AdminProfilePanel extends JPanel implements ActionListener, ItemListener {
@@ -48,7 +47,7 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         this.setLayout(null);
         
         // Set JLabel (lTitle)
-        lTitle = new JLabel("Yout Profile");
+        lTitle = new JLabel("Your Profile");
         lTitle.setForeground(ConstColor.WHITE);
         lTitle.setFont(new Font("ARIAL", Font.BOLD, 30));
         lTitle.setBounds(20, 20, 450, 40);
@@ -65,6 +64,11 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         tfUsername.setBackground(ConstColor.PURPLE3);
         tfUsername.setBounds(lTitle.getX(), lUsername.getY() + 40, 300, 40);
         tfUsername.setMargin(new Insets(0, 10, 0, 0));
+        tfUsername.setText(SingletonManager.getInstance().getUser().getUsername());
+        // tfUsername.setText("SingletonManager.getInstance().getUser().getUsername()");
+        System.out.println("value = " + SingletonManager.getInstance().getUser().getUsername());
+        System.out.println(SingletonManager.getInstance().getUser().getUsername().getClass());
+        System.out.println(SingletonManager.getInstance().getUser().toString() + "\n");
 
         // Set JLabel (lPassword)
         lPassword = new JLabel("Password");
@@ -78,11 +82,12 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         pfPassword.setBackground(ConstColor.PURPLE3);
         pfPassword.setBounds(lTitle.getX(), lPassword.getY() + 40, 300, 40);
         pfPassword.setMargin(new Insets(0, 10, 0, 0));
+        pfPassword.setText(SingletonManager.getInstance().getUser().getPassword());
 
         // Set JCheckBok (for showing pfPassword)
         showPassword = new JCheckBox("Show Password");
         showPassword.setForeground(ConstColor.WHITE);
-        showPassword.setBackground(ConstColor.PURPLE2);
+        showPassword.setBackground(ConstColor.PURPLE1);
         showPassword.setBounds(lTitle.getX(), pfPassword.getY() + 40, 120, 20);
         passwordDefault = pfPassword.getEchoChar();
         showPassword.addItemListener(this);
@@ -99,11 +104,12 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         pfVerify.setBackground(ConstColor.PURPLE3);
         pfVerify.setBounds(lTitle.getX(), lVerify.getY() + 40, 300, 40);
         pfVerify.setMargin(new Insets(0, 10, 0, 0));
+        pfVerify.setText(SingletonManager.getInstance().getUser().getPassword());
 
         // Set JCheckBok (for showing pfVerify)
         showVerify = new JCheckBox("Show Verify");
         showVerify.setForeground(ConstColor.WHITE);
-        showVerify.setBackground(ConstColor.PURPLE2);
+        showVerify.setBackground(ConstColor.PURPLE1);
         showVerify.setBounds(lTitle.getX(), pfVerify.getY() + 40, 120, 20);
         verifyDefault = pfVerify.getEchoChar();
         showVerify.addItemListener(this);
@@ -120,6 +126,7 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         tfEmail.setBackground(ConstColor.PURPLE3);
         tfEmail.setBounds(lEmail.getX(), lEmail.getY() + 40, 300, 40);
         tfEmail.setMargin(new Insets(0, 10, 0, 0));
+        tfEmail.setText(SingletonManager.getInstance().getUser().getEmail());
 
         // Set Jlabel (lFullname)
         lFullname = new JLabel("Fullname");
@@ -133,6 +140,7 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         tfFullname.setBackground(ConstColor.PURPLE3);
         tfFullname.setBounds(lEmail.getX(), lFullname.getY() + 40, 300, 40);
         tfFullname.setMargin(new Insets(0, 10, 0, 0));
+        tfFullname.setText(SingletonManager.getInstance().getUser().getFullname());
 
         // Set Jlabel (lAddress)
         lAddress = new JLabel("Address");
@@ -147,6 +155,7 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
         taAddress.setBounds(lEmail.getX(), lAddress.getY() + 40, 300, 100);
         taAddress.setMargin(new Insets(10, 10, 0, 0));
         taAddress.setBorder(new JTextField().getBorder());
+        taAddress.setText(SingletonManager.getInstance().getUser().getAddress());
 
         // Set JButton (btnUpdate)
         btnUpdate = new JButton("Update");
@@ -222,47 +231,45 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
             JOptionPane.showMessageDialog(null, "Verify password failed !");
         } else {
             
-            // Check if email / username already taken
             QueryController queryController = new QueryController();
+            
+            boolean somethingChanged = !username.equals(SingletonManager.getInstance().getUser().getUsername()) ||
+            !password.equals(SingletonManager.getInstance().getUser().getUsername()) ||
+            !email.equals(SingletonManager.getInstance().getUser().getEmail()) ||
+            !fullname.equals(SingletonManager.getInstance().getUser().getEmail()) ||
+            !address.equals(SingletonManager.getInstance().getUser().getAddress());
 
-            int emailTaken = queryController.isEmailTaken(email);
-            switch (emailTaken) {
-                case 0:
+            if (somethingChanged) {
+                
+                boolean willUpdate = false;
+                int emailTaken = -1;
+                int usernameTaken = -1;
 
-                    int usernameTaken = queryController.isUsernameTaken(username);
-                    switch (usernameTaken) {
-                        case 0:
-                            
-                            // Make new user and insert to database
-                            User newUser = new User(fullname, username, email, password, address);
-
-                            boolean success = queryController.insertUser(newUser);
-
-                            if (success) {
-                                JOptionPane.showMessageDialog(null, "Register success");
-                                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Register failed");
-                            }
-                            break;
-                        case 1:
-                        JOptionPane.showMessageDialog(null, "Username already taken");
-                            break;
-                        case -1:
-                            JOptionPane.showMessageDialog(null, "Database connection failed");
-                            break;
-                        default:
-                            break;
+                if (!username.equals(SingletonManager.getInstance().getUser().getUsername()) || !email.equals(SingletonManager.getInstance().getUser().getEmail())) {
+                    emailTaken = queryController.isEmailTaken(email);
+                    usernameTaken = queryController.isUsernameTaken(username);
+                    if (emailTaken == 0 && usernameTaken == 0) {
+                        willUpdate = true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Username or Email already taken");
                     }
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Email already taken");
-                    break;
-                case -1:
-                    JOptionPane.showMessageDialog(null, "Database connection failed");
-                    break;
-                default:
-                    break;
+                }
+
+                if (willUpdate) {
+                    // Update database
+                    int userID = SingletonManager.getInstance().getUser().getUserID();
+                    User updateUser = new User(fullname, username, email, password, address);
+
+                    boolean success = queryController.updateUser(userID, updateUser);
+
+                    if (success) {
+                        JOptionPane.showMessageDialog(null, "Update success");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Update failed");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nothing changed");
             }
         }
     }

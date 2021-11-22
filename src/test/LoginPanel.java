@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import javax.swing.event.MouseInputListener;
 
 import controller.QueryController;
+import controller.SingletonManager;
 import model.User;
 
 import javax.swing.JButton;
@@ -176,6 +177,12 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                     String userType = user.getUserType();
                     switch (userType) {
                         case "Admin":
+
+                            // Set current user data with singleton
+                            SingletonManager.getInstance().setUser(user);
+
+                            // Set UI
+                            MainFrame.setCardPanelAdmin();
                             MainFrame.cardPanel1.setVisible(false);
                             MainFrame.buttonContainerAdmin.setVisible(true);
                             MainFrame.cardPanelAdmin.setVisible(true);

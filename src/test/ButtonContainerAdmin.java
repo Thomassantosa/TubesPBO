@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.event.MouseInputListener;
 
+import controller.SingletonManager;
+
 public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
 
     // Declaring variable
@@ -206,9 +208,15 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
             case "Logout":
                 int choice = JOptionPane.showConfirmDialog(null, "Are you sure want to logout ?", "Logout", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (choice == 0) {
+
+                    // Set current user data back to null
+                    SingletonManager.getInstance().setUser(null);
+
+                    // Set UI
                     MainFrame.cardPanel1.setVisible(true);
                     MainFrame.buttonContainerAdmin.setVisible(false);
                     MainFrame.cardPanelAdmin.setVisible(false);
+                    MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminHomePanel");
                 }
                 break;
             default: 
