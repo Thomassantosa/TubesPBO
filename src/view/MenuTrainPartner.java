@@ -65,7 +65,7 @@ public class MenuTrainPartner implements MouseInputListener {
         panelDelete.setBounds((int) width / 10, 0, (int) width, (int) height);
         panelDelete.setLayout(null);
 
-        lTitle = new JLabel("Trains Data ");
+        lTitle = new JLabel("Train Data ");
         lTitle.setForeground(Color.white);
         lTitle.setFont(new Font("Tahoma", Font.BOLD, 40));
         lTitle.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
@@ -96,7 +96,7 @@ public class MenuTrainPartner implements MouseInputListener {
         // Trainnumber (text), departure time arrival time (String), departure date
         // arrival date (String),travel time
 
-        btnShow = new JButton("Show Trains Data");
+        btnShow = new JButton("Show Train Data");
         btnShow.setBounds(panelMenu.getX(), panelMenu.getY(), panelMenu.getWidth(), panelMenu.getHeight() / 4);
         btnShow.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnShow.setBackground(new Color(100, 88, 110));
@@ -104,7 +104,7 @@ public class MenuTrainPartner implements MouseInputListener {
         btnShow.addMouseListener(this);
         btnShow.setHorizontalAlignment(SwingConstants.LEFT);
 
-        btnAdd = new JButton("Add Trains Data");
+        btnAdd = new JButton("Add Train Data");
         btnAdd.setBounds(btnShow.getX(), btnShow.getY() + btnShow.getHeight(), btnShow.getWidth(),
                 panelMenu.getHeight() / 4);
         btnAdd.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -165,7 +165,7 @@ public class MenuTrainPartner implements MouseInputListener {
 
         switch (name) {
 
-        case "Show Trains Data":
+        case "Show Train Data":
 
             scrollpane.setVisible(true);
             panelMenu.setVisible(true);
@@ -175,10 +175,10 @@ public class MenuTrainPartner implements MouseInputListener {
 
             break;
 
-        case "Add Trains Data":
+        case "Add Train Data":
 
             // label for adding a Train
-            lAddTrain = new JLabel("Add Trains");
+            lAddTrain = new JLabel("Add Train");
             lAddTrain.setForeground(Color.white);
             lAddTrain.setFont(new Font("Tahoma", Font.BOLD, 40));
             lAddTrain.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
@@ -331,13 +331,13 @@ public class MenuTrainPartner implements MouseInputListener {
         case "Delete Train Data":
 
             //label title delete 
-            lDelete = new JLabel("Delete Trains");
+            lDelete = new JLabel("Delete Train");
             lDelete.setForeground(Color.white);
             lDelete.setFont(new Font("Tahoma", Font.BOLD, 40));
             lDelete.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
             
             //label 
-            lDeletebyID = new JLabel("Delete Trains by ID");
+            lDeletebyID = new JLabel("Delete Train by ID");
             lDeletebyID.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lDelete.getY() + lDelete.getHeight() + 150, 300, 33);
             lDeletebyID.setForeground(Color.white);
             lDeletebyID.setFont(new Font("Tahoma", Font.BOLD, 30));
