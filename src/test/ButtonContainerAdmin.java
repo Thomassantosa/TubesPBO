@@ -203,9 +203,12 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
                 MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminAccountPanel");
                 break;
             case "Logout":
-                MainFrame.cardPanel1.setVisible(true);
-                MainFrame.buttonContainerAdmin.setVisible(false);
-                MainFrame.cardPanelAdmin.setVisible(false);
+                int choice = JOptionPane.showConfirmDialog(null, "Are you sure want to logout ?", "Logout", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (choice == 0) {
+                    MainFrame.cardPanel1.setVisible(true);
+                    MainFrame.buttonContainerAdmin.setVisible(false);
+                    MainFrame.cardPanelAdmin.setVisible(false);
+                }
                 break;
             default: 
                 break;

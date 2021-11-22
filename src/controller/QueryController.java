@@ -13,6 +13,7 @@ import model.Airport;
 import model.BusCompany;
 import model.BusTrip;
 import model.Flight;
+import model.Hotel;
 import model.Partner;
 import model.Station;
 import model.TrainTrip;
@@ -643,6 +644,47 @@ public class QueryController {
 
             return busTrips;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Hotel> selectAllHotel() {
+        conn.connect();
+        String query = "SELECT hotel_id, " +
+        "hotel_name, " +
+        "hotel_star, " +
+        "hotel_rating, " +
+        "hotel_review, " +
+        "hotel_facility, " +
+        "hotel_address, " +
+        "hotel_city, " +
+        "hotel_country " +
+        "FROM `hotels` " +
+        "WHERE 1 " +
+        "ORDER BY hotel_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            ArrayList<Hotel> hotels = new ArrayList<>();
+            while (result.next()) {
+                Hotel currentHotel = new Hotel();
+
+                currentHotel.setHotelID(result.getInt("hotel_id"));
+                currentHotel.setName(result.getString("hotel_name"));
+                currentHotel.setStar(result.getInt("hotel_star"));
+                currentHotel.setRating(result.getDouble("hotel_rating"));
+                currentHotel.setReview(result.getInt("hotel_review"));
+                currentHotel.setFacility(result.getString("hotel_facility"));
+                currentHotel.setAddress(result.getString("hotel_address"));
+                currentHotel.setCity(result.getString("hotel_city"));
+                currentHotel.setCountry(result.getString("hotel_country"));
+                hotels.add(currentHotel);
+            }
+            return hotels;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

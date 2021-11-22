@@ -12,10 +12,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.QueryController;
-import model.TrainTrip;
+import model.Flight;
+import model.Hotel;
 import model.Trip;
 
-public class AdminTrainPanel extends JPanel {
+public class AdminHotelPanel extends JPanel {
     
     // Declaring variable
     JLabel lTitle;
@@ -29,7 +30,7 @@ public class AdminTrainPanel extends JPanel {
     DefaultTableModel model;
     JScrollPane scrollpane;
 
-    public AdminTrainPanel() {
+    public AdminHotelPanel() {
 
         queryController = new QueryController();
 
@@ -40,7 +41,7 @@ public class AdminTrainPanel extends JPanel {
 
         // Set components
         // Set JLabel (title)
-        lTitle = new JLabel("Admin Menu (Train Data)");
+        lTitle = new JLabel("Admin Menu (Hotel Data)");
         lTitle.setForeground(ConstColor.WHITE);
         lTitle.setFont(new Font("Arial", Font.BOLD, 30));
         lTitle.setBounds(20, 20, 450, 40);
@@ -48,27 +49,23 @@ public class AdminTrainPanel extends JPanel {
         // Set JTable
         dataTable = new JTable();
         dataTable.setBounds(20, 80, width-270, height-200);
-        String[] columnData = {"Traintrip_id", "Train", "Departure Station", "Destination Station", "Traintrip Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
+        String[] columnData = {"Hotel_id", "Hotel Name", "Hotel Star", "Rating", "Number of Review", "Hotel Facility" ,"Address", "City", "Country"};
         model = new DefaultTableModel(columnData, 0);
         
-        ArrayList<Trip> traintrips = queryController.selectAllTrainTrip();
-        for (int i = 0; i < traintrips.size(); i++) {
-            String[] newModel = new String[10];
+        ArrayList<Hotel> hotels = queryController.selectAllHotel();
+        for (int i = 0; i < hotels.size(); i++) {
+            String[] newModel = new String[9];
 
-            Trip currentTrip = traintrips.get(i);
-            if(currentTrip instanceof TrainTrip) {
-                TrainTrip trainTrip = (TrainTrip) currentTrip;
-                newModel[0] = String.valueOf(trainTrip.getTripID());
-                newModel[1] = trainTrip.getTrain().getModel();
-                newModel[2] = trainTrip.getDepartureStation().getName();
-                newModel[3] = trainTrip.getDestinationStation().getName();
-                newModel[4] = trainTrip.getTrainTripNumber();
-                newModel[5] = trainTrip.getDepartureTime();
-                newModel[6] = trainTrip.getArrivalTime();
-                newModel[7] = trainTrip.getDepartureDate();
-                newModel[8] = trainTrip.getArrivalDate();
-                newModel[9] = String.valueOf(trainTrip.getTripTime());
-            }
+            Hotel currentHotel = hotels.get(i);
+            newModel[0] = String.valueOf(currentHotel.getHotelID());
+            newModel[1] = currentHotel.getName();
+            newModel[2] = String.valueOf(currentHotel.getStar());
+            newModel[3] = String.valueOf(currentHotel.getRating());
+            newModel[4] = String.valueOf(currentHotel.getReview());
+            newModel[5] = currentHotel.getFacility();
+            newModel[6] = currentHotel.getAddress();
+            newModel[7] = currentHotel.getCity();
+            newModel[8] = currentHotel.getCountry();
             model.addRow(newModel);
         }
         dataTable.setModel(model);

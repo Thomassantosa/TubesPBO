@@ -48,12 +48,12 @@ public class AdminFlightPanel extends JPanel {
         // Set JTable
         dataTable = new JTable();
         dataTable.setBounds(20, 80, width-270, height-200);
-        String[] columnData = {"Flight_id", "Airplane", "Departure Airport", "Destination Airport", "Flight_Type", "Airline" ,"Flight Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
+        String[] columnData = {"Flight_id", "Airplane", "Departure Airport", "Destination Airport", "Flight_Type", "Airline", "Flight Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
         model = new DefaultTableModel(columnData, 0);
         
         ArrayList<Trip> flights = queryController.selectAllFlight();
         for (int i = 0; i < flights.size(); i++) {
-            String[] newModel = new String[11];
+            String[] newModel = new String[12];
 
             Trip currentTrip = flights.get(i);
             if(currentTrip instanceof Flight) {
