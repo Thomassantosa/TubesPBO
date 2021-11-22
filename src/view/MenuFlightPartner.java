@@ -25,17 +25,17 @@ public class MenuFlightPartner implements MouseInputListener {
     double height = screenSize.getHeight();
     JFrame fMainMenuFlight;
     JPanel panelMenu, panelShowData, panelDelete, panelAdd;
-    JButton btnShow, btnAdd, btnDelete, btnSave, btnLogout;
+    JButton btnShow, btnAdd, btnDelete, btnSave, btnLogout , deleteBtn;
     JTable dataTable;
     JLabel lTitle, lAddFLight, lDelete, lairPlaneName, lderpatureAirport, ldestinationAirport, lflightType,
-            lflightNumber, lderpatureTime, larrivalTime, lderpatureDate, larivalDate, ltravelTime;
+            lflightNumber, lderpatureTime, larrivalTime, lderpatureDate, larivalDate, ltravelTime , lDeletebyID;
 
     JScrollPane scrollpane;
     DefaultTableModel model;
-    JTextField flightNumber, derpatureTime, arrivalTime, travelTime;
+    JTextField flightNumber, derpatureTime, arrivalTime, travelTime , delete;
     JComboBox cbairPlaneName, cbderpatureAirport, cbdestinationAirport;
-    JDatePickerImpl derpatureDate, arivalDate;
-
+    JDatePanelImpl derpatureDate, arivalDate;
+    
     MenuFlightPartner() {
 
         // frame
@@ -258,6 +258,37 @@ public class MenuFlightPartner implements MouseInputListener {
             travelTime.setBackground(new Color(100,88,110));
             travelTime.setBounds(ltravelTime.getX(),ltravelTime.getY()+ltravelTime.getHeight()+30,250,33);
 
+            //derpature date
+            lderpatureDate=new JLabel("Derparture Date");
+            lderpatureDate.setForeground(Color.white);
+            lderpatureDate.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            lderpatureDate.setBounds(arrivalTime.getX(), arrivalTime.getY()+arrivalTime.getHeight()+30, 250, 33);
+          
+            //datepicker
+            Properties p = new Properties();
+            SqlDateModel model = new SqlDateModel();
+            p.put("text.day", "Day");
+            p.put("text.month", "Month");
+            p.put("text.year", "Year");
+            derpatureDate = new JDatePanelImpl(model, p);
+            derpatureDate.setBounds(lderpatureDate.getX(), lderpatureDate.getY()+lderpatureDate.getHeight()+50 , 200, 200);
+
+            //Arrival Date 
+
+            //label Arival Date
+            larivalDate = new JLabel("Arrival Date");
+            larivalDate.setForeground(Color.white);
+            larivalDate.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            larivalDate.setBounds(lderpatureDate.getX()+lderpatureDate.getWidth()+20, lderpatureDate.getY(), 250, 33);
+          
+            Properties prop = new Properties();
+            SqlDateModel model2 = new SqlDateModel();
+            prop.put("text.day", "Day");
+            prop.put("text.month", "Month");
+            prop.put("text.year", "Year");
+            arivalDate = new JDatePanelImpl(model2, p);
+            arivalDate.setBounds(larivalDate.getX(), larivalDate.getY()+larivalDate.getHeight()+50 , 200, 200);
+
             //btn Save
             btnSave = new JButton("Save");
             btnSave.setForeground(Color.white);
@@ -274,7 +305,11 @@ public class MenuFlightPartner implements MouseInputListener {
             panelAdd.add(lderpatureTime);
             panelAdd.add(larrivalTime);
             panelAdd.add(ltravelTime);
+            panelAdd.add(lderpatureDate);   
+            panelAdd.add(larivalDate);
 
+            panelAdd.add(arivalDate);
+            panelAdd.add(derpatureDate);
             panelAdd.add(travelTime);
             panelAdd.add(arrivalTime);
             panelAdd.add(flightNumber);
@@ -292,12 +327,45 @@ public class MenuFlightPartner implements MouseInputListener {
 
 
             break;
+
         case "Delete Flight Data":
+
+            //label title delete 
+            lDelete = new JLabel("Delete Flights");
+            lDelete.setForeground(Color.white);
+            lDelete.setFont(new Font("Tahoma", Font.BOLD, 40));
+            lDelete.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
+            
+            //label 
+            lDeletebyID = new JLabel("Delete Flights by ID");
+            lDeletebyID.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lDelete.getY() + lDelete.getHeight() + 150, 300, 33);
+            lDeletebyID.setForeground(Color.white);
+            lDeletebyID.setFont(new Font("Tahoma", Font.BOLD, 30));
+
+            //jtextfield
+            delete = new JTextField();
+            delete.setForeground(Color.white);
+            delete.setBackground(new Color(100,88,110));
+            delete.setBounds (lDeletebyID.getX(), lDeletebyID.getY()+lDeletebyID.getHeight()+20 , 300 , 33);
+
+            deleteBtn = new JButton("Delete");
+            deleteBtn.setForeground(Color.white);
+            deleteBtn.setBackground(new Color(100, 88, 110));
+            deleteBtn.setBounds(lDeletebyID.getX(),panelDelete.getHeight()-200,200,50);
+            deleteBtn.setFont(new Font ("Tahoma",Font.BOLD,30));
+            deleteBtn.addMouseListener(this);
+
+            panelDelete.add(lDelete);   
+            panelDelete.add(lDeletebyID);
+            panelDelete.add(delete);
+            panelDelete.add(deleteBtn);
+            
             scrollpane.setVisible(false);
             panelMenu.setVisible(true);
             panelShowData.setVisible(false);
             panelAdd.setVisible(false);
             panelDelete.setVisible(true);
+
         default:
             break;
         }
