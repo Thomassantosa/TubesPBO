@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import model.Airlines;
 import model.Airport;
+import model.BusCompany;
+import model.BusTrip;
 import model.Flight;
 import model.Partner;
 import model.Station;
@@ -544,6 +546,102 @@ public class QueryController {
             }
 
             return trainTrips;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Trip> selectAllBusTrip() {
+        conn.connect();
+
+        String query = "SELECT a.bustrip_id, " +
+        "a.bustrip_number, " +
+        "a.departure_time, " +
+        "a.arrival_time, " +
+        "a.departure_date, " +
+        "a.arrival_date, " +
+        "a.travel_time, " +
+        
+        "b.bus_id, " +
+        "b.bus_model, " +
+        
+        "e.buscompany_id, " +
+        "e.buscompany_name, " +
+        "e.buscompany_contact, " +
+        "e.buscompany_address, " +
+        
+        "c.busstation_id AS departure_busstation_id, " +
+        "c.busstation_code AS departure_busstation_code, " +
+        "c.busstation_name AS departure_busstation_name, " +
+        "c.busstation_city AS departure_busstation_city, " +
+        
+        "d.busstation_id AS destination_busstation_id, " +
+        "d.busstation_code AS destination_busstation_code, " +
+        "d.busstation_name AS destination_busstation_name, " +
+        "d.busstation_city AS destination_busstation_city " +
+        
+        "FROM bustrips a " +
+        "JOIN buses b " +
+        "ON a.bustrip_id = b.bus_id " +
+        "JOIN busstations c " +
+        "ON a.departure_busstation = c.busstation_id " +
+        "JOIN busstations d " +
+        "ON a.destination_busstation = d.busstation_id " +
+        "JOIN buscompanies e " +
+        "ON b.buscompany_id = e.buscompany_id " +
+        "WHERE 1 " +
+        "ORDER BY bustrip_id Desc";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Trip> busTrips = new ArrayList<>();
+
+            while (result.next()) {
+                BusTrip busTrip = new BusTrip();
+                Vehicle bus = new Vehicle();
+                Station departureStation = new Station();
+                Station destinationStation = new Station();
+                BusCompany busCompany = new BusCompany();
+
+                busTrip.setTripID(result.getInt("bustrip_id"));
+                busTrip.setBusTripNumber(result.getString("bustrip_number"));
+                busTrip.setTripTypes(TripTypesEnum.BUS);
+                busTrip.setDepartureTime(result.getString("departure_time"));
+                busTrip.setArrivalTime(result.getString("arrival_time"));
+                busTrip.setDepartureDate(result.getString("departure_date"));
+                busTrip.setArrivalDate(result.getString("arrival_date"));
+                busTrip.setTripTime(result.getInt("travel_time"));
+
+                bus.setVehicleID(result.getInt("bus_id"));
+                bus.setModel(result.getString("bus_model"));
+
+                departureStation.setStationID(result.getInt("departure_busstation_id"));
+                departureStation.setName(result.getString("departure_busstation_name"));
+                departureStation.setCode(result.getString("departure_busstation_code"));
+                departureStation.setCity(result.getString("departure_busstation_city"));
+
+                destinationStation.setStationID(result.getInt("destination_busstation_id"));
+                destinationStation.setName(result.getString("destination_busstation_name"));
+                destinationStation.setCode(result.getString("destination_busstation_code"));
+                destinationStation.setCity(result.getString("destination_busstation_city"));
+
+                busCompany.setBusCompanyID(result.getInt("buscompany_id"));
+                busCompany.setName(result.getString("buscompany_name"));
+                busCompany.setContact(result.getString("buscompany_contact"));
+                busCompany.setAddress(result.getString("buscompany_address"));
+
+                busTrip.setBus(bus);
+                busTrip.setDepartureStation(departureStation);
+                busTrip.setDestinationStation(destinationStation);
+                busTrip.setBusCompany(busCompany);
+                
+                busTrips.add(busTrip);
+            }
+
+            return busTrips;
 
         } catch (SQLException e) {
             e.printStackTrace();

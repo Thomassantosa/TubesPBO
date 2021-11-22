@@ -31,6 +31,7 @@ public class MainFrame extends JFrame {
     AdminHomePanel adminHomePanel;
     AdminFlightPanel adminFlightPanel;
     AdminTrainPanel adminTrainPanel;
+    AdminBusPanel adminBusPanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -76,6 +77,7 @@ public class MainFrame extends JFrame {
         adminHomePanel = new AdminHomePanel();
         adminFlightPanel = new AdminFlightPanel();
         adminTrainPanel = new AdminTrainPanel();
+        adminBusPanel = new AdminBusPanel();
         panel1 = new Panel1();
         panel2 = new Panel2();
 
@@ -93,6 +95,7 @@ public class MainFrame extends JFrame {
         cardPanelAdmin.add(adminHomePanel, "adminHomePanel");
         cardPanelAdmin.add(adminFlightPanel, "adminFlightPanel");
         cardPanelAdmin.add(adminTrainPanel, "adminTrainPanel");
+        cardPanelAdmin.add(adminBusPanel, "adminBusPanel");
         cardPanelAdmin.add(panel1, "panelB");
         cardPanelAdmin.add(panel2, "panelC");
         this.add(cardPanelAdmin);

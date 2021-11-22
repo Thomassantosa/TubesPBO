@@ -48,7 +48,7 @@ public class AdminFlightPanel extends JPanel {
         // Set JTable
         dataTable = new JTable();
         dataTable.setBounds(20, 80, width-270, height-200);
-        String[] columnData = {"Flight_id", "Airplane", "Departure Airport", "Destination Airport", "Flight_Type", "Flight Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
+        String[] columnData = {"Flight_id", "Airplane", "Departure Airport", "Destination Airport", "Flight_Type", "Airline" ,"Flight Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
         model = new DefaultTableModel(columnData, 0);
         
         ArrayList<Trip> flights = queryController.selectAllFlight();
@@ -63,12 +63,13 @@ public class AdminFlightPanel extends JPanel {
                 newModel[2] = flight.getDepartureAirport().getName();
                 newModel[3] = flight.getDestinationAirport().getName();
                 newModel[4] = flight.getFlightType();
-                newModel[5] = flight.getFlightNumber();
-                newModel[6] = flight.getDepartureTime();
-                newModel[7] = flight.getArrivalTime();
-                newModel[8] = flight.getDepartureDate();
-                newModel[9] = flight.getArrivalDate();
-                newModel[10] = String.valueOf(flight.getTripTime());
+                newModel[5] = flight.getAirline().getName();
+                newModel[6] = flight.getFlightNumber();
+                newModel[7] = flight.getDepartureTime();
+                newModel[8] = flight.getArrivalTime();
+                newModel[9] = flight.getDepartureDate();
+                newModel[10] = flight.getArrivalDate();
+                newModel[11] = String.valueOf(flight.getTripTime());
             }
             model.addRow(newModel);
         }
