@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import controller.Controller;
+import controller.QueryController;
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -28,9 +28,13 @@ public class LoginForm implements ItemListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
+<<<<<<< HEAD
 
         // object
         Controller controller = new Controller();
+=======
+       
+>>>>>>> MainMenu
 
         JPanel splashPanel = new JPanel();
         splashPanel.setBackground(new Color(40, 25, 54));
@@ -106,14 +110,8 @@ public class LoginForm implements ItemListener {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean check = controller.CheckLogin(jtUsername.getText(), jPassword.getText());
-                if (check) {
-                    fLogin.dispose();
-                    new MainMenu();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please insert all the field correctly !", "Warning",
-                            JOptionPane.WARNING_MESSAGE);
-                }
+                new MainMenu();
+                fLogin.dispose();
             }
         });
 

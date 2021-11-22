@@ -39,7 +39,7 @@ public class RegisterForm implements MouseInputListener, ItemListener {
     JButton regisButton;
 
     public RegisterForm() {
-        Controller controller = new Controller();
+        QueryController controller = new QueryController();
 
         // image
         ImageIcon icon = new ImageIcon("src\\source\\Logo_Splashscreen.png");
