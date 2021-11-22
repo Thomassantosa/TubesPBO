@@ -169,11 +169,46 @@ public class QueryController {
             return null;
         }
     }
-    public ArrayList<Flight> showFlights(){
+    public ArrayList<String> selectAirplaneModel(){
         conn.connect();
-        String query = "SELECT`a.departure_airport`,`a.destination_airport`,`a.departure_time`,`a.arrival_time`,`a.departure_date`,`a.arrival_date`, `b.airport_code`, `b.airport_name` FROM `flights a ` join `airports b` on a.flights_id = b.";
-        return null;
+        String query = "SELECT `airplane_model` FROM `airplanes` ORDER BY `airplane_id` ASC;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> airplaneName = new ArrayList<>();
+
+            while (result.next()) {
+                airplaneName.add(result.getString("airplane_model"));
+            }
+            return airplaneName;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
+    public ArrayList<String> selectAirportsName(){
+        conn.connect();
+        String query = "SELECT `airport_name` FROM `airports` GROUP BY airport_id ASC;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> airportName = new ArrayList<>();
+
+            while (result.next()) {
+                airportName.add(result.getString("airport_name"));
+            }
+            return airportName;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    
+  
     // public boolean insertFlight() {
 
     // }
@@ -243,4 +278,6 @@ public class QueryController {
     public boolean CheckRegistration() {
         return true;
     }
+
+    
 }

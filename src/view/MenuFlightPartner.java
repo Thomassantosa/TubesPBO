@@ -20,6 +20,8 @@ import java.awt.Toolkit;
 import java.awt.Image;
 
 public class MenuFlightPartner implements MouseInputListener {
+    QueryController queryController = new QueryController();
+    
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
@@ -33,8 +35,11 @@ public class MenuFlightPartner implements MouseInputListener {
     JScrollPane scrollpane;
     DefaultTableModel model;
     JTextField flightNumber, derpatureTime, arrivalTime, travelTime , delete;
-    JComboBox cbairPlaneName, cbderpatureAirport, cbdestinationAirport;
+    JComboBox<String> cbairPlaneName, cbderpatureAirport, cbdestinationAirport;
     JDatePanelImpl derpatureDate, arivalDate;
+
+    ArrayList<String> airplaneModel = queryController.selectAirplaneModel();
+    ArrayList<String> airportName = queryController.selectAirportsName();
     
     MenuFlightPartner() {
 
@@ -189,17 +194,28 @@ public class MenuFlightPartner implements MouseInputListener {
             lairPlaneName.setFont(new Font("Tahoma", Font.PLAIN, 30));
           
             // cb airplane
-            cbairPlaneName = new JComboBox<>();
+            String[] airplaneNameList = new String[airplaneModel.size()];
+            for (int i = 0; i < airplaneModel.size(); i++) {
+                airplaneNameList[i] = airplaneModel.get(i);
+            }
+            cbairPlaneName = new JComboBox<>(airplaneNameList);
             cbairPlaneName.setBackground(new Color(100, 88, 110));
             cbairPlaneName.setForeground(Color.white);
             cbairPlaneName.setBounds(lairPlaneName.getX(), lairPlaneName.getY() + lairPlaneName.getHeight() + 30, 200, 33);
+
 
             lderpatureAirport = new JLabel("Derpature Airport");
             lderpatureAirport.setForeground(Color.white);
             lderpatureAirport.setFont(new Font("Tahoma", Font.PLAIN, 30));
             lderpatureAirport.setBounds(cbairPlaneName.getX(),cbairPlaneName.getY()+cbairPlaneName.getHeight()+80,250,33);
 
-            cbderpatureAirport = new JComboBox<>();
+
+            String[] derpatureAirport = new String[airportName.size()];
+            for (int i = 0; i < airportName.size(); i++) {
+                derpatureAirport[i] = airportName.get(i);
+            }
+
+            cbderpatureAirport = new JComboBox<>(derpatureAirport);
             cbderpatureAirport.setForeground(Color.white);
             cbderpatureAirport.setBackground(new Color(100,88,110));
             cbderpatureAirport.setBounds(lderpatureAirport.getX(), lderpatureAirport.getY() + lderpatureAirport.getHeight() + 30, 200, 33);
@@ -209,7 +225,11 @@ public class MenuFlightPartner implements MouseInputListener {
             ldestinationAirport.setFont(new Font("Tahoma", Font.PLAIN, 30));
             ldestinationAirport.setBounds(cbderpatureAirport.getX(),cbderpatureAirport.getY()+cbderpatureAirport.getHeight()+80,250,33);
 
-            cbdestinationAirport = new JComboBox<>();
+            String[] destinationAirport = new String[airportName.size()];
+            for (int i = 0; i < airportName.size(); i++) {
+                destinationAirport[i] = airportName.get(i);
+            }
+            cbdestinationAirport = new JComboBox<>(destinationAirport);
             cbdestinationAirport.setForeground(Color.white);
             cbdestinationAirport.setBackground(new Color(100,88,110));
             cbdestinationAirport.setBounds(ldestinationAirport.getX(), ldestinationAirport.getY() + ldestinationAirport.getHeight() + 30, 200, 33);
