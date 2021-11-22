@@ -27,9 +27,14 @@ public class MenuFlightPartner implements MouseInputListener {
     JPanel panelMenu, panelShowData, panelDelete, panelAdd;
     JButton btnShow, btnAdd, btnDelete, btnSave, btnLogout;
     JTable dataTable;
-    JLabel lTitle;
+    JLabel lTitle, lAddFLight, lDelete, lairPlaneName, lderpatureAirport, ldestinationAirport, lflightType,
+            lflightNumber, lderpatureTime, larrivalTime, lderpatureDate, larivalDate, ltravelTime;
+
     JScrollPane scrollpane;
     DefaultTableModel model;
+    JTextField flightNumber, derpatureTime, arrivalTime, travelTime;
+    JComboBox cbairPlaneName, cbderpatureAirport, cbdestinationAirport;
+    JDatePickerImpl derpatureDate, arivalDate;
 
     MenuFlightPartner() {
 
@@ -81,6 +86,7 @@ public class MenuFlightPartner implements MouseInputListener {
         // Set value
         String[] columnData = { "Airplane Name", "Derparture Airport ", "Destination Airport", "Flight type",
                 "Flight Number", "Departure Time", "Arrival Time", "Derpature Date", "Arrival Date", "Travel Time" };
+
         model = new DefaultTableModel(columnData, 0);
 
         dataTable.setModel(model);
@@ -89,6 +95,7 @@ public class MenuFlightPartner implements MouseInputListener {
         // nama pesawat , statisun brangkat tujuan , flight type (hardcode),
         // flightnumber (text), departure time arrival time (String), departure date
         // arrival date (String),travel time
+
         btnShow = new JButton("Show Flights Data");
         btnShow.setBounds(panelMenu.getX(), panelMenu.getY(), panelMenu.getWidth(), panelMenu.getHeight() / 4);
         btnShow.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -98,7 +105,8 @@ public class MenuFlightPartner implements MouseInputListener {
         btnShow.setHorizontalAlignment(SwingConstants.LEFT);
 
         btnAdd = new JButton("Add Flights Data");
-        btnAdd.setBounds(btnShow.getX(), btnShow.getY()+btnShow.getHeight(), btnShow.getWidth(), panelMenu.getHeight() / 4);
+        btnAdd.setBounds(btnShow.getX(), btnShow.getY() + btnShow.getHeight(), btnShow.getWidth(),
+                panelMenu.getHeight() / 4);
         btnAdd.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnAdd.setBackground(new Color(100, 88, 110));
         btnAdd.setForeground(Color.white);
@@ -166,13 +174,122 @@ public class MenuFlightPartner implements MouseInputListener {
             panelDelete.setVisible(false);
 
             break;
+
         case "Add Flights Data":
+
+            // label for adding a flight
+            lAddFLight = new JLabel("Add Flights");
+            lAddFLight.setForeground(Color.white);
+            lAddFLight.setFont(new Font("Tahoma", Font.BOLD, 40));
+            lAddFLight.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
+
+            lairPlaneName = new JLabel("Airplane Name");
+            lairPlaneName.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lAddFLight.getY() + lAddFLight.getHeight() + 50, 250, 33);
+            lairPlaneName.setForeground(Color.white);
+            lairPlaneName.setFont(new Font("Tahoma", Font.PLAIN, 30));
+          
+            // cb airplane
+            cbairPlaneName = new JComboBox<>();
+            cbairPlaneName.setBackground(new Color(100, 88, 110));
+            cbairPlaneName.setForeground(Color.white);
+            cbairPlaneName.setBounds(lairPlaneName.getX(), lairPlaneName.getY() + lairPlaneName.getHeight() + 30, 200, 33);
+
+            lderpatureAirport = new JLabel("Derpature Airport");
+            lderpatureAirport.setForeground(Color.white);
+            lderpatureAirport.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            lderpatureAirport.setBounds(cbairPlaneName.getX(),cbairPlaneName.getY()+cbairPlaneName.getHeight()+80,250,33);
+
+            cbderpatureAirport = new JComboBox<>();
+            cbderpatureAirport.setForeground(Color.white);
+            cbderpatureAirport.setBackground(new Color(100,88,110));
+            cbderpatureAirport.setBounds(lderpatureAirport.getX(), lderpatureAirport.getY() + lderpatureAirport.getHeight() + 30, 200, 33);
+
+            ldestinationAirport = new JLabel("Destination Airport");
+            ldestinationAirport.setForeground(Color.white);
+            ldestinationAirport.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            ldestinationAirport.setBounds(cbderpatureAirport.getX(),cbderpatureAirport.getY()+cbderpatureAirport.getHeight()+80,250,33);
+
+            cbdestinationAirport = new JComboBox<>();
+            cbdestinationAirport.setForeground(Color.white);
+            cbdestinationAirport.setBackground(new Color(100,88,110));
+            cbdestinationAirport.setBounds(ldestinationAirport.getX(), ldestinationAirport.getY() + ldestinationAirport.getHeight() + 30, 200, 33);
+
+            //flight number 
+            lflightNumber=new JLabel("Flight Number");
+            lflightNumber.setBounds(lAddFLight.getX(), lairPlaneName.getY(), 250, 33);
+            lflightNumber.setForeground(Color.white);
+            lflightNumber.setFont(new Font("Tahoma", Font.PLAIN, 30));
+          
+            flightNumber = new JTextField();
+            flightNumber.setForeground(Color.white);
+            flightNumber.setBackground(new Color(100,88,110));
+            flightNumber.setBounds(lflightNumber.getX(),lflightNumber.getY()+lflightNumber.getHeight()+30,200,33);
+
+            //derpature time 
+            lderpatureTime = new JLabel("Derparture Time");
+            lderpatureTime.setForeground(Color.white);
+            lderpatureTime.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            lderpatureTime.setBounds(lflightNumber.getX()+lflightNumber.getWidth()+20, lflightNumber.getY(), 250, 33);
+
+            derpatureTime = new JTextField();
+            derpatureTime.setForeground(Color.white);
+            derpatureTime.setBackground(new Color(100,88,110));
+            derpatureTime.setBounds(lderpatureTime.getX(),lderpatureTime.getY()+lderpatureTime.getHeight()+30,250,33);
+
+            //arival time
+            larrivalTime = new JLabel("Arrival Time");
+            larrivalTime.setForeground(Color.white);
+            larrivalTime.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            larrivalTime.setBounds(lflightNumber.getX(), flightNumber.getY()+flightNumber.getHeight()+30, 250, 33);
+
+            arrivalTime = new JTextField();
+            arrivalTime.setForeground(Color.white);
+            arrivalTime.setBackground(new Color(100,88,110));
+            arrivalTime.setBounds(larrivalTime.getX(),larrivalTime.getY()+larrivalTime.getHeight()+30,200,33);
+            
+            //travel time
+            ltravelTime = new JLabel("Travel Time");
+            ltravelTime.setForeground(Color.white);
+            ltravelTime.setFont(new Font("Tahoma", Font.PLAIN, 30));
+            ltravelTime.setBounds(larrivalTime.getX()+larrivalTime.getWidth()+20, flightNumber.getY()+flightNumber.getHeight()+30, 250, 33);
+           
+            travelTime = new JTextField();
+            travelTime.setForeground(Color.white);
+            travelTime.setBackground(new Color(100,88,110));
+            travelTime.setBounds(ltravelTime.getX(),ltravelTime.getY()+ltravelTime.getHeight()+30,250,33);
+
+            //btn Save
+            btnSave = new JButton("Save");
+            btnSave.setForeground(Color.white);
+            btnSave.setBackground(new Color(100, 88, 110));
+            btnSave.setBounds(lairPlaneName.getX(),panelShowData.getHeight()-200,200,50);
+            btnSave.setFont(new Font ("Tahoma",Font.BOLD,30));
+            btnSave.addMouseListener(this);
+
+            panelAdd.add(lAddFLight);   
+            panelAdd.add(lairPlaneName);
+            panelAdd.add(lderpatureAirport);
+            panelAdd.add(ldestinationAirport);
+            panelAdd.add(lflightNumber);
+            panelAdd.add(lderpatureTime);
+            panelAdd.add(larrivalTime);
+            panelAdd.add(ltravelTime);
+
+            panelAdd.add(travelTime);
+            panelAdd.add(arrivalTime);
+            panelAdd.add(flightNumber);
+            panelAdd.add(cbairPlaneName);
+            panelAdd.add(cbderpatureAirport);
+            panelAdd.add(cbdestinationAirport);
+            panelAdd.add(derpatureTime);
+            panelAdd.add(btnSave);
 
             scrollpane.setVisible(false);
             panelMenu.setVisible(true);
             panelShowData.setVisible(false);
             panelAdd.setVisible(true);
             panelDelete.setVisible(false);
+
 
             break;
         case "Delete Flight Data":
