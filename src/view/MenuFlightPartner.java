@@ -38,7 +38,7 @@ public class MenuFlightPartner implements MouseInputListener {
     JComboBox<String> cbairPlaneName, cbderpatureAirport, cbdestinationAirport;
     JDatePanelImpl derpatureDate, arivalDate;
 
-    ArrayList<String> airplaneModel = queryController.selectAirplaneModel();
+    ArrayList<String> airplaneModel = queryController.selectAirplanesModel();
     ArrayList<String> airportName = queryController.selectAirportsName();
     
     MenuFlightPartner() {

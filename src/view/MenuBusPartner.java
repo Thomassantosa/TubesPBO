@@ -20,22 +20,27 @@ import java.awt.Toolkit;
 import java.awt.Image;
 
 public class MenuBusPartner implements MouseInputListener {
+    QueryController queryController = new QueryController();
+
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
     JFrame fMainMenuBus;
     JPanel panelMenu, panelShowData, panelDelete, panelAdd;
-    JButton btnShow, btnAdd, btnDelete, btnSave, btnLogout , deleteBtn;
+    JButton btnShow, btnAdd, btnDelete, btnSave, btnLogout, deleteBtn;
     JTable dataTable;
-    JLabel lTitle, lAddBus, lDelete, lBusName, lderpatureBusStation, ldestinationBusStation, lBusType,
-            lBusNumber, lderpatureTime, larrivalTime, lderpatureDate, larivalDate, ltravelTime , lDeletebyID;
+    JLabel lTitle, lAddBus, lDelete, lBusName, lderpatureBusStation, ldestinationBusStation, lBusType, lBusNumber,
+            lderpatureTime, larrivalTime, lderpatureDate, larivalDate, ltravelTime, lDeletebyID;
 
     JScrollPane scrollpane;
     DefaultTableModel model;
-    JTextField BusNumber, derpatureTime, arrivalTime, travelTime , delete;
-    JComboBox cbBusName, cbderpatureBusStation, cbdestinationBusStation;
+    JTextField BusNumber, derpatureTime, arrivalTime, travelTime, delete;
+    JComboBox<String> cbBusName, cbderpatureBusStation, cbdestinationBusStation;
     JDatePanelImpl derpatureDate, arivalDate;
-    
+
+    ArrayList<String> busModel = queryController.selectBusesModel();
+    ArrayList<String> busStationName = queryController.selectBusStations();
+
     MenuBusPartner() {
 
         // frame
@@ -184,12 +189,18 @@ public class MenuBusPartner implements MouseInputListener {
             lAddBus.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
 
             lBusName = new JLabel("Bus Name");
-            lBusName.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lAddBus.getY() + lAddBus.getHeight() + 50, 250, 33);
+            lBusName.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lAddBus.getY() + lAddBus.getHeight() + 50,
+                    250, 33);
             lBusName.setForeground(Color.white);
             lBusName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-          
+
             // cb Bus
-            cbBusName = new JComboBox<>();
+            String[] busNameList = new String[busModel.size()];
+            for (int i = 0; i < busModel.size(); i++) {
+                busNameList[i] = busModel.get(i);
+            }
+
+            cbBusName = new JComboBox<>(busNameList);
             cbBusName.setBackground(new Color(100, 88, 110));
             cbBusName.setForeground(Color.white);
             cbBusName.setBounds(lBusName.getX(), lBusName.getY() + lBusName.getHeight() + 30, 200, 33);
@@ -197,107 +208,122 @@ public class MenuBusPartner implements MouseInputListener {
             lderpatureBusStation = new JLabel("Derpature Bus Station");
             lderpatureBusStation.setForeground(Color.white);
             lderpatureBusStation.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lderpatureBusStation.setBounds(cbBusName.getX(),cbBusName.getY()+cbBusName.getHeight()+80,250,33);
+            lderpatureBusStation.setBounds(cbBusName.getX(), cbBusName.getY() + cbBusName.getHeight() + 80, 250, 33);
 
-            cbderpatureBusStation = new JComboBox<>();
+            String[] derpatureStation = new String[busStationName.size()];
+            for (int i = 0; i < busStationName.size(); i++) {
+                derpatureStation[i] = busStationName.get(i);
+            }
+
+            cbderpatureBusStation = new JComboBox<>(derpatureStation);
             cbderpatureBusStation.setForeground(Color.white);
-            cbderpatureBusStation.setBackground(new Color(100,88,110));
+            cbderpatureBusStation.setBackground(new Color(100, 88, 110));
             cbderpatureBusStation.setBounds(lderpatureBusStation.getX(), lderpatureBusStation.getY() + lderpatureBusStation.getHeight() + 30, 200, 33);
 
+          
             ldestinationBusStation = new JLabel("Destination Bus Station");
             ldestinationBusStation.setForeground(Color.white);
             ldestinationBusStation.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            ldestinationBusStation.setBounds(cbderpatureBusStation.getX(),cbderpatureBusStation.getY()+cbderpatureBusStation.getHeight()+80,250,33);
+            ldestinationBusStation.setBounds(cbderpatureBusStation.getX(),cbderpatureBusStation.getY() + cbderpatureBusStation.getHeight() + 80, 250, 33);
 
-            cbdestinationBusStation = new JComboBox<>();
+            String[] destinationStation = new String[busStationName.size()];
+            for (int i = 0; i < busStationName.size(); i++) {
+                destinationStation[i] = busStationName.get(i);
+            }
+            
+            cbdestinationBusStation = new JComboBox<>(destinationStation);
             cbdestinationBusStation.setForeground(Color.white);
-            cbdestinationBusStation.setBackground(new Color(100,88,110));
+            cbdestinationBusStation.setBackground(new Color(100, 88, 110));
             cbdestinationBusStation.setBounds(ldestinationBusStation.getX(), ldestinationBusStation.getY() + ldestinationBusStation.getHeight() + 30, 200, 33);
 
-            //Bus number 
-            lBusNumber=new JLabel("Bus Number");
+            // Bus number
+            lBusNumber = new JLabel("Bus Number");
             lBusNumber.setBounds(lAddBus.getX(), lBusName.getY(), 250, 33);
             lBusNumber.setForeground(Color.white);
             lBusNumber.setFont(new Font("Tahoma", Font.PLAIN, 30));
-          
+
             BusNumber = new JTextField();
             BusNumber.setForeground(Color.white);
-            BusNumber.setBackground(new Color(100,88,110));
-            BusNumber.setBounds(lBusNumber.getX(),lBusNumber.getY()+lBusNumber.getHeight()+30,200,33);
+            BusNumber.setBackground(new Color(100, 88, 110));
+            BusNumber.setBounds(lBusNumber.getX(), lBusNumber.getY() + lBusNumber.getHeight() + 30, 200, 33);
 
-            //derpature time 
+            // derpature time
             lderpatureTime = new JLabel("Derparture Time");
             lderpatureTime.setForeground(Color.white);
             lderpatureTime.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lderpatureTime.setBounds(lBusNumber.getX()+lBusNumber.getWidth()+20, lBusNumber.getY(), 250, 33);
+            lderpatureTime.setBounds(lBusNumber.getX() + lBusNumber.getWidth() + 20, lBusNumber.getY(), 250, 33);
 
             derpatureTime = new JTextField();
             derpatureTime.setForeground(Color.white);
-            derpatureTime.setBackground(new Color(100,88,110));
-            derpatureTime.setBounds(lderpatureTime.getX(),lderpatureTime.getY()+lderpatureTime.getHeight()+30,250,33);
+            derpatureTime.setBackground(new Color(100, 88, 110));
+            derpatureTime.setBounds(lderpatureTime.getX(), lderpatureTime.getY() + lderpatureTime.getHeight() + 30, 250,
+                    33);
 
-            //arival time
+            // arival time
             larrivalTime = new JLabel("Arrival Time");
             larrivalTime.setForeground(Color.white);
             larrivalTime.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            larrivalTime.setBounds(lBusNumber.getX(), BusNumber.getY()+BusNumber.getHeight()+30, 250, 33);
+            larrivalTime.setBounds(lBusNumber.getX(), BusNumber.getY() + BusNumber.getHeight() + 30, 250, 33);
 
             arrivalTime = new JTextField();
             arrivalTime.setForeground(Color.white);
-            arrivalTime.setBackground(new Color(100,88,110));
-            arrivalTime.setBounds(larrivalTime.getX(),larrivalTime.getY()+larrivalTime.getHeight()+30,200,33);
-            
-            //travel time
+            arrivalTime.setBackground(new Color(100, 88, 110));
+            arrivalTime.setBounds(larrivalTime.getX(), larrivalTime.getY() + larrivalTime.getHeight() + 30, 200, 33);
+
+            // travel time
             ltravelTime = new JLabel("Travel Time");
             ltravelTime.setForeground(Color.white);
             ltravelTime.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            ltravelTime.setBounds(larrivalTime.getX()+larrivalTime.getWidth()+20, BusNumber.getY()+BusNumber.getHeight()+30, 250, 33);
-           
+            ltravelTime.setBounds(larrivalTime.getX() + larrivalTime.getWidth() + 20,
+                    BusNumber.getY() + BusNumber.getHeight() + 30, 250, 33);
+
             travelTime = new JTextField();
             travelTime.setForeground(Color.white);
-            travelTime.setBackground(new Color(100,88,110));
-            travelTime.setBounds(ltravelTime.getX(),ltravelTime.getY()+ltravelTime.getHeight()+30,250,33);
+            travelTime.setBackground(new Color(100, 88, 110));
+            travelTime.setBounds(ltravelTime.getX(), ltravelTime.getY() + ltravelTime.getHeight() + 30, 250, 33);
 
-            //derpature date
-            lderpatureDate=new JLabel("Derparture Date");
+            // derpature date
+            lderpatureDate = new JLabel("Derparture Date");
             lderpatureDate.setForeground(Color.white);
             lderpatureDate.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lderpatureDate.setBounds(arrivalTime.getX(), arrivalTime.getY()+arrivalTime.getHeight()+30, 250, 33);
-          
-            //datepicker
+            lderpatureDate.setBounds(arrivalTime.getX(), arrivalTime.getY() + arrivalTime.getHeight() + 30, 250, 33);
+
+            // datepicker
             Properties p = new Properties();
             SqlDateModel model = new SqlDateModel();
             p.put("text.day", "Day");
             p.put("text.month", "Month");
             p.put("text.year", "Year");
             derpatureDate = new JDatePanelImpl(model, p);
-            derpatureDate.setBounds(lderpatureDate.getX(), lderpatureDate.getY()+lderpatureDate.getHeight()+50 , 200, 200);
+            derpatureDate.setBounds(lderpatureDate.getX(), lderpatureDate.getY() + lderpatureDate.getHeight() + 50, 200,
+                    200);
 
-            //Arrival Date 
+            // Arrival Date
 
-            //label Arival Date
+            // label Arival Date
             larivalDate = new JLabel("Arrival Date");
             larivalDate.setForeground(Color.white);
             larivalDate.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            larivalDate.setBounds(lderpatureDate.getX()+lderpatureDate.getWidth()+20, lderpatureDate.getY(), 250, 33);
-          
+            larivalDate.setBounds(lderpatureDate.getX() + lderpatureDate.getWidth() + 20, lderpatureDate.getY(), 250,
+                    33);
+
             Properties prop = new Properties();
             SqlDateModel model2 = new SqlDateModel();
             prop.put("text.day", "Day");
             prop.put("text.month", "Month");
             prop.put("text.year", "Year");
             arivalDate = new JDatePanelImpl(model2, p);
-            arivalDate.setBounds(larivalDate.getX(), larivalDate.getY()+larivalDate.getHeight()+50 , 200, 200);
+            arivalDate.setBounds(larivalDate.getX(), larivalDate.getY() + larivalDate.getHeight() + 50, 200, 200);
 
-            //btn Save
+            // btn Save
             btnSave = new JButton("Save");
             btnSave.setForeground(Color.white);
             btnSave.setBackground(new Color(100, 88, 110));
-            btnSave.setBounds(lBusName.getX(),panelShowData.getHeight()-200,200,50);
-            btnSave.setFont(new Font ("Tahoma",Font.BOLD,30));
+            btnSave.setBounds(lBusName.getX(), panelShowData.getHeight() - 200, 200, 50);
+            btnSave.setFont(new Font("Tahoma", Font.BOLD, 30));
             btnSave.addMouseListener(this);
 
-            panelAdd.add(lAddBus);   
+            panelAdd.add(lAddBus);
             panelAdd.add(lBusName);
             panelAdd.add(lderpatureBusStation);
             panelAdd.add(ldestinationBusStation);
@@ -305,7 +331,7 @@ public class MenuBusPartner implements MouseInputListener {
             panelAdd.add(lderpatureTime);
             panelAdd.add(larrivalTime);
             panelAdd.add(ltravelTime);
-            panelAdd.add(lderpatureDate);   
+            panelAdd.add(lderpatureDate);
             panelAdd.add(larivalDate);
 
             panelAdd.add(arivalDate);
@@ -325,41 +351,41 @@ public class MenuBusPartner implements MouseInputListener {
             panelAdd.setVisible(true);
             panelDelete.setVisible(false);
 
-
             break;
 
         case "Delete Bus Data":
 
-            //label title delete 
+            // label title delete
             lDelete = new JLabel("Delete Bus");
             lDelete.setForeground(Color.white);
             lDelete.setFont(new Font("Tahoma", Font.BOLD, 40));
             lDelete.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
-            
-            //label 
+
+            // label
             lDeletebyID = new JLabel("Delete Bus by ID");
-            lDeletebyID.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lDelete.getY() + lDelete.getHeight() + 150, 300, 33);
+            lDeletebyID.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50,
+                    lDelete.getY() + lDelete.getHeight() + 150, 300, 33);
             lDeletebyID.setForeground(Color.white);
             lDeletebyID.setFont(new Font("Tahoma", Font.BOLD, 30));
 
-            //jtextfield
+            // jtextfield
             delete = new JTextField();
             delete.setForeground(Color.white);
-            delete.setBackground(new Color(100,88,110));
-            delete.setBounds (lDeletebyID.getX(), lDeletebyID.getY()+lDeletebyID.getHeight()+20 , 300 , 33);
+            delete.setBackground(new Color(100, 88, 110));
+            delete.setBounds(lDeletebyID.getX(), lDeletebyID.getY() + lDeletebyID.getHeight() + 20, 300, 33);
 
             deleteBtn = new JButton("Delete");
             deleteBtn.setForeground(Color.white);
             deleteBtn.setBackground(new Color(100, 88, 110));
-            deleteBtn.setBounds(lDeletebyID.getX(),panelDelete.getHeight()-200,200,50);
-            deleteBtn.setFont(new Font ("Tahoma",Font.BOLD,30));
+            deleteBtn.setBounds(lDeletebyID.getX(), panelDelete.getHeight() - 200, 200, 50);
+            deleteBtn.setFont(new Font("Tahoma", Font.BOLD, 30));
             deleteBtn.addMouseListener(this);
 
-            panelDelete.add(lDelete);   
+            panelDelete.add(lDelete);
             panelDelete.add(lDeletebyID);
             panelDelete.add(delete);
             panelDelete.add(deleteBtn);
-            
+
             scrollpane.setVisible(false);
             panelMenu.setVisible(true);
             panelShowData.setVisible(false);

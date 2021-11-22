@@ -169,7 +169,7 @@ public class QueryController {
             return null;
         }
     }
-    public ArrayList<String> selectAirplaneModel(){
+    public ArrayList<String> selectAirplanesModel(){
         conn.connect();
         String query = "SELECT `airplane_model` FROM `airplanes` ORDER BY `airplane_id` ASC;";
         try {
@@ -201,6 +201,81 @@ public class QueryController {
             }
             return airportName;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public ArrayList<String> selectBusesModel(){
+        conn.connect();
+        String query = "SELECT bus_model FROM `buses` group By bus_id ASC;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> busModel = new ArrayList<>();
+
+            while (result.next()) {
+                busModel.add(result.getString("bus_model"));
+            }
+            return busModel;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+      
+    public ArrayList<String> selectBusStations(){
+        conn.connect();
+        String query = "SELECT busstation_name FROM `busstations` GROUP By busstation_id ASC;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> busStations = new ArrayList<>();
+
+            while (result.next()) {
+                busStations.add(result.getString("busstation_name"));
+            }
+            return busStations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+          
+    public ArrayList<String> selectTrainModels (){
+        conn.connect();
+        String query = "SELECT train_model FROM `trains`GROUP by train_id asc;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> trainModel = new ArrayList<>();
+
+            while (result.next()) {
+                trainModel.add(result.getString("train_model"));
+            }
+            return trainModel;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+          
+    public ArrayList<String> selectTrainStations(){
+        conn.connect();
+        String query = "SELECT station_name FROM `stations` group by station_id asc;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> trainStations = new ArrayList<>();
+
+            while (result.next()) {
+                trainStations.add(result.getString("station_name"));
+            }
+            return trainStations;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

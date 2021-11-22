@@ -20,6 +20,7 @@ import java.awt.Toolkit;
 import java.awt.Image;
 
 public class MenuTrainPartner implements MouseInputListener {
+    QueryController queryController = new QueryController();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
@@ -33,8 +34,11 @@ public class MenuTrainPartner implements MouseInputListener {
     JScrollPane scrollpane;
     DefaultTableModel model;
     JTextField TrainNumber, derpatureTime, arrivalTime, travelTime , delete;
-    JComboBox cbTrainName, cbderpatureStation, cbdestinationStation;
+    JComboBox <String> cbTrainName, cbderpatureStation, cbdestinationStation;
     JDatePanelImpl derpatureDate, arivalDate;
+    
+    ArrayList<String> trainModel = queryController.selectTrainModels();
+    ArrayList<String> trainStationName = queryController.selectTrainStations();
     
     MenuTrainPartner() {
 
@@ -189,7 +193,11 @@ public class MenuTrainPartner implements MouseInputListener {
             lTrainName.setFont(new Font("Tahoma", Font.PLAIN, 30));
           
             // cb Train
-            cbTrainName = new JComboBox<>();
+            String[] TrainNameList = new String[trainModel.size()];
+            for (int i = 0; i < trainModel.size(); i++) {
+                TrainNameList[i] = trainModel.get(i);
+            }
+            cbTrainName = new JComboBox<>(TrainNameList);
             cbTrainName.setBackground(new Color(100, 88, 110));
             cbTrainName.setForeground(Color.white);
             cbTrainName.setBounds(lTrainName.getX(), lTrainName.getY() + lTrainName.getHeight() + 30, 200, 33);
@@ -199,7 +207,13 @@ public class MenuTrainPartner implements MouseInputListener {
             lderpatureStation.setFont(new Font("Tahoma", Font.PLAIN, 30));
             lderpatureStation.setBounds(cbTrainName.getX(),cbTrainName.getY()+cbTrainName.getHeight()+80,250,33);
 
-            cbderpatureStation = new JComboBox<>();
+
+            
+            String[] derpatureStation = new String[trainStationName.size()];
+            for (int i = 0; i < trainStationName.size(); i++) {
+                derpatureStation[i] = trainStationName.get(i);
+            }
+            cbderpatureStation = new JComboBox<>(derpatureStation);
             cbderpatureStation.setForeground(Color.white);
             cbderpatureStation.setBackground(new Color(100,88,110));
             cbderpatureStation.setBounds(lderpatureStation.getX(), lderpatureStation.getY() + lderpatureStation.getHeight() + 30, 200, 33);
@@ -209,7 +223,13 @@ public class MenuTrainPartner implements MouseInputListener {
             ldestinationStation.setFont(new Font("Tahoma", Font.PLAIN, 30));
             ldestinationStation.setBounds(cbderpatureStation.getX(),cbderpatureStation.getY()+cbderpatureStation.getHeight()+80,250,33);
 
-            cbdestinationStation = new JComboBox<>();
+    
+            String[] destinationStation = new String[trainStationName.size()];
+            for (int i = 0; i < trainStationName.size(); i++) {
+                destinationStation[i] = trainStationName.get(i);
+            }
+
+            cbdestinationStation = new JComboBox<>(destinationStation);
             cbdestinationStation.setForeground(Color.white);
             cbdestinationStation.setBackground(new Color(100,88,110));
             cbdestinationStation.setBounds(ldestinationStation.getX(), ldestinationStation.getY() + ldestinationStation.getHeight() + 30, 200, 33);
