@@ -12,23 +12,21 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.QueryController;
-import model.Flight;
 import model.Hotel;
-import model.Trip;
 
 public class AdminHotelPanel extends JPanel {
     
     // Declaring variable
     JLabel lTitle;
     QueryController queryController;
+    JTable dataTable;
+    DefaultTableModel model;
+    JScrollPane scrollpane;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)size.getWidth();
     int height = (int)size.getHeight();
-    JTable dataTable;
-    DefaultTableModel model;
-    JScrollPane scrollpane;
 
     public AdminHotelPanel() {
 

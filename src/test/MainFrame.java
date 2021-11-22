@@ -36,6 +36,7 @@ public class MainFrame extends JFrame {
     AdminHotelPanel adminHotelPanel;
     AdminUserPanel adminUserPanel;
     AdminPartnerPanel adminPartnerPanel;
+    AdminProfilePanel adminProfilePanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -85,8 +86,7 @@ public class MainFrame extends JFrame {
         adminHotelPanel = new AdminHotelPanel();
         adminUserPanel = new AdminUserPanel();
         adminPartnerPanel = new AdminPartnerPanel();
-        panel1 = new Panel1();
-        panel2 = new Panel2();
+        adminProfilePanel = new AdminProfilePanel();
 
         // Set components
 
@@ -106,8 +106,7 @@ public class MainFrame extends JFrame {
         cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
         cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
         cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
-        cardPanelAdmin.add(panel1, "panelB");
-        cardPanelAdmin.add(panel2, "panelC");
+        cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
         this.add(cardPanelAdmin);
 
         this.add(buttonContainerAdmin);

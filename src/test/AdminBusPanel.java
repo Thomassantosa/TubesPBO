@@ -20,14 +20,14 @@ public class AdminBusPanel extends JPanel {
     // Declaring variable
     JLabel lTitle;
     QueryController queryController;
+    JTable dataTable;
+    DefaultTableModel model;
+    JScrollPane scrollpane;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)size.getWidth();
     int height = (int)size.getHeight();
-    JTable dataTable;
-    DefaultTableModel model;
-    JScrollPane scrollpane;
 
     public AdminBusPanel() {
 

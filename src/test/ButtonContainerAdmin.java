@@ -121,7 +121,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button8.setIcon(accountIcon);
         button8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
-        button9 = new JButton("Account");
+        button9 = new JButton("Profile");
         button9.setBackground(ConstColor.PURPLE2);
         button9.setForeground(ConstColor.GREY);
         button9.setBounds(0, height - 140, 220, 40);
@@ -200,8 +200,8 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
             case "Partner":
                 MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminPartnerPanel");
                 break;
-            case "Account":
-                MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminAccountPanel");
+            case "Profile":
+                MainFrame.cardLayout.show(MainFrame.cardPanelAdmin, "adminProfilePanel");
                 break;
             case "Logout":
                 int choice = JOptionPane.showConfirmDialog(null, "Are you sure want to logout ?", "Logout", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -273,7 +273,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
                 button.setBackground(ConstColor.PURPLE4);
                 button.setForeground(ConstColor.WHITE);
                 break;
-            case "Account":
+            case "Profile":
                 hoverIcon = new ImageIcon("src\\source\\Account Icon_Hover.png");
                 button.setBackground(ConstColor.PURPLE4);
                 button.setForeground(ConstColor.WHITE);
@@ -335,7 +335,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
                 button.setBackground(ConstColor.PURPLE2);
                 button.setForeground(ConstColor.GREY);
                 break;
-            case "Account":
+            case "Profile":
                 icon = new ImageIcon("src\\source\\Account Icon.png");
                 button.setBackground(ConstColor.PURPLE2);
                 button.setForeground(ConstColor.GREY);
