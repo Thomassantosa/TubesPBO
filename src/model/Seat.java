@@ -1,7 +1,6 @@
 package model;
 
 public class Seat {
-    private int seatId;
     private SeatType seatType;
     private int seatCapacity;
     private int baggageCapacity;
@@ -10,20 +9,11 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(int seatId, SeatType seatType, int seatCapacity, int baggageCapacity, int price) {
-        this.seatId = seatId;
+    public Seat(SeatType seatType, int seatCapacity, int baggageCapacity, int price) {
         this.seatType = seatType;
         this.seatCapacity = seatCapacity;
         this.baggageCapacity = baggageCapacity;
         this.price = price;
-    }
-
-    public int getSeatId() {
-        return this.seatId;
-    }
-
-    public void setSeatId(int seatId) {
-        this.seatId = seatId;
     }
 
     public SeatType getSeatType() {
@@ -61,12 +51,10 @@ public class Seat {
     @Override
     public String toString() {
         return "{" +
-            " seatId='" + getSeatId() + "'" +
-            ", seatType='" + getSeatType() + "'" +
+            " seatType='" + getSeatType() + "'" +
             ", seatCapacity='" + getSeatCapacity() + "'" +
             ", baggageCapacity='" + getBaggageCapacity() + "'" +
             ", price='" + getPrice() + "'" +
             "}";
     }
-
 }

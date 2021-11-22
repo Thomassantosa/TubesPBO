@@ -2,82 +2,83 @@ package model;
 
 public class Flight extends Trip {
 
-    private String flighNumber;
-    private String airplaneModel;
-    private String departureAirport;
-    private String destinationAirport;
-    private String airline;
-    private Seat seat;
+    private String flightType;
+    private String flightNumber;
+    private Vehicle airplane;
+    private Airport departureAirport;
+    private Airport destinationAirport;
+    private Airlines airline;
 
-    public Flight(String flighNumber, String airplaneModel, String departureAirport, String destinationAirport, String airline, Seat seat, int tripID, String trip, TripTypes TripTypes, String origin, String destination, int departureTime, int arrivalTime, String date, int tripTime) {
-        super(tripID, trip, TripTypes, origin, destination, departureTime, arrivalTime, date, tripTime);
-        this.flighNumber = flighNumber;
-        this.airplaneModel = airplaneModel;
+    public Flight() {
+    }
+
+    public Flight(String flightType, String flightNumber, Vehicle airplane, Airport departureAirport, Airport destinationAirport, Airlines airline) {
+        this.flightType = flightType;
+        this.flightNumber = flightNumber;
+        this.airplane = airplane;
         this.departureAirport = departureAirport;
         this.destinationAirport = destinationAirport;
         this.airline = airline;
-        this.seat = seat;
     }
 
-    public String getFlighNumber() {
-        return this.flighNumber;
+    public String getFlightType() {
+        return this.flightType;
     }
 
-    public void setFlighNumber(String flighNumber) {
-        this.flighNumber = flighNumber;
+    public void setFlightType(String flightType) {
+        this.flightType = flightType;
     }
 
-    public String getAirplaneModel() {
-        return this.airplaneModel;
+    public String getFlightNumber() {
+        return this.flightNumber;
     }
 
-    public void setAirplaneModel(String airplaneModel) {
-        this.airplaneModel = airplaneModel;
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
-    public String getDepartureAirport() {
+    public Vehicle getAirplane() {
+        return this.airplane;
+    }
+
+    public void setAirplane(Vehicle airplane) {
+        this.airplane = airplane;
+    }
+
+    public Airport getDepartureAirport() {
         return this.departureAirport;
     }
 
-    public void setDepartureAirport(String departureAirport) {
+    public void setDepartureAirport(Airport departureAirport) {
         this.departureAirport = departureAirport;
     }
 
-    public String getDestinationAirport() {
+    public Airport getDestinationAirport() {
         return this.destinationAirport;
     }
 
-    public void setDestinationAirport(String destinationAirport) {
+    public void setDestinationAirport(Airport destinationAirport) {
         this.destinationAirport = destinationAirport;
     }
 
-    public String getAirline() {
+    public Airlines getAirline() {
         return this.airline;
     }
 
-    public void setAirline(String airline) {
+    public void setAirline(Airlines airline) {
         this.airline = airline;
-    }
-
-    public Seat getSeat() {
-        return this.seat;
-    }
-
-    public void setSeat(Seat seat) {
-        this.seat = seat;
     }
 
     @Override
     public String toString() {
         return "{" +
-            " flighNumber='" + getFlighNumber() + "'" +
-            ", airplaneModel='" + getAirplaneModel() + "'" +
+            " flightType='" + getFlightType() + "'" +
+            ", flightNumber='" + getFlightNumber() + "'" +
+            ", airplane='" + getAirplane() + "'" +
             ", departureAirport='" + getDepartureAirport() + "'" +
             ", destinationAirport='" + getDestinationAirport() + "'" +
             ", airline='" + getAirline() + "'" +
-            ", seat='" + getSeat() + "'" +
             "}";
     }
-
 }
 

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import controller.Controller;
+import controller.QueryController;
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -22,8 +22,6 @@ public class LoginForm {
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
        
-        // object
-        Controller controller = new Controller();
 
         JFrame fLogin = new JFrame("Login Form");
         fLogin.setSize((int)width-100, (int)height-100);
@@ -80,14 +78,8 @@ public class LoginForm {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean check = controller.CheckLogin(jtUsername.getText(), jPassword.getText());
-                if (check) {
-                    fLogin.dispose();
-                    new MainMenu();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please insert all the field correctly !", "Warning",
-                            JOptionPane.WARNING_MESSAGE);
-                }
+                new MainMenu();
+                fLogin.dispose();
             }
         });
 
