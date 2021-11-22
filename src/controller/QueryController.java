@@ -4,7 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import model.Flight;
 import model.Partner;
 import model.User;
 
@@ -136,7 +140,7 @@ public class QueryController {
 
     public boolean insertUser(User user) {
         conn.connect();
-        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`) VALUES  (?,?,?,?,?,?)";
+        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`, `date_created`) VALUES  (?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.conn.prepareStatement(query);
             stmt.setString(1, user.getFullname());
@@ -145,6 +149,11 @@ public class QueryController {
             stmt.setString(4, user.getPassword());
             stmt.setString(5, user.getAddress());
             stmt.setString(6, user.getUserType());
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            String currentDate = dtf.format(now);
+            stmt.setString(7, currentDate);
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
@@ -155,7 +164,7 @@ public class QueryController {
 
     public boolean insertPartner(Partner user) {
         conn.connect();
-        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`, `partner_type`, `company_name`) VALUES  (?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`, `partner_type`, `company_name`, `date_created`) VALUES  (?,?,?,?,?,?,?,?,?)";
         try {   
             PreparedStatement stmt = conn.conn.prepareStatement(query);
             stmt.setString(1, user.getFullname());
@@ -166,6 +175,11 @@ public class QueryController {
             stmt.setString(6, user.getUserType());
             stmt.setString(7, user.getPartnerType());
             stmt.setString(8, user.getCompanyName());
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            String currentDate = dtf.format(now);
+            stmt.setString(9, currentDate);
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
@@ -217,6 +231,159 @@ public class QueryController {
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public int getTotalUser() {
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='User'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getTotalPartner() {
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='Partner'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNewUser() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='User' AND date_created='" + currentDate + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNewPartner() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='Partner' AND date_created='" + currentDate + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNewTransaction() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+
+        conn.connect();
+        String query = "SELECT COUNT(order_id) FROM orders WHERE order_date='" + currentDate + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            
+            int orderCount = 0;
+            
+            while (result.next()) {
+                orderCount = result.getInt("COUNT(order_id)");
+            }
+            return orderCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    // public int getTodayIncome() {
+    //     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    //     LocalDateTime now = LocalDateTime.now();
+    //     String currentDate = dtf.format(now);
+
+    //     conn.connect();
+    //     String query = "SELECT COUNT(order_id) FROM orders WHERE order_date='" + currentDate + "'";
+    //     try {
+    //         Statement stmt = conn.conn.createStatement();
+    //         ResultSet result = stmt.executeQuery(query);
+            
+    //         int orderCount = 0;
+            
+    //         while (result.next()) {
+    //             orderCount = result.getInt("COUNT(order_id)");
+    //         }
+    //         return orderCount;
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //         return -1;
+    //     }
+    // }
+
+    public ArrayList<Flight> selectAllFlight() {
+        conn.connect();
+
+        String query = "SELECT `flight_id`, `airplane_id`, `departure_airport`, `destination_airport`, `flight_type`, `flight_number`, `departure_time`, `arrival_time`, `departure_date`, `arrival_date`, `travel_time` FROM `flights` WHERE 1 ORDER BY flight_id Desc";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Flight> flights = new ArrayList<>();
+
+            while (result.next()) {
+                Flight flight = new Flight();
+                user.setIdUser(result.getInt("id_user"));
+                flight.setFl
+
+                flights.add(flight);
+            }
+
+            return flights;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

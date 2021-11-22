@@ -176,7 +176,6 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                     String userType = user.getUserType();
                     switch (userType) {
                         case "Admin":
-                            JOptionPane.showMessageDialog(null, "ADMIN FOUND");
                             MainFrame.cardPanel1.setVisible(false);
                             MainFrame.buttonContainerAdmin.setVisible(true);
                             MainFrame.cardPanelAdmin.setVisible(true);
