@@ -1,5 +1,6 @@
 package test;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -40,6 +41,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button1.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon homeIcon = new ImageIcon("src\\source\\Home Icon.png");
         button1.setIcon(homeIcon);
+        button1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button2 = new JButton("Flight");
         button2.setBackground(ConstColor.PURPLE2);
@@ -50,6 +52,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button2.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon flightIcon = new ImageIcon("src\\source\\Flight Icon.png");
         button2.setIcon(flightIcon);
+        button2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button3 = new JButton("Train");
         button3.setBackground(ConstColor.PURPLE2);
@@ -60,6 +63,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button3.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon trainIcon = new ImageIcon("src\\source\\Train Icon.png");
         button3.setIcon(trainIcon);
+        button3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button4 = new JButton("Bus");
         button4.setBackground(ConstColor.PURPLE2);
@@ -70,6 +74,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button4.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon busIcon = new ImageIcon("src\\source\\Bus Icon.png");
         button4.setIcon(busIcon);
+        button4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button5 = new JButton("Hotel");
         button5.setBackground(ConstColor.PURPLE2);
@@ -80,6 +85,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button5.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon hotelIcon = new ImageIcon("src\\source\\Hotel Icon.png");
         button5.setIcon(hotelIcon);
+        button5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button6 = new JButton("XTourience");
         button6.setBackground(ConstColor.PURPLE2);
@@ -90,6 +96,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button6.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon xTourienceIcon = new ImageIcon("src\\source\\XTourience Icon.png");
         button6.setIcon(xTourienceIcon);
+        button6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button7 = new JButton("User");
         button7.setBackground(ConstColor.PURPLE2);
@@ -100,6 +107,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button7.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon accountIcon = new ImageIcon("src\\source\\Account Icon.png");
         button7.setIcon(accountIcon);
+        button7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button8 = new JButton("Partner");
         button8.setBackground(ConstColor.PURPLE2);
@@ -110,6 +118,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button8.setHorizontalAlignment(SwingConstants.LEFT);
         accountIcon = new ImageIcon("src\\source\\Account Icon.png");
         button8.setIcon(accountIcon);
+        button8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button9 = new JButton("Account");
         button9.setBackground(ConstColor.PURPLE2);
@@ -120,6 +129,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button9.setHorizontalAlignment(SwingConstants.LEFT);
         accountIcon = new ImageIcon("src\\source\\Account Icon.png");
         button9.setIcon(accountIcon);
+        button9.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button10 = new JButton("Logout");
         button10.setBackground(ConstColor.PURPLE2);
@@ -130,6 +140,7 @@ public class ButtonContainerAdmin extends JPanel implements MouseInputListener {
         button10.setHorizontalAlignment(SwingConstants.LEFT);
         ImageIcon logoutIcon = new ImageIcon("src\\source\\LogOut Icon.png");
         button10.setIcon(logoutIcon);
+        button10.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         button1.addMouseListener(this);
         button2.addMouseListener(this);

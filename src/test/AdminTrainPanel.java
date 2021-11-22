@@ -12,10 +12,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.QueryController;
-import model.Flight;
+import model.TrainTrip;
 import model.Trip;
 
-public class AdminFlightPanel extends JPanel {
+public class AdminTrainPanel extends JPanel {
     
     // Declaring variable
     JLabel lTitle;
@@ -29,7 +29,7 @@ public class AdminFlightPanel extends JPanel {
     DefaultTableModel model;
     JScrollPane scrollpane;
 
-    public AdminFlightPanel() {
+    public AdminTrainPanel() {
 
         queryController = new QueryController();
 
@@ -40,7 +40,7 @@ public class AdminFlightPanel extends JPanel {
 
         // Set components
         // Set JLabel (title)
-        lTitle = new JLabel("Admin Menu (Flight Data)");
+        lTitle = new JLabel("Admin Menu (Train Data)");
         lTitle.setForeground(ConstColor.WHITE);
         lTitle.setFont(new Font("Arial", Font.BOLD, 30));
         lTitle.setBounds(20, 20, 450, 40);
@@ -48,27 +48,26 @@ public class AdminFlightPanel extends JPanel {
         // Set JTable
         dataTable = new JTable();
         dataTable.setBounds(20, 80, width-270, height-200);
-        String[] columnData = {"Flight_id", "Airplane", "Departure Airport", "Destination Airport", "Flight_Type", "Flight Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
+        String[] columnData = {"Traintrip_id", "Train", "Departure Station", "Destination Station", "Traintrip Number", "Departure Time", "Arrival Time", "Departure Date", "Arrival Date", "Travel Time"};
         model = new DefaultTableModel(columnData, 0);
         
-        ArrayList<Trip> flights = queryController.selectAllFlight();
-        for (int i = 0; i < flights.size(); i++) {
+        ArrayList<Trip> traintrips = queryController.selectAllTrainTrip();
+        for (int i = 0; i < traintrips.size(); i++) {
             String[] newModel = new String[11];
 
-            Trip currentTrip = flights.get(i);
-            if(currentTrip instanceof Flight) {
-                Flight flight = (Flight) currentTrip;
-                newModel[0] = String.valueOf(flight.getTripID());
-                newModel[1] = flight.getAirplane().getModel();
-                newModel[2] = flight.getDepartureAirport().getName();
-                newModel[3] = flight.getDestinationAirport().getName();
-                newModel[4] = flight.getFlightType();
-                newModel[5] = flight.getFlightNumber();
-                newModel[6] = flight.getDepartureTime();
-                newModel[7] = flight.getArrivalTime();
-                newModel[8] = flight.getDepartureDate();
-                newModel[9] = flight.getArrivalDate();
-                newModel[10] = String.valueOf(flight.getTripTime());
+            Trip currentTrip = traintrips.get(i);
+            if(currentTrip instanceof TrainTrip) {
+                TrainTrip trainTrip = (TrainTrip) currentTrip;
+                newModel[0] = String.valueOf(trainTrip.getTripID());
+                newModel[1] = trainTrip.getTrain().getModel();
+                newModel[2] = trainTrip.getDepartureStation().getName();
+                newModel[3] = trainTrip.getDestinationStation().getName();
+                newModel[4] = trainTrip.getTrainTripNumber();
+                newModel[5] = trainTrip.getDepartureTime();
+                newModel[6] = trainTrip.getArrivalTime();
+                newModel[7] = trainTrip.getDepartureDate();
+                newModel[8] = trainTrip.getArrivalDate();
+                newModel[9] = String.valueOf(trainTrip.getTripTime());
             }
             model.addRow(newModel);
         }

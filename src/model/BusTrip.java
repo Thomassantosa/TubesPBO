@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-
 public class BusTrip extends Trip{
     private String busTripNumber;
     private Vehicle bus;
@@ -11,7 +9,7 @@ public class BusTrip extends Trip{
     public BusTrip() {
     }
 
-    public BusTrip(TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
+    public BusTrip(TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
         super(TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.busTripNumber = busTripNumber;
         this.bus = bus;
@@ -19,7 +17,7 @@ public class BusTrip extends Trip{
         this.destinationStation = destinationStation;
     }
 
-    public BusTrip(int tripID, TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
+    public BusTrip(int tripID, TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
         super(tripID, TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.busTripNumber = busTripNumber;
         this.bus = bus;

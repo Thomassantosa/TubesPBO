@@ -12,7 +12,7 @@ public class TrainTrip extends Trip{
     public TrainTrip() {
     }
 
-    public TrainTrip(TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String trainTripNumber, Vehicle train, Station departureStation, Station destinationStation) {
+    public TrainTrip(TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String trainTripNumber, Vehicle train, Station departureStation, Station destinationStation) {
         super(TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.trainTripNumber = trainTripNumber;
         this.train = train;
@@ -20,7 +20,7 @@ public class TrainTrip extends Trip{
         this.destinationStation = destinationStation;
     }
 
-    public TrainTrip(int tripID, TripTypesEnum TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String trainTripNumber, Vehicle train, Station departureStation, Station destinationStation) {
+    public TrainTrip(int tripID, TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String trainTripNumber, Vehicle train, Station departureStation, Station destinationStation) {
         super(tripID, TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.trainTripNumber = trainTripNumber;
         this.train = train;
