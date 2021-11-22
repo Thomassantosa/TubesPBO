@@ -31,6 +31,7 @@ public class FormDataDiri {
     JTextField[] tfNama = new JTextField[7];
     JTextField[] tfNomorHP = new JTextField[7];
     JTextField[] tfEmail = new JTextField[7];
+
     public FormDataDiri() {
         fFormDataDiri = new JFrame("Form Data Diri");
         fFormDataDiri.setSize((int) width, (int) height);
@@ -74,7 +75,6 @@ public class FormDataDiri {
             tfNomorHP[i].setBounds((int) width - 920, (int) height / 10 + tot, 300, 30);
             tot += 100;
 
-
             pFormDataDiri.add(tfNomorHP[i]);
             pFormDataDiri.add(lNomorHP);
             pFormDataDiri.add(tfEmail[i]);
@@ -82,7 +82,10 @@ public class FormDataDiri {
             pFormDataDiri.add(tfNama[i]);
             pFormDataDiri.add(lNama);
         }
-
+        btnSubmit = new JButton("Submit");
+        btnSubmit.setBounds((int) width - 1800, (int) height / 2 + 300, 230, 50);
+        btnSubmit.setBackground(Color.orange);
+        pFormDataDiri.add(btnSubmit);
         pFormDataDiri.add(lTitle);
         fFormDataDiri.add(pFormDataDiri);
         fFormDataDiri.setVisible(true);

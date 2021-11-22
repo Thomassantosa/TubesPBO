@@ -11,9 +11,9 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.TabExpander;
+
 import controller.QueryController;
 import model.*;
 import java.awt.Toolkit;
@@ -32,7 +32,9 @@ public class MainMenu implements MouseInputListener {
             lBirthdate, lTitleXtour, lMoto;
     JComboBox cbDeparture, cbDestination, cbSeatClass, cbPassengers, cbCity, cbCityXtour;
     JDatePanelImpl jdPick;
-    JTextField tfFullName, tfUsername, tfAddress;
+    JTextField tfFullName, tfUsername, tfAddress, tfEmail;
+    JPasswordField pfPassword;
+    JTextArea taAddress;
     String seatClass[] = { "Economy", "Business", "First Class" };
     String number[] = { "1", "2", "3", "4", "5", "6", "7" };
     String City[] = { "Solo", "Bandung", "Jakarta", "Bali", "Yogyakarta" };
@@ -376,7 +378,6 @@ public class MainMenu implements MouseInputListener {
             btnSearchFlight.setBackground(Color.orange);
             btnSearchFlight.addMouseListener(this);
 
-
             panelFlight.add(cbPassengers);
             panelFlight.add(lNoPassengers);
             panelFlight.add(btnSearchFlight);
@@ -694,29 +695,35 @@ public class MainMenu implements MouseInputListener {
             lAddress.setFont(new Font("Tahoma", Font.BOLD, 17));
             lAddress.setBounds((int) width - 1800, (int) height / 7 + 45, 500, 50);
 
-            tfAddress = new JTextField();
-            tfAddress.setBounds((int) width - 1700, (int) height / 5 - 5, 300, 30);
+            taAddress = new JTextArea();
+            taAddress.setBounds((int) width - 1700, (int) height / 5 - 5, 300, 50);
 
-            lBirthdate = new JLabel("Birthdate : ");
-            lBirthdate.setForeground(Color.white);
-            lBirthdate.setFont(new Font("Tahoma", Font.BOLD, 17));
-            lBirthdate.setBounds((int) width - 1800, (int) height / 4, 500, 50);
+            lEmail = new JLabel("Email : ");
+            lEmail.setForeground(Color.white);
+            lEmail.setFont(new Font("Tahoma", Font.BOLD, 17));
+            lEmail.setBounds((int) width - 1800, (int) height / 5 + 60, 500, 50);
 
-            Properties p4 = new Properties();
-            SqlDateModel model4 = new SqlDateModel();
-            p4.put("text.day", "Day");
-            p4.put("text.month", "Month");
-            p4.put("text.year", "Year");
-            date = new JDatePanelImpl(model4, p4);
-            date.setBounds((int) width - 1800, (int) height / 3 - 50, 200, 200);
+            tfEmail = new JTextField();
+            tfEmail.setBounds((int) width - 1720, (int) height / 5 + 70, 300, 30);
 
+            lPassword = new JLabel("Password : ");
+            lPassword.setForeground(Color.white);
+            lPassword.setFont(new Font("Tahoma", Font.BOLD, 17));
+            lPassword.setBounds((int) width - 1800, (int) height / 4 + 70, 500, 50);
+
+            pfPassword = new JPasswordField();
+            pfPassword.setBounds((int) width - 1700, (int) height / 4 + 80, 300, 30);
+            
             btnSave = new JButton("Save");
-            btnSave.setBounds((int) width - 1800, (int) height / 2, 200, 50);
+            btnSave.setBounds((int) width - 1800, (int) height / 3 + 70, 200, 50);
             btnSave.setBackground(Color.orange);
+
             panelProfile.add(btnSave);
-            panelProfile.add(date);
-            panelProfile.add(lBirthdate);
-            panelProfile.add(tfAddress);
+            panelProfile.add(pfPassword);
+            panelProfile.add(lPassword);
+            panelProfile.add(tfEmail);
+            panelProfile.add(lEmail);
+            panelProfile.add(taAddress);
             panelProfile.add(lAddress);
             panelProfile.add(tfUsername);
             panelProfile.add(lUsername);

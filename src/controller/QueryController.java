@@ -179,7 +179,7 @@ public class QueryController {
             ArrayList<Flight> flights = new ArrayList<>();
 
             while (result.next()) {
-                Flight city = new Flight();
+                
             }
 
             return flights;
