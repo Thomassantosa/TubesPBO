@@ -169,6 +169,11 @@ public class QueryController {
             return null;
         }
     }
+    public ArrayList<String> showCityBus(){
+        conn.connect();
+        String query = "SELECT DISTINCT `busstation_city` FROM `busstasions`";
+        return null;
+    }
     public ArrayList<Flight> showFlights(Airport departureAirport,Airport destinationAirport){
         conn.connect();
         String query = "SELECT b.airport_name AS airport_name_departure,c.airport_name AS aiport_name_destination,a.flight_number,a.departure_time,a.departure_date,a.arrival_time,a.arrival_date,a.travel_time,d.seat_price,d.seat_avaliable, d.seat_type FROM flights a JOIN airports b on a.departure_airport = b.airport_id JOIN airports c on a.destination_airport = c.airport_id JOIN seats d on a.airplane_id = d.airplane_id WHERE b.airport_city = `"+departureAirport+"` AND c.airport_city = `"+destinationAirport+"`;";
@@ -198,7 +203,7 @@ public class QueryController {
             ArrayList<TrainTrip> trains = new ArrayList<>();
 
             while (result.next()) {
-                TrainTrip showTrip = new TrainTrip();
+                // TrainTrip showTrip = new TrainTrip();
             }
 
             return trains;
