@@ -25,8 +25,8 @@ public class MainMenu implements MouseInputListener {
     double height = screenSize.getHeight();
     JFrame fMainMenu;
     JPanel panelMenu, panelHome, panelProfile, panelFlight, panelTrain, panelBus, panelHotel, panelXtourience;
-    JButton btnSave, btnHome, btnProfile, btnFlight, btnTrain, btnBus, btnHotel, btnXtourience, btnLogOut, btnSearch,
-            btnSearchXtour, btnSearchFlight;
+    JButton btnSearchTrain, btnSave, btnHome, btnProfile, btnFlight, btnTrain, btnBus, btnHotel, btnXtourience,
+            btnLogOut, btnSearch, btnSearchXtour, btnSearchFlight, btnSearchBus, btnSearchHotel;
     JLabel lFullName, lProfile, lTitleHome, lCity, lTitleHotel, lTitleFlight, lDeparture, lDestination, lDate,
             lSeatClass, lNoPassengers, lTitleTrain, lTitleBus, lNight, lUsername, lEmail, lPassword, lAddress,
             lBirthdate, lTitleXtour, lMoto;
@@ -456,9 +456,10 @@ public class MainMenu implements MouseInputListener {
             cbPassengers.setBounds((int) width - 1300, (int) height / 5, 200, 20);
 
             // Button Search
-            btnSearch = new JButton("Search");
-            btnSearch.setBounds((int) width - 1800, (int) height / 2, 230, 50);
-            btnSearch.setBackground(Color.orange);
+            btnSearchTrain = new JButton("Search Train");
+            btnSearchTrain.setBounds((int) width - 1800, (int) height / 2, 230, 50);
+            btnSearchTrain.setBackground(Color.orange);
+            btnSearchTrain.addMouseListener(this);
 
             panelTrain.add(lTitleTrain);
             panelTrain.add(lDeparture);
@@ -469,7 +470,7 @@ public class MainMenu implements MouseInputListener {
             panelTrain.add(date);
             panelTrain.add(lNoPassengers);
             panelTrain.add(cbPassengers);
-            panelTrain.add(btnSearch);
+            panelTrain.add(btnSearchTrain);
             break;
         case "Bus":
             panelHome.setVisible(false);
@@ -532,9 +533,10 @@ public class MainMenu implements MouseInputListener {
             cbPassengers.setBounds((int) width - 1300, (int) height / 5, 200, 20);
 
             // Button Search
-            btnSearch = new JButton("Search");
-            btnSearch.setBounds((int) width - 1800, (int) height / 2, 230, 50);
-            btnSearch.setBackground(Color.orange);
+            btnSearchBus = new JButton("Search Bus");
+            btnSearchBus.setBounds((int) width - 1800, (int) height / 2, 230, 50);
+            btnSearchBus.setBackground(Color.orange);
+            btnSearchBus.addMouseListener(this);
 
             panelBus.add(lTitleBus);
             panelBus.add(lDeparture);
@@ -545,7 +547,7 @@ public class MainMenu implements MouseInputListener {
             panelBus.add(date);
             panelBus.add(lNoPassengers);
             panelBus.add(cbPassengers);
-            panelBus.add(btnSearch);
+            panelBus.add(btnSearchBus);
             break;
         case "Hotel":
             panelHome.setVisible(false);
@@ -597,9 +599,10 @@ public class MainMenu implements MouseInputListener {
             cbPassengers = new JComboBox<>(number);
             cbPassengers.setBounds((int) width - 1300, (int) height / 5, 200, 20);
 
-            btnSearch = new JButton("Search");
-            btnSearch.setBounds((int) width - 1800, (int) height / 2, 230, 50);
-            btnSearch.setBackground(Color.orange);
+            btnSearchHotel = new JButton("Search Hotel");
+            btnSearchHotel.setBounds((int) width - 1800, (int) height / 2, 230, 50);
+            btnSearchHotel.setBackground(Color.orange);
+            btnSearchHotel.addMouseListener(this);
 
             panelHotel.add(lNight);
             panelHotel.add(cbPassengers);
@@ -608,7 +611,7 @@ public class MainMenu implements MouseInputListener {
             panelHotel.add(lTitleHotel);
             panelHotel.add(lCity);
             panelHotel.add(cbCity);
-            panelHotel.add(btnSearch);
+            panelHotel.add(btnSearchHotel);
             break;
 
         // case "XTourience":
@@ -713,7 +716,7 @@ public class MainMenu implements MouseInputListener {
 
             pfPassword = new JPasswordField();
             pfPassword.setBounds((int) width - 1700, (int) height / 4 + 80, 300, 30);
-            
+
             btnSave = new JButton("Save");
             btnSave.setBounds((int) width - 1800, (int) height / 3 + 70, 200, 50);
             btnSave.setBackground(Color.orange);
@@ -743,6 +746,18 @@ public class MainMenu implements MouseInputListener {
             new LoginForm();
             break;
         case "Search Flight":
+            new ShowFlight();
+            fMainMenu.dispose();
+            break;
+        case "Search Train":
+            new ShowFlight();
+            fMainMenu.dispose();
+            break;
+        case "Search Bus":
+            new ShowFlight();
+            fMainMenu.dispose();
+            break;
+        case "Search Hotel":
             new ShowFlight();
             fMainMenu.dispose();
             break;
