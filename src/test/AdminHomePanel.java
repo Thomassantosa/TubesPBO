@@ -1,7 +1,6 @@
 package test;
 
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,28 +14,31 @@ import java.time.LocalDateTime;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.MouseInputListener;
 
-public class Panel0 extends JPanel implements MouseInputListener{
+import controller.QueryController;
+
+public class AdminHomePanel extends JPanel {
     
     // Declaring variable
     JLabel lTitle, lTitle2, lDate, lIncome, lIncomeValue, lTransaction, lTransactionValue;
     JLabel lNewUser, lNewUserValue, lTotalUser, lTotalUserValue;
     JLabel lNewPartner, lNewPartnerValue, lTotalPartner, lTotalPartnerValue;
     JPanel container;
+    QueryController queryController;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)size.getWidth();
     int height = (int)size.getHeight();
 
-    public Panel0() {
+    public AdminHomePanel() {
+
+        queryController = new QueryController();
 
         // Set JPanel (this)
         this.setBackground(ConstColor.PURPLE1);
         this.setBounds(220, 0, width-220, height);
         this.setLayout(null);
-        this.setVisible(true);
 
         // Set components
         // Set JLabel (title)
@@ -57,7 +59,7 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lTitle2.setFont(new Font("Arial", Font.BOLD, 20));
         lTitle2.setBounds(20, 20, 200, 20);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String currentTime = dtf.format(now);
         lDate = new JLabel(currentTime);
@@ -65,7 +67,7 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lDate.setFont(new Font("Arial", Font.PLAIN, 16));
         lDate.setBounds(20, lTitle2.getY()+20, 200, 20);
         
-        lIncome = new JLabel("Total Income");
+        lIncome = new JLabel("Today Income");
         lIncome.setForeground(ConstColor.GREEN4);
         lIncome.setFont(new Font("Arial", Font.BOLD, 20));
         lIncome.setBounds(20, lDate.getY()+60, 200, 20);
@@ -74,8 +76,10 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lIncomeValue.setForeground(ConstColor.WHITE);
         lIncomeValue.setFont(new Font("Arial", Font.PLAIN, 16));
         lIncomeValue.setBounds(20, lIncome.getY()+20, 200, 20);
+        // String todayIncome = String.valueOf(queryController.getTodayIncome());
+        // lTransactionValue.setText(todayIncome);
 
-        lTransaction = new JLabel("Total Transaction");
+        lTransaction = new JLabel("New Transaction");
         lTransaction.setForeground(ConstColor.BLUE4);
         lTransaction.setFont(new Font("Arial", Font.BOLD, 20));
         lTransaction.setBounds(300, lIncome.getY(), 200, 20);
@@ -84,6 +88,8 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lTransactionValue.setForeground(ConstColor.WHITE);
         lTransactionValue.setFont(new Font("Arial", Font.PLAIN, 16));
         lTransactionValue.setBounds(300, lIncomeValue.getY(), 200, 20);
+        String totalTransaction = String.valueOf(queryController.getNewTransaction());
+        lTransactionValue.setText(totalTransaction);
 
         lNewUser = new JLabel("New User");
         lNewUser.setForeground(ConstColor.WHITE);
@@ -94,7 +100,9 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lNewUserValue.setForeground(ConstColor.WHITE);
         lNewUserValue.setFont(new Font("Arial", Font.PLAIN, 16));
         lNewUserValue.setBounds(20, lNewUser.getY()+20, 200, 20);
-        
+        String newUser = String.valueOf(queryController.getNewUser());
+        lNewUserValue.setText(newUser);
+
         lNewPartner = new JLabel("New Partner");
         lNewPartner.setForeground(ConstColor.WHITE);
         lNewPartner.setFont(new Font("Arial", Font.BOLD, 20));
@@ -104,6 +112,8 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lNewPartnerValue.setForeground(ConstColor.WHITE);
         lNewPartnerValue.setFont(new Font("Arial", Font.PLAIN, 16));
         lNewPartnerValue.setBounds(300, lNewUserValue.getY(), 200, 20);
+        String newPartner = String.valueOf(queryController.getNewPartner());
+        lNewPartnerValue.setText(newPartner);
 
         lTotalUser = new JLabel("Total User");
         lTotalUser.setForeground(ConstColor.WHITE);
@@ -114,6 +124,8 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lTotalUserValue.setForeground(ConstColor.WHITE);
         lTotalUserValue.setFont(new Font("Arial", Font.PLAIN, 16));
         lTotalUserValue.setBounds(20, lTotalUser.getY()+20, 200, 20);
+        String totalUser = String.valueOf(queryController.getTotalUser());
+        lTotalUserValue.setText(totalUser);
 
         lTotalPartner = new JLabel("Total Partner");
         lTotalPartner.setForeground(ConstColor.WHITE);
@@ -124,6 +136,8 @@ public class Panel0 extends JPanel implements MouseInputListener{
         lTotalPartnerValue.setForeground(ConstColor.WHITE);
         lTotalPartnerValue.setFont(new Font("Arial", Font.PLAIN, 16));
         lTotalPartnerValue.setBounds(300, lTotalUserValue.getY(), 200, 20);
+        String totalPartner = String.valueOf(queryController.getTotalPartner());
+        lTotalPartnerValue.setText(totalPartner);
 
         // Adding components
         this.add(lTitle);
@@ -193,47 +207,5 @@ public class Panel0 extends JPanel implements MouseInputListener{
             graphics.setColor(getForeground());
             graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
         }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 }

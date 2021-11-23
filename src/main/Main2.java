@@ -1,6 +1,8 @@
-package test;
+package main;
 
-public class test {
+import test.MainFrame;
+
+public class Main2 {
     
     public static void main(String[] args) {
         new MainFrame();

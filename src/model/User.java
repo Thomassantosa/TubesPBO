@@ -2,29 +2,46 @@ package model;
 
 import java.util.ArrayList;
 
-public abstract class User {
+public class User {
     private int userID;
-    private String fulName;
+    private String fullname;
     private String username;
     private String email;
     private String password;
-    private String addresString;
-    private userType typeUser;
+    private String address;
+    private String userType;
+    private String dateCreated;
     private ArrayList <Order> orderList = new ArrayList<>();
 
-    public User (){
-        
+    public User() {
     }
 
-    public User(int userID, String fulName, String username, String email, String password, String addresString, userType typeUser, ArrayList<Order> orderList) {
+    public User(int userID, String fullname, String username, String email, String password, String address, String userType) {
         this.userID = userID;
-        this.fulName = fulName;
+        this.fullname = fullname;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.addresString = addresString;
-        this.typeUser = typeUser;
-        this.orderList = orderList;
+        this.address = address;
+        this.userType = userType;
+    }
+
+    public User(String fullname, String username, String email, String password, String address, String userType) {
+        this.fullname = fullname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.userType = userType;
+    }
+
+    public User(String fullname, String username, String email, String password, String address) {
+        this.fullname = fullname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.userType = ConstType.USER;
     }
 
     public int getUserID() {
@@ -35,12 +52,12 @@ public abstract class User {
         this.userID = userID;
     }
 
-    public String getFulName() {
-        return this.fulName;
+    public String getFullname() {
+        return this.fullname;
     }
 
-    public void setFulName(String fulName) {
-        this.fulName = fulName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUsername() {
@@ -67,20 +84,20 @@ public abstract class User {
         this.password = password;
     }
 
-    public String getAddresString() {
-        return this.addresString;
+    public String getAddress() {
+        return this.address;
     }
 
-    public void setAddresString(String addresString) {
-        this.addresString = addresString;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public userType getTypeUser() {
-        return this.typeUser;
+    public String getUserType() {
+        return this.userType;
     }
 
-    public void setTypeUser(userType typeUser) {
-        this.typeUser = typeUser;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public ArrayList<Order> getOrderList() {
@@ -91,18 +108,25 @@ public abstract class User {
         this.orderList = orderList;
     }
 
+    public String getDateCreated() {
+        return this.dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " userID='" + getUserID() + "'" +
-            ", fulName='" + getFulName() + "'" +
+            ", fullname='" + getFullname() + "'" +
             ", username='" + getUsername() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
-            ", addresString='" + getAddresString() + "'" +
-            ", typeUser='" + getTypeUser() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", userType='" + getUserType() + "'" +
             ", orderList='" + getOrderList() + "'" +
             "}";
     }
-
 }

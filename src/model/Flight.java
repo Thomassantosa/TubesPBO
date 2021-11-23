@@ -12,7 +12,18 @@ public class Flight extends Trip {
     public Flight() {
     }
 
-    public Flight(String flightType, String flightNumber, Vehicle airplane, Airport departureAirport, Airport destinationAirport, Airlines airline) {
+    public Flight(TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String flightType, String flightNumber, Vehicle airplane, Airport departureAirport, Airport destinationAirport, Airlines airline) {
+        super(TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
+        this.flightType = flightType;
+        this.flightNumber = flightNumber;
+        this.airplane = airplane;
+        this.departureAirport = departureAirport;
+        this.destinationAirport = destinationAirport;
+        this.airline = airline;
+    }
+
+    public Flight(int tripID, TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String flightType, String flightNumber, Vehicle airplane, Airport departureAirport, Airport destinationAirport, Airlines airline) {
+        super(tripID, TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.flightType = flightType;
         this.flightNumber = flightNumber;
         this.airplane = airplane;

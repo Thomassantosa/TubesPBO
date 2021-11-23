@@ -1,184 +1,467 @@
 package controller;
 
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
-import model.*;
+import model.Airlines;
+import model.Airport;
+import model.BusCompany;
+import model.BusTrip;
+import model.Flight;
+import model.Hotel;
+import model.Partner;
+import model.Station;
+import model.TrainTrip;
+import model.Trip;
+import model.TripTypesEnum;
+import model.User;
+import model.Vehicle;
 
 public class QueryController {
 
     DatabaseHandler conn = new DatabaseHandler();
-
-    public boolean insertAirline(Airlines airline) {
+    
+    public User selectUserByEmail(String email, String password) {
         conn.connect();
-        String query = "INSERT INTO `airlines`(`airline_name`, `airline_cantact`) VALUES ('?','?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setString(1, airline.getName());
-            stmt.setString(2, airline.getContact());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean insertAirplane(Vehicle Vehicle) {
-        conn.connect();
-        String query = "INSERT INTO `airplanes`(`airplane_model`) VALUES ('?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setString(1, Vehicle.getModel());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean insertAirport(Airport airport) {
-        conn.connect();
-        String query = "INSERT INTO `airports`(`airport_code`, `airport_name`, `airport_city`, `airport_country`) VALUES ('?','?','?','?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setString(1, airport.getCode());
-            stmt.setString(2, airport.getName());
-            stmt.setString(3, airport.getCity());
-            stmt.setString(4, airport.getCountry());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean insertBusCompany(BusCompany busCompany) {
-        conn.connect();
-        String query = "INSERT INTO `buscompanies`(`buscompany_name`, `buscompany_contact`, `buscompany_address`) VALUES ('?','?','?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setString(1, busCompany.getName());
-            stmt.setString(2, busCompany.getContact());
-            stmt.setString(3, busCompany.getAddress());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean insertBusStation(Station station) {
-        conn.connect();
-        String query = "INSERT INTO `busstations`(`busstation_code`, `busstation_name`, `busstation_city`) VALUES ('?','?','?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setString(1, station.getCode());
-            stmt.setString(2, station.getName());
-            stmt.setString(3, station.getCity());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean insertBusTrip(BusTrip busTrip) {
-        conn.connect();
-        String query = "INSERT INTO `busstations`(`bus_id`, `departure_busstation`, `destination_busstation`, `busTrip_number`, `departure_time`, `arrival_time`, `daparture_date`, `arrival_date`, `travel_time`) VALUES ('?','?','?','?','?','?','?','?','?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setInt(1, busTrip.getBus().getVehicleID());
-            stmt.setInt(2, busTrip.getDepartureStation().getStationID());
-            stmt.setInt(3, busTrip.getDepartureStation().getStationID());
-            stmt.setString(4, busTrip.getBusTripNumber());
-            stmt.setInt(5, busTrip.getDepartureTime());
-            stmt.setInt(6, busTrip.getArrivalTime());
-            stmt.setDate(7, busTrip.getDepartureDate());
-            stmt.setDate(8, busTrip.getArrivalDate());
-            stmt.setInt(9, busTrip.getTripTime());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public boolean insertBus(Vehicle vehicle) {
-        conn.connect();
-        String query = "INSERT INTO `buses`(`bus_model`) VALUES ('?')";
-        try {
-            PreparedStatement stmt = conn.conn.prepareStatement(query);
-            stmt.setString(1, vehicle.getModel());
-            stmt.executeUpdate();
-            return (true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    public ArrayList<Airport> showCityFlight() {
-        conn.connect();
-        String query = "Select `airport_city` FROM `airports`";
+        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `company_name` FROM `users` WHERE email='" + email + "' AND password='" + password + "'";
         try {
             Statement stmt = conn.conn.createStatement();
-            ResultSet result = stmt.executeQuery(query);
-            ArrayList<Airport> airport = new ArrayList<>();
-
-            while (result.next()) {
-                Airport city = new Airport();
-                city.setCity(result.getString("airport_city"));
-                airport.add(city);
+            ResultSet result1 = stmt.executeQuery(query);
+            
+            int id = 0;
+            String companyName = "";
+            while (result1.next()) {
+                id = result1.getInt("user_id");
+                companyName = result1.getString("company_name");
             }
 
-            return airport;
+            // Check if user found
+            if (id != 0) {
+                
+                // Check selected query is user or partner
+                if (companyName == null) {
 
+                    System.out.println("TEST1");
+                    User user = new User();
+                    ResultSet result2 = stmt.executeQuery(query);
+                    while (result2.next()) {
+                        user.setUserID(result2.getInt("user_id"));
+                        user.setFullname(result2.getString("fullname"));
+                        user.setUsername(result2.getString("username"));
+                        user.setEmail(result2.getString("email"));
+                        user.setPassword(result2.getString("password"));
+                        user.setAddress(result2.getString("address"));
+                        user.setUserType(result2.getString("user_type"));
+                    }
+
+                    return user;
+                } else {
+
+                    System.out.println("TEST2");
+                    Partner partner = new Partner();
+                    ResultSet result3 = stmt.executeQuery(query);
+                    while (result3.next()) {
+                        partner.setUserID(result3.getInt("user_id"));
+                        partner.setFullname(result3.getString("fullname"));
+                        partner.setUsername(result3.getString("username"));
+                        partner.setEmail(result3.getString("email"));
+                        partner.setPassword(result3.getString("password"));
+                        partner.setAddress(result3.getString("address"));
+                        partner.setUserType(result3.getString("user_type"));
+                        partner.setCompanyName(result3.getString("company_name"));
+                    }
+                    return partner;
+                }
+
+            // If user not found, then try select by username
+            } else {
+                return selectUserByUsername(email, password);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-    public ArrayList<Station> showCityTrain() {
+    
+    public User selectUserByUsername(String username, String password) {
         conn.connect();
-        String query = "SELECT DISTINCT `station_city` FROM `stations`";
+        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `company_name` FROM `users` WHERE username='" + username + "' AND password='" + password + "'";
         try {
             Statement stmt = conn.conn.createStatement();
-            ResultSet result = stmt.executeQuery(query);
-            ArrayList<Station> bus = new ArrayList<>();
-
-            while (result.next()) {
-                Station city = new Station();
-                city.setCity(result.getString("station_city"));
-                bus.add(city);
+            ResultSet result1 = stmt.executeQuery(query);
+            
+            int id = 0;
+            String companyName = "";
+            while (result1.next()) {
+                id = result1.getInt("user_id");
+                companyName = result1.getString("company_name");
             }
+            
+            // Check if user found
+            if (id != 0) {
 
-            return bus;
+                // Check selected query is user or partner
+                if (companyName == null) {
+                    
+                    User user = new User();
+                    ResultSet result2 = stmt.executeQuery(query);
+                    while (result2.next()) {
+                        user.setUserID(result2.getInt("user_id"));
+                        user.setFullname(result2.getString("fullname"));
+                        user.setUsername(result2.getString("username"));
+                        user.setEmail(result2.getString("email"));
+                        user.setPassword(result2.getString("password"));
+                        user.setAddress(result2.getString("address"));
+                        user.setUserType(result2.getString("user_type"));
+                    }
 
+                    return user;
+                } else {
+                    
+                    Partner partner = new Partner();
+                    ResultSet result3 = stmt.executeQuery(query);
+                    while (result3.next()) {
+                        partner.setUserID(result3.getInt("user_id"));
+                        partner.setFullname(result3.getString("fullname"));
+                        partner.setUsername(result3.getString("username"));
+                        partner.setEmail(result3.getString("email"));
+                        partner.setPassword(result3.getString("password"));
+                        partner.setAddress(result3.getString("address"));
+                        partner.setUserType(result3.getString("user_type"));
+                        partner.setCompanyName(result3.getString("company_name"));
+                    }
+                    return partner;
+                }
+
+            // If user not found, then return null
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-    public ArrayList<Flight> showFlights(Airport departureAirport,Airport destinationAirport){
+
+    public boolean insertUser(User user) {
         conn.connect();
-        String query = "SELECT b.airport_name AS airport_name_departure,c.airport_name AS aiport_name_destination,a.flight_number,a.departure_time,a.departure_date,a.arrival_time,a.arrival_date,a.travel_time,d.seat_price,d.seat_avaliable, d.seat_type FROM flights a JOIN airports b on a.departure_airport = b.airport_id JOIN airports c on a.destination_airport = c.airport_id JOIN seats d on a.airplane_id = d.airplane_id WHERE b.airport_city = `"+departureAirport+"` AND c.airport_city = `"+destinationAirport+"`;";
+        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`, `date_created`) VALUES  (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setString(1, user.getFullname());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getAddress());
+            stmt.setString(6, user.getUserType());
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            String currentDate = dtf.format(now);
+            stmt.setString(7, currentDate);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public boolean insertPartner(Partner user) {
+        conn.connect();
+        String query = "INSERT INTO `users`(`fullname`, `username`, `email`, `password`, `address`, `user_type`, `partner_type`, `company_name`, `date_created`) VALUES  (?,?,?,?,?,?,?,?,?)";
+        try {   
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setString(1, user.getFullname());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getAddress());
+            stmt.setString(6, user.getUserType());
+            stmt.setString(7, user.getPartnerType());
+            stmt.setString(8, user.getCompanyName());
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            String currentDate = dtf.format(now);
+            stmt.setString(9, currentDate);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public int isEmailTaken(String email) {
+        conn.connect();
+        String query = "SELECT `user_id` FROM `users` WHERE email='" + email + "'";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
-            ArrayList<Flight> flights = new ArrayList<>();
+            int userId = 0;
+            
+            while (result.next()) {
+                userId = result.getInt("user_id");
+            }
+
+            if (userId == 0) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int isUsernameTaken(String username) {
+        conn.connect();
+        String query = "SELECT `user_id` FROM `users` WHERE username='" + username + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userId = 0;
+            
+            while (result.next()) {
+                userId = result.getInt("user_id");
+            }
+
+            if (userId == 0) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getTotalUser() {
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='User'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getTotalPartner() {
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='Partner'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNewUser() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='User' AND date_created='" + currentDate + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNewPartner() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+
+        conn.connect();
+        String query = "SELECT COUNT(user_id) FROM users WHERE user_type='Partner' AND date_created='" + currentDate + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            
+            int userCount = 0;
+            
+            while (result.next()) {
+                userCount = result.getInt("COUNT(user_id)");
+            }
+            return userCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getNewTransaction() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currentDate = dtf.format(now);
+
+        conn.connect();
+        String query = "SELECT COUNT(order_id) FROM orders WHERE order_date='" + currentDate + "'";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            
+            int orderCount = 0;
+            
+            while (result.next()) {
+                orderCount = result.getInt("COUNT(order_id)");
+            }
+            return orderCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    // public int getTodayIncome() {
+    //     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    //     LocalDateTime now = LocalDateTime.now();
+    //     String currentDate = dtf.format(now);
+
+    //     conn.connect();
+    //     String query = "SELECT COUNT(order_id) FROM orders WHERE order_date='" + currentDate + "'";
+    //     try {
+    //         Statement stmt = conn.conn.createStatement();
+    //         ResultSet result = stmt.executeQuery(query);
+            
+    //         int orderCount = 0;
+            
+    //         while (result.next()) {
+    //             orderCount = result.getInt("COUNT(order_id)");
+    //         }
+    //         return orderCount;
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //         return -1;
+    //     }
+    // }
+
+    public ArrayList<Trip> selectAllFlight() {
+        conn.connect();
+
+        String query = "SELECT a.flight_id, " +
+        "a.flight_type, " +
+        "a.flight_number, " +
+        "a.departure_time, " +
+        "a.arrival_time, " +
+        "a.departure_date, " +
+        "a.arrival_date, " +
+        "a.travel_time, " +
+        
+        "b.airplane_id, " +
+        "b.airplane_model, " +
+        
+        "e.airline_id, " +
+        "e.airline_name, " +
+        "e.airline_contact, " +
+        
+        "c.airport_id AS departure_airport_id, " +
+        "c.airport_code AS departure_airport_code, " +
+        "c.airport_name AS departure_airport_name, " +
+        "c.airport_city AS departure_airport_city, " +
+        "c.airport_country AS departure_airport_country, " +
+        
+        "d.airport_id AS destination_airport_id, " +
+        "d.airport_code AS destination_airport_code, " +
+        "d.airport_name AS destination_airport_name, " +
+        "d.airport_city AS destination_airport_city, " +
+        "d.airport_country AS destination_airport_country " +
+        
+        "FROM flights a " +
+        "JOIN airplanes b " +
+        "ON a.flight_id = b.airplane_id " +
+        "JOIN airports c " +
+        "ON a.departure_airport = c.airport_id " +
+        "JOIN airports d " +
+        "ON a.destination_airport = d.airport_id " +
+        "JOIN airlines e " +
+        "ON b.airline_id = e.airline_id " +
+        "WHERE 1 " +
+        "ORDER BY flight_id Desc";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Trip> flights = new ArrayList<>();
 
             while (result.next()) {
-                Flight showFlights = new Flight();
+                Flight flight = new Flight();
+                Vehicle airplane = new Vehicle();
+                Airport departureAirport = new Airport();
+                Airport destinationAirport = new Airport();
+                Airlines airline = new Airlines();
+
+                flight.setTripID(result.getInt("flight_id"));
+                flight.setFlightType(result.getString("flight_type"));
+                flight.setFlightNumber(result.getString("flight_number"));
+                flight.setTripTypes(TripTypesEnum.FLIGHT);
+                flight.setDepartureTime(result.getString("departure_time"));
+                flight.setArrivalTime(result.getString("arrival_time"));
+                flight.setDepartureDate(result.getString("departure_date"));
+                flight.setArrivalDate(result.getString("arrival_date"));
+                flight.setTripTime(result.getInt("travel_time"));
+
+                airplane.setVehicleID(result.getInt("airplane_id"));
+                airplane.setModel(result.getString("airplane_model"));
+
+                departureAirport.setAirportID(result.getInt("departure_airport_id"));
+                departureAirport.setName(result.getString("departure_airport_name"));
+                departureAirport.setCode(result.getString("departure_airport_code"));
+                departureAirport.setCity(result.getString("departure_airport_city"));
+                departureAirport.setCountry(result.getString("departure_airport_country"));
+
+                destinationAirport.setAirportID(result.getInt("destination_airport_id"));
+                destinationAirport.setName(result.getString("destination_airport_name"));
+                destinationAirport.setCode(result.getString("destination_airport_code"));
+                destinationAirport.setCity(result.getString("destination_airport_city"));
+                destinationAirport.setCountry(result.getString("destination_airport_country"));
+
+                airline.setAirlineID(result.getInt("airline_id"));
+                airline.setName(result.getString("airline_name"));
+                airline.setContact(result.getString("airline_contact"));
+
+                flight.setAirplane(airplane);
+                flight.setDepartureAirport(departureAirport);
+                flight.setDestinationAirport(destinationAirport);
+                flight.setAirline(airline);
+                
+                flights.add(flight);
             }
 
             return flights;
@@ -189,112 +472,321 @@ public class QueryController {
         }
     }
 
-    public ArrayList<TrainTrip> showTrainTrip(String departureStation,String destinationStation ){
+    public ArrayList<Trip> selectAllTrainTrip() {
         conn.connect();
-        String query = "SELECT d.train_model,a.departure_station,b.station_name AS station_name_departure,a.destination_station,c.station_name AS station_name_destination,a.trainTrip_number,a.departure_time,a.arrival_time,a.departure_date,a.arrival_date, a.travel_time,e.seat_price,e.seat_avaliable,e.seat_type FROM traintrips a JOIN stations b on a.departure_station = b.station_id JOIN stations c on a.destination_station = c.station_id JOIN trains d on a.train_id = d.train_id JOIN seats e on d.train_id = e.train_id WHERE b.station_city = `"+departureStation +"` AND c.station_city=`"+destinationStation+"`;";
-        try {
-            Statement stmt = conn.conn.createStatement();
-            ResultSet result = stmt.executeQuery(query);
-            ArrayList<TrainTrip> trains = new ArrayList<>();
 
-            while (result.next()) {
-                TrainTrip showTrip = new TrainTrip();
-            }
-
-            return trains;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public ArrayList<BusTrip> showBusTrip(Station departureStation, Station destinationStation){
-        String query = "SELECT e.buscompany_name, d.bus_model, a.departure_busstation, b.busstation_name AS busstations_departure, a.destination_busstation, c.busstation_name AS busstations_destination, a.busTrip_number, a.departure_time, a.arrival_time, a.departure_date, a.arrival_date, a.travel_time, f.seat_price, f.seat_avaliable, f.seat_type FROM bustrips a JOIN busstations b on a.departure_busstation = b.busstation_id JOIN busstations c on a.destination_busstation = c.busstation_id JOIN buses d on a.bus_id = d.bus_id JOIN buscompanies e on d.buscompany_id = e.buscompany_id JOIN seats f on d.bus_id = f.bus_id WHERE b.busstation_city = `"+departureStation+"` AND c.busstation_city = `"+destinationStation+"`;";
-        try {
-            Statement stmt = conn.conn.createStatement();
-            ResultSet result = stmt.executeQuery(query);
-            ArrayList<BusTrip> bus = new ArrayList<>();
-
-            while (result.next()) {
-                BusTrip showTrip = new BusTrip();
-            }
-
-            return bus;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        String query = "SELECT a.traintrip_id, " +
+        "a.traintrip_number, " +
+        "a.departure_time, " +
+        "a.arrival_time, " +
+        "a.departure_date, " +
+        "a.arrival_date, " +
+        "a.travel_time, " +
         
-    }
-    // public boolean insertFlight() {
+        "b.train_id, " +
+        "b.train_model, " +
+        
+        "c.station_id AS departure_station_id, " +
+        "c.station_code AS departure_station_code, " +
+        "c.station_name AS departure_station_name, " +
+        "c.station_city AS departure_station_city, " +
+        
+        "d.station_id AS destination_station_id, " +
+        "d.station_code AS destination_station_code, " +
+        "d.station_name AS destination_station_name, " +
+        "d.station_city AS destination_station_city " +
+        
+        "FROM traintrips a " +
+        "JOIN trains b " +
+        "ON a.traintrip_id = b.train_id " +
+        "JOIN stations c " +
+        "ON a.departure_station = c.station_id " +
+        "JOIN stations d " +
+        "ON a.destination_station = d.station_id " +
+        "WHERE 1 " +
+        "ORDER BY traintrip_id Desc";
 
-    // }
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Trip> trainTrips = new ArrayList<>();
 
-    // public boolean insertHotel() {
+            while (result.next()) {
+                TrainTrip trainTrip = new TrainTrip();
+                Vehicle train = new Vehicle();
+                Station departureStation = new Station();
+                Station destinationStation = new Station();
 
-    // }
+                trainTrip.setTripID(result.getInt("traintrip_id"));
+                trainTrip.setTrainTripNumber(result.getString("traintrip_number"));
+                trainTrip.setTripTypes(TripTypesEnum.TRAIN);
+                trainTrip.setDepartureTime(result.getString("departure_time"));
+                trainTrip.setArrivalTime(result.getString("arrival_time"));
+                trainTrip.setDepartureDate(result.getString("departure_date"));
+                trainTrip.setArrivalDate(result.getString("arrival_date"));
+                trainTrip.setTripTime(result.getInt("travel_time"));
 
-    // public boolean insertImageList() {
+                train.setVehicleID(result.getInt("train_id"));
+                train.setModel(result.getString("train_model"));
 
-    // }
+                departureStation.setStationID(result.getInt("departure_station_id"));
+                departureStation.setName(result.getString("departure_station_name"));
+                departureStation.setCode(result.getString("departure_station_code"));
+                departureStation.setCity(result.getString("departure_station_city"));
 
-    // public boolean insertOrder() {
+                destinationStation.setStationID(result.getInt("destination_station_id"));
+                destinationStation.setName(result.getString("destination_station_name"));
+                destinationStation.setCode(result.getString("destination_station_code"));
+                destinationStation.setCity(result.getString("destination_station_city"));
 
-    // }
-
-    // public boolean insertRoom() {
-
-    // }
-
-    // public boolean insertRoomType() {
-
-    // }
-
-    // public boolean insertSchedule() {
-
-    // }
-
-    // public boolean insertSeat() {
-
-    // }
-
-    // public boolean insertStation() {
-
-    // }
-
-    // public boolean insertTrain() {
-
-    // }
-
-    // public boolean insertTour() {
-
-    // }
-
-    // public boolean insertTrainTrip() {
-
-    // }
-
-    // public boolean insertUser() {
-
-    // }
-
-    public boolean CheckLogin(String jtUsername, String jPassword) {
-        boolean result = false;
-        if (!jtUsername.equals("")) {
-            if (!jPassword.equals("")) {
-                result = true;
+                trainTrip.setTrain(train);
+                trainTrip.setDepartureStation(departureStation);
+                trainTrip.setDestinationStation(destinationStation);
+                
+                trainTrips.add(trainTrip);
             }
+
+            return trainTrips;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        return result;
     }
 
-    public void insertData() {
-        JOptionPane.showMessageDialog(null, "You Have been Registered!");
+    public ArrayList<Trip> selectAllBusTrip() {
+        conn.connect();
+
+        String query = "SELECT a.bustrip_id, " +
+        "a.bustrip_number, " +
+        "a.departure_time, " +
+        "a.arrival_time, " +
+        "a.departure_date, " +
+        "a.arrival_date, " +
+        "a.travel_time, " +
+        
+        "b.bus_id, " +
+        "b.bus_model, " +
+        
+        "e.buscompany_id, " +
+        "e.buscompany_name, " +
+        "e.buscompany_contact, " +
+        "e.buscompany_address, " +
+        
+        "c.busstation_id AS departure_busstation_id, " +
+        "c.busstation_code AS departure_busstation_code, " +
+        "c.busstation_name AS departure_busstation_name, " +
+        "c.busstation_city AS departure_busstation_city, " +
+        
+        "d.busstation_id AS destination_busstation_id, " +
+        "d.busstation_code AS destination_busstation_code, " +
+        "d.busstation_name AS destination_busstation_name, " +
+        "d.busstation_city AS destination_busstation_city " +
+        
+        "FROM bustrips a " +
+        "JOIN buses b " +
+        "ON a.bustrip_id = b.bus_id " +
+        "JOIN busstations c " +
+        "ON a.departure_busstation = c.busstation_id " +
+        "JOIN busstations d " +
+        "ON a.destination_busstation = d.busstation_id " +
+        "JOIN buscompanies e " +
+        "ON b.buscompany_id = e.buscompany_id " +
+        "WHERE 1 " +
+        "ORDER BY bustrip_id Desc";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Trip> busTrips = new ArrayList<>();
+
+            while (result.next()) {
+                BusTrip busTrip = new BusTrip();
+                Vehicle bus = new Vehicle();
+                Station departureStation = new Station();
+                Station destinationStation = new Station();
+                BusCompany busCompany = new BusCompany();
+
+                busTrip.setTripID(result.getInt("bustrip_id"));
+                busTrip.setBusTripNumber(result.getString("bustrip_number"));
+                busTrip.setTripTypes(TripTypesEnum.BUS);
+                busTrip.setDepartureTime(result.getString("departure_time"));
+                busTrip.setArrivalTime(result.getString("arrival_time"));
+                busTrip.setDepartureDate(result.getString("departure_date"));
+                busTrip.setArrivalDate(result.getString("arrival_date"));
+                busTrip.setTripTime(result.getInt("travel_time"));
+
+                bus.setVehicleID(result.getInt("bus_id"));
+                bus.setModel(result.getString("bus_model"));
+
+                departureStation.setStationID(result.getInt("departure_busstation_id"));
+                departureStation.setName(result.getString("departure_busstation_name"));
+                departureStation.setCode(result.getString("departure_busstation_code"));
+                departureStation.setCity(result.getString("departure_busstation_city"));
+
+                destinationStation.setStationID(result.getInt("destination_busstation_id"));
+                destinationStation.setName(result.getString("destination_busstation_name"));
+                destinationStation.setCode(result.getString("destination_busstation_code"));
+                destinationStation.setCity(result.getString("destination_busstation_city"));
+
+                busCompany.setBusCompanyID(result.getInt("buscompany_id"));
+                busCompany.setName(result.getString("buscompany_name"));
+                busCompany.setContact(result.getString("buscompany_contact"));
+                busCompany.setAddress(result.getString("buscompany_address"));
+
+                busTrip.setBus(bus);
+                busTrip.setDepartureStation(departureStation);
+                busTrip.setDestinationStation(destinationStation);
+                busTrip.setBusCompany(busCompany);
+                
+                busTrips.add(busTrip);
+            }
+
+            return busTrips;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public boolean CheckRegistration() {
-        return true;
+    public ArrayList<Hotel> selectAllHotel() {
+        conn.connect();
+        String query = "SELECT hotel_id, " +
+        "hotel_name, " +
+        "hotel_star, " +
+        "hotel_rating, " +
+        "hotel_review, " +
+        "hotel_facility, " +
+        "hotel_address, " +
+        "hotel_city, " +
+        "hotel_country " +
+        "FROM `hotels` " +
+        "WHERE 1 " +
+        "ORDER BY hotel_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            ArrayList<Hotel> hotels = new ArrayList<>();
+            while (result.next()) {
+                Hotel currentHotel = new Hotel();
+
+                currentHotel.setHotelID(result.getInt("hotel_id"));
+                currentHotel.setName(result.getString("hotel_name"));
+                currentHotel.setStar(result.getInt("hotel_star"));
+                currentHotel.setRating(result.getDouble("hotel_rating"));
+                currentHotel.setReview(result.getInt("hotel_review"));
+                currentHotel.setFacility(result.getString("hotel_facility"));
+                currentHotel.setAddress(result.getString("hotel_address"));
+                currentHotel.setCity(result.getString("hotel_city"));
+                currentHotel.setCountry(result.getString("hotel_country"));
+                hotels.add(currentHotel);
+            }
+            return hotels;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<User> selectAllTraveller() {
+        conn.connect();
+        String query = "SELECT user_id, " +
+        "fullname, " +
+        "username, " +
+        "email, " +
+        "address, " +
+        "date_created " +
+        "FROM users " +
+        "WHERE user_type = 'User' " +
+        "ORDER BY user_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            ArrayList<User> users = new ArrayList<>();
+            while (result.next()) {
+                User currentUser = new User();
+
+                currentUser.setUserID(result.getInt("user_id"));
+                currentUser.setFullname(result.getString("fullname"));
+                currentUser.setUsername(result.getString("username"));
+                currentUser.setEmail(result.getString("email"));
+                currentUser.setAddress(result.getString("address"));
+                currentUser.setDateCreated(result.getString("date_created"));
+                users.add(currentUser);
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Partner> selectAllPartner() {
+        conn.connect();
+        String query = "SELECT user_id, " +
+        "fullname, " +
+        "username, " +
+        "email, " +
+        "address, " +
+        "partner_type, " +
+        "company_name, " +
+        "date_created " +
+        "FROM users " +
+        "WHERE user_type = 'Partner' " +
+        "ORDER BY user_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            ArrayList<Partner> partners = new ArrayList<>();
+            while (result.next()) {
+                Partner currentPartner = new Partner();
+
+                currentPartner.setUserID(result.getInt("user_id"));
+                currentPartner.setFullname(result.getString("fullname"));
+                currentPartner.setUsername(result.getString("username"));
+                currentPartner.setEmail(result.getString("email"));
+                currentPartner.setAddress(result.getString("address"));
+                currentPartner.setPartnerType(result.getString("partner_type"));
+                currentPartner.setCompanyName(result.getString("company_name"));
+                currentPartner.setDateCreated(result.getString("date_created"));
+                partners.add(currentPartner);
+            }
+            return partners;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean updateUser(int idUser, User user) {
+        conn.connect();
+        String query = "UPDATE `users` " +
+        "SET `fullname`= ?, " +
+        "`username`= ?, " +
+        "`email`= ?, " +
+        "`password`= ?, " +
+        "`address`= ?  " +
+        "WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setString(1, user.getFullname());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getAddress());
+            stmt.setInt(6, idUser);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
     }
 }

@@ -1,18 +1,25 @@
 package model;
 
-import java.sql.Date;
-
 public class BusTrip extends Trip{
     private String busTripNumber;
     private Vehicle bus;
     private Station departureStation;
     private Station destinationStation;
+    private BusCompany busCompany;
 
     public BusTrip() {
     }
 
-    public BusTrip(TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation) {
+    public BusTrip(TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation, BusCompany busCompany) {
         super(TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
+        this.busTripNumber = busTripNumber;
+        this.bus = bus;
+        this.departureStation = departureStation;
+        this.destinationStation = destinationStation;
+    }
+
+    public BusTrip(int tripID, TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String busTripNumber, Vehicle bus, Station departureStation, Station destinationStation, BusCompany busCompany) {
+        super(tripID, TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
         this.busTripNumber = busTripNumber;
         this.bus = bus;
         this.departureStation = departureStation;
@@ -51,6 +58,14 @@ public class BusTrip extends Trip{
         this.destinationStation = destinationStation;
     }
 
+    public BusCompany getBusCompany() {
+        return this.busCompany;
+    }
+
+    public void setBusCompany(BusCompany busCompany) {
+        this.busCompany = busCompany;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -58,6 +73,7 @@ public class BusTrip extends Trip{
             ", bus='" + getBus() + "'" +
             ", departureStation='" + getDepartureStation() + "'" +
             ", destinationStation='" + getDestinationStation() + "'" +
+            ", busCompany='" + getBusCompany() + "'" +
             "}";
     }
 }

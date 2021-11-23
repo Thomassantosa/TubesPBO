@@ -1,20 +1,18 @@
 package model;
 
-import java.sql.Date;
-
 public abstract class Trip {
     private int tripID;
-    private TripTypes TripTypes;
-    private int departureTime;
-    private int arrivalTime;
-    private Date departureDate;
-    private Date arrivalDate;
+    private TripTypesEnum TripTypes;
+    private String departureTime;
+    private String arrivalTime;
+    private String departureDate;
+    private String arrivalDate;
     private int tripTime;
 
     public Trip() {
     }
 
-    public Trip(TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
+    public Trip(TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime) {
         this.TripTypes = TripTypes;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
@@ -23,7 +21,7 @@ public abstract class Trip {
         this.tripTime = tripTime;
     }
 
-    public Trip(int tripID, TripTypes TripTypes, int departureTime, int arrivalTime, Date departureDate, Date arrivalDate, int tripTime) {
+    public Trip(int tripID, TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime) {
         this.tripID = tripID;
         this.TripTypes = TripTypes;
         this.departureTime = departureTime;
@@ -41,43 +39,43 @@ public abstract class Trip {
         this.tripID = tripID;
     }
 
-    public TripTypes getTripTypes() {
+    public TripTypesEnum getTripTypes() {
         return this.TripTypes;
     }
 
-    public void setTripTypes(TripTypes TripTypes) {
+    public void setTripTypes(TripTypesEnum TripTypes) {
         this.TripTypes = TripTypes;
     }
 
-    public int getDepartureTime() {
+    public String getDepartureTime() {
         return this.departureTime;
     }
 
-    public void setDepartureTime(int departureTime) {
+    public void setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
     }
 
-    public int getArrivalTime() {
+    public String getArrivalTime() {
         return this.arrivalTime;
     }
 
-    public void setArrivalTime(int arrivalTime) {
+    public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public Date getDepartureDate() {
+    public String getDepartureDate() {
         return this.departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
-    public Date getArrivalDate() {
+    public String getArrivalDate() {
         return this.arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 

@@ -1,71 +1,72 @@
 package model;
 
+import java.sql.Date;
 
-public class TrainTrip {
-    private int trainTripNumber;
-    private String trainModel;
-    private String departureStation;
-    private String destinationStation;
-    private Seat seat;
+public class TrainTrip extends Trip{
+    private String trainTripNumber;
+    private Vehicle train;
+    private Station departureStation;
+    private Station destinationStation;
 
-    public TrainTrip(int trainTripNumber, String trainModel, String departureStation, String destinationStation, Seat seat) {
-        this.trainTripNumber = trainTripNumber;
-        this.trainModel = trainModel;
-        this.departureStation = departureStation;
-        this.destinationStation = destinationStation;
-        this.seat = seat;
+
+    public TrainTrip() {
     }
 
+    public TrainTrip(TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String trainTripNumber, Vehicle train, Station departureStation, Station destinationStation) {
+        super(TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
+        this.trainTripNumber = trainTripNumber;
+        this.train = train;
+        this.departureStation = departureStation;
+        this.destinationStation = destinationStation;
+    }
 
-    public int getTrainTripNumber() {
+    public TrainTrip(int tripID, TripTypesEnum TripTypes, String departureTime, String arrivalTime, String departureDate, String arrivalDate, int tripTime, String trainTripNumber, Vehicle train, Station departureStation, Station destinationStation) {
+        super(tripID, TripTypes, departureTime, arrivalTime, departureDate, arrivalDate, tripTime);
+        this.trainTripNumber = trainTripNumber;
+        this.train = train;
+        this.departureStation = departureStation;
+        this.destinationStation = destinationStation;
+    }
+
+    public String getTrainTripNumber() {
         return this.trainTripNumber;
     }
 
-    public void setTrainTripNumber(int trainTripNumber) {
+    public void setTrainTripNumber(String trainTripNumber) {
         this.trainTripNumber = trainTripNumber;
     }
 
-    public String getTrainModel() {
-        return this.trainModel;
+    public Vehicle getTrain() {
+        return this.train;
     }
 
-    public void setTrainModel(String trainModel) {
-        this.trainModel = trainModel;
+    public void setTrain(Vehicle train) {
+        this.train = train;
     }
 
-    public String getDepartureStation() {
+    public Station getDepartureStation() {
         return this.departureStation;
     }
 
-    public void setDepartureStation(String departureStation) {
+    public void setDepartureStation(Station departureStation) {
         this.departureStation = departureStation;
     }
 
-    public String getDestinationStation() {
+    public Station getDestinationStation() {
         return this.destinationStation;
     }
 
-    public void setDestinationStation(String destinationStation) {
+    public void setDestinationStation(Station destinationStation) {
         this.destinationStation = destinationStation;
-    }
-
-    public Seat getSeat() {
-        return this.seat;
-    }
-
-    public void setSeat(Seat seat) {
-        this.seat = seat;
     }
 
     @Override
     public String toString() {
         return "{" +
             " trainTripNumber='" + getTrainTripNumber() + "'" +
-            ", trainModel='" + getTrainModel() + "'" +
+            ", train='" + getTrain() + "'" +
             ", departureStation='" + getDepartureStation() + "'" +
             ", destinationStation='" + getDestinationStation() + "'" +
-            ", seat='" + getSeat() + "'" +
             "}";
     }
-    
 }
