@@ -17,27 +17,27 @@ import controller.QueryController;
 import model.*;
 import java.awt.Toolkit;
 import java.awt.Image;
-public class ShowFlight {
+public class ShowHotel {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
-    JFrame fShowFlight;
-    JPanel pShowFlght;
+    JFrame fShowHotel;
+    JPanel pShowHotel;
     JLabel lTitle;
     JButton btnBack;
-    public ShowFlight(){
-        fShowFlight = new JFrame("Flight");
-        fShowFlight.setSize((int) width, (int) height);
-        fShowFlight.setLayout(null);
-        fShowFlight.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fShowFlight.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public ShowHotel(){
+        fShowHotel = new JFrame("Hotel");
+        fShowHotel.setSize((int) width, (int) height);
+        fShowHotel.setLayout(null);
+        fShowHotel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fShowHotel.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        pShowFlght = new JPanel();
-        pShowFlght.setBackground(new Color(40, 25, 54));
-        pShowFlght.setSize((int) width, (int) height);
-        pShowFlght.setLayout(null);
+        pShowHotel = new JPanel();
+        pShowHotel.setBackground(new Color(40, 25, 54));
+        pShowHotel.setSize((int) width, (int) height);
+        pShowHotel.setLayout(null);
 
-        lTitle = new JLabel("LIST FLIGHT");
+        lTitle = new JLabel("LIST HOTEL");
         lTitle.setBounds((int) width / 2 - 250, (int) height / 60, 500, 50);
         lTitle.setForeground(Color.white);
         lTitle.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -45,11 +45,10 @@ public class ShowFlight {
         btnBack = new JButton("Back");
         btnBack.setBounds((int) width - 1800, (int) height / 60, 100, 25);
         btnBack.setBackground(Color.orange);
-
         
-        pShowFlght.add(btnBack);
-        pShowFlght.add(lTitle);
-        fShowFlight.add(pShowFlght);
-        fShowFlight.setVisible(true);
+        pShowHotel.add(btnBack);
+        pShowHotel.add(lTitle);
+        fShowHotel.add(pShowHotel);
+        fShowHotel.setVisible(true);
     }
 }

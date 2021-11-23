@@ -17,27 +17,27 @@ import controller.QueryController;
 import model.*;
 import java.awt.Toolkit;
 import java.awt.Image;
-public class ShowFlight {
+public class ShowBus {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
-    JFrame fShowFlight;
-    JPanel pShowFlght;
+    JFrame fShowBus;
+    JPanel pShowBus;
     JLabel lTitle;
     JButton btnBack;
-    public ShowFlight(){
-        fShowFlight = new JFrame("Flight");
-        fShowFlight.setSize((int) width, (int) height);
-        fShowFlight.setLayout(null);
-        fShowFlight.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fShowFlight.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public ShowBus(){
+        fShowBus = new JFrame("Bus");
+        fShowBus.setSize((int) width, (int) height);
+        fShowBus.setLayout(null);
+        fShowBus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fShowBus.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        pShowFlght = new JPanel();
-        pShowFlght.setBackground(new Color(40, 25, 54));
-        pShowFlght.setSize((int) width, (int) height);
-        pShowFlght.setLayout(null);
+        pShowBus = new JPanel();
+        pShowBus.setBackground(new Color(40, 25, 54));
+        pShowBus.setSize((int) width, (int) height);
+        pShowBus.setLayout(null);
 
-        lTitle = new JLabel("LIST FLIGHT");
+        lTitle = new JLabel("LIST BUS");
         lTitle.setBounds((int) width / 2 - 250, (int) height / 60, 500, 50);
         lTitle.setForeground(Color.white);
         lTitle.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -46,10 +46,9 @@ public class ShowFlight {
         btnBack.setBounds((int) width - 1800, (int) height / 60, 100, 25);
         btnBack.setBackground(Color.orange);
 
-        
-        pShowFlght.add(btnBack);
-        pShowFlght.add(lTitle);
-        fShowFlight.add(pShowFlght);
-        fShowFlight.setVisible(true);
+        pShowBus.add(btnBack);
+        pShowBus.add(lTitle);
+        fShowBus.add(pShowBus);
+        fShowBus.setVisible(true);
     }
 }

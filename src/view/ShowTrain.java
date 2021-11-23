@@ -17,27 +17,27 @@ import controller.QueryController;
 import model.*;
 import java.awt.Toolkit;
 import java.awt.Image;
-public class ShowFlight {
+public class ShowTrain {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double width = screenSize.getWidth();
     double height = screenSize.getHeight();
-    JFrame fShowFlight;
-    JPanel pShowFlght;
+    JFrame fShowTrain;
+    JPanel pShowTrain;
     JLabel lTitle;
     JButton btnBack;
-    public ShowFlight(){
-        fShowFlight = new JFrame("Flight");
-        fShowFlight.setSize((int) width, (int) height);
-        fShowFlight.setLayout(null);
-        fShowFlight.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fShowFlight.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public ShowTrain(){
+        fShowTrain = new JFrame("Train");
+        fShowTrain.setSize((int) width, (int) height);
+        fShowTrain.setLayout(null);
+        fShowTrain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fShowTrain.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        pShowFlght = new JPanel();
-        pShowFlght.setBackground(new Color(40, 25, 54));
-        pShowFlght.setSize((int) width, (int) height);
-        pShowFlght.setLayout(null);
+        pShowTrain = new JPanel();
+        pShowTrain.setBackground(new Color(40, 25, 54));
+        pShowTrain.setSize((int) width, (int) height);
+        pShowTrain.setLayout(null);
 
-        lTitle = new JLabel("LIST FLIGHT");
+        lTitle = new JLabel("LIST TRAIN");
         lTitle.setBounds((int) width / 2 - 250, (int) height / 60, 500, 50);
         lTitle.setForeground(Color.white);
         lTitle.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -46,10 +46,12 @@ public class ShowFlight {
         btnBack.setBounds((int) width - 1800, (int) height / 60, 100, 25);
         btnBack.setBackground(Color.orange);
 
-        
-        pShowFlght.add(btnBack);
-        pShowFlght.add(lTitle);
-        fShowFlight.add(pShowFlght);
-        fShowFlight.setVisible(true);
+        pShowTrain.add(btnBack);
+        pShowTrain.add(lTitle);
+        fShowTrain.add(pShowTrain);
+        fShowTrain.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new ShowTrain();
     }
 }
