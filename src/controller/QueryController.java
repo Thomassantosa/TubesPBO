@@ -169,17 +169,16 @@ public class QueryController {
             return null;
         }
     }
-    public ArrayList<Flight> showFlights(){
+    public ArrayList<Flight> showFlights(Airport departureAirport,Airport destinationAirport){
         conn.connect();
-        String query = "SELECT a.flight_number, a.departure_time, a.arrival_time, a.departure_date, a.arrival_date, a.travel_time,b.airport_code AS departure_airport_code, b.airport_name AS departure_airport_name,c.airport_code AS destination_airport_code, c.airport_name AS destination_airport_name,d.airline_name, d.airplane_model FROM flights a join airports b on a.departure_airport = b.airport_id join airports c on a.destination_airport = c.airport_id join airport_airlines d on a.airplane_id = d.airplane_id";
-        
+        String query = "SELECT b.airport_name AS airport_name_departure,c.airport_name AS aiport_name_destination,a.flight_number,a.departure_time,a.departure_date,a.arrival_time,a.arrival_date,a.travel_time,d.seat_price,d.seat_avaliable, d.seat_type FROM flights a JOIN airports b on a.departure_airport = b.airport_id JOIN airports c on a.destination_airport = c.airport_id JOIN seats d on a.airplane_id = d.airplane_id WHERE b.airport_city = `"+departureAirport+"` AND c.airport_city = `"+destinationAirport+"`;";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
             ArrayList<Flight> flights = new ArrayList<>();
 
             while (result.next()) {
-                
+                Flight showFlights = new Flight();
             }
 
             return flights;
@@ -188,6 +187,46 @@ public class QueryController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public ArrayList<TrainTrip> showTrainTrip(String departureStation,String destinationStation ){
+        conn.connect();
+        String query = "SELECT d.train_model,a.departure_station,b.station_name AS station_name_departure,a.destination_station,c.station_name AS station_name_destination,a.trainTrip_number,a.departure_time,a.arrival_time,a.departure_date,a.arrival_date, a.travel_time,e.seat_price,e.seat_avaliable,e.seat_type FROM traintrips a JOIN stations b on a.departure_station = b.station_id JOIN stations c on a.destination_station = c.station_id JOIN trains d on a.train_id = d.train_id JOIN seats e on d.train_id = e.train_id WHERE b.station_city = `"+departureStation +"` AND c.station_city=`"+destinationStation+"`;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<TrainTrip> trains = new ArrayList<>();
+
+            while (result.next()) {
+                TrainTrip showTrip = new TrainTrip();
+            }
+
+            return trains;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<BusTrip> showBusTrip(Station departureStation, Station destinationStation){
+        String query = "SELECT e.buscompany_name, d.bus_model, a.departure_busstation, b.busstation_name AS busstations_departure, a.destination_busstation, c.busstation_name AS busstations_destination, a.busTrip_number, a.departure_time, a.arrival_time, a.departure_date, a.arrival_date, a.travel_time, f.seat_price, f.seat_avaliable, f.seat_type FROM bustrips a JOIN busstations b on a.departure_busstation = b.busstation_id JOIN busstations c on a.destination_busstation = c.busstation_id JOIN buses d on a.bus_id = d.bus_id JOIN buscompanies e on d.buscompany_id = e.buscompany_id JOIN seats f on d.bus_id = f.bus_id WHERE b.busstation_city = `"+departureStation+"` AND c.busstation_city = `"+destinationStation+"`;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<BusTrip> bus = new ArrayList<>();
+
+            while (result.next()) {
+                BusTrip showTrip = new BusTrip();
+            }
+
+            return bus;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        
     }
     // public boolean insertFlight() {
 
