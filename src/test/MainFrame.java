@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
     
     // Declaring variable
     static JPanel buttonContainer;
-    static JPanel cardPanel1, cardPanelAdmin;
+    static JPanel cardPanel1, cardPanelAdmin, cardPanelUser;
     static CardLayout cardLayout;
     JLabel lSplashLogo;
     JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10;
@@ -37,7 +37,9 @@ public class MainFrame extends JFrame {
     static AdminUserPanel adminUserPanel;
     static AdminPartnerPanel adminPartnerPanel;
     static AdminProfilePanel adminProfilePanel;
+    static ButtonContainerUser buttonContainerUser;
 
+    
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)size.getWidth();
@@ -62,16 +64,19 @@ public class MainFrame extends JFrame {
         buttonContainer.setSize(220, height);
         buttonContainer.setLayout(null);
         
-        // Set JPanel
+        // Set JPanel (cardlayout)
         cardPanel1 = new JPanel();
         cardLayout = new CardLayout();
         cardPanel1.setLayout(cardLayout);
         cardPanel1.setBounds(0, 0, width, height);
 
         cardPanelAdmin = new JPanel();
-        // cardLayout = new CardLayout();
         cardPanelAdmin.setLayout(cardLayout);
         cardPanelAdmin.setBounds(220, 0, width - 220, height);
+
+        cardPanelUser = new JPanel();
+        cardPanelUser.setLayout(cardLayout);
+        cardPanelUser.setBounds(220, 0, width - 220, height);
 
         splashPanel = new SplashPanel();
         loginPanel = new LoginPanel();
@@ -88,6 +93,9 @@ public class MainFrame extends JFrame {
         adminUserPanel = new AdminUserPanel();
         adminPartnerPanel = new AdminPartnerPanel();
         // adminProfilePanel = new AdminProfilePanel();
+
+        buttonContainerUser = new ButtonContainerUser();
+        panel1 = new Panel1();
 
         // Adding component
         this.add(splashPanel);
@@ -107,8 +115,12 @@ public class MainFrame extends JFrame {
         cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
         // cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
         this.add(cardPanelAdmin);
+        
+        cardPanelUser.add(panel1, "panelA");
+        this.add(cardPanelUser);
 
         this.add(buttonContainerAdmin);
+        this.add(buttonContainerUser);
 
         // Set Vicibility
         this.setVisible(true);
@@ -116,39 +128,25 @@ public class MainFrame extends JFrame {
         buttonContainer.setVisible(false);
         cardPanel1.setVisible(false);
         cardPanelAdmin.setVisible(false);
+        cardPanelUser.setVisible(false);
         buttonContainerAdmin.setVisible(false);
+        buttonContainerUser.setVisible(false);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         splashPanel.setVisible(false);
-
-        // buttonContainer.setVisible(true);
         cardPanel1.setVisible(true);
-        // buttonContainer.setVisible(false);
     }
 
     public static void setCardPanelAdmin() {
-        // cardPanelAdmin = new JPanel();
-
-        // buttonContainerAdmin = new ButtonContainerAdmin();
-        // adminHomePanel = new AdminHomePanel();
-        // adminFlightPanel = new AdminFlightPanel();
-        // adminTrainPanel = new AdminTrainPanel();
-        // adminBusPanel = new AdminBusPanel();
-        // adminHotelPanel = new AdminHotelPanel();
-        // adminUserPanel = new AdminUserPanel();
-        // adminPartnerPanel = new AdminPartnerPanel();
         adminProfilePanel = new AdminProfilePanel();
-
-        // cardPanelAdmin.add(adminHomePanel, "adminHomePanel");
-        // cardPanelAdmin.add(adminFlightPanel, "adminFlightPanel");
-        // cardPanelAdmin.add(adminTrainPanel, "adminTrainPanel");
-        // cardPanelAdmin.add(adminBusPanel, "adminBusPanel");
-        // cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
-        // cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
-        // cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
         cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
+    }
+
+    public static void setCardPanelUser() {
+        // adminProfilePanel = new AdminProfilePanel();
+        // cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
     }
 }

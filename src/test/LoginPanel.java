@@ -177,6 +177,7 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                     String userType = user.getUserType();
                     switch (userType) {
                         case "Admin":
+                            // JOptionPane.showMessageDialog(null, "USER FOUND");
 
                             // Set current user data with singleton
                             SingletonManager.getInstance().setUser(user);
@@ -188,10 +189,21 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                             MainFrame.cardPanelAdmin.setVisible(true);
                             break;
                         case "User":
-                            JOptionPane.showMessageDialog(null, "USER FOUND");
+                            // JOptionPane.showMessageDialog(null, "USER FOUND");
+
+                            // Set current user data with singleton
+                            SingletonManager.getInstance().setUser(user);
+
+                            // Set UI
+                            MainFrame.setCardPanelUser();
+                            MainFrame.cardPanel1.setVisible(false);
+                            MainFrame.buttonContainerUser.setVisible(true);
+                            MainFrame.cardPanelUser.setVisible(true);
                             break;
                         case "Partner":
                             JOptionPane.showMessageDialog(null, "PARTNER FOUND");
+
+
                             break;
                         default:
                             break;
