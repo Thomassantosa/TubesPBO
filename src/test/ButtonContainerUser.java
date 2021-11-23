@@ -140,6 +140,7 @@ public class ButtonContainerUser extends JPanel implements MouseInputListener {
         button5.addMouseListener(this);
         button6.addMouseListener(this);
         button7.addMouseListener(this);
+        button8.addMouseListener(this);
 
         // Adding components
         this.add(button1);
@@ -149,6 +150,7 @@ public class ButtonContainerUser extends JPanel implements MouseInputListener {
         this.add(button5);
         this.add(button6);
         this.add(button7);
+        this.add(button8);
 
         // Set vicibility
         this.setVisible(true);
@@ -309,7 +311,7 @@ public class ButtonContainerUser extends JPanel implements MouseInputListener {
             //     break;
             case "Your Order":
                 icon = new ImageIcon("src\\source\\Order Icon.png");
-                button.setBackground(ConstColor.PURPLE4);
+                button.setBackground(ConstColor.PURPLE2);
                 button.setForeground(ConstColor.WHITE);
                 break;
             case "Profile":
