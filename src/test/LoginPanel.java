@@ -207,24 +207,12 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                             // Set current user data with singleton
                             Partner partner = (Partner) user;
                             SingletonManager.getInstance().setPartner(partner);
-
-                            switch (partner.getPartnerType()) {
-                                case "Flight":
-                                    // Set UI
-                                    MainFrame.setCardPanelPartner();
-                                    MainFrame.cardPanel1.setVisible(false);
-                                    MainFrame.buttonContainerPartner.setVisible(true);
-                                    MainFrame.cardPanelPartner.setVisible(true);
-                                    break;
-                                case "Train":
-                                    
-                                    break;
-                                case "Case":
-                                    
-                                    break;
-                                default:
-                                    break;
-                            }
+                            System.out.println(partner.toString());
+                            // Set UI
+                            MainFrame.setCardPanelPartner(partner.getPartnerType());
+                            MainFrame.cardPanel1.setVisible(false);
+                            MainFrame.buttonContainerPartner.setVisible(true);
+                            MainFrame.cardPanelPartner.setVisible(true);
                             break;
                         default:
                             break;

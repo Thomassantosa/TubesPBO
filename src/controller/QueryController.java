@@ -31,7 +31,7 @@ public class QueryController {
     
     public User selectUserByEmail(String email, String password) {
         conn.connect();
-        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `company_name` FROM `users` WHERE email='" + email + "' AND password='" + password + "'";
+        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `partner_type`, `company_name` FROM `users` WHERE email='" + email + "' AND password='" + password + "'";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result1 = stmt.executeQuery(query);
@@ -76,6 +76,7 @@ public class QueryController {
                         partner.setPassword(result3.getString("password"));
                         partner.setAddress(result3.getString("address"));
                         partner.setUserType(result3.getString("user_type"));
+                        partner.setPartnerType(result3.getString("partner_type"));
                         partner.setCompanyName(result3.getString("company_name"));
                     }
                     return partner;
@@ -93,7 +94,7 @@ public class QueryController {
     
     public User selectUserByUsername(String username, String password) {
         conn.connect();
-        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `company_name` FROM `users` WHERE username='" + username + "' AND password='" + password + "'";
+        String query = "SELECT `user_id`, `fullname`, `username`, `email`, `password`, `address`, `user_type`, `partner_type`, `company_name` FROM `users` WHERE username='" + username + "' AND password='" + password + "'";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result1 = stmt.executeQuery(query);
@@ -136,6 +137,7 @@ public class QueryController {
                         partner.setPassword(result3.getString("password"));
                         partner.setAddress(result3.getString("address"));
                         partner.setUserType(result3.getString("user_type"));
+                        partner.setPartnerType(result3.getString("partner_type"));
                         partner.setCompanyName(result3.getString("company_name"));
                     }
                     return partner;

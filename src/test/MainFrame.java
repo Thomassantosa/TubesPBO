@@ -15,13 +15,13 @@ public class MainFrame extends JFrame {
     
     // Declaring variable
     static JPanel buttonContainer;
-    static JPanel cardPanel1, cardPanelAdmin, cardPanelUser;
+    static JPanel cardPanel1, cardPanelAdmin, cardPanelUser, cardPanelPartner;
     static CardLayout cardLayout;
     JLabel lSplashLogo;
     JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10;
     
     // Declaring variable (JPanel from another class)
-    Panel1 panel1;
+    static Panel1 panel1;
     Panel2 panel2;
     SplashPanel splashPanel;
     LoginPanel loginPanel;
@@ -48,6 +48,17 @@ public class MainFrame extends JFrame {
     static UserOrderPanel userOrderPanel;
     static UserProfilePanel userProfilePanel;
     // static SearchFlightPanel searchFlightPanel;
+
+    static ButtonContainerPartner buttonContainerPartner;
+    static PartnerFlightShowPanel partnerFlightShowPanel;
+    static PartnerTrainShowPanel partnerTrainShowPanel;
+    static PartnerBusShowPanel partnerBusShowPanel;
+    static PartnerHotelShowPanel partnerHotelShowPanel;
+    static PartnerFlightAddPanel partnerFlightAddPanel;
+    static PartnerTrainAddPanel partnerTrainAddPanel;
+    static PartnerBusAddPanel partnerBusAddPanel;
+    static PartnerHotelAddPanel partnerHotelAddPanel;
+    static PartnerProfilePanel partnerProfilePanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -87,6 +98,10 @@ public class MainFrame extends JFrame {
         cardPanelUser.setLayout(cardLayout);
         cardPanelUser.setBounds(220, 0, width - 220, height);
 
+        cardPanelPartner = new JPanel();
+        cardPanelPartner.setLayout(cardLayout);
+        cardPanelPartner.setBounds(220, 0, width - 220, height);
+
         splashPanel = new SplashPanel();
         loginPanel = new LoginPanel();
         registerStatusPanel = new RegisterStatusPanel();
@@ -111,6 +126,8 @@ public class MainFrame extends JFrame {
         // userHotelPanel = new UserHotelPanel();
         // userOrderPanel = new UserOrderPanel();
         // userProfilePanel = new UserProfilePanel();
+        
+        buttonContainerPartner = new ButtonContainerPartner();
 
         panel1 = new Panel1();
 
@@ -142,8 +159,11 @@ public class MainFrame extends JFrame {
         // cardPanelUser.add(userProfilePanel, "userProfilePanel");
         this.add(cardPanelUser);
 
+        this.add(cardPanelPartner);
+
         this.add(buttonContainerAdmin);
         this.add(buttonContainerUser);
+        this.add(buttonContainerPartner);
 
         // Set Vicibility
         this.setVisible(true);
@@ -152,8 +172,10 @@ public class MainFrame extends JFrame {
         cardPanel1.setVisible(false);
         cardPanelAdmin.setVisible(false);
         cardPanelUser.setVisible(false);
+        cardPanelPartner.setVisible(false);
         buttonContainerAdmin.setVisible(false);
         buttonContainerUser.setVisible(false);
+        buttonContainerPartner.setVisible(false);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -204,5 +226,56 @@ public class MainFrame extends JFrame {
     public static void setSearchFlight(String departureCity, String destinationCity, String noPassenger, String departureDate, String seatClass) {
         SearchFlightPanel searchFlightPanel = new SearchFlightPanel(departureCity, destinationCity, noPassenger, departureDate, seatClass);
         cardPanelUser.add(searchFlightPanel, "searchFlightPanel");
+    }
+
+    public static void setCardPanelPartner(String partnerType) {
+
+        switch (partnerType) {
+        case "Flight":
+            partnerFlightShowPanel = new PartnerFlightShowPanel();
+            partnerFlightAddPanel = new PartnerFlightAddPanel();
+            panel1 = new Panel1();
+
+            cardPanelPartner.add(partnerFlightShowPanel, "partnerFlightShowPanel");
+            cardPanelPartner.add(partnerFlightAddPanel, "partnerFlightAddPanel");
+            cardPanelPartner.add(panel1, "panel1");
+            cardLayout.show(cardPanelPartner, "partnerFlightShowPanel");
+            break;
+        case "Train":
+            partnerTrainShowPanel = new PartnerTrainShowPanel();
+            partnerTrainAddPanel = new PartnerTrainAddPanel();
+            panel1 = new Panel1();
+
+            cardPanelPartner.add(partnerTrainShowPanel, "partnerTrainShowPanel");
+            cardPanelPartner.add(partnerTrainAddPanel, "partnerTrainAddPanel");
+            cardPanelPartner.add(panel1, "panel1");
+            cardLayout.show(cardPanelPartner, "partnerTrainShowPanel");
+            break;
+        case "Bus":
+            partnerBusShowPanel = new PartnerBusShowPanel();
+            partnerBusAddPanel = new PartnerBusAddPanel();
+            panel1 = new Panel1();
+
+            cardPanelPartner.add(partnerBusShowPanel, "partnerBusShowPanel");
+            cardPanelPartner.add(partnerBusAddPanel, "partnerBusAddPanel");
+            cardPanelPartner.add(panel1, "panel1");
+            cardLayout.show(cardPanelPartner, "partnerBusShowPanel");
+            break;
+        case "Hotel":
+            partnerHotelShowPanel = new PartnerHotelShowPanel();
+            partnerHotelAddPanel = new PartnerHotelAddPanel();
+            panel1 = new Panel1();
+
+            cardPanelPartner.add(partnerHotelShowPanel, "partnerHotelShowPanel");
+            cardPanelPartner.add(partnerHotelAddPanel, "partnerHotelAddPanel");
+            cardPanelPartner.add(panel1, "panel1");
+            cardLayout.show(cardPanelPartner, "partnerHotelShowPanel");
+            break;
+        default:
+            break;
+        }
+
+        partnerProfilePanel = new PartnerProfilePanel();
+        cardPanelPartner.add(partnerProfilePanel, "partnerProfilePanel");
     }
 }
