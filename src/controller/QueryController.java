@@ -17,6 +17,7 @@ import model.Flight;
 import model.Hotel;
 import model.Order;
 import model.Partner;
+import model.Room;
 import model.Seat;
 import model.Station;
 import model.TrainTrip;
@@ -903,7 +904,7 @@ public class QueryController {
         "`flight_id`, " +
         "`traintrip_id`, " +
         "`bustrip_id`, " +
-        "`hotel_id`, " +
+        "`room_id`, " +
         "`order_date`, " +
         "`person_name`, " +
         "`phone_number`, " +
@@ -934,7 +935,7 @@ public class QueryController {
                     currentOrder.setOrderType(TripTypesEnum.TRAIN);
                 } else if (result.getString("bustrip_id") != null) {
                     currentOrder.setOrderType(TripTypesEnum.BUS);
-                } else if (result.getString("hotel_id") != null) {
+                } else if (result.getString("room_id") != null) {
                     currentOrder.setOrderType(TripTypesEnum.HOTEL);
                 }
                 orders.add(currentOrder);
@@ -1120,7 +1121,7 @@ public class QueryController {
             }
         } else if (newOrder.getOrderType() == TripTypesEnum.HOTEL) {
             conn.connect();
-            String query = "INSERT INTO `orders`(`user_id`, `hotel_id`, `order_date`, `person_name`, `phone_number`, `email`, `transaction_type`) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO `orders`(`user_id`, `room_id`, `order_date`, `person_name`, `phone_number`, `email`, `transaction_type`) VALUES (?,?,?,?,?,?,?)";
             try {
                 PreparedStatement stmt = conn.conn.prepareStatement(query);
                 stmt.setInt(1, userID);
@@ -1138,5 +1139,107 @@ public class QueryController {
             }
         }
         return false;
+    }
+
+    public ArrayList<Room> selectRoom(String city, String noGuest, String checkIn, String checkOut) {
+        conn.connect();
+
+        String query = "SELECT a.hotel_id, " +
+        "a.hotel_name, " +
+        "a.hotel_star, " +
+        "a.hotel_rating, " +
+        "a.hotel_review, " +
+        "a.hotel_facility, " +
+        "a.hotel_address, " +
+        "a.hotel_city, " +
+        "a.hotel_country, " +
+        
+        "b.room_id, " +
+        "b.room_name, " +
+        "b.room_type, " +
+        "b.room_price, " +
+        "b.room_facility, " +
+        "b.room_capacity, " +
+        "b.room_status, " +
+        "b.checkin, " +
+        "b.checkout " +
+        
+        "FROM hotels a " +
+        "JOIN rooms b " +
+        "ON a.hotel_id = b.hotel_id " +
+        
+        "WHERE a.hotel_city = '" + city + "' " +
+        "AND b.room_capacity >= " + noGuest + " " +
+        "AND b.room_status = 0 ";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Room> rooms = new ArrayList<>();
+
+            while (result.next()) {
+                Room room = new Room();
+
+                room.setRoomID(result.getInt("room_id"));
+                room.setName(result.getString("room_name"));
+                room.setPrice(result.getInt("room_price"));
+                room.setFacility(result.getString("room_facility"));
+                room.setCapacity(result.getInt("room_capacity"));
+                room.setRoomType(result.getString("room_type"));
+
+                rooms.add(room);
+            }
+
+            return rooms;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Hotel getHotelByRoom(int roomID) {
+        conn.connect();
+
+        String query = "SELECT a.hotel_id, " +
+        "a.hotel_name, " +
+        "a.hotel_star, " +
+        "a.hotel_rating, " +
+        "a.hotel_review, " +
+        "a.hotel_facility, " +
+        "a.hotel_address, " +
+        "a.hotel_city, " +
+        "a.hotel_country " +
+        
+        "FROM hotels a " +
+        "JOIN rooms b " +
+        "ON a.hotel_id = b.hotel_id " +
+        
+        "WHERE b.room_id = '" + roomID + "' ";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            Hotel hotel = new Hotel();
+            while (result.next()) {
+
+                hotel.setHotelID(result.getInt("hotel_id"));
+                hotel.setName(result.getString("hotel_name"));
+                hotel.setStar(result.getInt("hotel_star"));
+                hotel.setRating(result.getDouble("hotel_rating"));
+                hotel.setReview(result.getInt("hotel_review"));
+                hotel.setFacility(result.getString("hotel_facility"));
+                hotel.setAddress(result.getString("hotel_address"));
+                hotel.setCity(result.getString("hotel_city"));
+                hotel.setCountry(result.getString("hotel_country"));
+            }
+
+            return hotel;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

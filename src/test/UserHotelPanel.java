@@ -191,9 +191,9 @@ public class UserHotelPanel extends JPanel implements ActionListener {
         if (noPassenger.equals("") || checkin.equals(null) || checkout.equals(null)) {
             JOptionPane.showMessageDialog(null, "Please fill all field !");
         } else {
-            JOptionPane.showMessageDialog(null, "ON PROGRESS");
-            // MainFrame.setSearchFlight(departureCity, destinationCity, noPassenger, departureDate, seatClass);
-            // MainFrame.cardLayout.show(MainFrame.cardPanelUser, "searchFlightPanel");
+            // JOptionPane.showMessageDialog(null, "ON PROGRESS");
+            MainFrame.setSearchHotel(city, noPassenger, checkin, checkout);
+            MainFrame.cardLayout.show(MainFrame.cardPanelUser, "searchHotelPanel");
         }
     }
 }

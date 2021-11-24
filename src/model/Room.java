@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Room {
     private int roomID;
     private String name;
-    private ConstType roomType;
+    private String roomType;
     private int price;
     private String facility;
     private int capacity;
@@ -18,7 +18,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(int roomID, String name, ConstType roomType, int price, String facility, int capacity, boolean status, Date checkin, Date checkout, ArrayList<Image> imageList) {
+    public Room(int roomID, String name, String roomType, int price, String facility, int capacity, boolean status, Date checkin, Date checkout, ArrayList<Image> imageList) {
         this.roomID = roomID;
         this.name = name;
         this.roomType = roomType;
@@ -47,11 +47,11 @@ public class Room {
         this.name = name;
     }
 
-    public ConstType getRoomType() {
+    public String getRoomType() {
         return this.roomType;
     }
 
-    public void setRoomType(ConstType roomType) {
+    public void setRoomType(String roomType) {
         this.roomType = roomType;
     }
 

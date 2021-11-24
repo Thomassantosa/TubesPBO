@@ -229,6 +229,21 @@ public class MainFrame extends JFrame {
         cardPanelUser.add(searchFlightPanel, "searchFlightPanel");
     }
 
+    // public static void setSearchTrain(String departureCity, String destinationCity, String departureDate, String seatClass) {
+    //     SearchTrainPanel searchTrainPanel = new SearchTrainPanel(departureCity, destinationCity, departureDate, seatClass);
+    //     cardPanelUser.add(searchTrainPanel, "searchTrainPanel");
+    // }
+
+    // public static void setSearchBus(String departureCity, String destinationCity, String departureDate, String seatClass) {
+    //     SearchBusPanel searchBusPanel = new SearchBusPanel(departureCity, destinationCity, departureDate, seatClass);
+    //     cardPanelUser.add(searchBusPanel, "searchBusPanel");
+    // }
+
+    public static void setSearchHotel(String city, String noGuest, String checkIn, String checkOut) {
+        SearchHotelPanel searchHotelPanel = new SearchHotelPanel(city, noGuest, checkIn, checkOut);
+        cardPanelUser.add(searchHotelPanel, "searchHotelPanel");
+    }
+
     public static void setCardPanelPartner(String partnerType) {
 
         switch (partnerType) {
