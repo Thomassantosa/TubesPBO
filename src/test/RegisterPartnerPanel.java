@@ -37,7 +37,7 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
     JTextArea taAddress;
     JCheckBox showPassword, showVerify;
     JComboBox<String> cbType;
-    JButton btnRegister;
+    JButton btnRegister, btnBack;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -198,10 +198,19 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
         btnRegister = new JButton("Register");
         btnRegister.setForeground(ConstColor.WHITE);
         btnRegister.setBackground(ConstColor.PURPLE4);
-        btnRegister.setBounds(lUsername.getX(), taAddress.getY() + 240, 250, 40);
+        btnRegister.setBounds(lUsername.getX(), taAddress.getY() + 240, 200, 40);
         btnRegister.setFont(new Font("Arial", Font.PLAIN, 20));
         btnRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnRegister.addActionListener(this);
+
+        // Set JButton (btnBack)
+        btnBack = new JButton("Back");
+        btnBack.setForeground(ConstColor.WHITE);
+        btnBack.setBackground(ConstColor.PURPLE4);
+        btnBack.setBounds(btnRegister.getX() + btnRegister.getWidth() + 40, btnRegister.getY(), 200, 40);
+        btnBack.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(this);
 
         // Adding components
         logoPanel.add(logo);
@@ -227,6 +236,7 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
         formPanel.add(lCompany);
         formPanel.add(tfCompany);
         formPanel.add(btnRegister);
+        formPanel.add(btnBack);
         this.add(formPanel);
 
         // Set vicibility
@@ -261,47 +271,63 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Get value
-        String username = tfUsername.getText();
-        String password = String.valueOf(pfPassword.getPassword());
-        String verify = String.valueOf(pfVerify.getPassword());
-        String email = tfEmail.getText();
-        String fullname = tfFullname.getText();
-        String address = taAddress.getText();
-        String companyName = tfCompany.getText();
-        String userType = ConstType.PARTNER;
-        String partnerType = cbType.getSelectedItem().toString();
+        JButton button = (JButton) e.getSource();
+        String name = button.getText();
 
-        if (username.equals("") || password.equals("") || verify.equals("") || email.equals("") || fullname.equals("") || address.equals("") || companyName.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please fill all field !");
-        } else if (!password.equals(verify)){
-            JOptionPane.showMessageDialog(null, "Verify password failed !");
-        } else {
-            
-            // Check if email / username already taken
-            QueryController queryController = new QueryController();
+        switch (name) {
+            case "Register":
 
-            int emailTaken = queryController.isEmailTaken(email);
-            switch (emailTaken) {
-                case 0:
+                // Get value
+                String username = tfUsername.getText();
+                String password = String.valueOf(pfPassword.getPassword());
+                String verify = String.valueOf(pfVerify.getPassword());
+                String email = tfEmail.getText();
+                String fullname = tfFullname.getText();
+                String address = taAddress.getText();
+                String companyName = tfCompany.getText();
+                String userType = ConstType.PARTNER;
+                String partnerType = cbType.getSelectedItem().toString();
 
-                    int usernameTaken = queryController.isUsernameTaken(username);
-                    switch (usernameTaken) {
+                if (username.equals("") || password.equals("") || verify.equals("") || email.equals("") || fullname.equals("") || address.equals("") || companyName.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill all field !");
+                } else if (!password.equals(verify)){
+                    JOptionPane.showMessageDialog(null, "Verify password failed !");
+                } else {
+                    
+                    // Check if email / username already taken
+                    QueryController queryController = new QueryController();
+
+                    int emailTaken = queryController.isEmailTaken(email);
+                    switch (emailTaken) {
                         case 0:
-                            
-                            // Make new user and insert to database
-                            Partner newPartner = new Partner(fullname, username, email, password, address, userType, partnerType, companyName);
-                            boolean success = queryController.insertPartner(newPartner);
 
-                            if (success) {
-                                JOptionPane.showMessageDialog(null, "Register success");
-                                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Register failed");
+                            int usernameTaken = queryController.isUsernameTaken(username);
+                            switch (usernameTaken) {
+                                case 0:
+                                    
+                                    // Make new user and insert to database
+                                    Partner newPartner = new Partner(fullname, username, email, password, address, userType, partnerType, companyName);
+                                    boolean success = queryController.insertPartner(newPartner);
+
+                                    if (success) {
+                                        JOptionPane.showMessageDialog(null, "Register success");
+                                        MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Register failed");
+                                    }
+                                    break;
+                                case 1:
+                                JOptionPane.showMessageDialog(null, "Username already taken");
+                                    break;
+                                case -1:
+                                    JOptionPane.showMessageDialog(null, "Database connection failed");
+                                    break;
+                                default:
+                                    break;
                             }
                             break;
                         case 1:
-                        JOptionPane.showMessageDialog(null, "Username already taken");
+                            JOptionPane.showMessageDialog(null, "Email already taken");
                             break;
                         case -1:
                             JOptionPane.showMessageDialog(null, "Database connection failed");
@@ -309,16 +335,13 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
                         default:
                             break;
                     }
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Email already taken");
-                    break;
-                case -1:
-                    JOptionPane.showMessageDialog(null, "Database connection failed");
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case "Back":
+                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                break;
+            default:
+                break;
         }
     }
 }

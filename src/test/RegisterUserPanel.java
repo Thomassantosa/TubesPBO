@@ -34,7 +34,7 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
     JTextField tfUsername, tfEmail, tfFullname;
     JTextArea taAddress;
     JCheckBox showPassword, showVerify;
-    JButton btnRegister;
+    JButton btnRegister, btnBack;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -170,10 +170,19 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
         btnRegister = new JButton("Register");
         btnRegister.setForeground(ConstColor.WHITE);
         btnRegister.setBackground(ConstColor.PURPLE4);
-        btnRegister.setBounds(lUsername.getX(), taAddress.getY() + 250, 250, 40);
+        btnRegister.setBounds(lUsername.getX(), taAddress.getY() + 250, 200, 40);
         btnRegister.setFont(new Font("Arial", Font.PLAIN, 20));
         btnRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnRegister.addActionListener(this);
+
+        // Set JButton (btnBack)
+        btnBack = new JButton("Back");
+        btnBack.setForeground(ConstColor.WHITE);
+        btnBack.setBackground(ConstColor.PURPLE4);
+        btnBack.setBounds(btnRegister.getX() + btnRegister.getWidth() + 40, btnRegister.getY(), 200, 40);
+        btnBack.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(this);
 
         // Adding components
         logoPanel.add(logo);
@@ -195,6 +204,7 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
         formPanel.add(lAddress);
         formPanel.add(taAddress);
         formPanel.add(btnRegister);
+        formPanel.add(btnBack);
         this.add(formPanel);
 
         // Set vicibility
@@ -229,45 +239,61 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Get value
-        String username = tfUsername.getText();
-        String password = String.valueOf(pfPassword.getPassword());
-        String verify = String.valueOf(pfVerify.getPassword());
-        String email = tfEmail.getText();
-        String fullname = tfFullname.getText();
-        String address = taAddress.getText();
+        JButton button = (JButton) e.getSource();
+        String name = button.getText();
 
-        if (username.equals("") || password.equals("") || verify.equals("") || email.equals("") || fullname.equals("") || address.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please fill all field !");
-        } else if (!password.equals(verify)){
-            JOptionPane.showMessageDialog(null, "Verify password failed !");
-        } else {
-            
-            // Check if email / username already taken
-            QueryController queryController = new QueryController();
+        switch (name) {
+            case "Register":
+                
+                // Get value
+                String username = tfUsername.getText();
+                String password = String.valueOf(pfPassword.getPassword());
+                String verify = String.valueOf(pfVerify.getPassword());
+                String email = tfEmail.getText();
+                String fullname = tfFullname.getText();
+                String address = taAddress.getText();
 
-            int emailTaken = queryController.isEmailTaken(email);
-            switch (emailTaken) {
-                case 0:
+                if (username.equals("") || password.equals("") || verify.equals("") || email.equals("") || fullname.equals("") || address.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill all field !");
+                } else if (!password.equals(verify)){
+                    JOptionPane.showMessageDialog(null, "Verify password failed !");
+                } else {
+                    
+                    // Check if email / username already taken
+                    QueryController queryController = new QueryController();
 
-                    int usernameTaken = queryController.isUsernameTaken(username);
-                    switch (usernameTaken) {
+                    int emailTaken = queryController.isEmailTaken(email);
+                    switch (emailTaken) {
                         case 0:
-                            
-                            // Make new user and insert to database
-                            User newUser = new User(fullname, username, email, password, address);
 
-                            boolean success = queryController.insertUser(newUser);
+                            int usernameTaken = queryController.isUsernameTaken(username);
+                            switch (usernameTaken) {
+                                case 0:
+                                    
+                                    // Make new user and insert to database
+                                    User newUser = new User(fullname, username, email, password, address);
 
-                            if (success) {
-                                JOptionPane.showMessageDialog(null, "Register success");
-                                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Register failed");
+                                    boolean success = queryController.insertUser(newUser);
+
+                                    if (success) {
+                                        JOptionPane.showMessageDialog(null, "Register success");
+                                        MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Register failed");
+                                    }
+                                    break;
+                                case 1:
+                                JOptionPane.showMessageDialog(null, "Username already taken");
+                                    break;
+                                case -1:
+                                    JOptionPane.showMessageDialog(null, "Database connection failed");
+                                    break;
+                                default:
+                                    break;
                             }
                             break;
                         case 1:
-                        JOptionPane.showMessageDialog(null, "Username already taken");
+                            JOptionPane.showMessageDialog(null, "Email already taken");
                             break;
                         case -1:
                             JOptionPane.showMessageDialog(null, "Database connection failed");
@@ -275,16 +301,14 @@ public class RegisterUserPanel extends JPanel implements ActionListener, ItemLis
                         default:
                             break;
                     }
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Email already taken");
-                    break;
-                case -1:
-                    JOptionPane.showMessageDialog(null, "Database connection failed");
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case "Back":
+                MainFrame.cardLayout.show(MainFrame.cardPanel1, "loginPanel");
+                break;
+            default:
+                break;
         }
+        
     }
 }
