@@ -29,17 +29,15 @@ public class MenuHotelPartner implements MouseInputListener {
     JPanel panelMenu, panelShowData, panelDelete, panelAdd;
     JButton btnShow, btnAdd, btnDelete, btnSave, btnLogout, deleteBtn;
     JTable dataTable;
-    JLabel lTitle, lAddHotel, lDelete, lHotelName, lroomName, lHotelType, lHotelNumber,
-            lderpatureTime, larrivalTime, lcheckin, lcheckout, ltravelTime, lDeletebyID;
+    JLabel lTitle,  lAddRoom, lDelete, lRoomName, lRoomType, lRoomPrice, lRoomFacility, lRoomCapacity, lDeletebyID;
 
     JScrollPane scrollpane;
     DefaultTableModel model;
-    JTextField HotelNumber, derpatureTime, arrivalTime, travelTime, delete;
-    JComboBox<String> cbHotelName, cbroomName, cbdestinationHotelStation;
+    JTextField RoomName, RoomPrice, RoomFacility, RoomCapacity , delete;
+    JComboBox<String> cbRoomType;
     JDatePanelImpl checkin, checkout;
 
-    ArrayList<String> HotelName = queryController.selectHotelName();
-    ArrayList<String> RoomName = queryController.SelectRoomName();
+    ArrayList<String> RoomType = queryController.selectRoomType();
 
     MenuHotelPartner() {
 
@@ -89,14 +87,14 @@ public class MenuHotelPartner implements MouseInputListener {
         scrollpane.setBounds(panelMenu.getWidth() + 100, lTitle.getY() + lTitle.getHeight() + 50, 1200, 350);
 
         // Set value
-        String[] columnData = { "Hotel Name",  "Room Name","Checkin","Checkout" };
+        String[] columnData = { "Hotel Name", "Room Name", "Checkin", "Checkout" };
 
         model = new DefaultTableModel(columnData, 0);
 
         dataTable.setModel(model);
 
         // button add Data
-        // nama Hotel , room 
+        // nama Hotel , room
         // tanggal check in, check out
 
         btnShow = new JButton("Show Hotel Data");
@@ -180,95 +178,92 @@ public class MenuHotelPartner implements MouseInputListener {
 
         case "Add Hotel Data":
 
-            // label for adding a Hotel
-            lAddHotel = new JLabel("Add Hotel");
-            lAddHotel.setForeground(Color.white);
-            lAddHotel.setFont(new Font("Tahoma", Font.BOLD, 40));
-            lAddHotel.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
-
-            lHotelName = new JLabel("Hotel Name");
-            lHotelName.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lAddHotel.getY() + lAddHotel.getHeight() + 50,
-                    250, 33);
-            lHotelName.setForeground(Color.white);
-            lHotelName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-
-            // cb Hotel
-            String[] HotelNameList = new String[HotelName.size()];
-            for (int i = 0; i < HotelName.size(); i++) {
-                HotelNameList[i] = HotelName.get(i);
-            }
-
-            cbHotelName = new JComboBox<>(HotelNameList);
-            cbHotelName.setBackground(new Color(100, 88, 110));
-            cbHotelName.setForeground(Color.white);
-            cbHotelName.setBounds(lHotelName.getX(), lHotelName.getY() + lHotelName.getHeight() + 30, 200, 33);
-
-            //cb room 
-            lroomName = new JLabel("Room Name");
-            lroomName.setForeground(Color.white);
-            lroomName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lroomName.setBounds(cbHotelName.getX(), cbHotelName.getY() + cbHotelName.getHeight() + 80, 250, 33);
-
-            String[] roomName = new String[RoomName.size()];
-            for (int i = 0; i < RoomName.size(); i++) {
-                roomName[i] = RoomName.get(i);
-            }
-
-            cbroomName = new JComboBox<>(roomName);
-            cbroomName.setForeground(Color.white);
-            cbroomName.setBackground(new Color(100, 88, 110));
-            cbroomName.setBounds(lroomName.getX(), lroomName.getY() + lroomName.getHeight() + 30, 200, 33);
-
-            // checkin
-            lcheckin = new JLabel("Checkin");
-            lcheckin.setForeground(Color.white);
-            lcheckin.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lcheckin.setBounds(arrivalTime.getX(), arrivalTime.getY() + arrivalTime.getHeight() + 30, 250, 33);
-
-            // datepicker
-            Properties p = new Properties();
-            SqlDateModel model = new SqlDateModel();
-            p.put("text.day", "Day");
-            p.put("text.month", "Month");
-            p.put("text.year", "Year");
-            checkin = new JDatePanelImpl(model, p);
-            checkin.setBounds(lcheckin.getX(), lcheckin.getY() + lcheckin.getHeight() + 50, 200,
-                    200);
-
-
-            // checkout
-            lcheckout = new JLabel("Checkout");
-            lcheckout.setForeground(Color.white);
-            lcheckout.setFont(new Font("Tahoma", Font.PLAIN, 30));
-            lcheckout.setBounds(lcheckin.getX() + lcheckin.getWidth() + 20, lcheckin.getY(), 250,
-                    33);
-
-            Properties prop = new Properties();
-            SqlDateModel model2 = new SqlDateModel();
-            prop.put("text.day", "Day");
-            prop.put("text.month", "Month");
-            prop.put("text.year", "Year");
-            checkout = new JDatePanelImpl(model2, p);
-            checkout.setBounds(lcheckout.getX(), lcheckout.getY() + lcheckout.getHeight() + 50, 200, 200);
-
+             // label for adding a Bus
+             lAddRoom = new JLabel("Add Room");
+             lAddRoom.setForeground(Color.white);
+             lAddRoom.setFont(new Font("Tahoma", Font.BOLD, 40));
+             lAddRoom.setBounds((int) width / 2 - 200, (int) height / 60, 500, 50);
+ 
+             lRoomName = new JLabel("Room Name");
+             lRoomName.setBounds(panelMenu.getX() + panelMenu.getWidth() - 50, lAddRoom.getY() + lAddRoom.getHeight() + 50,
+                     250, 33);
+            lRoomName.setForeground(Color.white);
+            lRoomName.setFont(new Font("Tahoma", Font.PLAIN, 30));
+ 
+            RoomName = new JTextField();
+            RoomName.setForeground(Color.white);
+            RoomName.setBackground(new Color(100, 88, 110));
+            RoomName.setBounds(lRoomName.getX(), lRoomName.getY() + lRoomName.getHeight() + 30, 200, 33);
+ 
+             lRoomType = new JLabel("Room Type");
+             lRoomType.setForeground(Color.white);
+             lRoomType.setFont(new Font("Tahoma", Font.PLAIN, 30));
+             lRoomType.setBounds(RoomName.getX(),RoomName.getY() + RoomName.getHeight() + 80, 250, 33);
+ 
+             String[] RoomTypeList = new String[RoomType.size()];
+             for (int i = 0; i < RoomType.size(); i++) {
+                RoomTypeList[i] = RoomType.get(i);
+             }
+ 
+             cbRoomType = new JComboBox<>(RoomTypeList);
+             cbRoomType.setBackground(new Color(100, 88, 110));
+             cbRoomType.setForeground(Color.white);
+             cbRoomType.setBounds(lRoomType.getX(), lRoomType.getY() + lRoomType.getHeight() + 30, 200, 33);
+ 
+             lRoomPrice = new JLabel("Room Price");
+             lRoomPrice.setForeground(Color.white);
+             lRoomPrice.setFont(new Font("Tahoma", Font.PLAIN, 30));
+             lRoomPrice.setBounds( cbRoomType.getX(), cbRoomType.getY() +  cbRoomType.getHeight() + 80, 250, 33);
+ 
+             RoomPrice = new JTextField();
+             RoomPrice.setForeground(Color.white);
+             RoomPrice.setBackground(new Color(100, 88, 110));
+             RoomPrice.setBounds( lRoomPrice.getX(),  lRoomPrice.getY() +  lRoomPrice.getHeight() + 30, 200, 33);
+ 
+            
+             lRoomFacility = new JLabel("Room Facility");
+             lRoomFacility.setBounds(lAddRoom.getX(), lRoomName.getY(), 250, 33);
+             lRoomFacility.setForeground(Color.white);
+             lRoomFacility.setFont(new Font("Tahoma", Font.PLAIN, 30));
+ 
+             RoomFacility = new JTextField();
+             RoomFacility.setForeground(Color.white);
+             RoomFacility.setBackground(new Color(100, 88, 110));
+             RoomFacility.setBounds(lRoomFacility.getX(), lRoomFacility.getY() + lRoomFacility.getHeight() + 30, 200, 33);
+ 
+             lRoomCapacity = new JLabel("Room Capacity");
+             lRoomCapacity.setForeground(Color.white);
+             lRoomCapacity.setFont(new Font("Tahoma", Font.PLAIN, 30));
+             lRoomCapacity.setBounds(RoomFacility.getX(),RoomFacility.getY() + RoomFacility.getHeight() + 80, 250, 33);
+ 
+ 
+             RoomCapacity = new JTextField();
+             RoomCapacity.setForeground(Color.white);
+             RoomCapacity.setBackground(new Color(100, 88, 110));
+             RoomCapacity.setBounds(lRoomCapacity.getX(), lRoomCapacity.getY() + lRoomCapacity.getHeight() + 30, 250,
+                     33);
+ 
             // btn Save
             btnSave = new JButton("Save");
             btnSave.setForeground(Color.white);
             btnSave.setBackground(new Color(100, 88, 110));
-            btnSave.setBounds(lHotelName.getX(), panelShowData.getHeight() - 200, 200, 50);
+            btnSave.setBounds(RoomCapacity.getX(), panelShowData.getHeight() - 200, 200, 50);
             btnSave.setFont(new Font("Tahoma", Font.BOLD, 30));
             btnSave.addMouseListener(this);
 
-            panelAdd.add(lAddHotel);
-            panelAdd.add(lHotelName);
-            panelAdd.add(lroomName);
-            panelAdd.add(lcheckin);
-            panelAdd.add(lcheckout);
+            panelAdd.add(lAddRoom);
+            panelAdd.add(lRoomName);
+            panelAdd.add(lRoomType);
+            panelAdd.add(lRoomPrice);
+            panelAdd.add(lRoomFacility);
+            panelAdd.add(lRoomCapacity);
 
-            panelAdd.add(checkout);
-            panelAdd.add(checkin);
-            panelAdd.add(cbHotelName);
-            panelAdd.add(cbroomName);
+            panelAdd.add(RoomName);
+            panelAdd.add(cbRoomType);
+            panelAdd.add(RoomPrice);
+            panelAdd.add(RoomFacility);
+            panelAdd.add(RoomCapacity);
+
             panelAdd.add(btnSave);
 
             scrollpane.setVisible(false);
