@@ -15,6 +15,7 @@ import model.Hotel;
 import model.Seat;
 import model.Station;
 import model.TrainTrip;
+import model.Room;
 
 public class QueryController {
 
@@ -186,9 +187,27 @@ public class QueryController {
 
     // }
     
-    // public boolean insertRoom() {
-
-    // }
+    public boolean insertRoom(Room rooms, int hotel) {
+        conn.connect();
+        String query = "INSERT INTO `rooms`( `hotel_id`,`room_name`, `room_type`, `room_price`,`room_facility`, `room_status`, `checkin`, `checkout`  ) VALUES (?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.conn.prepareStatement(query);
+            stmt.setInt(1, hotel);
+            stmt.setString(2, rooms.getName());
+            stmt.setString(3, rooms.getRoomType());
+            stmt.setInt(4, rooms.getPrice());
+            stmt.setString(5, rooms.getFacility());
+            stmt.setBoolean(6, rooms.getStatus());
+            stmt.setDate(7, rooms.getCheckin());
+            stmt.setDate(8, rooms.getCheckout());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    
     
     public boolean insertStation(Station station) {
         conn.connect();
