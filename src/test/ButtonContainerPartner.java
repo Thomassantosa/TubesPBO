@@ -118,15 +118,19 @@ public class ButtonContainerPartner extends JPanel implements MouseInputListener
 
                 switch (partnerType) {
                     case "Flight":
+                        MainFrame.setCardPanelPartner("Flight");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerFlightShowPanel");
                         break;
                     case "Train":
+                        MainFrame.setCardPanelPartner("Train");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerTrainShowPanel");
                         break;
                     case "Bus":
+                        MainFrame.setCardPanelPartner("Bus");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerBusShowPanel");
                         break;
                     case "Hotel":
+                        MainFrame.setCardPanelPartner("Hotel");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerHotelShowPanel");
                         break;
                     default:
@@ -137,15 +141,19 @@ public class ButtonContainerPartner extends JPanel implements MouseInputListener
 
                 switch (partnerType) {
                     case "Flight":
+                        MainFrame.setCardPanelPartner("Flight");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerFlightAddPanel");
                         break;
                     case "Train":
+                        MainFrame.setCardPanelPartner("Train");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerTrainAddPanel");
                         break;
                     case "Bus":
+                        MainFrame.setCardPanelPartner("Bus");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerBusAddPanel");
                         break;
                     case "Hotel":
+                        MainFrame.setCardPanelPartner("Hotel");
                         MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerHotelAddPanel");
                         break;
                     default:
@@ -156,22 +164,27 @@ public class ButtonContainerPartner extends JPanel implements MouseInputListener
 
                 switch (partnerType) {
                     case "Flight":
-                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "panel1");
+                        MainFrame.setCardPanelPartner("Flight");
+                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerFlightDeletePanel");
                         break;
                     case "Train":
-                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "panel1");
+                        MainFrame.setCardPanelPartner("Train");
+                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerTrainDeletePanel");
                         break;
                     case "Bus":
-                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "panel1");
+                        MainFrame.setCardPanelPartner("Bus");
+                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerBusDeletePanel");
                         break;
                     case "Hotel":
-                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "panel1");
+                        MainFrame.setCardPanelPartner("Hotel");
+                        MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerHotelDeletePanel");
                         break;
                     default:
                         break;
                 }
                 break;
             case "Profile":
+                MainFrame.setPartnerProfilePanel();
                 MainFrame.cardLayout.show(MainFrame.cardPanelPartner, "partnerProfilePanel");
                 break;
             case "Logout":

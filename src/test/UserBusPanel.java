@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.Properties;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,7 +16,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,14 +29,13 @@ import controller.QueryController;
 public class UserBusPanel extends JPanel implements ActionListener {
     
     // Declaring variable
-    JLabel lTitle, lOrder, lDeparture, lDestination, lDate, lNoPassengers, lSeatClass;
+    JLabel lTitle, lOrder, lDeparture, lDestination, lDate, lSeatClass;
     QueryController queryController;
     JPanel container;
     JComboBox<String> cbDeparture, cbDestination, cbSeatClass;
     UtilDateModel dateModel;
     JDatePanelImpl datePanel;
     JDatePickerImpl datePickerDeparture;
-    JTextField tfNoPassengers;
     JButton btnSearch;
 
     // Get screen size
@@ -66,7 +63,7 @@ public class UserBusPanel extends JPanel implements ActionListener {
         container.setBounds(20, 100, width-270, height-200);
         container.setLayout(null);
         container.setOpaque(false);
-
+        
         lOrder = new JLabel("Order ticket");
         lOrder.setForeground(ConstColor.WHITE);
         lOrder.setFont(new Font("Arial", Font.BOLD, 20));
@@ -106,23 +103,11 @@ public class UserBusPanel extends JPanel implements ActionListener {
         datePanel = new JDatePanelImpl(dateModel, p);
         datePickerDeparture = new JDatePickerImpl(datePanel, new DateLabelFormatter());
         datePickerDeparture.setBounds(lDate.getX(), lDate.getY() + 30, 200, 40);
-        // datePickerDeparture.addActionListener(this);
-        
-        lNoPassengers = new JLabel("No Passengers");
-        lNoPassengers.setForeground(ConstColor.WHITE);
-        lNoPassengers.setFont(new Font("Arial", Font.PLAIN, 16));
-        lNoPassengers.setBounds(lDestination.getX() + lDestination.getWidth() + 40, lDestination.getY(), 200, 20);
-
-        tfNoPassengers = new JTextField();
-        tfNoPassengers.setForeground(ConstColor.WHITE);
-        tfNoPassengers.setBackground(ConstColor.PURPLE3);
-        tfNoPassengers.setBounds(lNoPassengers.getX(), lNoPassengers.getY() + 30, 200, 40);
-        tfNoPassengers.setMargin(new Insets(0, 10, 0, 0));
 
         lSeatClass = new JLabel("Seat Class");
         lSeatClass.setForeground(ConstColor.WHITE);
         lSeatClass.setFont(new Font("Arial", Font.PLAIN, 16));
-        lSeatClass.setBounds(lNoPassengers.getX(), lDate.getY(), 200, 20);
+        lSeatClass.setBounds(cbDestination.getX() + cbDestination.getWidth() + 40, lDestination.getY(), 200, 20);
 
         ArrayList<String> seatList = queryController.selectSeatName();
         String[] seatClassName = new String[seatList.size()];
@@ -130,7 +115,7 @@ public class UserBusPanel extends JPanel implements ActionListener {
             seatClassName[i] = seatList.get(i);
         }
         cbSeatClass = new JComboBox<>(seatClassName);
-        cbSeatClass.setBounds(lSeatClass.getX(), datePickerDeparture.getY(), 200, 40);
+        cbSeatClass.setBounds(lSeatClass.getX(), cbDestination.getY(), 200, 40);
 
         btnSearch = new JButton("Search");
         btnSearch.setBounds(lOrder.getX(), container.getHeight() - 200, 200, 40);
@@ -150,17 +135,10 @@ public class UserBusPanel extends JPanel implements ActionListener {
         container.add(cbDestination);
         container.add(lDate);
         container.add(datePickerDeparture);
-        container.add(lNoPassengers);
-        container.add(tfNoPassengers);
         container.add(lSeatClass);
         container.add(cbSeatClass);
         container.add(btnSearch);
         this.add(container);
-
-        // Set vicibility
-        this.setVisible(true);
-        // Adding components
-        this.add(lTitle);
 
         // Set vicibility
         this.setVisible(true);
@@ -195,19 +173,15 @@ public class UserBusPanel extends JPanel implements ActionListener {
         // Get value
         String departureCity = cbDeparture.getSelectedItem().toString();
         String destinationCity = cbDestination.getSelectedItem().toString();
-        String noPassenger = tfNoPassengers.getText();
         String departureDate = datePickerDeparture.getJFormattedTextField().getText();
-        System.out.println(departureDate);
-        
         String seatClass = cbSeatClass.getSelectedItem().toString();
 
-        if (noPassenger.equals("") || departureDate.equals(null)) {
+        if (departureDate.equals(null)) {
             JOptionPane.showMessageDialog(null, "Please fill all field !");
         } else {
             System.out.println(departureDate.toString());
-            JOptionPane.showMessageDialog(null, "ON PROGRESS");
-            // MainFrame.setSearchFlight(departureCity, destinationCity, noPassenger, departureDate, seatClass);
-            // MainFrame.cardLayout.show(MainFrame.cardPanelUser, "searchFlightPanel");
+            MainFrame.setSearchBus(departureCity, destinationCity, departureDate, seatClass);
+            MainFrame.cardLayout.show(MainFrame.cardPanelUser, "searchBusPanel");
         }
     }
 }

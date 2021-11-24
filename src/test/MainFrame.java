@@ -60,6 +60,10 @@ public class MainFrame extends JFrame {
     static PartnerBusAddPanel partnerBusAddPanel;
     static PartnerHotelAddPanel partnerHotelAddPanel;
     static PartnerProfilePanel partnerProfilePanel;
+    static PartnerFlightDeletePanel partnerFlightDeletePanel;
+    static PartnerTrainDeletePanel partnerTrainDeletePanel;
+    static PartnerBusDeletePanel partnerBusDeletePanel;
+    static PartnerHotelDeletePanel partnerHotelDeletePanel;
 
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -229,15 +233,15 @@ public class MainFrame extends JFrame {
         cardPanelUser.add(searchFlightPanel, "searchFlightPanel");
     }
 
-    // public static void setSearchTrain(String departureCity, String destinationCity, String departureDate, String seatClass) {
-    //     SearchTrainPanel searchTrainPanel = new SearchTrainPanel(departureCity, destinationCity, departureDate, seatClass);
-    //     cardPanelUser.add(searchTrainPanel, "searchTrainPanel");
-    // }
+    public static void setSearchTrain(String departureCity, String destinationCity, String departureDate, String seatClass) {
+        SearchTrainPanel searchTrainPanel = new SearchTrainPanel(departureCity, destinationCity, departureDate, seatClass);
+        cardPanelUser.add(searchTrainPanel, "searchTrainPanel");
+    }
 
-    // public static void setSearchBus(String departureCity, String destinationCity, String departureDate, String seatClass) {
-    //     SearchBusPanel searchBusPanel = new SearchBusPanel(departureCity, destinationCity, departureDate, seatClass);
-    //     cardPanelUser.add(searchBusPanel, "searchBusPanel");
-    // }
+    public static void setSearchBus(String departureCity, String destinationCity, String departureDate, String seatClass) {
+        SearchBusPanel searchBusPanel = new SearchBusPanel(departureCity, destinationCity, departureDate, seatClass);
+        cardPanelUser.add(searchBusPanel, "searchBusPanel");
+    }
 
     public static void setSearchHotel(String city, String noGuest, String checkIn, String checkOut) {
         SearchHotelPanel searchHotelPanel = new SearchHotelPanel(city, noGuest, checkIn, checkOut);
@@ -250,47 +254,53 @@ public class MainFrame extends JFrame {
         case "Flight":
             partnerFlightShowPanel = new PartnerFlightShowPanel();
             partnerFlightAddPanel = new PartnerFlightAddPanel();
+            partnerFlightDeletePanel = new PartnerFlightDeletePanel();
             panel1 = new Panel1();
 
             cardPanelPartner.add(partnerFlightShowPanel, "partnerFlightShowPanel");
             cardPanelPartner.add(partnerFlightAddPanel, "partnerFlightAddPanel");
-            cardPanelPartner.add(panel1, "panel1");
+            cardPanelPartner.add(partnerFlightDeletePanel, "partnerFlightDeletePanel");
             cardLayout.show(cardPanelPartner, "partnerFlightShowPanel");
             break;
         case "Train":
             partnerTrainShowPanel = new PartnerTrainShowPanel();
             partnerTrainAddPanel = new PartnerTrainAddPanel();
+            partnerTrainDeletePanel = new PartnerTrainDeletePanel();
             panel1 = new Panel1();
 
             cardPanelPartner.add(partnerTrainShowPanel, "partnerTrainShowPanel");
             cardPanelPartner.add(partnerTrainAddPanel, "partnerTrainAddPanel");
-            cardPanelPartner.add(panel1, "panel1");
+            cardPanelPartner.add(partnerTrainDeletePanel, "partnerTrainDeletePanel");
             cardLayout.show(cardPanelPartner, "partnerTrainShowPanel");
             break;
         case "Bus":
             partnerBusShowPanel = new PartnerBusShowPanel();
             partnerBusAddPanel = new PartnerBusAddPanel();
+            partnerBusDeletePanel = new PartnerBusDeletePanel();
             panel1 = new Panel1();
 
             cardPanelPartner.add(partnerBusShowPanel, "partnerBusShowPanel");
             cardPanelPartner.add(partnerBusAddPanel, "partnerBusAddPanel");
-            cardPanelPartner.add(panel1, "panel1");
+            cardPanelPartner.add(partnerBusDeletePanel, "partnerBusDeletePanel");
             cardLayout.show(cardPanelPartner, "partnerBusShowPanel");
             break;
         case "Hotel":
             partnerHotelShowPanel = new PartnerHotelShowPanel();
             partnerHotelAddPanel = new PartnerHotelAddPanel();
+            partnerHotelDeletePanel = new PartnerHotelDeletePanel();
             panel1 = new Panel1();
 
             cardPanelPartner.add(partnerHotelShowPanel, "partnerHotelShowPanel");
             cardPanelPartner.add(partnerHotelAddPanel, "partnerHotelAddPanel");
-            cardPanelPartner.add(panel1, "panel1");
+            cardPanelPartner.add(partnerHotelDeletePanel, "partnerHotelDeletePanel");
             cardLayout.show(cardPanelPartner, "partnerHotelShowPanel");
             break;
         default:
             break;
         }
+    }
 
+    public static void setPartnerProfilePanel() {
         partnerProfilePanel = new PartnerProfilePanel();
         cardPanelPartner.add(partnerProfilePanel, "partnerProfilePanel");
     }

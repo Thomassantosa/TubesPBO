@@ -67,34 +67,36 @@ public class AdminHomePanel extends JPanel {
         lDate.setFont(new Font("Arial", Font.PLAIN, 16));
         lDate.setBounds(20, lTitle2.getY()+20, 200, 20);
         
-        lIncome = new JLabel("Today Income");
-        lIncome.setForeground(ConstColor.GREEN4);
-        lIncome.setFont(new Font("Arial", Font.BOLD, 20));
-        lIncome.setBounds(20, lDate.getY()+60, 200, 20);
+        // lIncome = new JLabel("Today Income");
+        // lIncome.setForeground(ConstColor.GREEN4);
+        // lIncome.setFont(new Font("Arial", Font.BOLD, 20));
+        // lIncome.setBounds(20, lDate.getY()+60, 200, 20);
         
-        lIncomeValue = new JLabel("dummy");
-        lIncomeValue.setForeground(ConstColor.WHITE);
-        lIncomeValue.setFont(new Font("Arial", Font.PLAIN, 16));
-        lIncomeValue.setBounds(20, lIncome.getY()+20, 200, 20);
+        // lIncomeValue = new JLabel("dummy");
+        // lIncomeValue.setForeground(ConstColor.WHITE);
+        // lIncomeValue.setFont(new Font("Arial", Font.PLAIN, 16));
+        // lIncomeValue.setBounds(20, lIncome.getY()+20, 200, 20);
         // String todayIncome = String.valueOf(queryController.getTodayIncome());
         // lTransactionValue.setText(todayIncome);
 
         lTransaction = new JLabel("New Transaction");
         lTransaction.setForeground(ConstColor.BLUE4);
         lTransaction.setFont(new Font("Arial", Font.BOLD, 20));
-        lTransaction.setBounds(300, lIncome.getY(), 200, 20);
+        // lTransaction.setBounds(300, lIncome.getY(), 200, 20);
+        lTransaction.setBounds(300, lDate.getY()+60, 200, 20);
 
         lTransactionValue = new JLabel("dummy");
         lTransactionValue.setForeground(ConstColor.WHITE);
         lTransactionValue.setFont(new Font("Arial", Font.PLAIN, 16));
-        lTransactionValue.setBounds(300, lIncomeValue.getY(), 200, 20);
+        // lTransactionValue.setBounds(300, lIncomeValue.getY(), 200, 20);
+        lTransactionValue.setBounds(300, lTransaction.getY() + 20, 200, 20);
         String totalTransaction = String.valueOf(queryController.getNewTransaction());
         lTransactionValue.setText(totalTransaction);
 
         lNewUser = new JLabel("New User");
         lNewUser.setForeground(ConstColor.WHITE);
         lNewUser.setFont(new Font("Arial", Font.BOLD, 20));
-        lNewUser.setBounds(20, lIncomeValue.getY()+60, 200, 20);
+        lNewUser.setBounds(20, lTransactionValue.getY()+60, 200, 20);
 
         lNewUserValue = new JLabel("dummy");
         lNewUserValue.setForeground(ConstColor.WHITE);
@@ -143,8 +145,8 @@ public class AdminHomePanel extends JPanel {
         this.add(lTitle);
         container.add(lTitle2);
         container.add(lDate);
-        container.add(lIncome);
-        container.add(lIncomeValue);
+        // container.add(lIncome);
+        // container.add(lIncomeValue);
         container.add(lTransaction);
         container.add(lTransactionValue);
         container.add(lNewUser);
