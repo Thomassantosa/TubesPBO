@@ -304,9 +304,24 @@ public class QueryController {
 
     // }
 
-    // public boolean insertRoomType() {
+    public ArrayList<String> selectRoomType(){
+        conn.connect();
+        String query = "SELECT `room_type` FROM `rooms` ORDER BY `room_id` ASC;";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> RoomType = new ArrayList<>();
 
-    // }
+            while (result.next()) {
+                RoomType.add(result.getString("room_type"));
+            }
+            return RoomType;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     // public boolean insertSchedule() {
 
