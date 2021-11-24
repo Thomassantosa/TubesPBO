@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,9 +38,17 @@ public class MainFrame extends JFrame {
     static AdminUserPanel adminUserPanel;
     static AdminPartnerPanel adminPartnerPanel;
     static AdminProfilePanel adminProfilePanel;
-    static ButtonContainerUser buttonContainerUser;
-
     
+    static ButtonContainerUser buttonContainerUser;
+    static UserHomePanel userHomePanel;
+    static UserFlightPanel userFlightPanel;
+    static UserTrainPanel userTrainPanel;
+    static UserBusPanel userBusPanel;
+    static UserHotelPanel userHotelPanel;
+    static UserOrderPanel userOrderPanel;
+    static UserProfilePanel userProfilePanel;
+    // static SearchFlightPanel searchFlightPanel;
+
     // Get screen size
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)size.getWidth();
@@ -85,16 +94,24 @@ public class MainFrame extends JFrame {
         registerPartnerPanel = new RegisterPartnerPanel();
 
         buttonContainerAdmin = new ButtonContainerAdmin();
-        adminHomePanel = new AdminHomePanel();
-        adminFlightPanel = new AdminFlightPanel();
-        adminTrainPanel = new AdminTrainPanel();
-        adminBusPanel = new AdminBusPanel();
-        adminHotelPanel = new AdminHotelPanel();
-        adminUserPanel = new AdminUserPanel();
-        adminPartnerPanel = new AdminPartnerPanel();
+        // adminHomePanel = new AdminHomePanel();
+        // adminFlightPanel = new AdminFlightPanel();
+        // adminTrainPanel = new AdminTrainPanel();
+        // adminBusPanel = new AdminBusPanel();
+        // adminHotelPanel = new AdminHotelPanel();
+        // adminUserPanel = new AdminUserPanel();
+        // adminPartnerPanel = new AdminPartnerPanel();
         // adminProfilePanel = new AdminProfilePanel();
 
         buttonContainerUser = new ButtonContainerUser();
+        // userHomePanel = new UserHomePanel();
+        // userFlightPanel = new UserFlightPanel();
+        // userTrainPanel = new UserTrainPanel();
+        // userBusPanel = new UserBusPanel();
+        // userHotelPanel = new UserHotelPanel();
+        // userOrderPanel = new UserOrderPanel();
+        // userProfilePanel = new UserProfilePanel();
+
         panel1 = new Panel1();
 
         // Adding component
@@ -106,17 +123,23 @@ public class MainFrame extends JFrame {
         cardPanel1.add(registerPartnerPanel, "registerPartner");
         this.add(cardPanel1);
 
-        cardPanelAdmin.add(adminHomePanel, "adminHomePanel");
-        cardPanelAdmin.add(adminFlightPanel, "adminFlightPanel");
-        cardPanelAdmin.add(adminTrainPanel, "adminTrainPanel");
-        cardPanelAdmin.add(adminBusPanel, "adminBusPanel");
-        cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
-        cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
-        cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
+        // cardPanelAdmin.add(adminHomePanel, "adminHomePanel");
+        // cardPanelAdmin.add(adminFlightPanel, "adminFlightPanel");
+        // cardPanelAdmin.add(adminTrainPanel, "adminTrainPanel");
+        // cardPanelAdmin.add(adminBusPanel, "adminBusPanel");
+        // cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
+        // cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
+        // cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
         // cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
         this.add(cardPanelAdmin);
         
-        cardPanelUser.add(panel1, "panelA");
+        // cardPanelUser.add(userHomePanel, "userHomePanel");
+        // cardPanelUser.add(userFlightPanel, "userFlightPanel");
+        // cardPanelUser.add(userTrainPanel, "userTrainPanel");
+        // cardPanelUser.add(userBusPanel, "userBusPanel");
+        // cardPanelUser.add(userHotelPanel, "userHotelPanel");
+        // cardPanelUser.add(userOrderPanel, "userOrderPanel");
+        // cardPanelUser.add(userProfilePanel, "userProfilePanel");
         this.add(cardPanelUser);
 
         this.add(buttonContainerAdmin);
@@ -141,12 +164,45 @@ public class MainFrame extends JFrame {
     }
 
     public static void setCardPanelAdmin() {
+        adminHomePanel = new AdminHomePanel();
+        adminFlightPanel = new AdminFlightPanel();
+        adminTrainPanel = new AdminTrainPanel();
+        adminBusPanel = new AdminBusPanel();
+        adminHotelPanel = new AdminHotelPanel();
+        adminUserPanel = new AdminUserPanel();
+        adminPartnerPanel = new AdminPartnerPanel();
         adminProfilePanel = new AdminProfilePanel();
+        
+        cardPanelAdmin.add(adminHomePanel, "adminHomePanel");
+        cardPanelAdmin.add(adminFlightPanel, "adminFlightPanel");
+        cardPanelAdmin.add(adminTrainPanel, "adminTrainPanel");
+        cardPanelAdmin.add(adminBusPanel, "adminBusPanel");
+        cardPanelAdmin.add(adminHotelPanel, "adminHotelPanel");
+        cardPanelAdmin.add(adminUserPanel, "adminUserPanel");
+        cardPanelAdmin.add(adminPartnerPanel, "adminPartnerPanel");
         cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
     }
 
     public static void setCardPanelUser() {
-        // adminProfilePanel = new AdminProfilePanel();
-        // cardPanelAdmin.add(adminProfilePanel, "adminProfilePanel");
+        userHomePanel = new UserHomePanel();
+        userFlightPanel = new UserFlightPanel();
+        userTrainPanel = new UserTrainPanel();
+        userBusPanel = new UserBusPanel();
+        userHotelPanel = new UserHotelPanel();
+        userOrderPanel = new UserOrderPanel();
+        userProfilePanel = new UserProfilePanel();
+
+        cardPanelUser.add(userHomePanel, "userHomePanel");
+        cardPanelUser.add(userFlightPanel, "userFlightPanel");
+        cardPanelUser.add(userTrainPanel, "userTrainPanel");
+        cardPanelUser.add(userBusPanel, "userBusPanel");
+        cardPanelUser.add(userHotelPanel, "userHotelPanel");
+        cardPanelUser.add(userOrderPanel, "userOrderPanel");
+        cardPanelUser.add(userProfilePanel, "userProfilePanel");
+    }
+
+    public static void setSearchFlight(String departureCity, String destinationCity, String noPassenger, String departureDate, String seatClass) {
+        SearchFlightPanel searchFlightPanel = new SearchFlightPanel(departureCity, destinationCity, noPassenger, departureDate, seatClass);
+        cardPanelUser.add(searchFlightPanel, "searchFlightPanel");
     }
 }

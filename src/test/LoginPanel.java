@@ -13,6 +13,7 @@ import javax.swing.event.MouseInputListener;
 
 import controller.QueryController;
 import controller.SingletonManager;
+import model.Partner;
 import model.User;
 
 import javax.swing.JButton;
@@ -201,9 +202,29 @@ public class LoginPanel extends JPanel implements ItemListener, MouseInputListen
                             MainFrame.cardPanelUser.setVisible(true);
                             break;
                         case "Partner":
-                            JOptionPane.showMessageDialog(null, "PARTNER FOUND");
+                            // JOptionPane.showMessageDialog(null, "PARTNER FOUND");
 
+                            // Set current user data with singleton
+                            Partner partner = (Partner) user;
+                            SingletonManager.getInstance().setPartner(partner);
 
+                            switch (partner.getPartnerType()) {
+                                case "Flight":
+                                    // Set UI
+                                    MainFrame.setCardPanelPartner();
+                                    MainFrame.cardPanel1.setVisible(false);
+                                    MainFrame.buttonContainerPartner.setVisible(true);
+                                    MainFrame.cardPanelPartner.setVisible(true);
+                                    break;
+                                case "Train":
+                                    
+                                    break;
+                                case "Case":
+                                    
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         default:
                             break;

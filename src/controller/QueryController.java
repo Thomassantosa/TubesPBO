@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.Airlines;
 import model.Airport;
@@ -14,7 +15,9 @@ import model.BusCompany;
 import model.BusTrip;
 import model.Flight;
 import model.Hotel;
+import model.Order;
 import model.Partner;
+import model.Seat;
 import model.Station;
 import model.TrainTrip;
 import model.Trip;
@@ -787,6 +790,275 @@ public class QueryController {
         } catch (SQLException e) {
             e.printStackTrace();
             return (false);
+        }
+    }
+
+    public ArrayList<String> selectAirportCity() {
+        conn.connect();
+        String query = "SELECT DISTINCT `airport_city` FROM `airports` ORDER BY airport_city ASC";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> city = new ArrayList<>();
+
+            while (result.next()) {
+                city.add(result.getString("airport_city"));
+            }
+
+            return city;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<String> selectStationCity() {
+        conn.connect();
+        String query = "SELECT DISTINCT `station_city` FROM `stations` ORDER BY station_city ASC";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> city = new ArrayList<>();
+
+            while (result.next()) {
+                city.add(result.getString("station_city"));
+            }
+
+            return city;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<String> selectBusStationCity() {
+        conn.connect();
+        String query = "SELECT DISTINCT `busstation_city` FROM `busstations` ORDER BY busstation_city ASC";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> city = new ArrayList<>();
+
+            while (result.next()) {
+                city.add(result.getString("busstation_city"));
+            }
+
+            return city;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<String> selectHotelCity() {
+        conn.connect();
+        String query = "SELECT DISTINCT `hotel_city` FROM `hotels` ORDER BY hotel_city ASC";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> city = new ArrayList<>();
+
+            while (result.next()) {
+                city.add(result.getString("hotel_city"));
+            }
+
+            return city;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<String> selectSeatName() {
+        conn.connect();
+        String query = "SELECT DISTINCT `seat_type` FROM `seats` ORDER BY seat_type ASC";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<String> seatName = new ArrayList<>();
+
+            while (result.next()) {
+                seatName.add(result.getString("seat_type"));
+            }
+
+            return seatName;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Order> selectUserOrder(int userID) {
+        conn.connect();
+
+        String query = "SELECT `order_id`, " +
+        "`user_id`, " +
+        "`flight_id`, " +
+        "`traintrip_id`, " +
+        "`bustrip_id`, " +
+        "`hotel_id`, " +
+        "`order_date`, " +
+        "`person_name`, " +
+        "`phone_number`, " +
+        "`email`, " +
+        "`order_status`, " +
+        "`transaction_type` " +
+        "FROM `orders` " +
+        "WHERE user_id = " + String.valueOf(userID) + " " +
+        "ORDER BY order_id DESC";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Order> orders = new ArrayList<>();
+
+            while (result.next()) {
+                Order currentOrder = new Order();
+
+                currentOrder.setOrderID(result.getInt("user_id"));
+                currentOrder.setOrderDate(result.getString("order_Date"));
+                currentOrder.setPhoneNumber(result.getString("phone_number"));
+                currentOrder.setPersonName(result.getString("person_name"));
+                currentOrder.setEmail(result.getString("email"));
+                currentOrder.setOrderStatus(result.getString("order_status"));
+                currentOrder.setTransactionType(result.getString("transaction_type"));
+
+                if (result.getString("flight_id") != null) {
+                    currentOrder.setOrderType(TripTypesEnum.FLIGHT);
+                } else if (result.getString("traintrip_id") != null) {
+                    currentOrder.setOrderType(TripTypesEnum.TRAIN);
+                } else if (result.getString("bustrip_id") != null) {
+                    currentOrder.setOrderType(TripTypesEnum.BUS);
+                } else if (result.getString("hotel_id") != null) {
+                    currentOrder.setOrderType(TripTypesEnum.HOTEL);
+                }
+                orders.add(currentOrder);
+            }
+
+            return orders;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Flight> selectFlight(String departureCity, String destinationCity, String noPassenger, String departureDate, String seatClass) {
+        conn.connect();
+
+        String query = "SELECT a.flight_id, " +
+        "a.flight_type, " +
+        "a.flight_number, " +
+        "a.departure_time, " +
+        "a.arrival_time, " +
+        "a.departure_date, " +
+        "a.arrival_date, " +
+        "a.travel_time, " +
+        
+        "b.airplane_id, " +
+        "b.airplane_model, " +
+        
+        "e.airline_id, " +
+        "e.airline_name, " +
+        "e.airline_contact, " +
+        
+        "c.airport_id AS departure_airport_id, " +
+        "c.airport_code AS departure_airport_code, " +
+        "c.airport_name AS departure_airport_name, " +
+        "c.airport_city AS departure_airport_city, " +
+        "c.airport_country AS departure_airport_country, " +
+        
+        "d.airport_id AS destination_airport_id, " +
+        "d.airport_code AS destination_airport_code, " +
+        "d.airport_name AS destination_airport_name, " +
+        "d.airport_city AS destination_airport_city, " +
+        "d.airport_country AS destination_airport_country, " +
+        
+        "f.seat_price AS seat_price, " +
+        "f.seat_type AS seat_type " +
+
+        "FROM flights a " +
+        "JOIN airplanes b " +
+        "ON a.flight_id = b.airplane_id " +
+        "JOIN airports c " +
+        "ON a.departure_airport = c.airport_id " +
+        "JOIN airports d " +
+        "ON a.destination_airport = d.airport_id " +
+        "JOIN airlines e " +
+        "ON b.airline_id = e.airline_id " +
+        "JOIN seats f " +
+        "ON b.airplane_id = f.airplane_id " +
+        "WHERE c.airport_city = '" + departureCity + "' " +
+        "AND d.airport_city = '" + destinationCity + "' " +
+        "AND f.seat_avaliable >= " + noPassenger + " " +
+        "AND a.departure_date = '" + departureDate + "' " + 
+        "AND f.seat_type = '" + seatClass + "' " +
+        "ORDER BY flight_id Desc";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<Flight> flights = new ArrayList<>();
+
+            while (result.next()) {
+                Flight flight = new Flight();
+                Vehicle airplane = new Vehicle();
+                Airport departureAirport = new Airport();
+                Airport destinationAirport = new Airport();
+                Airlines airline = new Airlines();
+                Seat seat = new Seat();
+
+                flight.setTripID(result.getInt("flight_id"));
+                flight.setFlightType(result.getString("flight_type"));
+                flight.setFlightNumber(result.getString("flight_number"));
+                flight.setTripTypes(TripTypesEnum.FLIGHT);
+                flight.setDepartureTime(result.getString("departure_time"));
+                flight.setArrivalTime(result.getString("arrival_time"));
+                flight.setDepartureDate(result.getString("departure_date"));
+                flight.setArrivalDate(result.getString("arrival_date"));
+                flight.setTripTime(result.getInt("travel_time"));
+
+                seat.setPrice(result.getInt("seat_price"));
+                seat.setSeatType(result.getString("seat_type"));
+
+                airplane.setVehicleID(result.getInt("airplane_id"));
+                airplane.setModel(result.getString("airplane_model"));
+                airplane.addSeat(seat);
+
+                departureAirport.setAirportID(result.getInt("departure_airport_id"));
+                departureAirport.setName(result.getString("departure_airport_name"));
+                departureAirport.setCode(result.getString("departure_airport_code"));
+                departureAirport.setCity(result.getString("departure_airport_city"));
+                departureAirport.setCountry(result.getString("departure_airport_country"));
+
+                destinationAirport.setAirportID(result.getInt("destination_airport_id"));
+                destinationAirport.setName(result.getString("destination_airport_name"));
+                destinationAirport.setCode(result.getString("destination_airport_code"));
+                destinationAirport.setCity(result.getString("destination_airport_city"));
+                destinationAirport.setCountry(result.getString("destination_airport_country"));
+
+                airline.setAirlineID(result.getInt("airline_id"));
+                airline.setName(result.getString("airline_name"));
+                airline.setContact(result.getString("airline_contact"));
+
+                flight.setAirplane(airplane);
+                flight.setDepartureAirport(departureAirport);
+                flight.setDestinationAirport(destinationAirport);
+                flight.setAirline(airline);
+                
+                flights.add(flight);
+            }
+
+            return flights;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

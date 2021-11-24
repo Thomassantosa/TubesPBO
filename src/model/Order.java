@@ -1,23 +1,28 @@
 package model;
-import java.util.ArrayList;
+
 public class Order {
     private int orderID;
     private String orderDate;
+    private String personName;
+    private String phoneNumber;
+    private String email;
     private String orderStatus;
     private String transactionType;
-    private ArrayList <Trip> tripList = new ArrayList<>();
-    private ArrayList <Hotel> hotelList = new ArrayList<>();
-    private ArrayList <Tour> tourList = new ArrayList<>();
+    private TripTypesEnum orderType;
+
+    public Order() {
+    }
 
 
-    public Order(int orderID, String orderDate, String orderStatus, String transactionType, ArrayList<Trip> tripList, ArrayList<Hotel> hotelList, ArrayList<Tour> tourList) {
+    public Order(int orderID, String orderDate, String personName, String phoneNumber, String email, String orderStatus, String transactionType, TripTypesEnum orderType) {
         this.orderID = orderID;
         this.orderDate = orderDate;
+        this.personName = personName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.orderStatus = orderStatus;
         this.transactionType = transactionType;
-        this.tripList = tripList;
-        this.hotelList = hotelList;
-        this.tourList = tourList;
+        this.orderType = orderType;
     }
 
     public int getOrderID() {
@@ -36,6 +41,30 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+    public String getPersonName() {
+        return this.personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getOrderStatus() {
         return this.orderStatus;
     }
@@ -52,28 +81,12 @@ public class Order {
         this.transactionType = transactionType;
     }
 
-    public ArrayList<Trip> getTripList() {
-        return this.tripList;
+    public TripTypesEnum getOrderType() {
+        return this.orderType;
     }
 
-    public void setTripList(ArrayList<Trip> tripList) {
-        this.tripList = tripList;
-    }
-
-    public ArrayList<Hotel> getHotelList() {
-        return this.hotelList;
-    }
-
-    public void setHotelList(ArrayList<Hotel> hotelList) {
-        this.hotelList = hotelList;
-    }
-
-    public ArrayList<Tour> getTourList() {
-        return this.tourList;
-    }
-
-    public void setTourList(ArrayList<Tour> tourList) {
-        this.tourList = tourList;
+    public void setOrderType(TripTypesEnum orderType) {
+        this.orderType = orderType;
     }
 
     @Override
@@ -81,12 +94,13 @@ public class Order {
         return "{" +
             " orderID='" + getOrderID() + "'" +
             ", orderDate='" + getOrderDate() + "'" +
+            ", personName='" + getPersonName() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", email='" + getEmail() + "'" +
             ", orderStatus='" + getOrderStatus() + "'" +
             ", transactionType='" + getTransactionType() + "'" +
-            ", tripList='" + getTripList() + "'" +
-            ", hotelList='" + getHotelList() + "'" +
-            ", tourList='" + getTourList() + "'" +
+            ", orderType='" + getOrderType() + "'" +
             "}";
     }
-
+    
 }

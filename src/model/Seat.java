@@ -2,7 +2,7 @@ package model;
 
 public class Seat {
     private int seatID;
-    private ConstType seatType;
+    private String seatType;
     private int seatAvaliable;
     private int baggageCapacity;
     private int price;
@@ -10,14 +10,14 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(ConstType seatType, int seatAvaliable, int baggageCapacity, int price) {
+    public Seat(String seatType, int seatAvaliable, int baggageCapacity, int price) {
         this.seatType = seatType;
         this.seatAvaliable = seatAvaliable;
         this.baggageCapacity = baggageCapacity;
         this.price = price;
     }
 
-    public Seat(int seatID, ConstType seatType, int seatAvaliable, int baggageCapacity, int price) {
+    public Seat(int seatID, String seatType, int seatAvaliable, int baggageCapacity, int price) {
         this.seatID = seatID;
         this.seatType = seatType;
         this.seatAvaliable = seatAvaliable;
@@ -33,11 +33,11 @@ public class Seat {
         this.seatID = seatID;
     }
 
-    public ConstType getSeatType() {
+    public String getSeatType() {
         return this.seatType;
     }
 
-    public void setSeatType(ConstType seatType) {
+    public void setSeatType(String seatType) {
         this.seatType = seatType;
     }
 
