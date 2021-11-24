@@ -181,6 +181,7 @@ public class ButtonContainerUser extends JPanel implements MouseInputListener {
             //     MainFrame.cardLayout.show(MainFrame.cardPanelUser, "panelC");
             //     break;
             case "Your Order":
+                MainFrame.setUserProfilePanel();
                 MainFrame.cardLayout.show(MainFrame.cardPanelUser, "userOrderPanel");
                 break;
             case "Profile":

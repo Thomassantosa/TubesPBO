@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.TripTypesEnum;
+
 public class MainFrame extends JFrame {
     
     // Declaring variable
@@ -47,7 +49,6 @@ public class MainFrame extends JFrame {
     static UserHotelPanel userHotelPanel;
     static UserOrderPanel userOrderPanel;
     static UserProfilePanel userProfilePanel;
-    // static SearchFlightPanel searchFlightPanel;
 
     static ButtonContainerPartner buttonContainerPartner;
     static PartnerFlightShowPanel partnerFlightShowPanel;
@@ -223,8 +224,8 @@ public class MainFrame extends JFrame {
         cardPanelUser.add(userProfilePanel, "userProfilePanel");
     }
 
-    public static void setSearchFlight(String departureCity, String destinationCity, String noPassenger, String departureDate, String seatClass) {
-        SearchFlightPanel searchFlightPanel = new SearchFlightPanel(departureCity, destinationCity, noPassenger, departureDate, seatClass);
+    public static void setSearchFlight(String departureCity, String destinationCity, String departureDate, String seatClass) {
+        SearchFlightPanel searchFlightPanel = new SearchFlightPanel(departureCity, destinationCity, departureDate, seatClass);
         cardPanelUser.add(searchFlightPanel, "searchFlightPanel");
     }
 
@@ -277,5 +278,15 @@ public class MainFrame extends JFrame {
 
         partnerProfilePanel = new PartnerProfilePanel();
         cardPanelPartner.add(partnerProfilePanel, "partnerProfilePanel");
+    }
+
+    public static void setBookingPanel(int id, TripTypesEnum type, int price) {
+        BookingPanel bookingPanel = new BookingPanel(id, type, price);
+        cardPanelUser.add(bookingPanel, "bookingPanel");
+    }
+
+    public static void setUserProfilePanel() {
+        userOrderPanel= new UserOrderPanel();
+        cardPanelUser.add(userOrderPanel, "userOrderPanel");
     }
 }

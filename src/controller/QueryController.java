@@ -908,7 +908,6 @@ public class QueryController {
         "`person_name`, " +
         "`phone_number`, " +
         "`email`, " +
-        "`order_status`, " +
         "`transaction_type` " +
         "FROM `orders` " +
         "WHERE user_id = " + String.valueOf(userID) + " " +
@@ -927,7 +926,6 @@ public class QueryController {
                 currentOrder.setPhoneNumber(result.getString("phone_number"));
                 currentOrder.setPersonName(result.getString("person_name"));
                 currentOrder.setEmail(result.getString("email"));
-                currentOrder.setOrderStatus(result.getString("order_status"));
                 currentOrder.setTransactionType(result.getString("transaction_type"));
 
                 if (result.getString("flight_id") != null) {
@@ -950,7 +948,7 @@ public class QueryController {
         }
     }
 
-    public ArrayList<Flight> selectFlight(String departureCity, String destinationCity, String noPassenger, String departureDate, String seatClass) {
+    public ArrayList<Flight> selectFlight(String departureCity, String destinationCity, String departureDate, String seatClass) {
         conn.connect();
 
         String query = "SELECT a.flight_id, " +
@@ -986,7 +984,7 @@ public class QueryController {
 
         "FROM flights a " +
         "JOIN airplanes b " +
-        "ON a.flight_id = b.airplane_id " +
+        "ON a.airplane_id = b.airplane_id " +
         "JOIN airports c " +
         "ON a.departure_airport = c.airport_id " +
         "JOIN airports d " +
@@ -997,7 +995,7 @@ public class QueryController {
         "ON b.airplane_id = f.airplane_id " +
         "WHERE c.airport_city = '" + departureCity + "' " +
         "AND d.airport_city = '" + destinationCity + "' " +
-        "AND f.seat_avaliable >= " + noPassenger + " " +
+        "AND f.seat_avaliable > 0 " +
         "AND a.departure_date = '" + departureDate + "' " + 
         "AND f.seat_type = '" + seatClass + "' " +
         "ORDER BY flight_id Desc";
@@ -1062,5 +1060,83 @@ public class QueryController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean insertNewOrder(int userID, Order newOrder, int selectedID) {
+        // Get type
+        if (newOrder.getOrderType() == TripTypesEnum.FLIGHT) {
+            conn.connect();
+            String query = "INSERT INTO `orders`(`user_id`, `flight_id`, `order_date`, `person_name`, `phone_number`, `email`, `transaction_type`) VALUES (?,?,?,?,?,?,?)";
+            try {
+                PreparedStatement stmt = conn.conn.prepareStatement(query);
+                stmt.setInt(1, userID);
+                stmt.setInt(2, selectedID);
+                stmt.setString(3, newOrder.getOrderDate());
+                stmt.setString(4, newOrder.getPersonName());
+                stmt.setString(5, newOrder.getPhoneNumber());
+                stmt.setString(6, newOrder.getEmail());
+                stmt.setString(7, newOrder.getTransactionType());
+                stmt.executeUpdate();
+                return (true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return (false);
+            }
+        } else if (newOrder.getOrderType() == TripTypesEnum.TRAIN) {
+            conn.connect();
+            String query = "INSERT INTO `orders`(`user_id`, `traintrip_id`, `order_date`, `person_name`, `phone_number`, `email`, `transaction_type`) VALUES (?,?,?,?,?,?,?)";
+            try {
+                PreparedStatement stmt = conn.conn.prepareStatement(query);
+                stmt.setInt(1, userID);
+                stmt.setInt(2, selectedID);
+                stmt.setString(3, newOrder.getOrderDate());
+                stmt.setString(4, newOrder.getPersonName());
+                stmt.setString(5, newOrder.getPhoneNumber());
+                stmt.setString(6, newOrder.getEmail());
+                stmt.setString(7, newOrder.getTransactionType());
+                stmt.executeUpdate();
+                return (true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return (false);
+            }
+        } else if (newOrder.getOrderType() == TripTypesEnum.BUS) {
+            conn.connect();
+            String query = "INSERT INTO `orders`(`user_id`, `bustrip_id`, `order_date`, `person_name`, `phone_number`, `email`, `transaction_type`) VALUES (?,?,?,?,?,?,?)";
+            try {
+                PreparedStatement stmt = conn.conn.prepareStatement(query);
+                stmt.setInt(1, userID);
+                stmt.setInt(2, selectedID);
+                stmt.setString(3, newOrder.getOrderDate());
+                stmt.setString(4, newOrder.getPersonName());
+                stmt.setString(5, newOrder.getPhoneNumber());
+                stmt.setString(6, newOrder.getEmail());
+                stmt.setString(7, newOrder.getTransactionType());
+                stmt.executeUpdate();
+                return (true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return (false);
+            }
+        } else if (newOrder.getOrderType() == TripTypesEnum.HOTEL) {
+            conn.connect();
+            String query = "INSERT INTO `orders`(`user_id`, `hotel_id`, `order_date`, `person_name`, `phone_number`, `email`, `transaction_type`) VALUES (?,?,?,?,?,?,?)";
+            try {
+                PreparedStatement stmt = conn.conn.prepareStatement(query);
+                stmt.setInt(1, userID);
+                stmt.setInt(2, selectedID);
+                stmt.setString(3, newOrder.getOrderDate());
+                stmt.setString(4, newOrder.getPersonName());
+                stmt.setString(5, newOrder.getPhoneNumber());
+                stmt.setString(6, newOrder.getEmail());
+                stmt.setString(7, newOrder.getTransactionType());
+                stmt.executeUpdate();
+                return (true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return (false);
+            }
+        }
+        return false;
     }
 }

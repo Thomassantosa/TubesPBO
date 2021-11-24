@@ -49,12 +49,12 @@ public class UserOrderPanel extends JPanel {
         // Set JTable
         dataTable = new JTable();
         dataTable.setBounds(20, 80, width-270, height-200);
-        String[] columnData = {"Order Date", "Order Type", "Person Name", "Phone Number", "Email", "Order Status", "Transaction Type"};
+        String[] columnData = {"Order Date", "Order Type", "Person Name", "Phone Number", "Email", "Transaction Type"};
         model = new DefaultTableModel(columnData, 0);
         
         ArrayList<Order> orders = queryController.selectUserOrder(SingletonManager.getInstance().getUser().getUserID());
         for (int i = 0; i < orders.size(); i++) {
-            String[] newModel = new String[7];
+            String[] newModel = new String[6];
 
             Order currentOrder = orders.get(i);
             newModel[0] = currentOrder.getOrderDate();
@@ -72,8 +72,7 @@ public class UserOrderPanel extends JPanel {
             newModel[2] = currentOrder.getPersonName();
             newModel[3] = currentOrder.getPhoneNumber();
             newModel[4] = currentOrder.getEmail();
-            newModel[5] = currentOrder.getOrderStatus();
-            newModel[6] = currentOrder.getTransactionType();
+            newModel[5] = currentOrder.getTransactionType();
 
             model.addRow(newModel);
         }

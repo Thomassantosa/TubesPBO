@@ -14,13 +14,21 @@ public class Order {
     }
 
 
-    public Order(int orderID, String orderDate, String personName, String phoneNumber, String email, String orderStatus, String transactionType, TripTypesEnum orderType) {
+    public Order(int orderID, String orderDate, String personName, String phoneNumber, String email, String transactionType, TripTypesEnum orderType) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.personName = personName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.orderStatus = orderStatus;
+        this.transactionType = transactionType;
+        this.orderType = orderType;
+    }
+
+    public Order(String orderDate, String personName, String phoneNumber, String email, String transactionType, TripTypesEnum orderType) {
+        this.orderDate = orderDate;
+        this.personName = personName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.transactionType = transactionType;
         this.orderType = orderType;
     }
