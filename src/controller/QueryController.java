@@ -1062,6 +1062,113 @@ public class QueryController {
         }
     }
 
+    public ArrayList<TrainTrip> selecTrainTrip(String departureCity , String destinationCity , String departureDate , String seatClass){
+
+        conn.connect();
+
+        String query = "SELECT  a.traintrip_id, " +
+        " a.train_id, "+
+        "a.trainTrip_number," + 
+        "a.departure_time," +
+        "a.arrival_time," +  
+        "a.departure_date," +  
+        "a.arrival_date," + 
+        "a.travel_time," + 
+        
+        "b.train_id," + 
+        "b.train_model," +
+        
+        "c.station_id AS departure_station_id," + 
+        "c.station_code AS departure_station_code," + 
+        "c.station_name AS departure_station_name," + 
+        "c.station_city AS departure_station_city," + 
+        
+        "d.station_id  AS destination_station_id," + 
+        "d.station_code AS destination_station_code," + 
+        "d.station_name AS destination_station_name," + 
+        "d.station_city AS destination_station_city," + 
+     
+        
+        "f.seat_price AS seat_price," + 
+        "f.seat_type AS seat_type "+
+
+        "FROM traintrips a " +
+        "JOIN trains b " +
+        "ON a.train_id = b.train_id"+ 
+        "JOIN stations c " +
+        "ON a.departure_station = c.station_id"+
+        "JOIN stations d" + 
+        "ON a.destination_station = d.station_id" +
+        "JOIN seats f" + 
+        "ON b.train_id = f.train_id" + 
+        
+        "WHERE c.station_city = '" + departureCity + "' " +
+        "AND d.station_city = '" + destinationCity + "' " +
+        "AND f.seat_avaliable > 0 " +
+        "AND a.departure_date = '" + departureDate + "' " + 
+        "AND f.seat_type = '" + seatClass + "' " +
+       
+        "ORDER BY traintrip_id Desc;";
+
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<TrainTrip> trainTrips = new ArrayList<>();
+
+            while (result.next()) {
+                TrainTrip trainTrip = new TrainTrip();
+                Vehicle train = new Vehicle();
+                Station departureStation = new Station();
+                Station destinationStation = new Station();
+                Seat seat = new Seat();
+
+                trainTrip.setTripID(result.getInt("traintrip_id"));
+              
+                trainTrip.setTrainTripNumber(result.getString("trainTrip_Number"));
+                trainTrip.setTripTypes(TripTypesEnum.TRAIN);
+                trainTrip.setDepartureTime(result.getString("departure_time"));
+                trainTrip.setArrivalTime(result.getString("arrival_time"));
+                trainTrip.setDepartureDate(result.getString("departure_date"));
+                trainTrip.setArrivalDate(result.getString("arrival_date"));
+                trainTrip.setTripTime(result.getInt("travel_time"));
+
+                seat.setPrice(result.getInt("seat_price"));
+                seat.setSeatType(result.getString("seat_type"));
+
+                train.setVehicleID(result.getInt("train_id"));
+                train.setModel(result.getString("train_model"));
+                train.addSeat(seat);
+
+                departureStation.setStationID(result.getInt("departure_station_id"));
+                departureStation.setName(result.getString("departure_station_name"));
+                departureStation.setCode(result.getString("departure_station_code"));
+                departureStation.setCity(result.getString("departure_station_city"));
+               
+
+                destinationStation.setStationID(result.getInt("destination_station_id"));
+                destinationStation.setName(result.getString("destination_station_name"));
+                destinationStation.setCode(result.getString("destination_station_code"));
+                destinationStation.setCity(result.getString("destination_station_city"));
+          
+
+
+                trainTrip.setTrain(train);
+                trainTrip.setDepartureStation(departureStation);
+                trainTrip.setDestinationStation(destinationStation);
+                
+                
+                trainTrips.add(trainTrip);
+            }
+
+            return trainTrips;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+
     public boolean insertNewOrder(int userID, Order newOrder, int selectedID) {
         // Get type
         if (newOrder.getOrderType() == TripTypesEnum.FLIGHT) {
