@@ -1139,4 +1139,59 @@ public class QueryController {
         }
         return false;
     }
+    public ArrayList<BusTrip> selectBusTrip (String departureCity, String destinationCity, String departureDate, String seatClass) {
+        conn.connect();
+
+        String query = "SELECT a.bustrip_id,"+
+        "a.busTrip_number,"+
+        "a.departure_date," +
+        "a.departure_time, "+
+        "a.arrival_date, " +
+        "a.arrival_time, "+
+        "a.travel_time, "+
+        "b.bus_model," +
+        "e.buscompany_id,"+
+        "e.buscompany_name,"+
+        "e.buscompany_contact," +
+        "c.busstation_id AS departure_busstation_id,"+
+        "c.busstation_code AS departure_busstation_code,"+
+        "c.busstation_name AS departure_busstation_name,"+
+        "c.busstation_city AS departure_busstation_city,"+
+        "d.busstation_id AS destination_busstation_id,"+
+        "d.busstation_code AS destination_busstation_code,"+
+        "d.busstation_name AS destination_busstation_name,"+
+        "d.busstation_city AS destination_busstation_city,"+
+        "f.seat_price AS seat_price, " +
+        "f.seat_type AS seat_type " + 
+        "FROM bustrips a " +
+        "JOIN buses b "+
+        "on a.bus_id = b.bus_id"+
+        "JOIN busstations c "+
+        "on a.departure_busstation = c.busstation_id"+
+        "JOIN busstations d "+
+        "on a.destination_busstation = d.busstation_id"+
+        "JOIN buscompanies e "+
+        "on b.buscompany_id = e.buscompany_id"+
+        "JOIN seats f "+
+        "on b.bus_id = f.bus_id"+
+        "WHERE c.busstation_city ='" + departureCity + "' "+
+        "AND d.busstation_city ='" + destinationCity + "' "+
+        "AND f.seat_avaliable > 0 " +
+        "AND a.departure_date = '" + departureDate + "' " + 
+        "AND f.seat_type = '" + seatClass + "' " +
+        "ORDER BY bustrip_id DESC";
+        try {
+            Statement stmt = conn.conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            ArrayList<BusTrip> bus = new ArrayList<>();
+            while (result.next()) {
+                
+            }
+            return bus;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }
