@@ -135,7 +135,7 @@ public class RegisterPartnerPanel extends JPanel implements ActionListener, Item
         lType.setFont(new Font("Arial", Font.PLAIN, 20));
         lType.setBounds(lTitle.getX(), pfVerify.getY() + 70, 120, 50);
 
-        String[] typeList = {"Flight", "Train", "Bus", "Hotel", "XTorience"};
+        String[] typeList = {"Flight", "Train", "Bus", "Hotel"};
         cbType = new JComboBox<>(typeList); 
         cbType.setForeground(ConstColor.WHITE);
         cbType.setBackground(ConstColor.PURPLE3);
