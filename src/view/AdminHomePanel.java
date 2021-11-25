@@ -79,17 +79,17 @@ public class AdminHomePanel extends JPanel {
         // String todayIncome = String.valueOf(queryController.getTodayIncome());
         // lTransactionValue.setText(todayIncome);
 
-        lTransaction = new JLabel("New Transaction");
-        lTransaction.setForeground(ConstColor.BLUE4);
+        lTransaction = new JLabel("New Order");
+        lTransaction.setForeground(ConstColor.GREEN4);
         lTransaction.setFont(new Font("Arial", Font.BOLD, 20));
         // lTransaction.setBounds(300, lIncome.getY(), 200, 20);
-        lTransaction.setBounds(300, lDate.getY()+60, 200, 20);
+        lTransaction.setBounds(lDate.getX(), lDate.getY()+60, 200, 20);
 
         lTransactionValue = new JLabel("dummy");
         lTransactionValue.setForeground(ConstColor.WHITE);
         lTransactionValue.setFont(new Font("Arial", Font.PLAIN, 16));
         // lTransactionValue.setBounds(300, lIncomeValue.getY(), 200, 20);
-        lTransactionValue.setBounds(300, lTransaction.getY() + 20, 200, 20);
+        lTransactionValue.setBounds(lTransaction.getX(), lTransaction.getY() + 20, 200, 20);
         String totalTransaction = String.valueOf(queryController.getNewTransaction());
         lTransactionValue.setText(totalTransaction);
 

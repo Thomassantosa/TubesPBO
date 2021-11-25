@@ -338,7 +338,7 @@ public class QueryController {
         String currentDate = dtf.format(now);
 
         conn.connect();
-        String query = "SELECT COUNT(order_id) FROM orders WHERE order_date='" + currentDate + "'";
+        String query = "SELECT COUNT(order_id) FROM orders WHERE order_date = '" + currentDate + "'";
         try {
             Statement stmt = conn.conn.createStatement();
             ResultSet result = stmt.executeQuery(query);

@@ -241,33 +241,33 @@ public class PartnerProfilePanel extends JPanel implements ActionListener, ItemL
 
             if (somethingChanged) {
                 
-                boolean willUpdate = false;
-                int emailTaken = -1;
-                int usernameTaken = -1;
+                boolean willUpdate = true;
+                // int emailTaken = -1;
+                // int usernameTaken = -1;
 
-                if (!username.equals(SingletonManager.getInstance().getPartner().getUsername()) && !email.equals(SingletonManager.getInstance().getPartner().getEmail())) {
-                    emailTaken = queryController.isEmailTaken(email);
-                    usernameTaken = queryController.isUsernameTaken(username);
-                    if (emailTaken == 0 && usernameTaken == 0) {
-                        willUpdate = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Username or Email already taken");
-                    }
-                } else if (!username.equals(SingletonManager.getInstance().getPartner().getUsername())) {
-                    usernameTaken = queryController.isUsernameTaken(username);
-                    if (usernameTaken == 0) {
-                        willUpdate = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Username already taken");
-                    }
-                } else if (!email.equals(SingletonManager.getInstance().getPartner().getEmail())) {
-                    emailTaken = queryController.isEmailTaken(email);
-                    if (emailTaken == 0) {
-                        willUpdate = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Email already taken");
-                    }
-                }
+                // if (!username.equals(SingletonManager.getInstance().getPartner().getUsername()) && !email.equals(SingletonManager.getInstance().getPartner().getEmail())) {
+                //     emailTaken = queryController.isEmailTaken(email);
+                //     usernameTaken = queryController.isUsernameTaken(username);
+                //     if (emailTaken == 0 && usernameTaken == 0) {
+                //         willUpdate = true;
+                //     } else {
+                //         JOptionPane.showMessageDialog(null, "Username or Email already taken");
+                //     }
+                // } else if (!username.equals(SingletonManager.getInstance().getPartner().getUsername())) {
+                //     usernameTaken = queryController.isUsernameTaken(username);
+                //     if (usernameTaken == 0) {
+                //         willUpdate = true;
+                //     } else {
+                //         JOptionPane.showMessageDialog(null, "Username already taken");
+                //     }
+                // } else if (!email.equals(SingletonManager.getInstance().getPartner().getEmail())) {
+                //     emailTaken = queryController.isEmailTaken(email);
+                //     if (emailTaken == 0) {
+                //         willUpdate = true;
+                //     } else {
+                //         JOptionPane.showMessageDialog(null, "Email already taken");
+                //     }
+                // }
 
                 if (willUpdate) {
                     // Update database
@@ -275,13 +275,13 @@ public class PartnerProfilePanel extends JPanel implements ActionListener, ItemL
                     User updateUser = new User(fullname, username, email, password, address);
 
                     JOptionPane.showMessageDialog(null, "ON PROGRESS");
-                    // boolean success = queryController.updateUser(userID, updateUser);
+                    boolean success = queryController.updateUser(userID, updateUser);
 
-                    // if (success) {
-                    //     JOptionPane.showMessageDialog(null, "Update success");
-                    // } else {
-                    //     JOptionPane.showMessageDialog(null, "Update failed");
-                    // }
+                    if (success) {
+                        JOptionPane.showMessageDialog(null, "Update success");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Update failed");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Nothing changed");

@@ -241,33 +241,33 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
 
             if (somethingChanged) {
                 
-                boolean willUpdate = false;
-                int emailTaken = -1;
-                int usernameTaken = -1;
+                boolean willUpdate = true;
+                // int emailTaken = -1;
+                // int usernameTaken = -1;
 
-                if (!username.equals(SingletonManager.getInstance().getUser().getUsername()) && !email.equals(SingletonManager.getInstance().getUser().getEmail())) {
-                    emailTaken = queryController.isEmailTaken(email);
-                    usernameTaken = queryController.isUsernameTaken(username);
-                    if (emailTaken == 0 && usernameTaken == 0) {
-                        willUpdate = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Username or Email already taken");
-                    }
-                } else if (!username.equals(SingletonManager.getInstance().getUser().getUsername())) {
-                    usernameTaken = queryController.isUsernameTaken(username);
-                    if (usernameTaken == 0) {
-                        willUpdate = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Username already taken");
-                    }
-                } else if (!email.equals(SingletonManager.getInstance().getUser().getEmail())) {
-                    emailTaken = queryController.isEmailTaken(email);
-                    if (emailTaken == 0) {
-                        willUpdate = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Email already taken");
-                    }
-                }
+                // if (!username.equals(SingletonManager.getInstance().getUser().getUsername()) && !email.equals(SingletonManager.getInstance().getUser().getEmail())) {
+                //     emailTaken = queryController.isEmailTaken(email);
+                //     usernameTaken = queryController.isUsernameTaken(username);
+                //     if (emailTaken == 0 && usernameTaken == 0) {
+                //         willUpdate = true;
+                //     } else {
+                //         JOptionPane.showMessageDialog(null, "Username or Email already taken");
+                //     }
+                // } else if (!username.equals(SingletonManager.getInstance().getUser().getUsername())) {
+                //     usernameTaken = queryController.isUsernameTaken(username);
+                //     if (usernameTaken == 0) {
+                //         willUpdate = true;
+                //     } else {
+                //         JOptionPane.showMessageDialog(null, "Username already taken");
+                //     }
+                // } else if (!email.equals(SingletonManager.getInstance().getUser().getEmail())) {
+                //     emailTaken = queryController.isEmailTaken(email);
+                //     if (emailTaken == 0) {
+                //         willUpdate = true;
+                //     } else {
+                //         JOptionPane.showMessageDialog(null, "Email already taken");
+                //     }
+                // }
 
                 if (willUpdate) {
                     // Update database
@@ -281,6 +281,8 @@ public class AdminProfilePanel extends JPanel implements ActionListener, ItemLis
                     } else {
                         JOptionPane.showMessageDialog(null, "Update failed");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Update failed");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Nothing changed");
