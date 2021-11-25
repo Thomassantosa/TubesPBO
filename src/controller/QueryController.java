@@ -504,7 +504,7 @@ public class QueryController {
         
         "FROM traintrips a " +
         "JOIN trains b " +
-        "ON a.traintrip_id = b.train_id " +
+        "ON a.train_id = b.train_id " +
         "JOIN stations c " +
         "ON a.departure_station = c.station_id " +
         "JOIN stations d " +
@@ -591,7 +591,7 @@ public class QueryController {
         
         "FROM bustrips a " +
         "JOIN buses b " +
-        "ON a.bustrip_id = b.bus_id " +
+        "ON a.bus_id = b.bus_id " +
         "JOIN busstations c " +
         "ON a.departure_busstation = c.busstation_id " +
         "JOIN busstations d " +
@@ -667,7 +667,7 @@ public class QueryController {
         "hotel_address, " +
         "hotel_city, " +
         "hotel_country " +
-        "FROM `hotels` " +
+        "FROM hotels " +
         "WHERE 1 " +
         "ORDER BY hotel_id DESC";
 

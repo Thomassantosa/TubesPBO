@@ -1,18 +1,12 @@
 Architecture yang digunakan :
 
 model/                                                      (berisi struktur data)
-    -
-    -
 
 view/                                                       (berisi GUI)
-    -
-    -
 
 controller/                                                 (berisi logic / fungsi)
-    -
 
-main/                                                       (berisi main / config)
-    - Main.java
+main/                                                       (berisi main / runnable class)
     
 info/                                                       (berisi informasi keseluruhan program)
     - Architecture.txt

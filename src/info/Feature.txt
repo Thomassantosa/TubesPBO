@@ -1,6 +1,38 @@
-Transportasi
-    - Bus
-    - Kereta
-    - Pesawat
-Hotel
-Wisata
+Feature List
+
+a) Login               (dapat login dengan username / email)
+b) Menu Admin 
+    1) Melihat data dashboard
+    2) Melihat data flight
+    3) mMelihat data train trip
+    4) Melihat data bus trip
+    5) Melihat data Hotel
+    6) Melihat data user
+    7) Melihat data partner
+    8) Edit profile
+
+c) Menu user
+    1) Home Menu
+    2) Flight booking
+        - Search
+        - Choose
+        - Booking
+    3) Train booking
+        - Search
+        - Choose
+        - Booking
+    4) Bus booking
+        - Search
+        - Choose
+        - Booking
+    5) Hotel / room booking
+        - Search
+        - Choose
+        - Booking
+    6) Melihat data order
+    7) Edit profile
+
+d) Menu Partner
+    1) Melihat data
+    2) Add new data
+    3) Delete data
