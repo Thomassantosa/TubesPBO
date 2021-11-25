@@ -274,7 +274,6 @@ public class PartnerProfilePanel extends JPanel implements ActionListener, ItemL
                     int userID = SingletonManager.getInstance().getPartner().getUserID();
                     User updateUser = new User(fullname, username, email, password, address);
 
-                    JOptionPane.showMessageDialog(null, "ON PROGRESS");
                     boolean success = queryController.updateUser(userID, updateUser);
 
                     if (success) {
