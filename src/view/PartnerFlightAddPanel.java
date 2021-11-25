@@ -28,7 +28,6 @@ import org.jdatepicker.impl.UtilDateModel;
 import controller.QueryController;
 import controller.SingletonManager;
 import model.Flight;
-import model.TripTypesEnum;
 import model.Vehicle;
 
 public class PartnerFlightAddPanel extends JPanel implements ActionListener {

@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 public class Room {
     private int roomID;
@@ -13,12 +12,11 @@ public class Room {
     private boolean status;
     private Date checkin;
     private Date checkout;
-    ArrayList <Image> imageList = new ArrayList<>();
 
     public Room() {
     }
 
-    public Room(int roomID, String name, String roomType, int price, String facility, int capacity, boolean status, Date checkin, Date checkout, ArrayList<Image> imageList) {
+    public Room(int roomID, String name, String roomType, int price, String facility, int capacity, boolean status, Date checkin, Date checkout) {
         this.roomID = roomID;
         this.name = name;
         this.roomType = roomType;
@@ -28,7 +26,6 @@ public class Room {
         this.status = status;
         this.checkin = checkin;
         this.checkout = checkout;
-        this.imageList = imageList;
     }
 
     public int getRoomID() {
@@ -107,13 +104,7 @@ public class Room {
         this.checkout = checkout;
     }
 
-    public ArrayList<Image> getImageList() {
-        return this.imageList;
-    }
 
-    public void setImageList(ArrayList<Image> imageList) {
-        this.imageList = imageList;
-    }
 
     @Override
     public String toString() {
@@ -127,7 +118,6 @@ public class Room {
             ", status='" + isStatus() + "'" +
             ", checkin='" + getCheckin() + "'" +
             ", checkout='" + getCheckout() + "'" +
-            ", imageList='" + getImageList() + "'" +
             "}";
     }
 }

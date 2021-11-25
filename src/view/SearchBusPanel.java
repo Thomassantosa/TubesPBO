@@ -21,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.QueryController;
 import model.BusTrip;
-import model.TrainTrip;
 import model.TripTypesEnum;
 
 public class SearchBusPanel extends JPanel implements ActionListener {

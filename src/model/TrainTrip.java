@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-
 public class TrainTrip extends Trip{
     private String trainTripNumber;
     private Vehicle train;

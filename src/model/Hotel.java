@@ -13,12 +13,12 @@ public class Hotel {
     private String city;
     private String country;
     ArrayList <Room> roomList = new ArrayList<>();
-    ArrayList <Image> imageList = new ArrayList<>();
+  
 
     public Hotel() {
     }
 
-    public Hotel(int hotelID, String name, int star, double rating, int review, String facility, String address, String city, String country, ArrayList<Room> roomList, ArrayList<Image> imageList) {
+    public Hotel(int hotelID, String name, int star, double rating, int review, String facility, String address, String city, String country, ArrayList<Room> roomList) {
         this.hotelID = hotelID;
         this.name = name;
         this.star = star;
@@ -29,7 +29,7 @@ public class Hotel {
         this.city = city;
         this.country = country;
         this.roomList = roomList;
-        this.imageList = imageList;
+      
     }
 
     public int getHotelID() {
@@ -112,13 +112,6 @@ public class Hotel {
         this.roomList = roomList;
     }
 
-    public ArrayList<Image> getImageList() {
-        return this.imageList;
-    }
-
-    public void setImageList(ArrayList<Image> imageList) {
-        this.imageList = imageList;
-    }
 
     @Override
     public String toString() {
@@ -133,7 +126,6 @@ public class Hotel {
             ", city='" + getCity() + "'" +
             ", country='" + getCountry() + "'" +
             ", roomList='" + getRoomList() + "'" +
-            ", imageList='" + getImageList() + "'" +
             "}";
     }
 }
